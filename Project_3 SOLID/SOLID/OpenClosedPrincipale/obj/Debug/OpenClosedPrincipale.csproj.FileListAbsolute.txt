@@ -1,0 +1,7 @@
+D:\Internship\Projects\Project_3 SOLID\SOLID\OpenClosedPrincipale\bin\Debug\OpenClosedPrincipale.exe.config
+D:\Internship\Projects\Project_3 SOLID\SOLID\OpenClosedPrincipale\bin\Debug\OpenClosedPrincipale.exe
+D:\Internship\Projects\Project_3 SOLID\SOLID\OpenClosedPrincipale\bin\Debug\OpenClosedPrincipale.pdb
+D:\Internship\Projects\Project_3 SOLID\SOLID\OpenClosedPrincipale\obj\Debug\OpenClosedPrincipale.csprojAssemblyReference.cache
+D:\Internship\Projects\Project_3 SOLID\SOLID\OpenClosedPrincipale\obj\Debug\OpenClosedPrincipale.csproj.CoreCompileInputs.cache
+D:\Internship\Projects\Project_3 SOLID\SOLID\OpenClosedPrincipale\obj\Debug\OpenClosedPrincipale.exe
+D:\Internship\Projects\Project_3 SOLID\SOLID\OpenClosedPrincipale\obj\Debug\OpenClosedPrincipale.pdb

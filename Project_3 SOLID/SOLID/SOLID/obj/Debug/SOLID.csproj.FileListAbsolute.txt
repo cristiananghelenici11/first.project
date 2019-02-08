@@ -1,0 +1,7 @@
+D:\Internship\Projects\Project_3 SOLID\SOLID\SOLID\bin\Debug\SOLID.exe.config
+D:\Internship\Projects\Project_3 SOLID\SOLID\SOLID\bin\Debug\SOLID.exe
+D:\Internship\Projects\Project_3 SOLID\SOLID\SOLID\bin\Debug\SOLID.pdb
+D:\Internship\Projects\Project_3 SOLID\SOLID\SOLID\obj\Debug\SOLID.csprojAssemblyReference.cache
+D:\Internship\Projects\Project_3 SOLID\SOLID\SOLID\obj\Debug\SOLID.csproj.CoreCompileInputs.cache
+D:\Internship\Projects\Project_3 SOLID\SOLID\SOLID\obj\Debug\SOLID.exe
+D:\Internship\Projects\Project_3 SOLID\SOLID\SOLID\obj\Debug\SOLID.pdb
