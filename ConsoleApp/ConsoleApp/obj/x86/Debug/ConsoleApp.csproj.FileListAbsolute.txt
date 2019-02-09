@@ -1,7 +1,0 @@
-D:\Internship\Projects\Project_1 VCS\first.project\ConsoleApp\ConsoleApp\bin\Debug\ConsoleApplication.exe.config
-D:\Internship\Projects\Project_1 VCS\first.project\ConsoleApp\ConsoleApp\bin\Debug\ConsoleApplication.exe
-D:\Internship\Projects\Project_1 VCS\first.project\ConsoleApp\ConsoleApp\bin\Debug\ConsoleApplication.pdb
-D:\Internship\Projects\Project_1 VCS\first.project\ConsoleApp\ConsoleApp\obj\x86\Debug\ConsoleApp.csprojAssemblyReference.cache
-D:\Internship\Projects\Project_1 VCS\first.project\ConsoleApp\ConsoleApp\obj\x86\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
-D:\Internship\Projects\Project_1 VCS\first.project\ConsoleApp\ConsoleApp\obj\x86\Debug\ConsoleApplication.exe
-D:\Internship\Projects\Project_1 VCS\first.project\ConsoleApp\ConsoleApp\obj\x86\Debug\ConsoleApplication.pdb
