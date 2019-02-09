@@ -11,9 +11,10 @@ namespace SOLID
         static void Main(string[] args)
         {
             IPrinter printer = new ConsolePrinter();
-            Book book = new Book(){Text = "Hi"};
+            Book book = new Book(){Text = "Book Number 1"};
             book.Print(printer);
             Console.ReadLine();
+
         }
     }
     
