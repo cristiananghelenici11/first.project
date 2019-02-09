@@ -9,9 +9,6 @@ namespace Relation
     class Aircraft : Vehicle
     {
         public int ParachuteNumber { get; set; }
-
-
-
     }
 
 

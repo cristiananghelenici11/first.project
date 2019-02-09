@@ -12,6 +12,5 @@ namespace Relation
         public double Area { get; set; }
 
         public Aircraft Aircraft { get; set; }
-
     }
 }

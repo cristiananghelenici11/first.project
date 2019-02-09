@@ -10,12 +10,10 @@ namespace Relation
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
             // incapsulation
             Ship ship = new Ship();
             ship.Move();
-
+            Console.ReadKey();
         }
     }
 }

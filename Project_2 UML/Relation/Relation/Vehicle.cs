@@ -27,6 +27,7 @@ namespace Relation
             CheckFuel();
             CheckBattery();
             Plug(true, false);
+            Console.WriteLine("Move Vehicle");
         }
 
         public void Stop()
@@ -36,17 +37,24 @@ namespace Relation
 
         private void CheckFuel()
         {
-            //
+            Console.WriteLine("Check Fuel");
         }
 
         private void CheckBattery()
         {
-
+            Console.WriteLine("Check battery");
         }
 
         private void Plug(bool start, bool stop)
         {
-
+            if (start == true)
+            {
+                Console.WriteLine("Start engine");
+            }
+            else
+            {
+                Console.WriteLine("Stop Engine");
+            }
         }
 
     }

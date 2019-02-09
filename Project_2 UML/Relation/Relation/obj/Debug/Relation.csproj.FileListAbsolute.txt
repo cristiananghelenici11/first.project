@@ -1,0 +1,7 @@
+C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.csprojAssemblyReference.cache
+C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.csproj.CoreCompileInputs.cache
+C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\bin\Debug\Relation.exe.config
+C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\bin\Debug\Relation.exe
+C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\bin\Debug\Relation.pdb
+C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.exe
+C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.pdb
