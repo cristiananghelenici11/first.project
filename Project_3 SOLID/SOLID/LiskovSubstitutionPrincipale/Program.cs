@@ -10,21 +10,17 @@ namespace LiskovSubstitutionPrincipale
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            Vehicle vehicle = new Bus();
+            vehicle.Speed = 9;
+
+            vehicle = new Car();
+            vehicle.Speed = 8;
+
             Console.ReadKey();
 
         }
-        public static float GetMedium(float[] numbers)
-        {
-            if (numbers.Length == 0)
-                throw new Exception("длина массива равна нулю");
-
-            float result = numbers.Sum() / numbers.Length;
-
-            if (result < 0)
-                throw new Exception("Результат меньше нуля");
-            return result;
-        }
+     
     }
     
 }

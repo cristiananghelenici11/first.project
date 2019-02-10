@@ -4,3 +4,4 @@ C:\Users\crist\Desktop\work\first.project\Project_3 SOLID\SOLID\LiskovSubstituti
 C:\Users\crist\Desktop\work\first.project\Project_3 SOLID\SOLID\LiskovSubstitutionPrincipale\obj\Debug\LiskovSubstitutionPrincipale.csproj.CoreCompileInputs.cache
 C:\Users\crist\Desktop\work\first.project\Project_3 SOLID\SOLID\LiskovSubstitutionPrincipale\obj\Debug\LiskovSubstitutionPrincipale.exe
 C:\Users\crist\Desktop\work\first.project\Project_3 SOLID\SOLID\LiskovSubstitutionPrincipale\obj\Debug\LiskovSubstitutionPrincipale.pdb
+C:\Users\crist\Desktop\work\first.project\Project_3 SOLID\SOLID\LiskovSubstitutionPrincipale\obj\Debug\LiskovSubstitutionPrincipale.csprojAssemblyReference.cache

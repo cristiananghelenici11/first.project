@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{206CEC6B-EE30-4F8A-A1AC-F35741C93077}</ProjectGuid>
+    <ProjectGuid>{D3A4B903-3E99-4950-B480-AECF47C4786C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LiskovSubstitutionPrincipale</RootNamespace>
-    <AssemblyName>LiskovSubstitutionPrincipale</AssemblyName>
+    <RootNamespace>PolymorphismAddHoc</RootNamespace>
+    <AssemblyName>PolymorphismAddHoc</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,11 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bus.cs" />
-    <Compile Include="Car.cs" />
+    <Compile Include="Operation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
