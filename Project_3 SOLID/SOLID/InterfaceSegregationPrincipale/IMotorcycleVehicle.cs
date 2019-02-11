@@ -8,6 +8,6 @@ namespace InterfaceSegregationPrincipale
 {
     interface IMotorcycleVehicle : IVehicle
     {
-        string TypeMotocycle { get; set; }
+        string TypeMotorcycle { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace InterfaceSegregationPrincipale
 {
     class Motorcycle : IMotorcycleVehicle
     {
-        public string TypeMotocycle { get; set; }
+        public string TypeMotorcycle { get; set; }
         public string Mark { get; set; }
         public string Model { get; set; }
 

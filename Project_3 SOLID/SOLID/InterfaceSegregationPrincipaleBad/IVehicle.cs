@@ -15,7 +15,7 @@ namespace InterfaceSegregationPrincipaleBad
 
         double LoadCapacity { get; set; }
 
-        string TypeMotocycle { get; set; }
+        string TypeMotorcycle { get; set; }
 
         string Transmision { get; set; }
 
