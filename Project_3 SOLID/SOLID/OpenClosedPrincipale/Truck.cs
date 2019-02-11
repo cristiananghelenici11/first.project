@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace OpenClosedPrincipale
 {
-    interface ISwim
+    class Truck : IVehicle
     {
-        string Swim();
+        public void Drive()
+        {
+            Console.WriteLine("drive truck");
+        }
     }
 }

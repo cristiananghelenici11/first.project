@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LiskovSubstitutionPrincipale
+namespace OpenClosedPrincipale
 {
-    class Car : Vehicle
+    interface IVehicle
     {
-        bool IsHatchBack { get; set; }
+        void Drive();
     }
 }

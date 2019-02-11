@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenClosedPrincipale;
 
-namespace OpenClosedPrincipale
+namespace LiskovSubstitutionPrincipale
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // acum Cat realizeaza doar interfata IRun
-            List<Cat> list = new List<Cat>();
+            Driver driver = new Driver("Cristian ");
+            IVehicle car = new Car();
+            IVehicle truck = new Truck();
 
-            list.Add(new Cat());
+            driver.Drive(car);
+            driver.Drive(truck);
 
-            foreach (Cat cats in list)
-            {
-                cats.Run();
-            }
-
-            Cat cat = new Cat();
-            Console.WriteLine(cat.Run());
             Console.ReadKey();
         }
     }

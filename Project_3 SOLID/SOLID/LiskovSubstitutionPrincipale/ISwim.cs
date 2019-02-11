@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
-    class Bus : Vehicle
+    interface ISwim
     {
-        string EmergencyExitLoc { get; set; }
+        string Swim();
     }
 }

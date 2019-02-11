@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
-    class Vehicle
+    class Cat : IRun
     {
-        public int Speed { get; set; }
-        public int CubicCapacity { get; set; }
+        public string Run()
+        {
+            return "run cat";
+        }
     }
 }
