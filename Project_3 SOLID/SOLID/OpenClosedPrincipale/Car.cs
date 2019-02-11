@@ -12,5 +12,10 @@ namespace OpenClosedPrincipale
         {
             Console.WriteLine("drive car");
         }
+
+        public void OpenDoor()
+        {
+            Console.WriteLine("Open door");
+        }
     }
 }
