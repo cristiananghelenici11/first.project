@@ -10,12 +10,18 @@ namespace OpenClosedPrincipale
     {
         static void Main(string[] args)
         {
-            ICar car1 = new PassengerCar();
-            ICar car2 = new TruckCar();
-            Driver driver1 = new Driver("Andrei");
-            driver1.DriveCar(car1);
-            driver1.DriveCar(car2);
+            // acum Cat realizeaza doar interfata IRun
+            List<Cat> list = new List<Cat>();
 
+            list.Add(new Cat());
+
+            foreach (Cat cats in list)
+            {
+                cats.Run();
+            }
+
+            Cat cat = new Cat();
+            Console.WriteLine(cat.Run());
             Console.ReadKey();
         }
     }

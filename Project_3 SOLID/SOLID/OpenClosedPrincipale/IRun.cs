@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenClosedPrincipale
 {
-    interface ICar
+    interface IRun
     {
-        void Drive();
+        string Run();
     }
 }

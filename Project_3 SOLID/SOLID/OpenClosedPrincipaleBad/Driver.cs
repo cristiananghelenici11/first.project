@@ -10,12 +10,12 @@ namespace OpenClosedPrincipaleBad
     {
         public string Name { get; set; }
 
-        public Driver (string name)
+        public Driver(string name)
         {
             Name = name;
         }
 
-        public void DriveCar ()
+        public void Drive()
         {
             Console.Write($"{Name} Drive ");
             Console.WriteLine("Start and drive the car");

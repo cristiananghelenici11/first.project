@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace OpenClosedPrincipale
 {
-    class PassengerCar : ICar
+    class Crocodile : IRun, ISwim
+
     {
-        public void Drive()
+        public string Run()
         {
-            Console.WriteLine("Passenger Car");
+            return "run crocodile";
+        }
+
+        public string Swim()
+        {
+            return "swim crocodile";
         }
     }
 }

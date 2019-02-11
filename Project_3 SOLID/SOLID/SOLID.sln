@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenClosedPrincipaleBad", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleResponsabilityPrincipaleBad", "SingleResponsabilityPrincipaleBad\SingleResponsabilityPrincipaleBad.csproj", "{0E9529B1-DCA1-4C13-8993-DE36336B71E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiskovSubstitutionPrincipaleBad", "LiskovSubstitutionPrincipaleBad\LiskovSubstitutionPrincipaleBad.csproj", "{0174E78D-4CD0-487E-B305-8B2E83E835D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{0E9529B1-DCA1-4C13-8993-DE36336B71E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E9529B1-DCA1-4C13-8993-DE36336B71E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E9529B1-DCA1-4C13-8993-DE36336B71E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0174E78D-4CD0-487E-B305-8B2E83E835D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0174E78D-4CD0-487E-B305-8B2E83E835D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0174E78D-4CD0-487E-B305-8B2E83E835D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0174E78D-4CD0-487E-B305-8B2E83E835D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{BD631DC8-5FE8-4E8C-AE8D-8847D0822D92} = {23624F9F-5884-4610-84DE-D2F35558A752}
 		{F86C3AFB-BDAB-4E37-8919-73E40AC06828} = {B6B9DA22-45C1-4A62-AE92-83CEA917963B}
 		{0E9529B1-DCA1-4C13-8993-DE36336B71E2} = {7B9B137E-316B-4FC2-99A9-9BA3AE557ADA}
+		{0174E78D-4CD0-487E-B305-8B2E83E835D8} = {2D8FA21A-EFC0-4884-BDF0-2D404C4EDEF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C31C0A9-0138-4D60-ADCC-E819DDC51EE8}
