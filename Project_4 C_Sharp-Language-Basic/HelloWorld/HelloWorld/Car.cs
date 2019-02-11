@@ -12,13 +12,16 @@ namespace HelloWorld
         {
             Console.WriteLine("Static Car constructor");
         }
+
         public static void Start()
         {
             Console.WriteLine("method start");
         }
+
         public static void Accelerate()
         {
             Console.WriteLine("method stop");
         }
+
     }
 }

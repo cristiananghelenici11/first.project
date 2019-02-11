@@ -10,12 +10,12 @@ namespace Polymorphism
     {
         public void Drow()
         {
-            Console.WriteLine("Deseneaza Circ");
+            Console.WriteLine("Deseneaza CErc");
         }
 
         public void Erase()
         {
-            Console.WriteLine("Sterge Circ");
+            Console.WriteLine("Sterge CErc");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace LiskovSubstitutionPrincipale
             vehicle.Speed = 9;
 
             vehicle = new Car();
-            vehicle.Speed = 8;
+            vehicle.CubicCapacity = 2;
 
             Console.ReadKey();
 
