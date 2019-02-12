@@ -11,8 +11,8 @@ namespace Clases
         string Name { get; set; }
         IVehicle Vehicle { get; set; }
 
-        void TakeMoney(int money);
         void Refuel(IVehicle vehicle, int money);
+        int GetMoney();
 
     }
 }

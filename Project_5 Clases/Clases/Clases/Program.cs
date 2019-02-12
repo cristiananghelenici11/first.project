@@ -25,8 +25,8 @@ namespace Clases
             Driver cristian = new Driver("Cristian", 10, car);
             
             cristian.Drive(car);
-            romPetrol.Refuel(car, 100);
-            
+            romPetrol.Refuel(car, 200);
+            Console.WriteLine(romPetrol.GetMoney());
 
 
             Console.ReadKey();
