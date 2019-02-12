@@ -14,6 +14,7 @@ namespace Clases
         public string Color { get; set; }
         public int DoorCount { get; set; }
         public int HorsePower { get; set; }
+        public double PetrolLevel { get; set; }
 
         public virtual void ChangeDirection()
         {

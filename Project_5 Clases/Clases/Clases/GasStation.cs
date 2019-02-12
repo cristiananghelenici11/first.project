@@ -9,7 +9,7 @@ namespace Clases
     class GasStation : IGasStation
     {
         public string Name { get; set; }
-        private int _money; 
+        private const double _pricePerLitre = 19.5; 
         public string TypeFuel { get; set; }
         public int NumberOfPump { get; set; }
 
@@ -18,10 +18,11 @@ namespace Clases
             Name = name;
         }
 
-        public void Refuel(IVehicle vehicle)
+        public void Refuel(IVehicle vehicle, double money)
         {
+            vehicle.PetrolLevel = money / _pricePerLitre;
             vehicle.ToString();
-            Console.WriteLine($"Refuel vehicle witch");
+            Console.WriteLine($"Refuel vehicle witch {vehicle.PetrolLevel} litres");
         }
     }
 }

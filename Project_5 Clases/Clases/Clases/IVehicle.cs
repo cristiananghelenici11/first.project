@@ -14,6 +14,7 @@ namespace Clases
         string Color { get; set; }
         int DoorCount { get; set; }
         int HorsePower { get; set; }
+        double PetrolLevel { get; set; }
 
         void Go();
         void Stop();

@@ -24,9 +24,12 @@ namespace Clases
             Driver cristian = new Driver("Cristian", 20, car);
 
             cristian.Drive();
-
             cristian.Drive(car);
-            romPetrol.Refuel(car);
+
+            Console.WriteLine($"{car.Mark}, {car.Model} petrol volume = {car.PetrolLevel} litres");
+            romPetrol.Refuel(car, 100);
+            Console.WriteLine($"{car.Mark}, {car.Model} petrol volume = {car.PetrolLevel} litres");
+
             Console.WriteLine(cristian.Age);
 
 
