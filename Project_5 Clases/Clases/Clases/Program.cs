@@ -18,19 +18,19 @@ namespace Clases
                 DoorCount = 3,
                 HorsePower = 430,
                 Year = 2019
-
             };
 
-            GasStation romPetrol = new GasStation("ROM PETROL", 1000);
-            Driver cristian = new Driver("Cristian", 10, car);
-            
+            GasStation romPetrol = new GasStation("ROM PETROL");
+            Driver cristian = new Driver("Cristian", 20, car);
+
+            cristian.Drive();
+
             cristian.Drive(car);
-            romPetrol.Refuel(car, 200);
-            Console.WriteLine(romPetrol.GetMoney());
+            romPetrol.Refuel(car);
+            Console.WriteLine(cristian.Age);
 
 
             Console.ReadKey();
         }
     }
-
 }

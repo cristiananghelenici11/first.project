@@ -9,26 +9,23 @@ namespace Clases
     class Driver
     {
         public string Name { get; set; }
-
+        private int _age;
         public int Age
         {
-            get
-            {
-                return Age;
-            }
+            get { return _age; }
             set
             {
-                if (value > 18) Age = value; 
+                if (value > 18) _age = value; 
             }
         }
 
-        private Vehicle _vehicle;
+        private IVehicle _personalVehicle;
 
-        public Driver(string name, int age, Vehicle vehicle)
+        public Driver(string name, int age, IVehicle personalVehicle)
         {
-            Age = age;
+            if(age >= 18) Age = age;
             Name = name;
-            _vehicle = vehicle;
+            _personalVehicle = personalVehicle;
         }
 
         public void Drive(IVehicle vehicle)
@@ -36,6 +33,12 @@ namespace Clases
             Console.WriteLine("Start drive");
             Console.WriteLine(vehicle);
             vehicle.Go();
+        }        
+        public void Drive()
+        {
+            Console.WriteLine("Start drive");
+            Console.WriteLine(_personalVehicle);
+            _personalVehicle.Go();
         }
     }
 }

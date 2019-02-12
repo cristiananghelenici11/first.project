@@ -9,10 +9,6 @@ namespace Clases
     interface IGasStation
     {
         string Name { get; set; }
-        IVehicle Vehicle { get; set; }
-
-        void Refuel(IVehicle vehicle, int money);
-        int GetMoney();
-
+        void Refuel(IVehicle vehicle);
     }
 }

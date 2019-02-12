@@ -15,14 +15,14 @@ namespace Clases
         public int DoorCount { get; set; }
         public int HorsePower { get; set; }
 
-        public void ChangeDirection()
+        public virtual void ChangeDirection()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Change Direction");
         }
 
-        public void DecreaseSpeed(int speed)
+        public virtual void DecreaseSpeed(int speed)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Decrease Speed 2 m/s");
         }
 
         public virtual void Go()
@@ -30,24 +30,24 @@ namespace Clases
             Console.WriteLine("Go witch acceleration 2 m/s");
         }
 
-        public void IncreaseSpeed()
+        public virtual void IncreaseSpeed()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Increase Speed 3 m/s");
         }
 
-        public void Stop()
+        public virtual void Stop()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Stop vehicle");
         }
 
-        public void TurnLeft()
+        public virtual void TurnLeft()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Turn Left vehicle");
         }
 
-        public void TurnRight()
+        public virtual void TurnRight()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Turn left vehicle");
         }
 
         public override string ToString()

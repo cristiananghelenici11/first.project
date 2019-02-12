@@ -9,49 +9,19 @@ namespace Clases
     class GasStation : IGasStation
     {
         public string Name { get; set; }
+        private int _money; 
+        public string TypeFuel { get; set; }
+        public int NumberOfPump { get; set; }
 
-        private int _money = 0; 
-        private int _bonus = 0; 
-        public IVehicle Vehicle { get; set; }
-        string TypeFuel { get; set; }
-        int NumberOfPump { get; set; }
-
-        public GasStation(string name, int startMoney)
+        public GasStation(string name)
         {
             Name = name;
-            _money = startMoney;
         }
 
-        public void Refuel(IVehicle vehicle, int money)
+        public void Refuel(IVehicle vehicle)
         {
-            TakeMoney(money);
             vehicle.ToString();
-            Console.WriteLine($"Refuel vehicle witch {money} lei");
-        }
-        public void Refuel(IVehicle vehicle, int money, int bonus)
-        {
-            TakeMoney(money);
-            TakeBonus(bonus);
-            vehicle.ToString();
-            Console.WriteLine($"Refuel vehicle witch {money} lei");
-        }
-
-        private void TakeMoney(int money)
-        {
-            if (money > 0) _money += money;
-            else
-            {
-                throw new Exception("No money, no fuel :)");
-            }
-        }
-        private void TakeBonus(int bonus)
-        {
-            if (bonus > 0) _bonus += bonus;
-        }
-
-        public int GetMoney()
-        {
-            return _money;
+            Console.WriteLine($"Refuel vehicle witch");
         }
     }
 }
