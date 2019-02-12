@@ -30,6 +30,8 @@ namespace Clases
             romPetrol.Refuel(car, 100);
             Console.WriteLine($"{car.Mark}, {car.Model} petrol volume = {car.PetrolLevel} litres");
 
+            car.TurnLeft();
+
             Console.WriteLine(cristian.Age);
 
 
