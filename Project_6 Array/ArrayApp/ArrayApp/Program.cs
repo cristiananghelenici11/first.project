@@ -12,80 +12,39 @@ namespace ArrayApp
         {
             //Create two functions with one-dimensional arrays
             // Sort, Show, RandomInitialize, concatArray
-            Show(Sort(new int[]{15, 2, 40, 10, -50}));
 
-            int[] arrUnidimensional = concatArray(new int[] {10, -2, 100}, RandomInitialize(new int[10]));
-            Show(arrUnidimensional);
+            ArrayOperation.Show(ArrayOperation.SortUnidimensional(new int[]{15, 2, 40, 10, -50}));
+
+            ArrayOperation.Show(ArrayOperation.concatArray(new int[] {10, -2, 100}, ArrayOperation.RandomInitialize(new int[10])));
 
             //Create two functions with multi-dimensional arrays
-            Show(RandomInitialize(new int[3,3]));
-            
+            ArrayOperation.Show(ArrayOperation.SortBidimensional(ArrayOperation.RandomInitialize(new int[5, 5])));
+
+            // Jagged array
+            // Initialize the elements:
+            int[][] arr = new int[][]
+            {
+                new int[] {1, 3, 5, 7, 9},
+                new int[] {1, 3, 5, 7, 9, 5}
+            };              
+            int[][,] arr2 = new int[][,]
+            {
+                new int[,] {{1, 3, 5, 7, 9}, {3, 4, 1, 7, 4}},
+                new int[,] {{1, 3, 5, 7, 9}, {2, 3, 4, 3, 7}}
+            };
+
+            ArrayOperation.Show(arr);
+            ArrayOperation.Show(arr2);
+            Array.Sort(ArrayOperation.RandomInitialize(new int[22]));
+            int n = ArrayOperation.RandomInitialize(new int[10, 3]).Rank;
+            Console.WriteLine(n);
+            int n1 = arr2.GetUpperBound(2);
+            Console.WriteLine(n1);
+            Array.Reverse(arr); 
 
 
 
             Console.ReadKey();
         }
-
-        public static int[]  Sort(int[] arr)
-        {
-            int temp = 0;
-            for (int write = 0; write < arr.Length; write++) {
-                for (int sort = 0; sort < arr.Length - 1; sort++) {
-                    if (arr[sort] > arr[sort + 1]) {
-                        temp = arr[sort + 1];
-                        arr[sort + 1] = arr[sort];
-                        arr[sort] = temp;
-                    }
-                }
-            }
-            return arr;
-        }
-
-        public static void Show(int[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-                Console.Write(arr[i] + " ");
-            Console.WriteLine();
-        }        
-        public static void Show(int[,] arr)
-        {
-            for (int i = 0; i < arr.GetLength(0); i++)
-            {
-                for (int j = 0; j < arr.GetLength(1); j++)
-                {
-                    Console.Write(arr[i, j] + " ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        public static int[] RandomInitialize(int[] arr)
-        {
-            Random random = new Random();
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = random.Next(-100, 100);
-            }
-            return arr;
-        }        
-        public static int[,] RandomInitialize(int[,] arr)
-        {
-            Random random = new Random();
-            for (int i = 0; i < arr.GetLength(0); i++)
-            {
-                for (int j = 0; j < arr.GetLength(1); j++)
-                {
-                    arr[i, j] = random.Next(-100, 100);
-                }
-                Console.WriteLine();
-            }
-            return arr;
-        }
-
-        public static int[] concatArray(int[] first, int[] second)
-        {
-            return first.Concat(second).ToArray();
-        }
-
     }
 }

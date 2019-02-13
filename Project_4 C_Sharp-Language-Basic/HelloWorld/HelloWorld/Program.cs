@@ -27,7 +27,7 @@ namespace HelloWorld
             object obj = x;
 
             // use static method
-            Vehicle.CalculateDistance(100, 450);
+            Console.WriteLine($"distance : {Vehicle.CalculateDistance(100, 450)}");
 
             //a method for each type of parameter modifier 
             //by value
@@ -51,7 +51,7 @@ namespace HelloWorld
                 Thread myThread = new Thread(Count);
                 myThread.Name = "Thread " + i.ToString();
                 myThread.Start();
-                Thread.Sleep(1000);
+//                Thread.Sleep(1000);
             }
 
             Thread t1 = new Thread(Car.Start);
