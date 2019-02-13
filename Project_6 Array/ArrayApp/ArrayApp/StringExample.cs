@@ -66,8 +66,6 @@ namespace ArrayApp
 
             Console.WriteLine(rest);
 
-
-
         }
     }
 }
