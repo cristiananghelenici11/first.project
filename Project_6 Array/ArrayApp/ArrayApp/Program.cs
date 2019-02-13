@@ -39,7 +39,15 @@ namespace ArrayApp
             int n = ArrayOperation.RandomInitialize(new int[10, 3]).Rank;
             Console.WriteLine(n);
             Array.Reverse(arr);
+
+            Console.WriteLine("String");
+            StringExample.StringGo();
+
+            Console.WriteLine("String Builder");
+            StringExample.StringBuilderGo();
+
             Console.ReadLine();
+
         }
     }
 }
