@@ -35,13 +35,14 @@ namespace ArrayApp
 
             ArrayOperation.Show(arr);
             ArrayOperation.Show(arr2);
+
             Array.Sort(ArrayOperation.RandomInitialize(new int[22]));
             int n = ArrayOperation.RandomInitialize(new int[10, 3]).Rank;
             Console.WriteLine(n);
 
             Console.WriteLine("String");
             StringExample.StringGo();
-
+            
             Console.WriteLine("String Builder");
             StringExample.StringBuilderGo();
 

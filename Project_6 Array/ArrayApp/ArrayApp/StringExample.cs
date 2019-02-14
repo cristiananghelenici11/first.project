@@ -55,6 +55,7 @@ namespace ArrayApp
             string str2 = new String('i', 10);
             string concatString = String.Concat(str1, str2);
             string insertString = concatString.Insert(11, " Insert ");
+            //verbatic
             string path = @"C:\ProgramData\Adobe\ARM\Reader_18.009.20044";
 
             Console.WriteLine($"{str1}\n {str2}\n{concatString}\n{insertString}\n{insertString.ToUpper()}\n{path}");
@@ -63,6 +64,11 @@ namespace ArrayApp
             string str = "This is our Demo String";
             string[] arr1 = str.Split(' ');
             string rest = string.Join(" ", arr1.Skip(1));
+
+            // trim
+            char[] charsToTrim = { '*', ' ', '\''};
+            string banner = "*** Much Ado About Nothing ***";
+            string result = banner.Trim(charsToTrim);
 
             Console.WriteLine(rest);
 

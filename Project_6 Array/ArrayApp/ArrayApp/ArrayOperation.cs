@@ -11,15 +11,19 @@ namespace ArrayApp
          public static int[] SortUnidimensional(int[] arr)
          {
             int temp = 0;
-            for (int write = 0; write < arr.Length; write++) {
-                for (int sort = 0; sort < arr.Length - 1; sort++) {
-                    if (arr[sort] > arr[sort + 1]) {
-                        temp = arr[sort + 1];
-                        arr[sort + 1] = arr[sort];
-                        arr[sort] = temp;
+            for (int i = 0; i < arr.Length; i++) 
+            {
+                for (int j = 0; j < arr.Length - 1; j++) 
+                {
+                    if (arr[j] > arr[j + 1]) 
+                    {
+                        temp = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = temp;
                     }
                 }
             }
+
             return arr;
          }
 
@@ -44,6 +48,7 @@ namespace ArrayApp
                     k++;
                 }
             }
+
             return matrix;
         }
 
@@ -54,7 +59,8 @@ namespace ArrayApp
             Console.WriteLine();
             Console.WriteLine();
 
-        }        
+        }      
+        
         public static void Show(int[,] arr)
         {
             for (int i = 0; i < arr.GetLength(0); i++)
@@ -109,7 +115,8 @@ namespace ArrayApp
                 arr[i] = random.Next(-100, 100);
             }
             return arr;
-        }        
+        }   
+        
         public static int[,] RandomInitialize(int[,] arr)
         {
             Random random = new Random();
@@ -126,6 +133,7 @@ namespace ArrayApp
         public static int[] concatArray(int[] first, int[] second)
         {
             return first.Concat(second).ToArray();
+
         }
     }
 }
