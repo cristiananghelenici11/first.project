@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Angle.cs" />
     <Compile Include="AngleComparer.cs" />
+    <Compile Include="Animal.cs" />
+    <Compile Include="AnimalEnumerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

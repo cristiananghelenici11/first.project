@@ -9,6 +9,7 @@ namespace Overload
     internal class Angle : AngleComparer , ICloneable, IComparable<Angle>
     {
         private int _degrees;
+
         public int Degrees
         {
             get => _degrees;

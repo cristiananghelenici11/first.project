@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace Overload
             Console.WriteLine("--------------");
             
             // Sort List  Angle
-            Console.WriteLine("Sorted List (seconds)");
+            Console.WriteLine("\nSorted List (seconds)");
             List<Angle> angles = Angle.GenerateAngle(4).OrderBy(x => x.Seconds).ToList();
             Array.ForEach(angles.ToArray(), x => Console.WriteLine(x));
 
@@ -39,22 +40,26 @@ namespace Overload
 
             // IComparable , CompareTo
             Angle[] angles2 = Angle.GenerateAngle(4).ToArray();
-            Console.WriteLine("IComparable CompareTo (degrees)");
+            Console.WriteLine("\nIComparable CompareTo (degrees)");
             Array.Sort(angles2);
             Array.ForEach(angles2.ToArray(), x => Console.WriteLine(x));
 
             //IComparer
             Angle[] angles3 = Angle.GenerateAngle(4).ToArray();
-            Console.WriteLine("Comparer (minutes)");
+            Console.WriteLine("\nComparer (minutes)");
             Array.Sort(angles3, new AngleComparer());   
             Array.ForEach(angles3.ToArray(), x => Console.WriteLine(x));
 
             //Ienumerable
-
+            Animal animal = new Animal();
+            Console.WriteLine("\nIEnumerable animals");
+            foreach(var a in animal)
+            {
+                Console.WriteLine(a);
+            }
 
             Console.ReadKey();
         }
 
-    
     }
 }
