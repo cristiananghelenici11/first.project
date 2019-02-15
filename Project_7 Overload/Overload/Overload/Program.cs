@@ -13,6 +13,7 @@ namespace Overload
         {
             var a1 = new Angle(50);
             var a2 = new Angle(50);
+            a2[1] = 900;
             Console.WriteLine(a1 + a2);
             Console.WriteLine(a1 - a2);
             Console.WriteLine(a1 * a2);

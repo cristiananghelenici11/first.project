@@ -12,6 +12,6 @@ namespace Overload
         {
             if(x is null) throw new NullReferenceException();
             return x.Minutes.CompareTo(y.Minutes);
-        }
-    }
+        }        
+    }    
 }
