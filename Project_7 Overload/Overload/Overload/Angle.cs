@@ -10,7 +10,7 @@ namespace Overload
     {
         private int _degrees;
 
-        public int Degrees
+        private int Degrees
         {
             get => _degrees;
             set => _degrees = value;
@@ -20,7 +20,7 @@ namespace Overload
         public int Minutes
         {
             get => _minutes;
-            set
+            private set
             {
                 _minutes = value % 60;
                 Degrees = value / 60;
@@ -31,7 +31,7 @@ namespace Overload
         public int Seconds
         {
             get => _seconds;
-            set
+            private set
             {
                 _seconds = value % 60;
                 Minutes = value / 60;
@@ -87,7 +87,7 @@ namespace Overload
             return !ToSeconds(angle1).Equals(ToSeconds(angle2));
         }
 
-        public static int ToSeconds(Angle angle)
+        private static int ToSeconds(Angle angle)
         {
             return (angle.Degrees * 60 + angle.Minutes) * 60 + angle.Seconds;
         }
@@ -106,7 +106,6 @@ namespace Overload
                 Degrees = this.Degrees
             };
         }
-
 
         public int CompareTo(Angle other)
         {

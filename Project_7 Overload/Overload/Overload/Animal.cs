@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Overload
 {
-    class Animal : IEnumerable
+    internal class Animal : IEnumerable
     {
-        public string[] animal = {"Dog", "Cat", "Duck", "Horse", "Mouse"};
+        private readonly string[] _animal = {"Dog", "Cat", "Duck", "Horse", "Mouse"};
 
         public IEnumerator GetEnumerator()
         {
-            return new AnimalEnumerator(animal);
+            //yield return animal[1];
+            //yield return animal[2];
+            return new AnimalEnumerator(_animal);
         }
     }
-
 }

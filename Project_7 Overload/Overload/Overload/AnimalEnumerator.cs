@@ -7,43 +7,38 @@ using System.Threading.Tasks;
 
 namespace Overload
 {
-    class AnimalEnumerator : IEnumerator
+    internal class AnimalEnumerator : IEnumerator
     {
-        public string[] animals;
-        int position = -1;
+        private readonly string[] _animals;
+        private int _position = -1;
 
         public AnimalEnumerator(string[] animals)
         {
-            this.animals = animals;
+            _animals = animals;
         }
 
         public object Current
         {
             get
             {
-                if (position == -1 || position >= animals.Length)
+                if (_position == -1 || _position >= _animals.Length)
                     throw new InvalidOperationException();
-                return animals[position];
+                return _animals[_position];
             }
         }
 
         public bool MoveNext()
         {
-            if (position < animals.Length - 1)
-            {
-                position++;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (_position >= _animals.Length - 1) return false;
+            _position++;
+            return true;
         }
 
         public void Reset()
         {
-            position = -1;
+            _position = -1;
         }
+
     }
 
 }
