@@ -10,7 +10,14 @@ namespace ExceptionApp
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                throw new Exception();
+            }
+            finally
+            {
+                Console.WriteLine("Exceptie");
+            }
 
             Console.ReadKey();
         }
