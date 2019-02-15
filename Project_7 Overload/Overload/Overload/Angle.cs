@@ -10,7 +10,7 @@ namespace Overload
     {
         private int _degrees;
 
-        private int Degrees
+        public int Degrees
         {
             get => _degrees;
             set => _degrees = value;
@@ -89,6 +89,7 @@ namespace Overload
 
         private static int ToSeconds(Angle angle)
         {
+//            if(angle == null)
             return (angle.Degrees * 60 + angle.Minutes) * 60 + angle.Seconds;
         }
 

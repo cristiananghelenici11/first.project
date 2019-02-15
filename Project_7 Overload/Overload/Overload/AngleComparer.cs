@@ -10,7 +10,7 @@ namespace Overload
     {
         public int Compare(Angle x, Angle y)
         {
-            //if((x == null) || (y == null)) throw new NullReferenceException();
+            if(ReferenceEquals(x, null)) throw new NullReferenceException();
             return x.Minutes.CompareTo(y.Minutes);
         }
     }
