@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Overload
 {
-    class Angle
+    internal class Angle : AngleComparer , ICloneable, IComparable<Angle>
     {
         private int _degrees;
-
         public int Degrees
         {
             get => _degrees;
@@ -17,7 +16,6 @@ namespace Overload
         }
 
         private int _minutes;
-
         public int Minutes
         {
             get => _minutes;
@@ -29,7 +27,6 @@ namespace Overload
         }
 
         private int _seconds;
-
         public int Seconds
         {
             get => _seconds;
@@ -82,7 +79,8 @@ namespace Overload
         public static bool operator ==(Angle angle1, Angle angle2)
         {
             return ToSeconds(angle1).Equals(ToSeconds(angle2));
-        }        
+        }       
+        
         public static bool operator !=(Angle angle1, Angle angle2)
         {
             return !ToSeconds(angle1).Equals(ToSeconds(angle2));
@@ -96,6 +94,22 @@ namespace Overload
         public override string ToString()
         {
             return $"{Degrees}, {Minutes}', {Seconds}''";
+        }
+
+        public object Clone()
+        {
+            return new Angle
+            {
+                Seconds = this.Seconds,
+                Minutes = this.Minutes,
+                Degrees = this.Degrees
+            };
+        }
+
+
+        public int CompareTo(Angle other)
+        {
+            return this.Degrees.CompareTo(other.Degrees);
         }
 
         public int this[int i]

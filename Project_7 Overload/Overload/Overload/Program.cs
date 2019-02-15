@@ -10,38 +10,47 @@ namespace Overload
     {
         static void Main(string[] args)
         {
-            Angle a1 = new Angle(500);
-            Angle a2 = new Angle(500);
-            Angle a3 = a1 + a2;
-            Angle a4 = a1 - a2;
-            Angle a5 = a1 * a2;
-            bool b = a4 != a5;
-            Angle test = new Angle();
-            test[0] = 11;
-            test["minutes"] = 22;
-            test[2] = 33;
-            Console.WriteLine(test);
+            Angle a1 = new Angle(50);
+            Angle a2 = new Angle(50);
+            Console.WriteLine(a1 + a2);
+            Console.WriteLine(a1 - a2);
+            Console.WriteLine(a1 * a2);
+            Console.WriteLine(a1 / a2);
 
-            Angle angle = new Angle(1000);
-            Angle angle2 = new Angle(2, 3, 4);
-            Console.WriteLine(angle);
-            Console.WriteLine(angle2);
-            Console.WriteLine(angle + angle2);
+            Angle index = new Angle();
+            index[0] = 11;
+            index["minutes"] = 22;
+            index[2] = 33;
+            Console.WriteLine(index);
+
+            Angle angle = new Angle(1, 2, 3);
+            angle = new Angle(100, 0);
+            angle = new Angle(100);
             Console.WriteLine("--------------");
             
-            //Sort array witch Angle
-            Angle[] arr = new Angle[]{a1, a2, a3, a4};
-            Array.ForEach(arr, x => Console.WriteLine(x));
-            Console.WriteLine("----Sorted array----"  );
-
-            List<Angle> sortedList = arr.OrderBy(sl => sl.Minutes).ToList();
-            Array.ForEach(arr, x => Console.WriteLine(x));
-            ///
-            // Sort List witch Angle
-            Console.WriteLine("----Sorted List----");
-
-            List<Angle> angles = AngleComparer.GenerateAngle(10).OrderBy(x => x.Degrees).ToList<Angle>();
+            // Sort List  Angle
+            Console.WriteLine("Sorted List (seconds)");
+            List<Angle> angles = Angle.GenerateAngle(4).OrderBy(x => x.Seconds).ToList();
             Array.ForEach(angles.ToArray(), x => Console.WriteLine(x));
+
+            // clone
+            Angle firstCopy = new Angle(10);
+            Angle cloneCopy = (Angle)firstCopy.Clone();
+
+            // IComparable , CompareTo
+            Angle[] angles2 = Angle.GenerateAngle(4).ToArray();
+            Console.WriteLine("IComparable CompareTo (degrees)");
+            Array.Sort(angles2);
+            Array.ForEach(angles2.ToArray(), x => Console.WriteLine(x));
+
+            //IComparer
+            Angle[] angles3 = Angle.GenerateAngle(4).ToArray();
+            Console.WriteLine("Comparer (minutes)");
+            Array.Sort(angles3, new AngleComparer());   
+            Array.ForEach(angles3.ToArray(), x => Console.WriteLine(x));
+
+            //Ienumerable
+
 
             Console.ReadKey();
         }

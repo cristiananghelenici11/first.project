@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Overload
 {
-    class AngleComparer
+    class AngleComparer : IComparer<Angle>
     {
         public static List<Angle> GenerateAngle(int lengthList)
         {
@@ -15,14 +15,14 @@ namespace Overload
             for(int i = 0; i < lengthList; i++)
             {
                 angles.Add(new Angle(random.Next(0, 360), random.Next(0, 60), random.Next(0, 60)));
-                //angles.Add(new Angle
-                //{
-                //    / Seconds = random.Next(0, 60),
-                //    Minutes = random.Next(0, 60,
-                //    Degrees = random.Next(1, 100)
-                //});
             }
+
             return angles;
+        }
+
+        public int Compare(Angle x, Angle y)
+        {
+            return x.Minutes.CompareTo(y.Minutes);
         }
     }
 }
