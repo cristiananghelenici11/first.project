@@ -13,7 +13,7 @@ namespace Overload
         public int Degrees
         {
             get => _degrees;
-            private set => _degrees = value % 360;
+            set => _degrees = value;
         }
 
         private int _minutes;
@@ -21,7 +21,7 @@ namespace Overload
         public int Minutes
         {
             get => _minutes;
-            private set
+            set
             {
                 _minutes = value % 60;
                 Degrees = value / 60;
@@ -33,7 +33,7 @@ namespace Overload
         public int Seconds
         {
             get => _seconds;
-            private set
+            set
             {
                 _seconds = value % 60;
                 Minutes = value / 60;
@@ -53,7 +53,6 @@ namespace Overload
             int value = (degrees * 60 + minutes) * 60 + seconds;
             Seconds = value;
         }
-
 
         public Angle()
         {

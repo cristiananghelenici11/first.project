@@ -15,7 +15,7 @@ namespace Overload
             Angle a3 = a1 + a2;
             Angle a4 = a1 - a2;
             Angle a5 = a1 * a2;
-            bool b = a4 == a5;
+            bool b = a4 != a5;
             Angle test = new Angle();
             test[0] = 11;
             test["minutes"] = 22;
@@ -29,14 +29,19 @@ namespace Overload
             Console.WriteLine(angle + angle2);
             Console.WriteLine("--------------");
             
-            //Sort
+            //Sort array witch Angle
             Angle[] arr = new Angle[]{a1, a2, a3, a4};
             Array.ForEach(arr, x => Console.WriteLine(x));
-   
-            Console.WriteLine("--------"  );
+            Console.WriteLine("----Sorted array----"  );
 
             List<Angle> sortedList = arr.OrderBy(sl => sl.Minutes).ToList();
             Array.ForEach(arr, x => Console.WriteLine(x));
+            ///
+            // Sort List witch Angle
+            Console.WriteLine("----Sorted List----");
+
+            List<Angle> angles = AngleComparer.GenerateAngle(10).OrderBy(x => x.Degrees).ToList<Angle>();
+            Array.ForEach(angles.ToArray(), x => Console.WriteLine(x));
 
             Console.ReadKey();
         }
