@@ -107,7 +107,7 @@ namespace Generics
 
         }
 
-        private void Swap(int firstIndex, int secondIndex)
+        public void Swap(int firstIndex, int secondIndex)
         {
             if (firstIndex < 0 || firstIndex >= Count) throw new ArgumentOutOfRangeException(nameof(firstIndex));
             if (secondIndex < 0 || secondIndex >= Count) throw new ArgumentOutOfRangeException(nameof(secondIndex));

@@ -20,6 +20,7 @@ namespace Generics
         {
             var arr = new ArrayOperation<int>(new [] {1, 2, 3, 2});
 
+            arr.Swap(0, 1);
             Print.Show(arr);
             arr.Insert(0, 100);
             Print.Show(arr);

@@ -8,8 +8,8 @@ namespace Generics
 {
     internal class Case
     {
-        readonly double? _size;
-        readonly string _color;
+        private readonly double? _size;
+        private readonly string _color;
         public List<Phone> _phone = new List<Phone>();
 
         public Case(double? size, string color, List<Phone> phone)
