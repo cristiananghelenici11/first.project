@@ -23,6 +23,7 @@ namespace Overload
             {
                 if (_position == -1 || _position >= _animals.Length)
                     throw new InvalidOperationException();
+
                 return _animals[_position];
             }
         }
@@ -31,6 +32,7 @@ namespace Overload
         {
             if (_position >= _animals.Length - 1) return false;
             _position++;
+
             return true;
         }
 
