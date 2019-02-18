@@ -5,3 +5,10 @@ C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\bin\De
 C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\bin\Debug\Relation.pdb
 C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.exe
 C:\Users\crist\Desktop\work\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.pdb
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\Relation.exe.config
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\Relation.exe
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\Relation.pdb
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.csprojAssemblyReference.cache
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.csproj.CoreCompileInputs.cache
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.exe
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.pdb

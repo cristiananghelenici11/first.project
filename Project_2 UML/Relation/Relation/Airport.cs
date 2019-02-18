@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Relation
 {
-    class Airport
+    internal class Airport
     {
         public string Location { get; set; }
         public double Area { get; set; }

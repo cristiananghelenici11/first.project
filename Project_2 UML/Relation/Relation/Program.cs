@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace Relation
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // incapsulation
-            Ship ship = new Ship();
+            var ship = new Ship();
             ship.Move();
+
+            var bmw = new Car();
+            var driver1 = new Driver(bmw);
+            bmw.Move();
+
             Console.ReadKey();
         }
     }

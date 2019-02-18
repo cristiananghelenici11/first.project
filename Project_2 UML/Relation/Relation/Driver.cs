@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Relation
 {
-    class Driver
+    internal class Driver
     {
         // agregarea
         private Car _car;

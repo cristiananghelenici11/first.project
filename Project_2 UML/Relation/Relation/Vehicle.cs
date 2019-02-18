@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Relation
 {
-    class Vehicle
+    internal class Vehicle
     {
         public double Speed { get; set; }
         public string Color { get; set; }
@@ -19,7 +19,7 @@ namespace Relation
         {
             _fuel = new Fuel();
             _engine = new Engine();
-        }    
+        }
        
         
         public void Move()
@@ -47,7 +47,7 @@ namespace Relation
 
         private void Plug(bool start, bool stop)
         {
-            if (start == true)
+            if (start)
             {
                 Console.WriteLine("Start engine");
             }
@@ -58,6 +58,5 @@ namespace Relation
         }
 
     }
-
 
 }

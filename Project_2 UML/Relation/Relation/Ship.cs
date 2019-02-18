@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Relation
 { 
 
-    class Ship : Vehicle
+    internal class Ship : Vehicle
     {
         public int LifeJacketNumber { get; set; }
 

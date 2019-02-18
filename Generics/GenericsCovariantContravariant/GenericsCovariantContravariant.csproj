@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{54E70F38-C46E-4246-8C8B-E918352ADD07}</ProjectGuid>
+    <ProjectGuid>{DABAA7C6-EAE7-4651-9676-9A4A3101A960}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Generics</RootNamespace>
-    <AssemblyName>Generics</AssemblyName>
+    <RootNamespace>GenericsCovariantContravariant</RootNamespace>
+    <AssemblyName>GenericsCovariantContravariant</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,13 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayOperation.cs" />
-    <Compile Include="Case.cs" />
-    <Compile Include="Phone.cs" />
-    <Compile Include="PhoneEqualityComparer.cs" />
-    <Compile Include="Print.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Bank.cs" />
+    <Compile Include="DepositAccount.cs" />
+    <Compile Include="IBank.cs" />
+    <Compile Include="ITransaction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

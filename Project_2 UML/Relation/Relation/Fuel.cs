@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Relation
 {
-    class Fuel
+    internal class Fuel
     {
         public int Volume { get; set; }
     }
