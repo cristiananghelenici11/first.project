@@ -14,11 +14,11 @@ namespace Linq
         {
             var computers = new GenericList<Computer>
             {
-                new Computer("Apple", "2018      ", 2400, 16, 512),
-                new Computer("ASUS", "Zenbook   ", 1800, 24, 256),
-                new Computer("ASUS", "Zenbook   ", 2000, 32, 256),
-                new Computer("DEL", "XPS       ", 2100, 24, 256),
-                new Computer("HP", "Chromebook", 1900, 16, 256)
+                new Computer { Brand = "Apple", Model = "2018      ", Price = 2400, Ram = 16, Storage = 512},
+                new Computer{ Brand = "ASUS", Model = "Zenbook   ", Price = 1800, Ram = 24, Storage = 256},
+                new Computer {Brand = "ASUS", Model = "Zenbook   ", Price = 2000, Ram = 32, Storage = 256},
+                new Computer{Brand = "DEL", Model = "XPS       ", Price = 2100, Ram = 24, Storage = 256},
+                new Computer{Brand = "HP", Model = "Chromebook", Price = 1900, Ram = 16, Storage = 256}
             };
 
             // using Delegate
