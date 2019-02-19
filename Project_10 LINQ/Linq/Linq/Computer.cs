@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Linq
 {
-    internal class Computer
+    public class Computer
     {
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -21,7 +21,7 @@ namespace Linq
             Price = price;
             Ram = ram;
             Storage = storage;
-        }
+        } 
 
         public override string ToString()
         {

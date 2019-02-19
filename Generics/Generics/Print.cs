@@ -28,6 +28,7 @@ namespace Generics
             }
 
         }        
+
         public static void Show(IEnumerable<Case> cases)
         {
             foreach (Case c in cases)

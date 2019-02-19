@@ -18,7 +18,7 @@ namespace Generics
 
         private static void Main(string[] args)
         {
-            var arr = new ArrayOperation<int>(new [] {1, 2, 3, 2});
+            var arr = new ArrayList<int>(new [] {1, 2, 3, 2});
 
             arr.Swap(0, 1);
             Print.Show(arr);
@@ -38,7 +38,7 @@ namespace Generics
             var phone4 = new Phone(Brands.Sony.ToString(), "Z", 4000, null);
             var phone5 = new Phone(Brands.Xiaomi.ToString(), "Mi A2", 6000, 64);
             var phones = new List<Phone>{phone1, phone2, phone3, phone4, phone5};
-
+            
             var case1 = new Case(5, "red", phone2);
             var case2 = new Case(6, "blue", phone3);
             var case3 = new Case(4, "white", phone4);

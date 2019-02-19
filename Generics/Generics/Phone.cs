@@ -11,8 +11,8 @@ namespace Generics
     {
         public string Brand { get; set; }
         public string Model { get; set; }
-        readonly int? _ram = null;
-        readonly int? _capacity = null;
+        private readonly int? _ram = null;
+        private readonly int? _capacity = null;
 
         public Phone(string brand, string model, int? ram, int? capacity)
         {

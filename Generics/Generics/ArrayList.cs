@@ -7,86 +7,52 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    internal class ArrayOperation<T> : IList<T>
-    {
-        private T[] _items;
+     public class ArrayList<T> : IList<T>
+     {
+        private List<T> _items;
         public T this[int index] 
         { 
             get => _items[index]; 
             set => _items[index] = value;
         }
 
-        public int Capacity
-        {
-            get => _items.Length;
-            set
-            {
-                if(value < Capacity) throw new ArgumentException("capacity was less than the current size");
-                Capacity = value;
-                Array.Resize(ref _items, Capacity);
-            }
-        }
-        public int Count { get; private set; }
-
-        public ArrayOperation(IEnumerable<T> items)
-        {
-            List<T> list = items.ToList();
-
-            _items = new T[list.Count];
-
-            foreach (T t in list)
-                _items[Count++] = t;
-        }
+        public int Capacity => _items?.Count ?? -1;
 
         public bool IsReadOnly { get; } = false;
 
+        public int Count => _items?.Count ?? -1;
+
+        public ArrayList(IEnumerable<T> items) => _items = new List<T>(items);
+
         public void Add(T item)
         {
-            if(Count >= Capacity) Array.Resize(ref _items, Capacity * 2);
-
-            _items[Count++] = item;
+            _items.Add(item);
         }
 
         public void AddRange(IEnumerable<T> items)
         {
-            List<T> itemsList = items.ToList();
-
-            int count = itemsList.Count;
-
-            if (Count + count > Capacity) Array.Resize(ref _items, Count + count);
-
-            foreach (T item in itemsList)
-            {
-                _items[Count++] = item;
-            }
+            _items.AddRange(items);
         }
 
         public void Clear()
         {
-            _items = new T[4];
-
-            Count = 0;
+            _items = null;
         }
 
         public bool Contains(T item)
         {
-            return IndexOf(item) != -1;
+            return _items.Contains(item);
 
         }
 
         public int IndexOf(T item)
         {
-            for (var i = 0; i < Count; i++)
-            {
-                if (_items[i].Equals(item)) return i;
-            }
-
-            return -1;
+            return _items.IndexOf(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array.Length > _items.Length) throw new ArgumentException($"Destination array was not long enough");
+            if (array.Length > _items.Count) throw new ArgumentException($"Destination array was not long enough");
             if (arrayIndex < 0) throw new ArgumentOutOfRangeException();
 
             for (var i = 0; i < Count; i++)
@@ -128,19 +94,7 @@ namespace Generics
 
         public void RemoveAt(int index)
         {
-            if (index < 0 || index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
-            
-            ShrinkArray(index);
-        }
-
-        private void ShrinkArray(int index)
-        {
-            for (var i = 0; i < Count - 1; i++)
-            {
-                if (i >= index) Swap(i, i + 1);
-            }
-
-            Count -= 1;
+            _items.RemoveAt(index);
         }
         
         public IEnumerator<T> GetEnumerator()
@@ -151,10 +105,10 @@ namespace Generics
                 yield return item;
             }
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-
         }
     }
 }

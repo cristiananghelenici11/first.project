@@ -18,6 +18,7 @@ namespace Generics
             _color = color;
             _phone = phone;
         }
+
         public Case(double? size, string color, Phone phone)
         {
             _size = size;
