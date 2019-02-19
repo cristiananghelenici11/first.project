@@ -13,6 +13,7 @@ namespace Linq
             foreach(Computer computer in computers)
             {
                 Console.WriteLine(computer);
+
             }
             Console.WriteLine();
 

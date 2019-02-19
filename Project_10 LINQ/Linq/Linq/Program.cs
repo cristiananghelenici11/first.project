@@ -64,10 +64,12 @@ namespace Linq
         private static bool ComputerRamCapability(Computer computer)
         {
             return computer.Ram >= 20;
+
         }        
         private static bool ComputerStorageCapability(Computer computer)
         {
             return computer.Storage > 256;
+
         }
 
         private static void DisplayComputer(IEnumerable<Computer> computers, DisplayCondition condition)
@@ -75,6 +77,7 @@ namespace Linq
             foreach (Computer computer in computers)
             {
                 if(condition(computer)) Console.WriteLine(computer);
+
             }
         }
     }

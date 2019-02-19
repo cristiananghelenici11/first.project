@@ -86,6 +86,7 @@ namespace Linq
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+
         }
     }
 }

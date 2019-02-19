@@ -26,6 +26,7 @@ namespace Linq
         public override string ToString()
         {
             return $"Brand: {Brand},\t {Model},\t {Price},\t {Ram},\t {Storage}";
+
         }
     }
 }

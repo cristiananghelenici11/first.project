@@ -14,7 +14,9 @@ namespace Linq
             foreach (T item in items)
             {
                 Console.WriteLine(item);
+
             }
+
         }
     }
 }
