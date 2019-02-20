@@ -15,7 +15,7 @@ namespace AdvancedLINQ
 
         public override string ToString()
         {
-            return $"Name: {Name}, ID: {Id}, Salary: {Salary} Computer: {Computer}";
+            return $"Name: {Name},\t ID: {Id},\t Salary: {Salary},\t Computer: {Computer},\t";
         }
     }
 }
