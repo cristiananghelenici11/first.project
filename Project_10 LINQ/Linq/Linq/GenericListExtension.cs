@@ -18,5 +18,15 @@ namespace Linq
             }
 
         }
+        public static void DisplayItems<T>(this IEnumerable<T> items, string delimitator)
+        {
+            Console.WriteLine("\n---> Display items Extension method <---");
+            foreach (T item in items)
+            {
+                Console.WriteLine(item + delimitator);
+
+            }
+
+        }
     }
 }

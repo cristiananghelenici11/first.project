@@ -22,25 +22,38 @@ namespace Linq
             };
 
             // using Delegate
-            DisplayComputer(computers, ComputerRamCapability);
+            var delegate1 = new DisplayCondition(ComputerRamCapability);
+            DisplayComputer(computers, delegate1);
             Console.WriteLine("------------------------");
             DisplayComputer(computers, ComputerStorageCapability);
 
             // using Extension method
             computers.DisplayItems();
+            computers.DisplayItems("$");
 
             //using anonymous functions
             AnonymousFunctions(computers);
 
             //lambda expressions
             Console.WriteLine("\n---> lambda expressions (price>2300 )<---");
-            DisplayComputer(computers, c => c.Price>2300);
+            DisplayComputer(computers, c => c.Price>=2300);
 
             // Select and Where
             IEnumerable<string> brands = computers.Where(x => x.Ram > 24).Select(x => x.Model);
             foreach (string s in brands)
             {
                 Console.WriteLine("Brands where ram > 24 is: " + s + " ");
+            }
+
+            // deferred
+            Console.WriteLine("---> Deferred execution <---");
+            IEnumerable<double> price = computers.Select(x => x.Price);
+
+            computers.Add(new Computer{Brand = "HP", Model = "Chromebook", Price = 19999, Ram = 16, Storage = 256});
+
+            foreach (double p in price)
+            {
+                Console.Write( p + " ");
             }
 
             Console.ReadKey();
@@ -76,7 +89,8 @@ namespace Linq
         {
             foreach (Computer computer in computers)
             {
-                if(condition(computer)) Console.WriteLine(computer);
+                if(condition(computer)) 
+                    Console.WriteLine(computer);
 
             }
         }

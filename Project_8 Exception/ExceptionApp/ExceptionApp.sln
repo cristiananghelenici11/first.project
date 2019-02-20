@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionApp", "ExceptionApp\ExceptionApp.csproj", "{773F31EC-9398-4704-AD0C-1C37907228A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionApp", "UnitTestProject1\ExceptionApp.csproj", "{4253999D-E0DE-41C2-9C7D-5437D57BED2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConditionalCompilation", "ConditionalCompilation\ConditionalCompilation.csproj", "{D61B3229-AD8E-43FB-BD97-0B3DD522F030}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{773F31EC-9398-4704-AD0C-1C37907228A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{773F31EC-9398-4704-AD0C-1C37907228A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{773F31EC-9398-4704-AD0C-1C37907228A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{773F31EC-9398-4704-AD0C-1C37907228A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4253999D-E0DE-41C2-9C7D-5437D57BED2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4253999D-E0DE-41C2-9C7D-5437D57BED2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4253999D-E0DE-41C2-9C7D-5437D57BED2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4253999D-E0DE-41C2-9C7D-5437D57BED2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D61B3229-AD8E-43FB-BD97-0B3DD522F030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D61B3229-AD8E-43FB-BD97-0B3DD522F030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D61B3229-AD8E-43FB-BD97-0B3DD522F030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D61B3229-AD8E-43FB-BD97-0B3DD522F030}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
