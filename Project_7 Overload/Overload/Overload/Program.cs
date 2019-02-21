@@ -23,6 +23,7 @@ namespace Overload
             index[0] = 11;
             index["minutes"] = 22;
             index[2] = 33;
+
             Console.WriteLine(index);
 
             var angle = new Angle(1, 2, 3);
@@ -30,7 +31,7 @@ namespace Overload
             angle = new Angle(100);
             Console.WriteLine("--------------");
             
-            // Sort List  Angle
+            // List  Angle
             Console.WriteLine("\nSorted List (seconds)");
             List<Angle> angles = GenerateAngle(4).OrderBy(x => x.Seconds).ToList();
             Array.ForEach(angles.ToArray(), Console.WriteLine);

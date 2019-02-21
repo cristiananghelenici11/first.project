@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{1448EA1B-7DA6-49FC-9040-962C9D93BBAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsCustom", "EventsCustom\EventsCustom.csproj", "{15C9B5DA-A4A1-4A4A-8472-C93193D04D5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1448EA1B-7DA6-49FC-9040-962C9D93BBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1448EA1B-7DA6-49FC-9040-962C9D93BBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1448EA1B-7DA6-49FC-9040-962C9D93BBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1448EA1B-7DA6-49FC-9040-962C9D93BBAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C9B5DA-A4A1-4A4A-8472-C93193D04D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C9B5DA-A4A1-4A4A-8472-C93193D04D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C9B5DA-A4A1-4A4A-8472-C93193D04D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C9B5DA-A4A1-4A4A-8472-C93193D04D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C180763-B72C-4D11-BD53-3202418994A9}
+	EndGlobalSection
+EndGlobal

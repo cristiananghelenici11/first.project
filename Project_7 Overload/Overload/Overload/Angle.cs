@@ -101,8 +101,8 @@ namespace Overload
 
         public override string ToString()
         {
-
             return $"{Degrees}, {Minutes}', {Seconds}''";
+
         }
 
         public object Clone()
@@ -114,12 +114,13 @@ namespace Overload
                 Minutes = this.Minutes,
                 Degrees = this.Degrees
             };
+
         }
 
         public int CompareTo(Angle other)
         {
-
             return this.Degrees.CompareTo(other.Degrees);
+
         }
 
         public int this[int i]

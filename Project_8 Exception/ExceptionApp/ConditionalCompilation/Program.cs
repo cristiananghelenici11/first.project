@@ -13,7 +13,7 @@ namespace ConditionalCompilation
         {
             Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
-            const int condition = 51;
+            int condition = 51;
             Debug.WriteLineIf(condition > 50, "This message for condition");
 
             Console.WriteLine(" Console.WriteLine");
