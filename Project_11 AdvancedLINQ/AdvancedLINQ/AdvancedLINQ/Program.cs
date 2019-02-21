@@ -61,7 +61,22 @@ namespace AdvancedLINQ
 
             Console.WriteLine("---> SELECTMANY <---");
             //_employee.SelectMany(e => e.Computer,
-              //  (e, c) => new { Employee = e.}
+            //  (e, c) => new { Employee = e.}
+
+            Console.WriteLine("---> JOIN <---");
+            _computers.Join(_employee,
+                c => c.Brand,
+                e => e.Computer.Brand,
+                (g, c) => g.Brand).Display();
+            Console.WriteLine("-----------");
+            _computers.Select(x => x.Brand).Display();
+
+            Console.WriteLine("-----------");
+            // IEnumerable<String> r2 =
+            (from c in _computers
+                join e in _employee
+                on c.Brand equals e.Computer.Brand
+                select c.Brand).Display();
 
             Console.ReadLine();
         }
