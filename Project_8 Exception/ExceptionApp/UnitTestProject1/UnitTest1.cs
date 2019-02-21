@@ -25,6 +25,7 @@ namespace ExceptionApp
         public void Assignment2()
         {
             Console.WriteLine("---> Assignment 2 (custom exceptions) <---");
+
             var person2 = new Person();
             //person2.AddAge(-1);
             person2.AddAge(10);
@@ -36,25 +37,27 @@ namespace ExceptionApp
         public void Assignment3()
         {
             Console.WriteLine("---> Assignment 3 (Try-catch-Finally block with multiple catch) <---");
+
             var person3 = new Person();
+
             try
             {
                 try
                 {
-                    person3.AddAge(23);
-                    //person3.AddAge(-1);
+                    //person3.AddAge(23);
+                    person3.AddAge(-1);
                     person3.AddName("Anghelenici", "Cristian");
                     Console.WriteLine(person3);
+                }
+                catch (InvalidAge e)
+                {
+                    Console.WriteLine(e.Message);
                 }
                 catch (ArgumentNullException e)
                 {
                     Console.WriteLine(e.Message);
                 }
                 catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                catch (InvalidAge e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -73,7 +76,9 @@ namespace ExceptionApp
         public void Assignment4()
         {
             Console.WriteLine("---> Assignment 4 (Use Catch WHEN Filter) <---");
+
             var person4 = new Person();
+
             try
             {
 
@@ -92,6 +97,7 @@ namespace ExceptionApp
                     throw;
                 }
             }
+
             catch (Exception e)
             {
                 Console.WriteLine(person4 + "\n" + e.Message);

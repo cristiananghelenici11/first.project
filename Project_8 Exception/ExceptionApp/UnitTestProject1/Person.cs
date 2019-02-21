@@ -23,7 +23,8 @@ namespace ExceptionApp
 
         public void AddAge(int age)
         {
-            if (age <= 0 || age > 150) throw new InvalidAge("Age can not be less than 0 and greater than 150 (0 < age < 150)");
+            if (age <= 0 || age > 150) 
+                throw new InvalidAge("Age can not be less than 0 and greater than 150 (0 < age < 150)");
             Age = age;
         }
 
