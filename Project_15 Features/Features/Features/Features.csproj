@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{877CA2C7-68C3-4C93-93FA-E728168EF0AD}</ProjectGuid>
+    <ProjectGuid>{994592B0-0A90-4AC7-92AD-32B998764B0A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Clases</RootNamespace>
-    <AssemblyName>Clases</AssemblyName>
+    <RootNamespace>Features</RootNamespace>
+    <AssemblyName>Features</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,26 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buses.cs" />
-    <Compile Include="Car.cs" />
-    <Compile Include="Driver.cs" />
-    <Compile Include="GasStation.cs" />
-    <Compile Include="IGasStation.cs" />
-    <Compile Include="IVehicle.cs" />
-    <Compile Include="Motorcycle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Truck.cs" />
-    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
-      <Project>{474cd554-8356-4a58-81c1-d75a319ba01a}</Project>
-      <Name>ClassLibrary1</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,6 +6,31 @@ using System.Threading.Tasks;
 
 namespace Clases
 {
+   
+    public class Test1
+    {
+        public virtual void Method()
+        {
+
+        }
+    }
+
+    public class Test2 : Test1
+    {
+        public sealed override void Method()
+        {
+
+        }
+    }
+
+    public class Test3: Test2
+    {
+        public void Method1()
+        {
+            Method();
+        }
+    }
+
     class Vehicle : IVehicle
     {
         public string Mark { get; set; }
@@ -28,6 +53,8 @@ namespace Clases
 
         public virtual void Go()
         {
+            CheckFuel();
+            CheckBattery();
             Console.WriteLine("Go witch acceleration 2 m/s");
         }
 
@@ -55,5 +82,16 @@ namespace Clases
         {
             return $"{base.ToString()} Mark: {Mark}, Model: {Model}";
         }
+
+        private void CheckFuel()
+        {
+            Console.WriteLine("Check Fuel");
+        }
+
+        private void CheckBattery()
+        {
+            Console.WriteLine("Check battery");
+        }
+ 
     }
 }

@@ -15,5 +15,9 @@ namespace Relation
         {
 
         }
+        public struct MyStruct
+        {
+            
+        }
     }
 }

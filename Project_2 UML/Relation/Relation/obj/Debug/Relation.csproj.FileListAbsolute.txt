@@ -12,3 +12,10 @@ D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relati
 D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.csproj.CoreCompileInputs.cache
 D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.exe
 D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.pdb
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\ReadOnlyCollectionsExtensions.dll
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\ReadOnlyCollectionsInterfaces.dll
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\ReadOnlyCollectionsExtensions.pdb
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\ReadOnlyCollectionsExtensions.xml
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\ReadOnlyCollectionsInterfaces.pdb
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\bin\Debug\ReadOnlyCollectionsInterfaces.xml
+D:\Internship\Projects\Project_1 VCS\first.project\Project_2 UML\Relation\Relation\obj\Debug\Relation.csproj.CopyComplete

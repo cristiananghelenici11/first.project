@@ -59,4 +59,13 @@ namespace Relation
 
     }
 
+    struct MyStruct
+    {
+        private int n;
+        MyStruct(int n)
+        {
+            this.n = n;
+        }
+    }
+
 }

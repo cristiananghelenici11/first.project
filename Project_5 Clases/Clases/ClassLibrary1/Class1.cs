@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clases
+namespace ClassLibrary1
 {
-    interface IGasStation
+    internal class MyClass1
     {
-        void Refuel(IVehicle vehicle, double money);
-
     }
 }

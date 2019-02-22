@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary1;
 
 namespace Clases
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Vehicle car = new Car()
+            Vehicle car = new Car
             {
                 Mark = "BMW",
                 Model = "850i",
@@ -20,20 +21,22 @@ namespace Clases
                 Year = 2019
             };
 
-            GasStation romPetrol = new GasStation("ROM PETROL");
-            Driver cristian = new Driver("Cristian", 20, car);
+            var romPetrol = new GasStation("ROM PETROL");
+            var driver1 = new Driver("Cristian", 20, car);
 
-            cristian.Drive();
-            cristian.Drive(car);
+            driver1.Drive();
+            driver1.Drive(car);
 
             Console.WriteLine($"{car.Mark}, {car.Model} petrol volume = {car.PetrolLevel} litres");
             romPetrol.Refuel(car, 100);
-
             Console.WriteLine($"{car.Mark}, {car.Model} petrol volume = {car.PetrolLevel} litres");
 
             car.TurnLeft();
 
             Console.ReadKey();
+
+
+            var test = new MyClass1();
         }
     }
 }

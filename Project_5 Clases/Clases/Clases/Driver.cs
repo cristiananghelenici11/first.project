@@ -12,7 +12,7 @@ namespace Clases
         private int _age;
         private IVehicle _personalVehicle;
 
-        public int Age
+        private int Age
         {
             get => _age;
             set
@@ -32,6 +32,7 @@ namespace Clases
         {
             Console.WriteLine("Start drive");
             Console.WriteLine(vehicle);
+            vehicle.CenturaOn();
             vehicle.Go();
         }  
         
@@ -42,4 +43,5 @@ namespace Clases
             _personalVehicle.Go();
         }
     }
+
 }

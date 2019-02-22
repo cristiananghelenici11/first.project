@@ -9,11 +9,6 @@ namespace Clases
     interface IVehicle
     {
         string Mark { get; set; }
-        string Model { get; set; }
-        int Year { get; set; }
-        string Color { get; set; }
-        int DoorCount { get; set; }
-        int HorsePower { get; set; }
         double PetrolLevel { get; set; }
 
         void Go();
