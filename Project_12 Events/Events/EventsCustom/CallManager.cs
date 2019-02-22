@@ -10,12 +10,9 @@ namespace EventsCustom
     {
         public event EventHandler<NewCallEventArgs> NewCall;
 
-        public virtual void OnNewCall(NewCallEventArgs c)
+        public void OnNewCall(NewCallEventArgs c)
         {
-            if (NewCall != null)
-            {
-                NewCall(this, c);
-            }
+            NewCall?.Invoke(this, c);
         }
 
         public void Call(string from, string to, double time)

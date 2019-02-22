@@ -8,10 +8,10 @@ namespace EventsCustom
 {
     public class LandlinePhone
     {
-        public void PhoneCall(object sender, NewCallEventArgs c)
+        public void LandlinePhoneCall(object sender, NewCallEventArgs c)
         {
             Console.WriteLine("\nCall to Landline Phone");
-            Console.WriteLine($"From: {c.From},\n   To: {c.To},\n   Subject: {c.Time},\n");
+            Console.WriteLine($"From: {c.From},\n   To: {c.To},\n   Time: {c.Time},\n");
         }
     }
 }

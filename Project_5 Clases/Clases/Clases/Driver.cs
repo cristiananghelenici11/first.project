@@ -10,16 +10,16 @@ namespace Clases
     {
         public string Name { get; set; }
         private int _age;
+        private IVehicle _personalVehicle;
+
         public int Age
         {
-            get { return _age; }
+            get => _age;
             set
             {
                 if (value > 18) _age = value; 
             }
         }
-
-        private IVehicle _personalVehicle;
 
         public Driver(string name, int age, IVehicle personalVehicle)
         {
@@ -33,7 +33,8 @@ namespace Clases
             Console.WriteLine("Start drive");
             Console.WriteLine(vehicle);
             vehicle.Go();
-        }        
+        }  
+        
         public void Drive()
         {
             Console.WriteLine("Start drive");

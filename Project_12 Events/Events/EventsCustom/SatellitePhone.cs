@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace EventsCustom
 {
-    public class MobilePhone
+    public class SatellitePhone
     {
-        public void MobilePhoneCall(object sender, NewCallEventArgs c)
+        public void SatelitePhoneCall(object sender, NewCallEventArgs c)
         {
-            Console.WriteLine("\n Call to Mobile Phone");
+            Console.WriteLine("\n Call to Satellite Phone");
             Console.WriteLine($"From: {c.From},\n   To: {c.To},\n   Subject: {c.Time},\n");
         }
     }

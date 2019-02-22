@@ -21,8 +21,10 @@ namespace Clases
         public void Refuel(IVehicle vehicle, double money)
         {
             vehicle.PetrolLevel = money / _pricePerLitre;
-            vehicle.ToString();
-            Console.WriteLine($"Refuel vehicle witch {vehicle.PetrolLevel} litres");
+            Console.WriteLine("-----------");
+            Console.WriteLine($"the vehicle: {vehicle.Mark} was powered by {vehicle.PetrolLevel} litres");
+            Console.WriteLine("-----------");
+
         }
     }
 }
