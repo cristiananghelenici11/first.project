@@ -10,7 +10,6 @@ namespace Features
     {
         static void Main(string[] args)
         {
-            // C# 4 – COM SUPPORT
      
 
 
