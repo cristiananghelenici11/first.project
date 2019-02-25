@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +22,12 @@ namespace AdvancedLINQ
                 computer1, computer2, computer3, computer4, computer5, computer6, computer7
             };
 
-            var _employee = new List<Employee>
+            var _employees = new List<Employee>
             {
                 new Employee(){Name = "Cristian", Id = 1234567891234, Salary = 850, Computer = computer1},
                 new Employee(){Name = "Catalin", Id = 1234536791234, Salary = 500, Computer = computer2},
                 new Employee(){Name = "Andrei", Id = 1232977891234, Salary = 1000, Computer = computer3},
+                new Employee(){Name = "Tom", Id = 1232977891234, Salary = 1000, Computer = computer2},
                 new Employee(){Name = "Oleg", Id = 1234567894234, Salary = 450, Computer = computer4},
                 new Employee(){Name = "Viorel", Id = 1234567877234, Salary = 1200, Computer = computer5},
                 new Employee(){Name = "Octavian", Id = 1384564891234, Salary = 600, Computer = computer7},
@@ -34,7 +35,7 @@ namespace AdvancedLINQ
             };
 
             Console.WriteLine("---> Display Employee and their computer <---");
-            _employee.Display();
+            _employees.Display();
 
             Console.WriteLine("---> WHERE <---");
             _computers.Where(x => x.Ram == 16).Display();
@@ -60,11 +61,16 @@ namespace AdvancedLINQ
             _computers.Where(x => x.Brand != "Samsung").Select(x => x.Brand).Display();
 
             Console.WriteLine("---> SELECTMANY <---");
-            //_employee.SelectMany(e => e.Computer,
-            //  (e, c) => new { Employee = e.}
+            _employees.SelectMany(e => e.Name).ToArray();
+            var select = from e in _employees
+                         from c in e.Computer.Brand
+                         where e.Salary > 800
+                         where c.ToString() == "Asus"
+                         select e;
+            select.Display();
 
             Console.WriteLine("---> JOIN <---");
-            _computers.Join(_employee,
+            _computers.Join(_employees,
                 c => c.Brand,
                 e => e.Computer.Brand,
                 (g, c) => g.Brand).Display();
@@ -74,7 +80,7 @@ namespace AdvancedLINQ
             Console.WriteLine("-----------");
             // IEnumerable<String> r2 =
             (from c in _computers
-                join e in _employee
+                join e in _employees
                 on c.Brand equals e.Computer.Brand
                 select c.Brand).Display();
 
