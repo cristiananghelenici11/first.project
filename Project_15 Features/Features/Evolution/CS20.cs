@@ -31,7 +31,6 @@ namespace Evolution
             Action<string> delegAction = delegate(string str)
             {
                 Console.WriteLine(str); 
-
             };
 
             Func<double, bool> delegFunc = delegate(double d)
@@ -68,12 +67,12 @@ namespace Evolution
         }
     }
 
-    public partial class Partial
+    public static partial class Partial
     {
         public static int Add(int x, int y) => x + y;
     }
 
-    public partial class Partial
+    public static partial class Partial
     {
         public static double Multiply(int x, int y) => x * y;
 

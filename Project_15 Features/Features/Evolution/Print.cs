@@ -6,10 +6,12 @@ namespace Evolution
 {
     public static class Print
     {
-        public static void PrintPerson(this Person persons)
+        public static void Display<T>(this IEnumerable<T> items)
         {
-            Console.WriteLine(persons);
+            foreach (T item in items)
+            {
+                Console.WriteLine(item);
+            }
         }
-
     }
 }

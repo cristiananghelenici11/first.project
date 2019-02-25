@@ -33,8 +33,12 @@ namespace Evolution
         [TestMethod]
         public void ExtensionMethod()
         {
-            var person = new Person{Name = "Cristian"};
-            person.PrintPerson();
+            var persons = new List<Person>
+            {
+                new Person {Name = "Cristian"},
+                new Person {Name = "Tudor"}
+            };
+            persons.Display();
         }
     }
 }

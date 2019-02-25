@@ -41,7 +41,7 @@ namespace Evolution
 
         }
 
-        private void DisplayValues(int a, int b, int d = 0, int e = 1, params int[] array)
+        private static void DisplayValues(int a, int b, int d = 0, int e = 1, params int[] array)
         {
             Console.WriteLine(a);
             Console.WriteLine(b);

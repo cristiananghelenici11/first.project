@@ -10,27 +10,35 @@ namespace Evolution
     public class CS50
     {
         [TestMethod]
-        public void AsynchronsMethod()
+        public void AsynchronousMethod()
         {
             Console.WriteLine("Start");
             Calculate();
             Console.WriteLine("Stop");
         }
 
-        public async void Calculate()
+        private static async void Calculate()
         {
-            Console.WriteLine("Start Add");
-            Console.WriteLine(await Add(23));
-            Console.WriteLine("Stop Add");
+            Console.WriteLine("Start Factorial");
+            int n = await FactorialAsync(3);
+            Console.WriteLine(n);
+            Console.WriteLine("Stop Factorial");
         }
 
-        private Task<int> Add(int i)
+        private static int Factorial(int n)
         {
-            return Task.Run(async () =>
+            var result = 1;
+            for (var i = 1; i <= n; i++)
             {
-                await Task.Delay(2000);
-                return i + i;
-            });
+                result *= i;
+            }
+            return result;
         }
+
+        private static async Task<int> FactorialAsync(int n)
+        {
+            return await Task.Run(()=>Factorial(n));
+        }
+
     }
 }
