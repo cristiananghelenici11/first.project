@@ -155,41 +155,41 @@ namespace LINQ
             }
 
             Console.WriteLine("-->GROUPBY<--");
-            var EC2 = from e in _employees
+            var brands = from e in _employees
                 group e by e.Computer.Brand
                 into g
                 select new {Brand = g.Key, Count = g.Count()};
-            foreach (var i in EC2)
+            foreach (var b in brands)
             {
-                Console.WriteLine($"{i.Brand}:, {i.Count}");
+                Console.WriteLine($"{b.Brand}:, {b.Count}");
             }
         }
 
         [TestMethod]
         public void SetOperators()
         {
-            IEnumerable<Computer> _ce1 = _computers.Where(c => c.Ram > 16);
-            IEnumerable<Computer> _ce2 = _computers.Where(c => c.Ram > 24);
+            IEnumerable<Computer> _computers1 = _computers.Where(c => c.Ram > 16);
+            IEnumerable<Computer> _computers2 = _computers.Where(c => c.Ram > 24);
 
             Console.WriteLine("---> ce1 <---");
-            _ce1.Display();
+            _computers1.Display();
 
             Console.WriteLine("---> ce2 <---");
-            _ce2.Display();
+            _computers2.Display();
 
             Console.WriteLine("--> CONCAT <--");
-            _ce1.Concat(_ce2).Display();
+            _computers1.Concat(_computers2).Display();
 
             //concatenarea fara duplicate
             Console.WriteLine("--> UNION <--");
-            _ce1.Union(_ce2).Display();
+            _computers1.Union(_computers2).Display();
 
             Console.WriteLine("--> Intersect <--");
-            _ce1.Intersect(_ce2).Display();
+            _computers1.Intersect(_computers2).Display();
 
             //Returns elements present in the first, but not the second sequence
             Console.WriteLine("--> EXCEPT <--");
-            _ce1.Except(_ce2).Display();
+            _computers1.Except(_computers2).Display();
         }
 
         [TestMethod]
@@ -335,15 +335,20 @@ namespace LINQ
         [TestMethod]
         public void Closure()
         {
-            var comparer = new ComparerComputer();
-            var computer = new Computer {Brand = "Apple", Ram = 32, Storage = 512};
+            /// Adauga 4 gb ram la pc.ram < 12
+            
+            Func<Computer, Computer> computerAddRam = UpgradeRam();
+            IEnumerable<Computer> _computers2 = _computers.Where(x => x.Ram < 12);
 
-            Console.WriteLine("-->CLOSURE<--");
-            IEnumerable<Computer> r = _computers.Where(x => comparer.Equals(computer, x));
+            Console.WriteLine("---> Before Upgrade RAM <---");
+            _computers2.Display();
 
-            Console.WriteLine("CHANGE");
-            var computer2 = new List<Computer> {new Computer {Brand = "Apple", Ram = 32, Storage = 512}};
-            computer2.Display();
+            Console.WriteLine("---> After Upgrade RAM <---");
+            foreach (Computer computer in _computers2)
+            {
+                computerAddRam(computer);
+                Console.WriteLine(computer);
+            }
         }
         
         private class Comparer : IEqualityComparer<Employee>
@@ -357,19 +362,18 @@ namespace LINQ
             {
                 throw new NotImplementedException();
             }
-        } 
-        
-        private class ComparerComputer : IEqualityComparer<Computer>
-        {
-            public bool Equals(Computer x, Computer y)
-            {
-                return x.Ram.Equals(y.Ram);
-            }
+        }
 
-            public int GetHashCode(Computer obj)
+        private static Func<Computer, Computer> UpgradeRam()
+        {
+            var ram = 0;
+            Func<Computer, Computer> computerAddRam = delegate(Computer computer)
             {
-                throw new NotImplementedException();
-            }
+                ram = ram + 4;
+                computer.Ram += ram;
+                return computer;
+            };
+            return computerAddRam;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LINQ
 {
-    class Employee
+    public class Employee
     {
         public string Name { get; set; }
         public long Id { get; set; }
