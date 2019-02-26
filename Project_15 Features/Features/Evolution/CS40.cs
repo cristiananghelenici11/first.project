@@ -37,7 +37,7 @@ namespace Evolution
 
             DisplayValues(1, 2, e: 2, d: 4);
 
-            DisplayValues(a: 1, b: 2, d: 3, e: 4, array: new[] {5, 6, 7});
+            DisplayValues(a: 1, b: 2, e: 4, array: new[] {5, 6, 7});
 
         }
 

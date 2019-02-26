@@ -69,7 +69,7 @@ namespace LINQ
             _employees.Select(x => x.Name).Display();
 
             Console.WriteLine("---> SelectMany <---");
-            char[] person = _employees.SelectMany(x => x.Name).ToArray();
+            char[] person = _employees.SelectMany(x => x.Computer.Brand).ToArray();
             foreach (char p in person)
             {
                 Console.Write(p);
@@ -95,7 +95,7 @@ namespace LINQ
             var computerBrands = _computers.GroupJoin(_employees,
                 c => c.Brand,
                 e => e.Computer.Brand,
-                (computers, employees) => new {ComputerBrand = computers.Brand, Employees = employees});
+                (computer, employees) => new {ComputerBrand = computer.Brand, Employees = employees});
             foreach (var c in computerBrands)
             {
                 Console.WriteLine("--->" + c.ComputerBrand);
@@ -248,10 +248,10 @@ namespace LINQ
             var _emptyList = new List<Computer>();
 
             Console.WriteLine("--> FIRST<--");
-            Console.WriteLine(_computers.First());
+            Console.WriteLine(_computers.First(x => x.Ram > 30));
 
             Console.WriteLine("--> FIRSTORDEFAULT <--");
-            Console.WriteLine(_computers.FirstOrDefault());
+            Console.WriteLine(_computers.FirstOrDefault(x => x.Ram > 30));
 
             Console.WriteLine("--> LAST <--");
             Console.WriteLine(_computers.Last());
@@ -260,7 +260,7 @@ namespace LINQ
             Console.WriteLine(_computers.LastOrDefault());
 
             Console.WriteLine("-->SINGLE<--");
-            Console.WriteLine(_computers.Single(x => x.Ram > 30));
+            Console.WriteLine(_computers.Single(x => x.Ram > 20));
 
             Console.WriteLine("--> SINGLEORDEFAULT <--");
             Console.WriteLine(_emptyList.SingleOrDefault());
@@ -310,10 +310,10 @@ namespace LINQ
             Console.WriteLine(_employees.Contains(new Employee{Name = "Tom", Id = 1232977891234, Salary = 1000}, new Comparer()));
 
             Console.WriteLine("--> ANY <--");
-            Console.WriteLine(_computers.Any(x => x.Ram >30));
+            Console.WriteLine(_computers.Any(x => x.Ram > 30));
 
             Console.WriteLine("--> ALL <--");
-            Console.WriteLine(_computers.All(x => x.Ram >5));
+            Console.WriteLine(_computers.All(x => x.Ram > 5));
 
             Console.WriteLine("-->SEQUENCEEQUAL<--");
             Console.WriteLine(_computers.SequenceEqual(_computers));
@@ -350,6 +350,18 @@ namespace LINQ
                 Console.WriteLine(computer);
             }
         }
+
+        private static Func<Computer, Computer> UpgradeRam()
+        {
+            var ram = 0;
+            Func<Computer, Computer> computerAddRam = delegate(Computer computer)
+            {
+                ram = ram + 4;
+                computer.Ram += ram;
+                return computer;
+            };
+            return computerAddRam;
+        }
         
         private class Comparer : IEqualityComparer<Employee>
         {
@@ -364,16 +376,6 @@ namespace LINQ
             }
         }
 
-        private static Func<Computer, Computer> UpgradeRam()
-        {
-            var ram = 0;
-            Func<Computer, Computer> computerAddRam = delegate(Computer computer)
-            {
-                ram = ram + 4;
-                computer.Ram += ram;
-                return computer;
-            };
-            return computerAddRam;
-        }
+        
     }
 }
