@@ -168,42 +168,42 @@ namespace LINQ
         [TestMethod]
         public void SetOperators()
         {
-            IEnumerable<Computer> _computers1 = _computers.Where(c => c.Ram > 16);
-            IEnumerable<Computer> _computers2 = _computers.Where(c => c.Ram > 24);
+            IEnumerable<Computer> computers1 = _computers.Where(c => c.Ram > 16);
+            IEnumerable<Computer> computers2 = _computers.Where(c => c.Ram > 24);
 
             Console.WriteLine("---> ce1 <---");
-            _computers1.Display();
+            computers1.Display();
 
             Console.WriteLine("---> ce2 <---");
-            _computers2.Display();
+            computers2.Display();
 
             Console.WriteLine("--> CONCAT <--");
-            _computers1.Concat(_computers2).Display();
+            computers1.Concat(computers2).Display();
 
             //concatenarea fara duplicate
             Console.WriteLine("--> UNION <--");
-            _computers1.Union(_computers2).Display();
+            computers1.Union(computers2).Display();
 
             Console.WriteLine("--> Intersect <--");
-            _computers1.Intersect(_computers2).Display();
+            computers1.Intersect(computers2).Display();
 
             //Returns elements present in the first, but not the second sequence
             Console.WriteLine("--> EXCEPT <--");
-            _computers1.Except(_computers2).Display();
+            computers1.Except(computers2).Display();
         }
 
         [TestMethod]
         public void ConversionMethods()
         {
-            IEnumerable<object> _obj = new  object[] {1, 3.6f, 6.6, 5, "fc", 4, 8};
+            IEnumerable<object> obj = new  object[] {1, 3.6f, 6.6, 5, "fc", 4, 8};
 
             Console.WriteLine("---> OFTYPE <---");
-            _obj.OfType<int>().Display();
+            obj.OfType<int>().Display();
 
             Console.WriteLine("--> CAST <--");
             try
             {
-                _obj.Cast<int>().Display();
+                obj.Cast<int>().Display();
             }
             catch (InvalidCastException e)
             {
@@ -211,7 +211,7 @@ namespace LINQ
             }
 
             Console.WriteLine("--> TOARRAY <--");
-            object[] arr = _obj.ToArray();
+            object[] arr = obj.ToArray();
             arr.Display();
 
             Console.WriteLine("--> TOLIST <--");
@@ -338,13 +338,13 @@ namespace LINQ
             /// Adauga 4 gb ram la pc.ram < 12
             
             Func<Computer, Computer> computerAddRam = UpgradeRam();
-            IEnumerable<Computer> _computers2 = _computers.Where(x => x.Ram < 12);
+            IEnumerable<Computer> computers2 = _computers.Where(x => x.Ram < 12);
 
             Console.WriteLine("---> Before Upgrade RAM <---");
-            _computers2.Display();
+            computers2.Display();
 
             Console.WriteLine("---> After Upgrade RAM <---");
-            foreach (Computer computer in _computers2)
+            foreach (Computer computer in computers2)
             {
                 computerAddRam(computer);
                 Console.WriteLine(computer);
