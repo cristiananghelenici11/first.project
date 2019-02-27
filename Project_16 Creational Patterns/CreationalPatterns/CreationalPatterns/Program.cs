@@ -21,7 +21,7 @@ namespace Singleton
 
             var jupiter = new Planet("Universe2"){NameOfPlanet = "Jupiter"};
             superHero.CreatePlanet(jupiter);
-            Console.WriteLine($"Planet: {jupiter.NameOfPlanet}, Sun: {jupiter.universe.Name}");
+            Console.WriteLine($"Planet: {jupiter.NameOfPlanet}, Sun: {jupiter.Universe.Name}");
 
             Universe universe2 = Universe.GetInstance();
             universe2.Name = "Universe3";
