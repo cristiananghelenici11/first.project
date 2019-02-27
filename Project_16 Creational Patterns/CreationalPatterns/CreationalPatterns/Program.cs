@@ -12,22 +12,22 @@ namespace Singleton
     {
         private static void Main(string[] args)
         {
-            Sun sun1 = Sun.GetInstance();
-            sun1.Name = "Soare";
+            Universe universe1 = Universe.GetInstance();
+            universe1.Name = "Universe";
 
             var superHero = new Hero { Name = "PlanetMan" };
-            superHero.CreatePlanet(new Planet("Soare1"){NameOfPlanet = "Tera"});
-            Console.WriteLine(sun1.Name);
+            superHero.CreatePlanet(new Planet("Universe1"){NameOfPlanet = "Tera"});
+            Console.WriteLine(universe1.Name);
 
-            var jupiter = new Planet("Lumina"){NameOfPlanet = "Jupiter"};
+            var jupiter = new Planet("Universe2"){NameOfPlanet = "Jupiter"};
             superHero.CreatePlanet(jupiter);
-            Console.WriteLine($"Planet: {jupiter.NameOfPlanet}, Sun: {jupiter.Sun.Name}");
+            Console.WriteLine($"Planet: {jupiter.NameOfPlanet}, Sun: {jupiter.universe.Name}");
 
-            Sun sun2 = Sun.GetInstance();
-            sun2.Name = "Soare2";
+            Universe universe2 = Universe.GetInstance();
+            universe2.Name = "Universe3";
 
-            Console.WriteLine($"Sun1 and Sun2 is equal: {sun1.Equals(sun2)}");
-            Console.WriteLine($"{sun1.GetHashCode()}, \n{sun2.GetHashCode()}");
+            Console.WriteLine($"Sun1 and Sun2 is equal: {universe1.Equals(universe2)}");
+            Console.WriteLine($"{universe1.GetHashCode()}, \n{universe2.GetHashCode()}");
             Console.ReadKey();
         }
     }

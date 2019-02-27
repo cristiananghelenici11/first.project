@@ -79,14 +79,9 @@ namespace Evolution
             Array.ForEach(arr, Console.WriteLine);
 
         }
-        //private static ref int TestRef(int[] arr)
-        //{
-        //    return ref arr[0];
-        //}
-
-        private static void int TestRef(ref int[] arr)
+        private static ref int TestRef(int[] arr)
         {
-            arr[0] = 2;
+            return ref arr[0];
         }
 
         public class TestBodyExpression
