@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "C:\Users\cristian.anghelenici\source\repos\StructuralPatterns\Proxy\Proxy.csproj", "{9D072864-A85A-49F0-AC93-D945B313ED6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy\Proxy.csproj", "{9D072864-A85A-49F0-AC93-D945B313ED6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decorator", "C:\Users\cristian.anghelenici\source\repos\StructuralPatterns\Decorator\Decorator.csproj", "{A0FB0C89-3DC2-4E55-9805-381C9F5C8CD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decorator", "Decorator\Decorator.csproj", "{A0FB0C89-3DC2-4E55-9805-381C9F5C8CD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facade", "C:\Users\cristian.anghelenici\source\repos\StructuralPatterns\Facade\Facade.csproj", "{56781600-A314-4603-A39D-5F8B6EA81438}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facade", "Facade\Facade.csproj", "{56781600-A314-4603-A39D-5F8B6EA81438}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
