@@ -14,13 +14,13 @@ namespace Factory
             var maternityHome = new MaternityHome();
 
             Console.WriteLine("-----> Generate New Person <-----");
-            Print(maternityHome.GenerateNewPerson(5));
+            Print(maternityHome.GenerateNewPersons(5));
 
             Console.WriteLine("\n-----> Generate Child Person <-----");
-            Print(maternityHome.GenerateChildPerson(5));
+            Print(maternityHome.GenerateChildPersons(5));
 
             Console.WriteLine("\n-----> Generate Big Person <-----");
-            Print(maternityHome.GenerateBigPerson(5));
+            Print(maternityHome.GenerateBigPersons(5));
 
             Console.ReadKey();
         }

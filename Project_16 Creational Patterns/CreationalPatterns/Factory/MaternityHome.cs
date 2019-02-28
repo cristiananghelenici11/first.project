@@ -9,7 +9,7 @@ namespace Factory
     public class MaternityHome
     {
 
-        public IEnumerable<Person> GenerateNewPerson(int numberOfPerson)
+        public IEnumerable<Person> GenerateNewPersons(int numberOfPerson)
         {
             var persons = new List<Person>();
             var rnd = new Random();
@@ -22,7 +22,7 @@ namespace Factory
             return persons;
         }
 
-        public IEnumerable<Person> GenerateChildPerson(int numberOfPerson)
+        public IEnumerable<Person> GenerateChildPersons(int numberOfPerson)
         {
             var persons = new List<Person>();
             var rnd = new Random();
@@ -35,7 +35,7 @@ namespace Factory
             return persons;
         }
 
-        public IEnumerable<Person> GenerateBigPerson(int numberOfPerson)
+        public IEnumerable<Person> GenerateBigPersons(int numberOfPerson)
         {
             var persons = new List<Person>();
             var rnd = new Random();
