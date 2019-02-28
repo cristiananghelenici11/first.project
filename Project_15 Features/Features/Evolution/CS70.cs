@@ -122,7 +122,7 @@ namespace Evolution
         public void Test()
         {
 
-            DoSomething(null);
+            DoSomething("ii");
         }
 
         public static void DoSomething(string newName)         
