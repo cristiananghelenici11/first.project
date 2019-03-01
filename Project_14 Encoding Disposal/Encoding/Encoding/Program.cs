@@ -1,7 +1,11 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EncodingDisposal
@@ -48,7 +52,7 @@ namespace EncodingDisposal
             Console.WriteLine($"DateTime UtcNow: {DateTime.UtcNow}");
             Console.WriteLine($"DateTime.Now: {DateTime.Now}");
             Console.WriteLine($"DateTime - TimeSpan: {DateTime.Now - timeSpan1}");
-            Console.WriteLine($"DateTime - DateTime: {DateTime.Now - DateTime.Now}");
+            Console.WriteLine($"DateTime - DateTime: {DateTime.Now + timeSpan1 - DateTime.Now}");
 
             Console.WriteLine("\n---> DateTimeOffset <---");
             //DateTimeOffset
@@ -59,13 +63,45 @@ namespace EncodingDisposal
             Console.WriteLine($"DateTimeOffset - DateTime: {DateTimeOffset.Now - new DateTime(2019, 1, 10)}");
 
             Console.WriteLine("\n---> TimeZone <---");
+            //TimeZone
             foreach (TimeZoneInfo timeZone in TimeZoneInfo.GetSystemTimeZones().Take(10))
             {
                 Console.WriteLine(timeZone.DisplayName);
             }
 
+            Console.WriteLine("\n---> CultureInfoo <---");
+            //CultureInfo
+            const double number = 237405.9476;
+            Console.WriteLine($"CurrentCulture: {number:C}");
+            Console.WriteLine($"InvariantCulture: {number.ToString("C", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Culture(en-GB): {number.ToString("C", new CultureInfo("en-GB"))}");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+            Console.WriteLine($"Culture(en-Ru):{number:C}");
 
+            Console.WriteLine("\n---> IDisposable --->");
+            //IDisposable
+            var disposable = new DisposableTest();
+            disposable.Dispose();
 
+            using (var test = new DisposableTest())
+            {
+                Console.WriteLine("using");
+            }
+
+            //STORE DATETIME ON LOCAL FILE SYSTEM THEN READ IT AND PRINT IN CORRECT FORMAT FOR CURRENT USER LOCALE
+            Console.WriteLine("\n---> DATETIME ON LOCAL FILE SYSTEM <---");
+
+            DateTime dateTime = DateTime.Now;
+            Console.WriteLine($"{dateTime}");
+
+            var saver2 = new Saver
+            {
+                Data = dateTime.ToString(CultureInfo.CurrentCulture)
+            };
+            const string path = @"D:\Internship\Projects\Project_1 VCS\first.project\Project_14 Encoding Disposal\Encoding\dateTime.txt";
+
+            saver2.Save(path);
+            saver2.Read(path);
 
             Console.ReadKey();
         }

@@ -260,7 +260,7 @@ namespace LINQ
             Console.WriteLine(_computers.LastOrDefault());
 
             Console.WriteLine("-->SINGLE<--");
-            Console.WriteLine(_computers.Single(x => x.Ram > 20));
+            Console.WriteLine(_computers.Single(x => x.Ram > 30));
 
             Console.WriteLine("--> SINGLEORDEFAULT <--");
             Console.WriteLine(_emptyList.SingleOrDefault());
