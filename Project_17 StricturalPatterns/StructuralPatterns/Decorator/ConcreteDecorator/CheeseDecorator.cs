@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Decorator
 {
-    public class MeatPizza : PizzaDecorator
+    public class CheeseDecorator : PizzaDecorator
     {
-        public MeatPizza(Pizza pizza) : base($"{pizza.Name} + meat pizza", pizza)
+        public CheeseDecorator(Pizza pizza) : base(pizza.Name + "+ witch cheese",  pizza)
         {
         }
+
         public override int GetCost()
         {
-            return pizza.GetCost() + 15;
+            return pizza.GetCost() + 10;
         }
     }
 }

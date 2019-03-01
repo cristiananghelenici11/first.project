@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConcreteComponent\CapricioasaPizza.cs" />
-    <Compile Include="ConcreteDecorator\CheesePizza.cs" />
+    <Compile Include="ConcreteDecorator\CheeseDecorator.cs" />
     <Compile Include="ConcreteComponent\ItalianPizza.cs" />
-    <Compile Include="ConcreteDecorator\MeatPizza.cs" />
+    <Compile Include="ConcreteDecorator\MeatDecorator.cs" />
     <Compile Include="Pizza.cs" />
     <Compile Include="PizzaDecorator.cs" />
     <Compile Include="Program.cs" />
