@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,14 @@ namespace Synchronize
     {
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            const string path1 = @"C:\Users\crist\Desktop\work\first.project\Project_13 FileStreams\FileStreams\Dir1";
+            const string path2 = @"C:\Users\crist\Desktop\work\first.project\Project_13 FileStreams\FileStreams\Dir2";
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+            Console.WriteLine($"Synchronize {Path.GetFileName(path1)} and {Path.GetFileName(path2)}");
+            SynchronizeDirectory synchronize = new SynchronizeDirectory();
+            synchronize.Synchronize(path1, path2);
+
+            Console.ReadKey();
         }
     }
 }

@@ -17,6 +17,8 @@ namespace FileStreams
             Console.WriteLine($"Synchronize {Path.GetFileName(path1)} and {Path.GetFileName(path2)}");
             SynchronizeDirectory.Synchronize(path1, path2);
 
+            //string str = 
+            Console.WriteLine();
 
             Console.ReadKey();
         }

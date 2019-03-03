@@ -93,7 +93,6 @@ namespace FileStreams
             foreach (string file in Directory.GetFiles(sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 string tempPath = file.Replace(sourceDirectory, targetDirectory);
-
                 if (fileExtension.Contains(Path.GetExtension(file)))
                 {
                     var stringBuilder1 = new StringBuilder();
@@ -117,9 +116,9 @@ namespace FileStreams
                     }
 
                     if (stringBuilder1.Equals(stringBuilder2)) continue;
-                    using (var sw = new StreamWriter( tempPath, false, Encoding.Default))
+                    using (var streamWriter = new StreamWriter( tempPath, false, Encoding.Default))
                     {
-                        await Task.Run(() => sw.WriteLine((stringBuilder1)));
+                        await Task.Run(() => streamWriter.WriteLine((stringBuilder1)));
                     }
                 }
                 else
