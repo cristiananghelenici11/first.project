@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileStreams", "FileStreams\FileStreams.csproj", "{1B6A9271-BB48-41D6-B3D8-DE438704C760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synchronize", "Synchronize\Synchronize.csproj", "{0CDEF587-395D-45D8-8061-8044401A350B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B6A9271-BB48-41D6-B3D8-DE438704C760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B6A9271-BB48-41D6-B3D8-DE438704C760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B6A9271-BB48-41D6-B3D8-DE438704C760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B6A9271-BB48-41D6-B3D8-DE438704C760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CDEF587-395D-45D8-8061-8044401A350B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CDEF587-395D-45D8-8061-8044401A350B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CDEF587-395D-45D8-8061-8044401A350B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CDEF587-395D-45D8-8061-8044401A350B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D178A1F-311C-4228-86F1-A379249F1EB3}
+	EndGlobalSection
+EndGlobal
