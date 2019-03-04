@@ -11,10 +11,9 @@ namespace CreationalPatterns
         public string NameOfPlanet { get; set; }
         public readonly Universe Universe;
 
-        public Planet(string nameOfSun)
+        public Planet()
         {
             Universe = Universe.GetInstance();
-            Universe.Name = nameOfSun;
         }
     }
 }
