@@ -43,6 +43,8 @@ namespace Evolution
             }
             catch (WebException e) when(e.Status == WebExceptionStatus.ConnectionClosed)
             {
+                Exception ex = new Exception("sss", e);
+                throw  ex;
                 WriteLine(nameof(WebExceptionStatus.ConnectionClosed));
             }
             catch (WebException e) when (e.Status == WebExceptionStatus.ConnectFailure)

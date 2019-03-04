@@ -11,9 +11,10 @@ namespace ConditionalCompilation
     {
         private static void Main(string[] args)
         {
+            
             Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
-            int condition = 51;
+            var condition = 51;
             Debug.WriteLineIf(condition > 50, "This message for condition");
 
             Console.WriteLine(" Console.WriteLine");
@@ -21,7 +22,7 @@ namespace ConditionalCompilation
            
             Trace.WriteLine("Trace Information-Product Starting ");
 
-#if DEBUG
+#if TEST
             Console.WriteLine("if DEBUG");
 #else
             //Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));

@@ -10,7 +10,7 @@ namespace EventsCustom
     {
         public event EventHandler<NewCallEventArgs> NewCall;
 
-        public void OnNewCall(NewCallEventArgs c)
+        private void OnNewCall(NewCallEventArgs c)
         {
             NewCall?.Invoke(this, c);
         }

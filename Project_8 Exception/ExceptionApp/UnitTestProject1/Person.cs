@@ -6,9 +6,9 @@ namespace ExceptionApp
 {
     public class Person
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
+        private string FirstName { get; set; }
+        private string LastName { get; set; }
+        public int Age { get; private set; }
 
         public void AddName(string firstName, string lastName)
         {

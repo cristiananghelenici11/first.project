@@ -11,7 +11,7 @@ namespace Evolution
         [TestMethod]
         public void Generic()
         {
-            var list = new List<int>{1, 2, 3, 4, 5};
+            List<int> list = new List<int>{1, 2, 3, 4, 5};
 
             Action<int> deleg = Console.WriteLine;
 

@@ -18,7 +18,6 @@ namespace EncodingDisposal
 
         ~DisposableTest()
         {
-            Console.WriteLine("Destructor");
             Dispose();
         }
     }

@@ -11,7 +11,7 @@ namespace Facade
     {
         private static void Main(string[] args)
         {
-            var car = new Car("BMW");
+            var car = new Car("BMW", new Engine(), new Gearbox());
 
             car.Start();
             car.Stop();

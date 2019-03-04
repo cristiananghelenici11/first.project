@@ -105,7 +105,7 @@ namespace Evolution
             (string, string, int) person = Person();
             (string firstName, string lastName, int Age) person2 = Person();
             Console.WriteLine(number);
-            Console.WriteLine(person);
+            Console.WriteLine(person2);
         }
 
         private static (int, string) Number()
@@ -122,7 +122,7 @@ namespace Evolution
         public void Test()
         {
 
-            DoSomething("ii");
+            DoSomething("l");
         }
 
         public static void DoSomething(string newName)         

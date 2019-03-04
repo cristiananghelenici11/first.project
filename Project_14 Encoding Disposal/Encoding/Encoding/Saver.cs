@@ -13,14 +13,14 @@ namespace EncodingDisposal
 
         public void Save(string fileName, Encoding encoding)
         {
-            using (var writer = new BinaryWriter(File.Open(fileName, FileMode.Create), encoding))
+            using (var writer = new BinaryWriter(File.Open(fileName, FileMode.OpenOrCreate), encoding))
             {
                 writer.Write(encoding.GetBytes(Data));
             }
         }
         public void Save(string fileName)
         {
-            using (var writer = new BinaryWriter(File.Open(fileName, FileMode.Create)))
+            using (var writer = new BinaryWriter(File.Open(fileName, FileMode.OpenOrCreate)))
             {
                 writer.Write(Data);
             }

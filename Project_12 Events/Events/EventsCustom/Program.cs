@@ -12,11 +12,11 @@ namespace EventsCustom
     {
         private static void Main(string[] args)
         {
-            CallManager callManager = new CallManager();
+            var callManager = new CallManager();
 
-            LandlinePhone landlinePhone = new LandlinePhone();
-            MobilePhone mobilePhone = new MobilePhone();
-            SatellitePhone satellitePhone = new SatellitePhone();
+            var landlinePhone = new LandlinePhone();
+            var mobilePhone = new MobilePhone();
+            var satellitePhone = new SatellitePhone();
 
             WeakEventManager<CallManager, NewCallEventArgs>.
                 AddHandler(callManager, "NewCall", landlinePhone.LandlinePhoneCall);

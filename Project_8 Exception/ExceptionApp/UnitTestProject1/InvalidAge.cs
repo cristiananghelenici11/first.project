@@ -8,7 +8,7 @@ namespace ExceptionApp
     {
         public InvalidAge(string message) : base(message)
         {
-            
+
         }
     }
 }

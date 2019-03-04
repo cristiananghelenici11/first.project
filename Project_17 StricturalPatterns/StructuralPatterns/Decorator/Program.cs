@@ -18,7 +18,6 @@ namespace Decorator
             Pizza p2 = new ItalianPizza();
             p2 = new MeatDecorator(p2);
             Console.WriteLine($"Name: {p2.Name}, Cost: {p2.GetCost()}");
-
             
             Console.ReadKey();
         }

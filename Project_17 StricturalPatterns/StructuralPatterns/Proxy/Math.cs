@@ -19,5 +19,7 @@ namespace Proxy
         public double Pow(double x, double y) => System.Math.Pow(x, y);
 
         public double Sub(double x, double y) => x - y;
+
+        public double AddMultiple(double x, double y, double z) => x * y * z;
     }
 }

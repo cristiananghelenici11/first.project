@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Decorator
 {
+
     public abstract class Pizza
     {
         protected Pizza(string name)
@@ -13,6 +14,7 @@ namespace Decorator
             Name = name;
         }
         public string Name { get; }
+
         public abstract int GetCost();
     }
 }

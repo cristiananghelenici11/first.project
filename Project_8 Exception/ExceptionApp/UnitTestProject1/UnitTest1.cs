@@ -15,7 +15,7 @@ namespace ExceptionApp
             
             //person1.AddName("", "Cristian");    //err
             //person1.AddName(null, "");          //err
-            //person1.AddName("", "");            //err
+            person1.AddName("", "");            //err
             person1.AddName("Anghelenici", "Cristian");
             Console.WriteLine(person1);
         }
@@ -42,25 +42,7 @@ namespace ExceptionApp
 
             try
             {
-                try
-                {
-                    //person3.AddAge(23);
-                    person3.AddAge(-1);
-                    person3.AddName("Anghelenici", "Cristian");
-                    Console.WriteLine(person3);
-                }
-                catch (InvalidAge e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                catch (ArgumentNullException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                NewMethod(person3);
             }
             catch (Exception e)
             {
@@ -72,12 +54,45 @@ namespace ExceptionApp
             }
         }
 
+        private static void NewMethod(Person person3)
+        {
+            try
+            {
+                //person3.AddAge(23);
+                person3.AddAge(-1);
+                person3.AddName("Anghelenici", "Cristian");
+                Console.WriteLine(person3);
+            }
+            catch (InvalidAge e)
+            {
+                Console.WriteLine(e.Message);
+                var exception = new Exception("SDS", e);
+                throw exception;
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         [TestMethod]
         public void Assignment4()
         {
             Console.WriteLine("---> Assignment 4 (Use Catch WHEN Filter) <---");
 
+            
             var person4 = new Person();
+
+
+            var anon = new
+            {
+                a = 3,
+                b = 5
+            };
 
             try
             {
