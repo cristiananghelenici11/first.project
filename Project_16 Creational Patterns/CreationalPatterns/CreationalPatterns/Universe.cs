@@ -11,7 +11,7 @@ namespace CreationalPatterns
         private static readonly Lazy<Universe> Lazy = 
             new Lazy<Universe>(() => new Universe(), true);
 
-        public static string Name { get; set; }
+        public string Name { get; set; }
 
         private Universe()
         {

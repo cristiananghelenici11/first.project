@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Synchronize
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             const string path1 = @"D:\Internship\Projects\Project_1 VCS\first.project\Project_13 FileStreams\FileStreams\Dir1";
             const string path2 = @"D:\Internship\Projects\Project_1 VCS\first.project\Project_13 FileStreams\FileStreams\Dir2";

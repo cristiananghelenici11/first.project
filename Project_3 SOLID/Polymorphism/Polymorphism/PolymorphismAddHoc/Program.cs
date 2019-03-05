@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace PolymorphismAddHoc
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Operation operation = new Operation();
+            var operation = new Operation();
 
             operation.Add(2, 4);
             operation.Add(2, 4, 5);
             operation.Add(2, 4, 5.5);
 
-
-            Console.ReadKey();
             // coercing 
             int a = 45;
             double b = a;
             long c = a;
+
+            Console.ReadKey();
+
         }
     }
 }

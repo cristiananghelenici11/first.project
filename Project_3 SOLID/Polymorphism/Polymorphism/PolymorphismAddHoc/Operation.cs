@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PolymorphismAddHoc
 {
-    class Operation
+    public class Operation
     {
         public int Add(int a, int b)
         {

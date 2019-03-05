@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PolymorphismParametric
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Display(32);
             Display("text");
@@ -17,12 +17,12 @@ namespace PolymorphismParametric
             Console.ReadKey();
         }
 
-        static void Display<T>(T value)
+        private static void Display<T>(T value)
         {
             Console.WriteLine(value);
         }
 
-        static void Display<T, U>(T firstValue, U secondValue)
+        private static void Display<T, U>(T firstValue, U secondValue)
         {
             Console.WriteLine($"{firstValue} {secondValue}");
 

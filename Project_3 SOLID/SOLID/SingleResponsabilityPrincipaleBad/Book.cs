@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SingleResponsabilityPrincipaleBad
 {
-    class Book
+    public class Book
     {
         public string Text { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceSegregationPrincipaleBad
 {
-    class Truck : IVehicle
+    public class Truck : IVehicle
     {
         public string Mark { get; set; }
 

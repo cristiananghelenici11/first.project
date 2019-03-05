@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenClosedPrincipale
 {
-    class Driver
+    public class Driver
     {
         public string Name { get; set; }
 

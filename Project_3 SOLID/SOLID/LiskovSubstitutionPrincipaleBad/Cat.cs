@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipaleBad
 {
-    class Cat : Animal
+    public class Cat : Animal
     {
         public override string Run()
         {
@@ -15,7 +15,7 @@ namespace LiskovSubstitutionPrincipaleBad
 
         public override string Swim()
         {
-            throw new NotImplementedException();
+            throw new Exception("Cat not swim");
         }
     }
 }

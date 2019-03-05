@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipaleBad
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
 
-            List<Animal> list = new List<Animal>();
+            var list = new List<Animal>
+            {
+                new Cat(), 
+                new Crocodile()
+            };
 
-            list.Add(new Cat());
-            list.Add(new Crocodile());
 
             foreach (Animal animal in list)
             {
                 animal.Swim();
             }
-            Console.ReadKey();
 
+            Console.ReadKey();
         }
     }
 }

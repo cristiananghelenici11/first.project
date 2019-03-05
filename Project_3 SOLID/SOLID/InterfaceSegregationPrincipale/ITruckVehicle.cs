@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceSegregationPrincipale
 {
-    interface ITruckVehicle : IVehicle
+    public interface ITruckVehicle : IVehicle
     {
         double LoadCapacity { get; set; }
     }

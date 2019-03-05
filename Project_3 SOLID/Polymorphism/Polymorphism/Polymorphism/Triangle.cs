@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Polymorphism
 {
-    class Triangle : IShape
+    public class Triangle : IShape
     {
         public void Drow()
         {

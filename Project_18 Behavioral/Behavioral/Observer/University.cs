@@ -15,6 +15,7 @@ namespace Observer
         {
             _observers = new List<IObserver>();
         }
+
         public void NotifyObservers(string news)
         {
             foreach (IObserver observer in _observers)
@@ -26,8 +27,9 @@ namespace Observer
         public void RegisterObserver(IObserver observer)
         {
             _observers.Add(observer);
-        }        
-        public void RegisterObserver(List<IObserver> observers)
+        }  
+        
+        public void RegisterObserver(IEnumerable<IObserver> observers)
         {
             _observers.AddRange(observers);
         }
@@ -37,5 +39,6 @@ namespace Observer
             _observers.Remove(observer);
             Console.WriteLine();
         }
+
     }
 }

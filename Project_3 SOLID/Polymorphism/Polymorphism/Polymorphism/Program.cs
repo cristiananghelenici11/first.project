@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Polymorphism
 {
     // universal inclusion
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             IShape circle = new Circle();
             IShape triangle = new Triangle();

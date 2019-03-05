@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InterfaceSegregationPrincipale
+namespace Visitor
 {
-    public interface IMotorcycleVehicle : IVehicle
+    public interface IVisitor
     {
-        string TypeMotorcycle { get; set; }
+        void VisitPersonAcc(Person acc);
+        void VisitCompanyAcc(Company acc);
+
     }
 }

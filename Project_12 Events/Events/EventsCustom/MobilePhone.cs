@@ -12,7 +12,7 @@ namespace EventsCustom
 //        {
 //            cm.NewCall += MobilePhoneCall;
 //        }
-        public void MobilePhoneCall(object sender, NewCallEventArgs c)
+        public void MobilePhoneCall(object sende, NewCallEventArgs c)
         {
             Console.WriteLine("\n Call to Mobile Phone");
             Console.WriteLine($"From: {c.From},\n   To: {c.To},\n   Subject: {c.Time},\n");

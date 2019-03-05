@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpenClosedPrincipale
 {
-    class Truck : IVehicle
+    public class Truck : IVehicle
     {
         public void Drive()
         {
             Console.WriteLine("drive truck");
         }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
-    class Crocodile : IRun, ISwim
+    public class Crocodile : IRun, ISwim
 
     {
         public string Run()

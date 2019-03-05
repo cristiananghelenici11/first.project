@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipaleBad
 {
-    class Crocodile : Animal
+    public class Crocodile : Animal
     {
         public override string Run()
         {

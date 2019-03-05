@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
-    interface ISwim
+    public interface ISwim
     {
         string Swim();
     }

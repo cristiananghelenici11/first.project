@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Polymorphism
 {
-    class Circle : IShape
+    public class Circle : IShape
     {
         public void Drow()
         {
@@ -15,7 +15,7 @@ namespace Polymorphism
 
         public void Erase()
         {
-            Console.WriteLine("Sterge CErc");
+            Console.WriteLine("Sterge Cerc");
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceSegregationPrincipale
 {
-    interface IVehicle
+    public interface IVehicle
     {
         void Move();
         void Stop();

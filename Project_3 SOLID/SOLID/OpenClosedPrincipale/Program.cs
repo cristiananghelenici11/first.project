@@ -7,35 +7,18 @@ using OpenClosedPrincipale;
 
 namespace LiskovSubstitutionPrincipale
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Driver driver = new Driver("Cristian ");
-            //upcast
+            var driver = new Driver("Cristian ");
             IVehicle car = new Car();
             IVehicle truck = new Truck();
-
-            // down cast
-            //((Car) car).OpenDoor();
 
             driver.Drive(car);
             driver.Drive(truck);
            
             Console.ReadKey();
-        }
-    }
-
-    interface IExemple
-    {
-        void Drow();
-    }
-
-    abstract class Test : IExemple
-    {
-        public void Drow()
-        {
-            throw new NotImplementedException();
         }
     }
 }

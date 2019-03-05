@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpenClosedPrincipaleBad
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
             Console.ReadKey();
-
         }
     }
 }

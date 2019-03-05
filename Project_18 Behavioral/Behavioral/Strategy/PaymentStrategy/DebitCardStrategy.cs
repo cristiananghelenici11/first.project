@@ -12,5 +12,6 @@ namespace Strategy.PaymentStrategy
         {
             Console.WriteLine($"Pay with --> Debit Card Strategy <---, Price: {price}");
         }
+
     }
 }

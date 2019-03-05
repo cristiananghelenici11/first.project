@@ -1,6 +1,6 @@
 ﻿namespace SingleResponsabilityPrincipale
 {
-    class Book
+    public class Book
     {
         public string Text { get; set; }
 
@@ -20,5 +20,6 @@
         {
             printer.Print(Text);
         }
+
     }
 }

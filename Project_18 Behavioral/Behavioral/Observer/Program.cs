@@ -12,7 +12,7 @@ namespace Observer
         {
             var university1 = new University{ Name = "UTM" };
 
-            var _students = new List<IObserver>
+            var students = new List<IObserver>
             {
                 new Student{ FirstName = "Anghelenici", LasttName = "Cristian", AverageOfGrades = 9.5},
                 new Student{ FirstName = "Starciuc", LasttName = "Aurel", AverageOfGrades = 9.5},
@@ -25,7 +25,7 @@ namespace Observer
                 FirstName = "Rotaru", LasttName = "Ion", Discipline = "OOP"
             };
             
-            university1.RegisterObserver(_students);
+            university1.RegisterObserver(students);
             university1.RegisterObserver(professor1);
 
             university1.NotifyObservers("Nu facem OOP");

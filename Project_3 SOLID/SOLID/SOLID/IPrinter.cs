@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SingleResponsabilityPrincipale
 {
-    interface IPrinter
+    public interface IPrinter
     {
         void Print(string text);
     }

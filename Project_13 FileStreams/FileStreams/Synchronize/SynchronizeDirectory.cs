@@ -35,11 +35,11 @@ namespace Synchronize
             watcher.Created += SyncFromSourceDirectory;
             watcher.Deleted += DeleteFromTargetdirectory;
             watcher.Renamed += SyncFromSourceDirectory;
-           
+
             watcher.EnableRaisingEvents = true;
 
         }
-        
+
         private void SyncFromSourceDirectory(object obj, FileSystemEventArgs e)
         {
             string tempPath;
@@ -56,7 +56,7 @@ namespace Synchronize
             foreach (string source in Directory.GetFiles(_sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 tempPath = source.Replace(_sourceDirectory, _targetDirectory);
-                
+
                 if (!File.Exists(tempPath))
                 {
                     var final = false;
@@ -74,7 +74,7 @@ namespace Synchronize
 
                         }
                     }
-                    
+
                 }
             }
 
@@ -124,29 +124,12 @@ namespace Synchronize
 
         private void SynchronizeContent(object obj, FileSystemEventArgs e)
         {
-
             foreach (string file in Directory.GetFiles(_sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 string tempPath = file.Replace(_sourceDirectory, _targetDirectory);
 
-                if (file.GetHashCode() != tempPath.GetHashCode())
-                {
-                    var check = false;
-                    while (check == false)
-                    {
-                        try
-                        {
-                            File.Copy(file, tempPath, true);
-                            check = true;
-                        }
-                        catch
-                        {
-                            Thread.Sleep(1000);
-                        }
-                    }
-                }
+                File.Copy(file, tempPath, true);
             }
-                
         }
 
     }

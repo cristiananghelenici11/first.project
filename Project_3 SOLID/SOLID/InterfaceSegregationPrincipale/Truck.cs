@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceSegregationPrincipale
 {
-    class Truck : ITruckVehicle
+    public class Truck : ITruckVehicle
     {
         public double LoadCapacity { get; set; }
         public string Mark { get; set; }

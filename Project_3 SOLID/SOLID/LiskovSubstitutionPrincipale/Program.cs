@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            // acum Cat realizeaza doar interfata IRun
-            List<Cat> list = new List<Cat>();
-
-            list.Add(new Cat());
+            var list = new List<Cat>
+            {
+                new Cat()
+            };
 
             foreach (Cat cats in list)
             {
                 cats.Run();
             }
 
-            Cat cat = new Cat();
+            var cat = new Cat();
             Console.WriteLine(cat.Run());
+
             Console.ReadKey();
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenClosedPrincipale
 {
-    class Car : IVehicle
+    public class Car : IVehicle
     {
         public void Drive()
         {

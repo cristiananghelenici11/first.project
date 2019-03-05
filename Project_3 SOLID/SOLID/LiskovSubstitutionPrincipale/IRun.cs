@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
-    interface IRun
+    public interface IRun
     {
         string Run();
     }
