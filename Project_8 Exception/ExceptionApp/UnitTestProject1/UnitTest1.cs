@@ -15,7 +15,11 @@ namespace ExceptionApp
             
             //person1.AddName("", "Cristian");    //err
             //person1.AddName(null, "");          //err
+<<<<<<< HEAD
             person1.AddName("", "");            //err
+=======
+            //person1.AddName("", "");            //err
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             person1.AddName("Anghelenici", "Cristian");
             Console.WriteLine(person1);
         }
@@ -42,7 +46,29 @@ namespace ExceptionApp
 
             try
             {
+<<<<<<< HEAD
                 NewMethod(person3);
+=======
+                try
+                {
+                    //person3.AddAge(23);
+                    person3.AddAge(-1);
+                    person3.AddName("Anghelenici", "Cristian");
+                    Console.WriteLine(person3);
+                }
+                catch (InvalidAge e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             }
             catch (Exception e)
             {
@@ -54,6 +80,7 @@ namespace ExceptionApp
             }
         }
 
+<<<<<<< HEAD
         private static void NewMethod(Person person3)
         {
             try
@@ -79,11 +106,14 @@ namespace ExceptionApp
             }
         }
 
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         [TestMethod]
         public void Assignment4()
         {
             Console.WriteLine("---> Assignment 4 (Use Catch WHEN Filter) <---");
 
+<<<<<<< HEAD
             
             var person4 = new Person();
 
@@ -94,6 +124,10 @@ namespace ExceptionApp
                 b = 5
             };
 
+=======
+            var person4 = new Person();
+
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             try
             {
 

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Polymorphism
 {
+<<<<<<< HEAD
     public interface IShape
+=======
+    interface IShape
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     {
         void Drow();
         void Erase();

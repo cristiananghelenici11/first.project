@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace InterfaceSegregationPrincipaleBad
 {
+<<<<<<< HEAD
     public class Motorcycle : IVehicle
+=======
+    class Motorcycle : IVehicle
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     {
         public string Mark { get; set; }
 

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace InterfaceSegregationPrincipale
 {
+<<<<<<< HEAD
     public class Car : ICar
+=======
+    class Car : ICar
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     {
         public string Transmision { get; set; }
         public string Mark { get; set; }

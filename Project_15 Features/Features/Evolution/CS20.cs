@@ -11,7 +11,11 @@ namespace Evolution
         [TestMethod]
         public void Generic()
         {
+<<<<<<< HEAD
             List<int> list = new List<int>{1, 2, 3, 4, 5};
+=======
+            var list = new List<int>{1, 2, 3, 4, 5};
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 
             Action<int> deleg = Console.WriteLine;
 

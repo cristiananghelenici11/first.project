@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SingleResponsabilityPrincipale
 {
+<<<<<<< HEAD
     public class Program
     {
         private static void Main(string[] args)
@@ -15,6 +16,17 @@ namespace SingleResponsabilityPrincipale
             book.Print(printer);
 
             Console.ReadLine();
+=======
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IPrinter printer = new ConsolePrinter();
+            Book book = new Book(){Text = "Book Number 1"};
+            book.Print(printer);
+            Console.ReadLine();
+
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         }
     }
     

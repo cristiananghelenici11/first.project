@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+<<<<<<< HEAD
 using System.Net;
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,7 +50,11 @@ namespace FileStreams
         private static void DeleteFromTargetdirectory(string sourceDirectory, string targetDirectory)
         {
             string tempPath;
+<<<<<<< HEAD
             foreach (string targetFile in Directory.GetFiles(targetDirectory, "*", SearchOption.AllDirectories))
+=======
+            foreach (string targetFile in Directory.GetFiles(targetDirectory))
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             {
                 tempPath = targetFile.Replace(targetDirectory, sourceDirectory);
                 if (!File.Exists(tempPath))
@@ -57,7 +64,11 @@ namespace FileStreams
                 }
             }
 
+<<<<<<< HEAD
             foreach (string directory in Directory.GetDirectories(targetDirectory, "*", SearchOption.AllDirectories))
+=======
+            foreach (string directory in Directory.GetDirectories(targetDirectory))
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             {
                 tempPath = directory.Replace(targetDirectory, sourceDirectory);
                 if (!Directory.Exists(tempPath))
@@ -89,10 +100,15 @@ namespace FileStreams
 
         private static async void SynchronizeContent(string sourceDirectory, string targetDirectory)
         {
+<<<<<<< HEAD
+=======
+            string[] fileExtension = { ".txt", ".doc", ".docx", ".html", ".css" };
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 
             foreach (string file in Directory.GetFiles(sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 string tempPath = file.Replace(sourceDirectory, targetDirectory);
+<<<<<<< HEAD
 
 
                 using (var sourceFile = new FileStream(file, FileMode.Open))
@@ -135,5 +151,44 @@ namespace FileStreams
             }
         }
 
+=======
+                if (fileExtension.Contains(Path.GetExtension(file)))
+                {
+                    var stringBuilder1 = new StringBuilder();
+                    var stringBuilder2 = new StringBuilder();
+                    string tempLine;
+
+                    using (var streamReader = new StreamReader(file))
+                    {
+                        while ((tempLine = streamReader.ReadLine()) != null)
+                        {
+                            await Task.Run(() => stringBuilder1.Append(tempLine + Environment.NewLine));
+                        }
+                    }
+
+                    using (var streamReader = new StreamReader(tempPath))
+                    {
+                        while ((tempLine = streamReader.ReadLine()) != null)
+                        {
+                            await Task.Run(() => stringBuilder2.Append(tempLine + Environment.NewLine));
+                        }
+                    }
+
+                    if (stringBuilder1.Equals(stringBuilder2)) continue;
+                    using (var streamWriter = new StreamWriter( tempPath, false, Encoding.Default))
+                    {
+                        await Task.Run(() => streamWriter.WriteLine((stringBuilder1)));
+                    }
+                }
+                else
+                {
+                    if (file.GetHashCode() != tempPath.GetHashCode())
+                    {
+                        File.Copy(file, tempPath, true);
+                    }
+                }
+            }
+        }
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     }
 }

@@ -105,7 +105,11 @@ namespace Evolution
             (string, string, int) person = Person();
             (string firstName, string lastName, int Age) person2 = Person();
             Console.WriteLine(number);
+<<<<<<< HEAD
             Console.WriteLine(person2);
+=======
+            Console.WriteLine(person);
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         }
 
         private static (int, string) Number()
@@ -122,7 +126,11 @@ namespace Evolution
         public void Test()
         {
 
+<<<<<<< HEAD
             DoSomething("l");
+=======
+            DoSomething("ii");
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         }
 
         public static void DoSomething(string newName)         

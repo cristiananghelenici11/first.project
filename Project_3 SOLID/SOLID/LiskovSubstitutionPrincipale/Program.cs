@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
+<<<<<<< HEAD
     public class Program
     {
         private static void Main(string[] args)
@@ -14,15 +15,30 @@ namespace LiskovSubstitutionPrincipale
             {
                 new Cat()
             };
+=======
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // acum Cat realizeaza doar interfata IRun
+            List<Cat> list = new List<Cat>();
+
+            list.Add(new Cat());
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 
             foreach (Cat cats in list)
             {
                 cats.Run();
             }
 
+<<<<<<< HEAD
             var cat = new Cat();
             Console.WriteLine(cat.Run());
 
+=======
+            Cat cat = new Cat();
+            Console.WriteLine(cat.Run());
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             Console.ReadKey();
         }
     }
