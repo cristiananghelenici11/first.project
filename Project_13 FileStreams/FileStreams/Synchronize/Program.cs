@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Synchronize
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public class Program
     {
         private static void Main(string[] args)
@@ -15,12 +16,17 @@ namespace Synchronize
             const string path1 = @"D:\Internship\Projects\Project_1 VCS\first.project\Project_13 FileStreams\FileStreams\Dir1";
             const string path2 = @"D:\Internship\Projects\Project_1 VCS\first.project\Project_13 FileStreams\FileStreams\Dir2";
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     class Program
     {
         static void Main(string[] args)
         {
             const string path1 = @"C:\Users\crist\Desktop\work\first.project\Project_13 FileStreams\FileStreams\Dir1";
             const string path2 = @"C:\Users\crist\Desktop\work\first.project\Project_13 FileStreams\FileStreams\Dir2";
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 
             Console.WriteLine($"Synchronize {Path.GetFileName(path1)} and {Path.GetFileName(path2)}");

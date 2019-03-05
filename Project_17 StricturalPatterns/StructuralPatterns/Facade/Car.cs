@@ -11,6 +11,7 @@ namespace Facade
     {
         private readonly string _mark;
 <<<<<<< HEAD
+<<<<<<< HEAD
         private readonly Engine _engine;
         private readonly Gearbox _gearBox ;
 
@@ -21,6 +22,8 @@ namespace Facade
             _mark = mark;
         }
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 
         public Car(string mark)
         {
@@ -29,6 +32,9 @@ namespace Facade
  
         private readonly Engine _engine = new Engine();
         private readonly Gearbox _gearBox = new Gearbox();
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 
         public void Start()

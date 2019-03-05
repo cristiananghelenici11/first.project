@@ -27,7 +27,11 @@ namespace EncodingDisposal
             };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             saver.Save(@"D:\Internship\Projects\Project_1 VCS\first.project\Project_14 Encoding Disposal\Encoding\as cii.txt", Encoding.ASCII);
+=======
+            saver.Save(@"D:\Internship\Projects\Project_1 VCS\first.project\Project_14 Encoding Disposal\Encoding\ascii.txt", Encoding.ASCII);
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             saver.Save(@"D:\Internship\Projects\Project_1 VCS\first.project\Project_14 Encoding Disposal\Encoding\ascii.txt", Encoding.ASCII);
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -36,8 +40,11 @@ namespace EncodingDisposal
             saver.Save(@"D:\Internship\Projects\Project_1 VCS\first.project\Project_14 Encoding Disposal\Encoding\unicode.txt", Encoding.Unicode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             Console.WriteLine("---> String <---");
             //String format
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             string s = string.Format("it {0} , Day of week {1}", 1, DateTime.Now.DayOfWeek);

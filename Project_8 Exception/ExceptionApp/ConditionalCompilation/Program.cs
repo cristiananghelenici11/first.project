@@ -12,10 +12,16 @@ namespace ConditionalCompilation
         private static void Main(string[] args)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             
             Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
             var condition = 51;
+=======
+            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
+
+            int condition = 51;
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
@@ -29,7 +35,11 @@ namespace ConditionalCompilation
             Trace.WriteLine("Trace Information-Product Starting ");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if TEST
+=======
+#if DEBUG
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
 #if DEBUG
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355

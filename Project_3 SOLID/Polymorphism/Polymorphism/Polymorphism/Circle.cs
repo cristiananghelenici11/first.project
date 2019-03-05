@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 namespace Polymorphism
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public class Circle : IShape
+=======
+    class Circle : IShape
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
     class Circle : IShape
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -20,7 +24,11 @@ namespace Polymorphism
         public void Erase()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             Console.WriteLine("Sterge Cerc");
+=======
+            Console.WriteLine("Sterge CErc");
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             Console.WriteLine("Sterge CErc");
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355

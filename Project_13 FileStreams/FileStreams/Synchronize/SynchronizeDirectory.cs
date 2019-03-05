@@ -36,16 +36,22 @@ namespace Synchronize
             watcher.Deleted += DeleteFromTargetdirectory;
             watcher.Renamed += SyncFromSourceDirectory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             watcher.EnableRaisingEvents = true;
 
         }
 
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             watcher.EnableRaisingEvents = true;
 
         }
         
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         private void SyncFromSourceDirectory(object obj, FileSystemEventArgs e)
         {
@@ -64,7 +70,11 @@ namespace Synchronize
             {
                 tempPath = source.Replace(_sourceDirectory, _targetDirectory);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
                 
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -86,7 +96,11 @@ namespace Synchronize
                         }
                     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
                     
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -138,8 +152,14 @@ namespace Synchronize
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         private void SynchronizeContent(object obj, FileSystemEventArgs e)
         {
+=======
+        private async void SynchronizeContent(object obj, FileSystemEventArgs e)
+        {
+
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
         private async void SynchronizeContent(object obj, FileSystemEventArgs e)
         {
@@ -150,9 +170,12 @@ namespace Synchronize
                 string tempPath = file.Replace(_sourceDirectory, _targetDirectory);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 File.Copy(file, tempPath, true);
             }
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
                 if (file.GetHashCode() != tempPath.GetHashCode())
                 {
                     bool executed = false;
@@ -171,6 +194,9 @@ namespace Synchronize
                 }
             }
                 
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         }
 

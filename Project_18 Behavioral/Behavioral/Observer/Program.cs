@@ -13,7 +13,11 @@ namespace Observer
             var university1 = new University{ Name = "UTM" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             var students = new List<IObserver>
+=======
+            var _students = new List<IObserver>
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             var _students = new List<IObserver>
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -30,7 +34,11 @@ namespace Observer
             };
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             university1.RegisterObserver(students);
+=======
+            university1.RegisterObserver(_students);
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             university1.RegisterObserver(_students);
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355

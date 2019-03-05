@@ -19,6 +19,10 @@ namespace Decorator
             p2 = new MeatDecorator(p2);
             Console.WriteLine($"Name: {p2.Name}, Cost: {p2.GetCost()}");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
 
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355

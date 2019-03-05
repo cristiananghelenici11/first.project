@@ -10,8 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy", "Strategy\Strategy.csproj", "{313D25EF-D663-42D6-A25A-EEC4EA0D2320}"
 EndProject
 <<<<<<< HEAD
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visitor", "Visitor\Visitor.csproj", "{ED4441D8-8986-4F19-8082-DDB3946278F2}"
 EndProject
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 Global
@@ -33,10 +36,13 @@ Global
 		{313D25EF-D663-42D6-A25A-EEC4EA0D2320}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{313D25EF-D663-42D6-A25A-EEC4EA0D2320}.Release|Any CPU.Build.0 = Release|Any CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{ED4441D8-8986-4F19-8082-DDB3946278F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED4441D8-8986-4F19-8082-DDB3946278F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED4441D8-8986-4F19-8082-DDB3946278F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED4441D8-8986-4F19-8082-DDB3946278F2}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 	EndGlobalSection

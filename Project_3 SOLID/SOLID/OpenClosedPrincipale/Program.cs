@@ -8,6 +8,7 @@ using OpenClosedPrincipale;
 namespace LiskovSubstitutionPrincipale
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public class Program
     {
         private static void Main(string[] args)
@@ -17,6 +18,8 @@ namespace LiskovSubstitutionPrincipale
             IVehicle truck = new Truck();
 
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     class Program
     {
         static void Main(string[] args)
@@ -29,6 +32,9 @@ namespace LiskovSubstitutionPrincipale
             // down cast
             //((Car) car).OpenDoor();
 
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             driver.Drive(car);
             driver.Drive(truck);
@@ -37,7 +43,10 @@ namespace LiskovSubstitutionPrincipale
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 
     interface IExemple
     {
@@ -51,5 +60,8 @@ namespace LiskovSubstitutionPrincipale
             throw new NotImplementedException();
         }
     }
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 }

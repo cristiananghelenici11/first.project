@@ -11,7 +11,11 @@ namespace EventsCustom
         public event EventHandler<NewCallEventArgs> NewCall;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         private void OnNewCall(NewCallEventArgs c)
+=======
+        public void OnNewCall(NewCallEventArgs c)
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
         public void OnNewCall(NewCallEventArgs c)
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355

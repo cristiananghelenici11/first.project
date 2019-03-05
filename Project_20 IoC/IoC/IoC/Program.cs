@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace IoC
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public class Program
     {
         private static void Main(string[] args)
@@ -14,6 +15,8 @@ namespace IoC
 
             Console.ReadKey();
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     class Program
     {
         static void Main(string[] args)
@@ -24,6 +27,9 @@ namespace IoC
             Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         }
     }

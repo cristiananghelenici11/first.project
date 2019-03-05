@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 using System.Net;
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 using System.Text;
@@ -51,7 +54,11 @@ namespace FileStreams
         {
             string tempPath;
 <<<<<<< HEAD
+<<<<<<< HEAD
             foreach (string targetFile in Directory.GetFiles(targetDirectory, "*", SearchOption.AllDirectories))
+=======
+            foreach (string targetFile in Directory.GetFiles(targetDirectory))
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             foreach (string targetFile in Directory.GetFiles(targetDirectory))
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -65,7 +72,11 @@ namespace FileStreams
             }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             foreach (string directory in Directory.GetDirectories(targetDirectory, "*", SearchOption.AllDirectories))
+=======
+            foreach (string directory in Directory.GetDirectories(targetDirectory))
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             foreach (string directory in Directory.GetDirectories(targetDirectory))
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -101,6 +112,10 @@ namespace FileStreams
         private static async void SynchronizeContent(string sourceDirectory, string targetDirectory)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            string[] fileExtension = { ".txt", ".doc", ".docx", ".html", ".css" };
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             string[] fileExtension = { ".txt", ".doc", ".docx", ".html", ".css" };
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -108,6 +123,7 @@ namespace FileStreams
             foreach (string file in Directory.GetFiles(sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 string tempPath = file.Replace(sourceDirectory, targetDirectory);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -152,6 +168,8 @@ namespace FileStreams
         }
 
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
                 if (fileExtension.Contains(Path.GetExtension(file)))
                 {
                     var stringBuilder1 = new StringBuilder();
@@ -189,6 +207,9 @@ namespace FileStreams
                 }
             }
         }
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     }
 }

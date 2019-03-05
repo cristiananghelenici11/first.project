@@ -16,7 +16,11 @@ namespace ExceptionApp
             //person1.AddName("", "Cristian");    //err
             //person1.AddName(null, "");          //err
 <<<<<<< HEAD
+<<<<<<< HEAD
             person1.AddName("", "");            //err
+=======
+            //person1.AddName("", "");            //err
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             //person1.AddName("", "");            //err
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
@@ -47,8 +51,11 @@ namespace ExceptionApp
             try
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 NewMethod(person3);
 =======
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
                 try
                 {
                     //person3.AddAge(23);
@@ -68,6 +75,9 @@ namespace ExceptionApp
                 {
                     Console.WriteLine(e.Message);
                 }
+<<<<<<< HEAD
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             }
             catch (Exception e)
@@ -80,6 +90,7 @@ namespace ExceptionApp
             }
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         private static void NewMethod(Person person3)
         {
@@ -108,11 +119,14 @@ namespace ExceptionApp
 
 =======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         [TestMethod]
         public void Assignment4()
         {
             Console.WriteLine("---> Assignment 4 (Use Catch WHEN Filter) <---");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             
             var person4 = new Person();
@@ -124,6 +138,10 @@ namespace ExceptionApp
                 b = 5
             };
 
+=======
+            var person4 = new Person();
+
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
             var person4 = new Person();
 

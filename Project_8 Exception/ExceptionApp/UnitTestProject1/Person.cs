@@ -7,9 +7,15 @@ namespace ExceptionApp
     public class Person
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         private string FirstName { get; set; }
         private string LastName { get; set; }
         public int Age { get; private set; }
+=======
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 namespace InterfaceSegregationPrincipale
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public interface IMotorcycleVehicle : IVehicle
+=======
+    interface IMotorcycleVehicle : IVehicle
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
     interface IMotorcycleVehicle : IVehicle
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355

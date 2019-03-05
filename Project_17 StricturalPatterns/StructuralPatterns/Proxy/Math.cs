@@ -20,8 +20,11 @@ namespace Proxy
 
         public double Sub(double x, double y) => x - y;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         public double AddMultiple(double x, double y, double z) => x * y * z;
+=======
+>>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
 =======
 >>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     }
