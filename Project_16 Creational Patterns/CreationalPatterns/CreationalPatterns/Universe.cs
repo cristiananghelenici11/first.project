@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CreationalPatterns
 {
-    public class Universe
+    public sealed class Universe
     {
-        private static readonly Lazy<Universe> lazy = 
-            new Lazy<Universe>(() => new Universe());
+        private static readonly Lazy<Universe> Lazy = 
+            new Lazy<Universe>(() => new Universe(), true);
 
-        public string Name { get; set; }
+        public static string Name { get; set; }
 
         private Universe()
         {
@@ -19,7 +19,7 @@ namespace CreationalPatterns
 
         public static Universe GetInstance()
         {
-            return lazy.Value;
+            return Lazy.Value;
         }
     }
 }

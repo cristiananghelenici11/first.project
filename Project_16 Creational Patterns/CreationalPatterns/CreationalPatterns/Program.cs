@@ -16,15 +16,15 @@ namespace Singleton
             universe1.Name = "Universe";
 
             var superHero = new Hero { Name = "PlanetMan" };
-            superHero.CreatePlanet(new Planet("Universe1"){NameOfPlanet = "Tera"});
+            superHero.CreatePlanet(new Planet{NameOfPlanet = "Terra"});
             Console.WriteLine(universe1.Name);
 
-            var jupiter = new Planet("Universe2"){NameOfPlanet = "Jupiter"};
+            var jupiter = new Planet{NameOfPlanet = "Jupiter"};
             superHero.CreatePlanet(jupiter);
             Console.WriteLine($"Planet: {jupiter.NameOfPlanet}, Sun: {jupiter.Universe.Name}");
 
             Universe universe2 = Universe.GetInstance();
-            universe2.Name = "Universe3";
+            universe2.Name = "Universe";
 
             Console.WriteLine($"Sun1 and Sun2 is equal: {universe1.Equals(universe2)}");
             Console.WriteLine($"{universe1.GetHashCode()}, \n{universe2.GetHashCode()}");

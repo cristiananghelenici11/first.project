@@ -9,7 +9,7 @@ namespace CreationalPatterns
     public class Hero
     {
         public string Name { get; set; }
-        private List<Planet>_planets = new List<Planet>();
+        private readonly List<Planet> _planets = new List<Planet>();
 
         public void CreatePlanet(Planet planet)
         {
