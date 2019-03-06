@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-<<<<<<< HEAD
-<<<<<<< HEAD
 using System.Net;
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,15 +48,7 @@ namespace FileStreams
         private static void DeleteFromTargetdirectory(string sourceDirectory, string targetDirectory)
         {
             string tempPath;
-<<<<<<< HEAD
-<<<<<<< HEAD
             foreach (string targetFile in Directory.GetFiles(targetDirectory, "*", SearchOption.AllDirectories))
-=======
-            foreach (string targetFile in Directory.GetFiles(targetDirectory))
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-            foreach (string targetFile in Directory.GetFiles(targetDirectory))
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             {
                 tempPath = targetFile.Replace(targetDirectory, sourceDirectory);
                 if (!File.Exists(tempPath))
@@ -71,15 +58,7 @@ namespace FileStreams
                 }
             }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
             foreach (string directory in Directory.GetDirectories(targetDirectory, "*", SearchOption.AllDirectories))
-=======
-            foreach (string directory in Directory.GetDirectories(targetDirectory))
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-            foreach (string directory in Directory.GetDirectories(targetDirectory))
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             {
                 tempPath = directory.Replace(targetDirectory, sourceDirectory);
                 if (!Directory.Exists(tempPath))
@@ -109,29 +88,17 @@ namespace FileStreams
 
         }
 
-        private static async void SynchronizeContent(string sourceDirectory, string targetDirectory)
+        private static void SynchronizeContent(string sourceDirectory, string targetDirectory)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            string[] fileExtension = { ".txt", ".doc", ".docx", ".html", ".css" };
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-            string[] fileExtension = { ".txt", ".doc", ".docx", ".html", ".css" };
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-
             foreach (string file in Directory.GetFiles(sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 string tempPath = file.Replace(sourceDirectory, targetDirectory);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 
                 using (var sourceFile = new FileStream(file, FileMode.Open))
                 using (var targetFile = new FileStream(tempPath, FileMode.Open))
                 {
-
-                    if (!IsEquals(sourceFile, targetFile))
+                    bool isSame = VerifyFilesBinary(sourceFile, targetFile);
+                    if (!isSame)
                     {
                         targetFile.Close();
                         File.Delete(tempPath);
@@ -139,77 +106,55 @@ namespace FileStreams
                     }
                 }
 
-                bool IsEquals(Stream sourceFileStream, Stream targetFileStream)
+                //1
+                bool VerifyFilesBinary(Stream sourceFileStream, Stream targetFileStream)
                 {
-                    var source = new byte[sourceFileStream.Length];
-                    var target = new byte[targetFileStream.Length];
-                    if (!source.SequenceEqual(target))
-                    {
+
+                    if (sourceFileStream.Length != targetFileStream.Length)
                         return false;
-                    }
 
-                    for (var i = 10; i <= sourceFileStream.Length; i += 10)
+                    var bufferSize = 1024 * 1024 * 1024;
+
+                    var source = new byte[bufferSize];
+                    var target = new byte[bufferSize];
+
+                    var bytesRead = 1;
+
+                    while (bytesRead != 0)
                     {
-
-                        sourceFileStream.Read(source, 0, i);
-                        targetFileStream.Read(target, 0, i);
+                        bytesRead = sourceFileStream.Read(source, 0, bufferSize);
+                        targetFileStream.Read(target, 0, bufferSize);
                         if (!source.SequenceEqual(target))
-                        {
                             return false;
-                        }
-                        if (sourceFileStream.Length - i < 10)
-                            i = (int)sourceFileStream.Length;
                     }
 
                     return true;
                 }
 
+                //2
+                bool VerifyFilesSHA256(Stream sourceFileStream, Stream targetFileStream)
+                {
+                    string s1, s2;
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        s1 = Convert.ToBase64String(sha256.ComputeHash(sourceFileStream));
+                        s2 = Convert.ToBase64String(sha256.ComputeHash(targetFileStream));
+                    }
+
+                    return s1 == s2;
+                }
+
+                //3
+                bool VerifyFilesMd5(Stream sourceFileStream, Stream targetFileStream)
+                {
+                    byte[] firstHash = MD5.Create().ComputeHash(sourceFileStream);
+                    byte[] secondHash = MD5.Create().ComputeHash(targetFileStream);
+
+                    return !firstHash.Where((t, i) => t != secondHash[i]).Any();
+                }
+
             }
         }
 
-=======
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-                if (fileExtension.Contains(Path.GetExtension(file)))
-                {
-                    var stringBuilder1 = new StringBuilder();
-                    var stringBuilder2 = new StringBuilder();
-                    string tempLine;
-
-                    using (var streamReader = new StreamReader(file))
-                    {
-                        while ((tempLine = streamReader.ReadLine()) != null)
-                        {
-                            await Task.Run(() => stringBuilder1.Append(tempLine + Environment.NewLine));
-                        }
-                    }
-
-                    using (var streamReader = new StreamReader(tempPath))
-                    {
-                        while ((tempLine = streamReader.ReadLine()) != null)
-                        {
-                            await Task.Run(() => stringBuilder2.Append(tempLine + Environment.NewLine));
-                        }
-                    }
-
-                    if (stringBuilder1.Equals(stringBuilder2)) continue;
-                    using (var streamWriter = new StreamWriter( tempPath, false, Encoding.Default))
-                    {
-                        await Task.Run(() => streamWriter.WriteLine((stringBuilder1)));
-                    }
-                }
-                else
-                {
-                    if (file.GetHashCode() != tempPath.GetHashCode())
-                    {
-                        File.Copy(file, tempPath, true);
-                    }
-                }
-            }
-        }
-<<<<<<< HEAD
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
     }
 }

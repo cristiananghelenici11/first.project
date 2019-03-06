@@ -1,0 +1,7 @@
+743243f39d1c56635a9f0655e25e16dc1703ecbe commit	refs/heads/ConsoleApp
+80460f97abe72908723585ad8118a0773a275359 commit	refs/heads/master
+b99634dadcd284ec07ff76a9a160acb59223b296 commit	refs/heads/secondBranch
+9ce4d5ea94d656a0ae7c5e7b5dec880c3ffc0223 commit	refs/remotes/origin/ConsoleApp
+18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355 commit	refs/remotes/origin/HEAD
+18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355 commit	refs/remotes/origin/master
+58470fc1b0a128fc6ad98970ed7d7ffd64248540 commit	refs/stash

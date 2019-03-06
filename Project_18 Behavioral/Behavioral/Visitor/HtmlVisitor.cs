@@ -24,5 +24,6 @@ namespace Visitor
             result += "<tr><td>Number<td><td>" + acc.Number + "</td></tr></table>";
             Console.WriteLine(result);
         }
+
     }
 }

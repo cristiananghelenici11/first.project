@@ -18,11 +18,8 @@ namespace Visitor
             Company company = new Company();
             HtmlVisitor htmlVisitor = new HtmlVisitor();
             structure.Accept(htmlVisitor);
-            //structure.Accept(new HtmlVisitor());
-            //structure.Accept(new XmlVisitor());
 
             htmlVisitor.VisitCompanyAcc(company); 
-
 
             Console.WriteLine("Hello World!");
             Console.ReadKey();

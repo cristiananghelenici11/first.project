@@ -35,24 +35,11 @@ namespace Synchronize
             watcher.Created += SyncFromSourceDirectory;
             watcher.Deleted += DeleteFromTargetdirectory;
             watcher.Renamed += SyncFromSourceDirectory;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             watcher.EnableRaisingEvents = true;
 
         }
 
-=======
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-            watcher.EnableRaisingEvents = true;
-
-        }
-        
-<<<<<<< HEAD
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         private void SyncFromSourceDirectory(object obj, FileSystemEventArgs e)
         {
             string tempPath;
@@ -69,15 +56,7 @@ namespace Synchronize
             foreach (string source in Directory.GetFiles(_sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 tempPath = source.Replace(_sourceDirectory, _targetDirectory);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-                
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
                 if (!File.Exists(tempPath))
                 {
                     var final = false;
@@ -95,15 +74,6 @@ namespace Synchronize
 
                         }
                     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-                    
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-                    
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
                 }
             }
 
@@ -151,53 +121,31 @@ namespace Synchronize
 
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         private void SynchronizeContent(object obj, FileSystemEventArgs e)
         {
-=======
-        private async void SynchronizeContent(object obj, FileSystemEventArgs e)
-        {
-
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-        private async void SynchronizeContent(object obj, FileSystemEventArgs e)
-        {
-
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
             foreach (string file in Directory.GetFiles(_sourceDirectory, "*", SearchOption.AllDirectories))
             {
                 string tempPath = file.Replace(_sourceDirectory, _targetDirectory);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
                 File.Copy(file, tempPath, true);
             }
-=======
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-                if (file.GetHashCode() != tempPath.GetHashCode())
-                {
-                    bool executed = false;
-                    while (executed == false)
-                    {
-                        try
-                        {
-                            File.Copy(file, tempPath, true);
-                            executed = true;
-                        }
-                        catch
-                        {
-                            Thread.Sleep(1000);
-                        }
-                    }
-                }
-            }
-                
-<<<<<<< HEAD
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+
+//            if (file.GetHashCode() != tempPath.GetHashCode())
+//            {
+//                bool executed = false;
+//                while (executed == false)
+//                {
+//                    try
+//                    {
+//                        File.Copy(file, tempPath, true);
+//                        executed = true;
+//                    }
+//                    catch
+//                    {
+//                        Thread.Sleep(1000);
+//                    }
+//                }
+//            }
         }
 
     }

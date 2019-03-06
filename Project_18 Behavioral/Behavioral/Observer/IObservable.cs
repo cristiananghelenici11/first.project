@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Observer
 {
-    interface IObservable
+    public interface IObservable
     {
         void RegisterObserver(IObserver o);
         void RemoveObserver(IObserver o);
         void NotifyObservers(string str);
+
     }
 }

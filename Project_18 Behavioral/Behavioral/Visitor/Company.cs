@@ -17,4 +17,5 @@ namespace Visitor
             visitor.VisitCompanyAcc(this);
         }
     }
+
 }
