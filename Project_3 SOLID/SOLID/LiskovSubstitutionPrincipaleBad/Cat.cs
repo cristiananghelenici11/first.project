@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipaleBad
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
     public class Cat : Animal
-=======
-    class Cat : Animal
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-    class Cat : Animal
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
+
     {
         public override string Run()
         {
@@ -23,15 +16,7 @@ namespace LiskovSubstitutionPrincipaleBad
 
         public override string Swim()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
             throw new Exception("Cat not swim");
-=======
-            throw new NotImplementedException();
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
-=======
-            throw new NotImplementedException();
->>>>>>> 18a9e152a9d4ca40f5adaa6c18f43b9d49cd1355
         }
     }
 }

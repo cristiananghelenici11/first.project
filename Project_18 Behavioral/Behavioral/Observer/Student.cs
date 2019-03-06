@@ -22,5 +22,6 @@ namespace Observer
         {
             return $"Studentul: {FirstName}, {LasttName}, ID: {ID}, AVG Grades {AverageOfGrades}";
         }
+        
     }
 }

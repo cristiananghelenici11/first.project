@@ -15,8 +15,8 @@ namespace Visitor
             structure.Add(new Person{Name = "Cristian"});
             structure.Add(new Company{Name = "Amdaris"});
 
-            Company company = new Company();
-            HtmlVisitor htmlVisitor = new HtmlVisitor();
+            var company = new Company();
+            var htmlVisitor = new HtmlVisitor();
             structure.Accept(htmlVisitor);
 
             htmlVisitor.VisitCompanyAcc(company); 
