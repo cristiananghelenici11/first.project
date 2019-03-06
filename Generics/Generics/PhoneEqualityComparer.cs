@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    internal class PhoneEqualityComparer : IEqualityComparer<Phone>, IComparer<Phone>
+    public class PhoneEqualityComparer : IEqualityComparer<Phone>, IComparer<Phone>
     {
         public int Compare(Phone x, Phone y)
         {

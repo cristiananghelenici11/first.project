@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    internal static class Print
+    public static class Print
     {
         public static void Show(IEnumerable<int> array)
         {

@@ -11,5 +11,6 @@ namespace Visitor
         void VisitPersonAcc(Person acc);
         void VisitCompanyAcc(Company acc);
 
+
     }
 }

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Polymorphism
+namespace GenericRepository
 {
-    public interface IShape
+    public class Company
     {
-        void Draw();
-        void Erase();
-
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

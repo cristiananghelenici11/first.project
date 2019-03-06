@@ -17,6 +17,9 @@ namespace Strategy
             customer.PaymentStrategy = new CashStrategy();
             customer.Pay(300);
 
+            IPaymentStrategy paymentStrategy = new CashStrategy();
+            paymentStrategy.Pay(20);
+
             Console.ReadKey();
         }
     }

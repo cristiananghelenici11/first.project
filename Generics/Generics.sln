@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generics", "Generics\Generi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericsCovariantContravariant", "GenericsCovariantContravariant\GenericsCovariantContravariant.csproj", "{DABAA7C6-EAE7-4651-9676-9A4A3101A960}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericRepository", "GenericRepository\GenericRepository.csproj", "{DED178A3-7046-4C7B-993B-8387EEE56E9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DABAA7C6-EAE7-4651-9676-9A4A3101A960}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DABAA7C6-EAE7-4651-9676-9A4A3101A960}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DABAA7C6-EAE7-4651-9676-9A4A3101A960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED178A3-7046-4C7B-993B-8387EEE56E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED178A3-7046-4C7B-993B-8387EEE56E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED178A3-7046-4C7B-993B-8387EEE56E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED178A3-7046-4C7B-993B-8387EEE56E9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

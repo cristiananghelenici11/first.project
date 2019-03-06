@@ -51,7 +51,10 @@ namespace Generics
 
             var dictionary = new Dictionary<Phone, Case>
             {
-                {phone1, case1}, {phone2, case2}, {phone3, case3}, {phone4, case4}
+                {phone1, case1}, 
+                {phone2, case2}, 
+                {phone3, case3}, 
+                {phone4, case4}
             };
             Print.Show(dictionary);
 

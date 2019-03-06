@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Generics
 {
 
-    internal class Phone
+    public class Phone
     {
         public string Brand { get; set; }
         public string Model { get; set; }
-        private readonly int? _ram = null;
-        private readonly int? _capacity = null;
+        private readonly int? _ram;
+        private readonly int? _capacity;
 
         public Phone(string brand, string model, int? ram, int? capacity)
         {

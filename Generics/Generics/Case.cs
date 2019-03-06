@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    internal class Case
+    public class Case
     {
-        private readonly double? _size;
+        private readonly double _size;
         private readonly string _color;
-        public List<Phone> _phone = new List<Phone>();
+        public readonly List<Phone> _phone = new List<Phone>();
 
-        public Case(double? size, string color, List<Phone> phone)
+        public Case(double size, string color, List<Phone> phone)
         {
             _size = size;
             _color = color;
             _phone = phone;
         }
 
-        public Case(double? size, string color, Phone phone)
+        public Case(double size, string color, Phone phone)
         {
             _size = size;
             _color = color;

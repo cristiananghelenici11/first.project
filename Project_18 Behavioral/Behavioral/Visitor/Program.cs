@@ -10,14 +10,14 @@ namespace Visitor
     {
         private static void Main(string[] args)
         {
-            var structure = new Bank();
+            var bank = new Bank();
 
-            structure.Add(new Person{Name = "Cristian"});
-            structure.Add(new Company{Name = "Amdaris"});
+            bank.Add(new Person{Name = "Cristian"});
+            bank.Add(new Company{Name = "Amdaris"});
 
             var company = new Company();
             var htmlVisitor = new HtmlVisitor();
-            structure.Accept(htmlVisitor);
+            bank.Accept(htmlVisitor);
 
             htmlVisitor.VisitCompanyAcc(company); 
 
