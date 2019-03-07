@@ -10,17 +10,18 @@ namespace LiskovSubstitutionPrincipale
     {
         private static void Main(string[] args)
         {
-            var list = new List<Cat>
+            var animalRunners = new List<IRun>
             {
-                new Cat()
+                new Sheep(),
+                new Crocodile(),
             };
 
-            foreach (Cat cats in list)
+            foreach (IRun runner in animalRunners)
             {
-                cats.Run();
+                runner.Run();
             }
 
-            var cat = new Cat();
+            var cat = new Sheep();
             Console.WriteLine(cat.Run());
 
             Console.ReadKey();

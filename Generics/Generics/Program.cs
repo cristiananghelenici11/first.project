@@ -18,7 +18,10 @@ namespace Generics
 
         private static void Main(string[] args)
         {
-            var arr = new ArrayList<int>(new [] {1, 2, 3, 2});
+            var arr = new CollectionArray<int>(new [] {1, 2, 3, 2});
+            Print.Show(arr);
+            arr.RemoveAt(0);
+            Print.Show(arr);
 
             arr.Swap(0, 1);
             Print.Show(arr);
@@ -64,8 +67,6 @@ namespace Generics
             //IComparer brand
             phones.Sort(new PhoneEqualityComparer());
             Print.Show(phones);
-
-            //Generic Covariance and Contravariance
 
             Console.ReadKey();
 

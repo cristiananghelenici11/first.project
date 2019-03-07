@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cat.cs" />
+    <Compile Include="Sheep.cs" />
     <Compile Include="Crocodile.cs" />
     <Compile Include="IRun.cs" />
     <Compile Include="ISwim.cs" />

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LiskovSubstitutionPrincipale
 {
-    public class Cat : IRun
+    public class Sheep : IRun
     {
         public string Run()
         {
-            return "run cat";
+            return "run sheep";
         }
     }
 }

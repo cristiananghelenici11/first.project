@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="Company.cs" />
-    <Compile Include="EFGenericRepository.cs" />
+    <Compile Include="GenericRepository.cs" />
     <Compile Include="IGenericRepository.cs" />
     <Compile Include="Phone.cs" />
     <Compile Include="Program.cs" />

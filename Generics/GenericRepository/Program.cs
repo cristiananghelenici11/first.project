@@ -15,13 +15,7 @@ namespace GenericRepository
             phoneRepo.Create(new Phone{Company = new Company(), Name = "iPhone"});
             phoneRepo.Create(new Phone{Company = new Company(), Name = "iPhone"});
             phoneRepo.Create(new Phone{Company = new Company(), Name = "iPhone"});
-            
-//            IGenericRepository<Phone> phones1 = new EFGenericRepository<Phone>(new ApplicationContext())
-//            {
-//                
-//            };
 
-            //IEnumerable<Phone> phones = phoneRepo.GetWithInclude(p=>p.Company);
 
             IEnumerable<Phone> phones = phoneRepo.GetWithInclude(x=>x.Company.Name.StartsWith("S"), p=>p.Company);
             foreach (Phone p in phones)

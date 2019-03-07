@@ -13,7 +13,7 @@ namespace LiskovSubstitutionPrincipaleBad
 
             var list = new List<Animal>
             {
-                new Cat(), 
+                new Sheep(), 
                 new Crocodile()
             };
 

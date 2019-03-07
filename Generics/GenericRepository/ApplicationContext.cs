@@ -9,7 +9,7 @@ namespace GenericRepository
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Phone> Phones { get; set; }
+        public List<Phone> Phones { get; set; }
         public DbSet<Company> Companies { get; set; }
     }
 }

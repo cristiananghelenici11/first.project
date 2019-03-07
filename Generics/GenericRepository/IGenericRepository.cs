@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace GenericRepository
 {
-    public interface IGenericRepository<Tentity> where Tentity : class
+    public interface IGenericRepository<T> where T : class
     {
-        void Create(Tentity item);
-        Tentity FindById(int id);
-        IEnumerable<Tentity> Get();
-        IEnumerable<Tentity> Get(Func<Tentity, bool> predicate);
-        void Remove(Tentity item);
-        void Update(Tentity item);
+        void Create(T item);
+        T FindById(int id);
+        IEnumerable<T> Get();
+        IEnumerable<T> Get(Func<T, bool> predicate);
+        void Remove(T item);
+        void Update(T item);
 
     }
 }

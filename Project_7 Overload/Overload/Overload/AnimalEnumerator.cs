@@ -40,7 +40,6 @@ namespace Overload
         {
             _position = -1;
         }
-
     }
 
 }

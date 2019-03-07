@@ -10,14 +10,14 @@ namespace GenericsCovariantContravariant
     {
         private static void Main(string[] args)
         {
-            // covariant
+            // covariant out
             IBank<DepositAccount> depositBank = new Bank<DepositAccount>();
             Account account1 = depositBank.CreateAccount(100);
 
             IBank<Account> ordinaryBank = new Bank<DepositAccount>();
             Account account2 = ordinaryBank.CreateAccount(50);
 
-            // contravariant
+            // contravariant in
             ITransaction<Account> accTransaction = new Transaction<Account>();
             accTransaction.DoOperation(new Account(), 400);
 

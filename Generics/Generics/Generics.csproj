@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayList.cs" />
+    <Compile Include="CollectionArray.cs" />
     <Compile Include="Case.cs" />
     <Compile Include="Phone.cs" />
     <Compile Include="PhoneEqualityComparer.cs" />
