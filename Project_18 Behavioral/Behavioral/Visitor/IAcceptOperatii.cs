@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericRepository
+namespace Visitor
 {
-    public class Company : Entity
+    public interface IAcceptOperatii
     {
-        public string Name { get; set; }
+        void Accept(IOperatie operatie);
     }
 }

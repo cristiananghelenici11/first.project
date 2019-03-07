@@ -18,6 +18,10 @@ namespace LiskovSubstitutionPrincipale
             driver.Drive(car);
             driver.Drive(truck);
            
+
+            IVehicle V = new Truck();
+
+            V.Drive();
             Console.ReadKey();
         }
     }

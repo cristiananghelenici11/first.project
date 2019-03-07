@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Visitor
 {
-    public interface IVisitor
+    public interface IOperatie
     {
-        void VisitPersonAcc(Person acc);
-        void VisitCompanyAcc(Company acc);
-
-
+        void Visit(Person acc);
+        void Visit(Company acc);
     }
 }

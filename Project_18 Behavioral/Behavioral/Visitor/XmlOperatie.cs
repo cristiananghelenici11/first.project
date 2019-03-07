@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Visitor
 {
-    public class XmlVisitor : IVisitor
+    public class XmlOperatie : IOperatie
     {
-        public void VisitPersonAcc(Person acc)
+        public void Visit(Person acc)
         {
             string result = "<Person><Name>"+acc.Name+"</Name>"+
                             "<Number>"+acc.Number+"</Number><Person>";
             Console.WriteLine(result);
         }
  
-        public void VisitCompanyAcc(Company acc)
+        public void Visit(Company acc)
         {
             string result = "<Company><Name>" + acc.Name + "</Name>" + 
                             "<RegNumber>" + acc.RegNumber + "</RegNumber>" + 

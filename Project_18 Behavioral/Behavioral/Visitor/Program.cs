@@ -10,19 +10,31 @@ namespace Visitor
     {
         private static void Main(string[] args)
         {
-            var bank = new Bank();
+            //var bank = new Bank();
 
-            bank.Add(new Person{Name = "Cristian"});
-            bank.Add(new Company{Name = "Amdaris"});
+            //bank.Add(new Person{Name = "Cristian"});
+            //bank.Add(new Company{Name = "Amdaris"});
 
-            var company = new Company();
-            var htmlVisitor = new HtmlVisitor();
-            bank.Accept(htmlVisitor);
+            //var company = new Company();
+            //var htmlVisitor = new HtmlOperatie();
+            //bank.Accept(htmlVisitor);
 
-            htmlVisitor.VisitCompanyAcc(company); 
+            //htmlVisitor.Visit(company); 
 
-            Console.WriteLine("Hello World!");
+            //Console.WriteLine("Hello World!");
+
+            M(new HtmlOperatie(), new Company(), new Person());
+            M(new XmlOperatie(), new Company(), new Person());
+
             Console.ReadKey();
+        }
+
+        static void M(IOperatie operatie, params IAcceptOperatii[] objects)
+        {
+            foreach (IAcceptOperatii o in objects)
+            {
+                o.Accept(operatie);
+            }
         }
     }
 }

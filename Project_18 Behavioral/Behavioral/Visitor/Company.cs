@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Visitor
 {
-    public class Company : IAccount
+    public class Company : IAcceptOperatii
     {
         public string Name { get; set; }
         public string RegNumber { get; set; }
         public string Number { get; set; }
  
-        public void Accept(IVisitor visitor)
+        public void Accept(IOperatie operatie)
         {
-            visitor.VisitCompanyAcc(this);
+            operatie.Visit(this);
         }
     }
 }

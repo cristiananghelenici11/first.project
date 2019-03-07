@@ -8,22 +8,22 @@ namespace Visitor
 {
     public class Bank
     {
-        List<IAccount> accounts = new List<IAccount>();
+        List<IAcceptOperatii> accounts = new List<IAcceptOperatii>();
 
-        public void Add(IAccount acc)
+        public void Add(IAcceptOperatii acc)
         {
             accounts.Add(acc);
         }
 
-        public void Remove(IAccount acc)
+        public void Remove(IAcceptOperatii acc)
         {
             accounts.Remove(acc);
         }
 
-        public void Accept(IVisitor visitor)
+        public void Accept(IOperatie operatie)
         {
-            foreach (IAccount acc in accounts)
-                acc.Accept(visitor);
+            foreach (IAcceptOperatii acc in accounts)
+                acc.Accept(operatie);
         }
 
     }

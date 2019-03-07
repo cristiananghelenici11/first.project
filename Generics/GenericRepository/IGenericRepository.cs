@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericRepository
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : Entity
     {
         void Create(T item);
         T FindById(int id);

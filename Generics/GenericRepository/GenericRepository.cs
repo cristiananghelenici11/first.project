@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenericRepository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : Entity
     {
         private List<T> _dbEntity;
 
@@ -23,7 +23,7 @@ namespace GenericRepository
 
         public T FindById(int id)
         {
-            return _dbEntity.Find(x => x.ID == id);
+            return _dbEntity.Find(x => x.Id == id);
         }
 
         public IEnumerable<T> Get()
@@ -43,7 +43,7 @@ namespace GenericRepository
 
         public void Update(T item)
         {
-            int index = _dbEntity.FindIndex(e => e.ID == item.ID);
+            int index = _dbEntity.FindIndex(e => e.Id == item.Id);
 
             if (index != -1)
                 _dbEntity[index] = item;
