@@ -11,5 +11,7 @@ namespace ClassDefined.DataModel
         public string Name { get; set; }
 
         public List<Course> Courses { get; set; }
+
+        public string testFaculty { get; set; }
     }
 }
