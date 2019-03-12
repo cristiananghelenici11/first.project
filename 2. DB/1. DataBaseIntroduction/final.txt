@@ -1,0 +1,130 @@
+CREATE DATABASE Student;
+
+USE Student;
+
+CREATE TABLE Universities
+(
+    [Id] BIGINT IDENTITY(1,1),
+    [Name] NVARCHAR(64) NOT NULL,
+    [Address] NVARCHAR(128) NOT NULL,
+    [Description] NVARCHAR(256) NOT NULL,
+    [Contact] VARCHAR(64) NOT NULL,
+    [Age] INT NOT NULL,
+    CONSTRAINT PK_University PRIMARY KEY (Id),
+    CONSTRAINT CHK_Age CHECK (Age>0)
+);
+
+CREATE TABLE Faculties
+(
+    [Id] BIGINT IDENTITY(1,1),
+    [Name] NVARCHAR(64) NOT NULL,
+    [Address] NVARCHAR(128) NOT NULL,
+    [Description] NVARCHAR(256) NOT NULL,
+    [UniverstityId] BIGINT NOT NULL,
+    CONSTRAINT PK_Faculty PRIMARY KEY (Id),
+    CONSTRAINT FK_FacultyToUniversity FOREIGN KEY (UniverstityId)
+    REFERENCES Universities(Id)
+);
+
+CREATE TABLE Courses
+(
+    [Id] BIGINT IDENTITY(1,1),
+    [Name] NVARCHAR(64) NOT NULL,
+    [Description] NVARCHAR(256) NOT NULL,
+    [Credits] INT NOT NULL,
+    [YearOfStudy] INT NOT NULL,
+	[FacultyId] BIGINT NOT NULL,
+	CONSTRAINT PK_CourseId PRIMARY KEY (Id),
+	CONSTRAINT FK_CourseToFaculty FOREIGN KEY ([FacultyId])
+	REFERENCES Faculties(Id)     
+);
+
+CREATE TABLE Teachers
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[IDNP] BIGINT NOT NULL,
+	[FirstName] NVARCHAR(64) NOT NULL,
+	[LastName] NVARCHAR(64) NOT NULL,
+	[Phone] VARCHAR(64) NOT NULL,
+	[Email] NVARCHAR(64) NOT NULL,
+	CONSTRAINT PK_Teachers PRIMARY KEY (Id),
+	CONSTRAINT UK_Person UNIQUE (IDNP) 
+);
+
+CREATE TABLE CourseTeachers
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[TeacherId] BIGINT,
+	[CourseId] BIGINT,
+	CONSTRAINT PK_CourseTeachers PRIMARY KEY (Id),
+	CONSTRAINT FK_CPToTeachers FOREIGN KEY (TeacherId)
+	REFERENCES Teachers(Id),
+	CONSTRAINT FK_CPToCourses FOREIGN KEY (CourseId)
+	REFERENCES Courses(Id)
+);
+
+CREATE TABLE UniversityTeachers
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[UniversityId] BIGINT NOT NULL,
+	[TeacherId] BIGINT NOT NULL,
+	CONSTRAINT PK_UniversityTeachers PRIMARY KEY (Id),
+	CONSTRAINT FK_UPToUniversities FOREIGN KEY (UniversityId)
+	REFERENCES Universities(Id),
+	CONSTRAINT FK_UPToTeachers FOREIGN KEY (TeacherId)
+	REFERENCES Teachers(Id)
+);
+
+CREATE TABLE Users
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[FirstName] NVARCHAR(64),
+	[LasttName] NVARCHAR(64),
+	[IDNP] BIGINT NOT NULL,
+	[Phone] VARCHAR(64) NOT NULL,
+	[Email] NVARCHAR(64) NOT NULL,
+	CONSTRAINT UK_UserIDNP UNIQUE (IDNP),
+	CONSTRAINT PK_Users PRIMARY KEY (Id)
+);
+
+CREATE TABLE Marks
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[TypeMark] NVARCHAR(64) NOT NULL,
+	[Value] FLOAT(2),
+	[TeacherId] BIGINT,
+	[CourseId] BIGINT,
+	[UserId] BIGINT,
+	CONSTRAINT PK_Marks PRIMARY KEY (Id),
+
+	CONSTRAINT CHK_Mark CHECK(TeacherId IS NOT NULL OR CourseId IS NOT NULL),
+	CONSTRAINT UC_Marks UNIQUE (TeacherId,CourseId,UserId),
+
+	CONSTRAINT FK_MarkToUser FOREIGN KEY (UserId)
+	REFERENCES Users(Id),
+	CONSTRAINT FK_MarkToTeachers FOREIGN KEY (TeacherId)
+	REFERENCES Teachers(Id),
+	CONSTRAINT FK_MarkToCourse FOREIGN KEY (CourseId)
+	REFERENCES Courses(Id)
+
+);
+
+CREATE TABLE Comments
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[Subject] NVARCHAR(64) NULL,
+	[Message] NVARCHAR(MAX) NOT NULL,
+	[CourseId] BIGINT,
+	[TeacherId] BIGINT,
+	[CommentId] BIGINT,
+	CONSTRAINT PK_Comment PRIMARY KEY (Id),
+	
+	CONSTRAINT CHK_Comment CHECK(TeacherId IS NOT NULL OR CourseId IS NOT NULL),
+	CONSTRAINT FK_CommentToTeachers FOREIGN KEY (TeacherId)
+	REFERENCES Teachers(Id),
+	CONSTRAINT FK_CommentToCourses FOREIGN KEY (CourseId)
+	REFERENCES Courses(Id),
+	CONSTRAINT FK_CommentToUsers FOREIGN KEY (CommentId)
+	REFERENCES Users(Id)
+);
+
