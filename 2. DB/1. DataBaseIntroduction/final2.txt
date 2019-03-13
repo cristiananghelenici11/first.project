@@ -192,4 +192,9 @@ INSERT INTO CourseTeachers (CourseId, TeacherId)
 		(1, 2);
 
 
-
+SELECT T.FirstName, T.LastName, AVG(M.Value) AS AvgMarks, C.Message
+FROM Teachers AS T
+INNER JOIN Marks AS M ON T.Id=M.TeacherId
+INNER JOIN Comments AS C ON T.Id=C.Id
+WHERE M.Value > 0
+GROUP BY FirstName, LastName, Message

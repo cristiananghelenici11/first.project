@@ -1,3 +1,14 @@
+﻿/*
+Post-Deployment Script Template							
+--------------------------------------------------------------------------------------
+ This file contains SQL statements that will be appended to the build script.		
+ Use SQLCMD syntax to include a file in the post-deployment script.			
+ Example:      :r .\myfile.sql								
+ Use SQLCMD syntax to reference a variable in the post-deployment script.		
+ Example:      :setvar TableName MyTable							
+               SELECT * FROM [$(TableName)]					
+--------------------------------------------------------------------------------------
+*/
 CREATE DATABASE Student;
 
 USE Student;
@@ -142,9 +153,9 @@ INSERT INTO Universities (Name, Address, Description, Contact, Age)
 INSERT INTO Faculties (Name, Address, Description, UniverstityId)
 	Values
 		('FCIM', 'Studentilor 7/1', 'Facultatea de Calculatoare Informatica', 1),
-		('FEIE', 'str. 31 August 1989', 'Facultatea Energetica ?i Inginerie Electrica', 1),
-		('FET', ' bd. Stefan cel Mare, 168,', 'Facultatea Electronica ?i Telecomunica?ii', 1),
-		('FIEB', 'bd. Dacia, 41', 'Facultatea Inginerie Economica si Business', 1);
+		('FEIE', 'str. 31 August 1989', 'Facultatea Energetică și Inginerie Electrică', 1),
+		('FET', ' bd. Ştefan cel Mare, 168,', 'Facultatea Electronică și Telecomunicații', 1),
+		('FIEB', 'bd. Dacia, 41', 'Facultatea Inginerie Economică şi Business', 1);
 
 INSERT INTO Courses (Name, Description, Credits, YearOfStudy, FacultyId)
 	VALUES
@@ -192,4 +203,9 @@ INSERT INTO CourseTeachers (CourseId, TeacherId)
 		(1, 2);
 
 
-
+SELECT T.FirstName, T.LastName, AVG(M.Value) AS AvgMarks, C.Message
+FROM Teachers AS T
+INNER JOIN Marks AS M ON T.Id=M.TeacherId
+INNER JOIN Comments AS C ON T.Id=C.Id
+WHERE M.Value > 0
+GROUP BY FirstName, LastName, Message
