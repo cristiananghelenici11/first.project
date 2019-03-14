@@ -4,20 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>UniversityDatabase</Name>
+    <Name>Student</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{a9f1c55e-eee3-4dea-ab70-7e66cb67e3a5}</ProjectGuid>
+    <ProjectGuid>{bb653848-4438-4f15-a995-cfd827435532}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>UniversityDatabase</RootNamespace>
-    <AssemblyName>UniversityDatabase</AssemblyName>
+    <RootNamespace>Student</RootNamespace>
+    <AssemblyName>Student</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -57,11 +57,23 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Universities.sql" />
+    <Build Include="Tables\Universities.sql" />
+    <Build Include="Tables\Faculties.sql" />
+    <Build Include="Tables\Courses.sql" />
+    <Build Include="Tables\Teachers.sql" />
+    <Build Include="Tables\CourseTeachers.sql" />
+    <Build Include="Tables\UniversityTeachers.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\Marks.sql" />
+    <Build Include="Tables\Comments.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="UniversityDatabase.publish.xml" />
+    <None Include="Student.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Insert.sql" />
   </ItemGroup>
 </Project>
