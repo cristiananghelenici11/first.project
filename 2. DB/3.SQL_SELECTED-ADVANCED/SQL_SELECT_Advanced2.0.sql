@@ -1,6 +1,6 @@
 --L3
 -- P1 Basic Usage
-
+USE ACDB;
 --1.1
 SELECT TOP(1) Last_Name
 FROM customers
@@ -202,3 +202,42 @@ UPDATE customers
 	SET customers.monthly_discount -= 0.05
 	FROM customers AS c
 	INNER JOIN MyCustomers AS m ON c.City=m.City
+
+--MERGE
+
+CREATE TABLE MyCustomersTest
+(
+	[Id] BIGINT,
+	[First_Name] NVARCHAR(100)
+);
+
+INSERT INTO MyCustomersTest(Id, First_Name)
+	VALUES
+		(1, 'Cristian'),
+		(2, 'Charles'),
+		(3, 'Alvin'),
+		(4, 'AlvinA');
+
+SELECT * FROM MyCustomersTest
+
+DELETE MyCustomersTest;
+
+MERGE INTO MyCustomersTest AS m
+USING customers AS c
+ON c.Customer_Id = m.ID
+
+WHEN MATCHED THEN 
+	UPDATE 
+		SET m.ID = c.Customer_Id,
+			m.First_Name = 'MATCHED'
+
+WHEN NOT MATCHED THEN 
+	INSERT (Id, First_Name)
+		VALUES (c.Customer_Id, c.First_Name)
+
+WHEN NOT MATCHED BY SOURCE THEN
+	UPDATE 
+		SET m.First_Name = 'default';
+
+SELECT * FROM MyCustomersTest
+WHERE First_Name = 'default'
