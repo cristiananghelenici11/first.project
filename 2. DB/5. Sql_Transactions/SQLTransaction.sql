@@ -1,5 +1,5 @@
 --Try Out transactions in three modes
-
+USE ACDB;
 --AUTOCOMITED
 SET IDENTITY_INSERT sectors ON;
 INSERT INTO sectors(sector_id, sector_name) 
@@ -62,15 +62,16 @@ DELETE FROM sectors WHERE sector_id>53 AND sector_id < 59
 
 --Block another transaction and view the locks.
 
-
+BEGIN TRANSACTION
 UPDATE sectors
 SET sector_name = 'updated'
 WHERE sector_id = 1;
 
+WAITFOR DELAY '00:00:10'
+ROLLBACK
 UPDATE packages
 SET monthly_payment = 100
 WHERE pack_id = 1;
-
 
 ------------------------------------------------------------
 --DIRTY READ
@@ -102,4 +103,3 @@ SELECT * FROM sectors
 WAITFOR DELAY '00:00:10'
 SELECT * FROM sectors
 COMMIT
-
