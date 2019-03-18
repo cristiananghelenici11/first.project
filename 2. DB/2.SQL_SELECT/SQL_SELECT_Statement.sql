@@ -70,7 +70,7 @@ ORDER BY Name DESC
 
 --Use is Null logic, use like, combine predicates
 SELECT Last_Name, COUNT(Join_Date)
-FROM ACDB.dbo.customers
+FROM customers
 WHERE Join_Date > '2007'
 GROUP BY Last_Name
 HAVING COUNT(Last_Name) > 0
