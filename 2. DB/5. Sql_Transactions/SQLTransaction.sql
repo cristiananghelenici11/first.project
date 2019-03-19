@@ -1,5 +1,6 @@
 --Try Out transactions in three modes
 USE ACDB;
+
 --AUTOCOMITED
 SET IDENTITY_INSERT sectors ON;
 INSERT INTO sectors(sector_id, sector_name) 
@@ -17,6 +18,7 @@ INSERT INTO sectors(sector_id, sector_name)
 		(220, 'action')
 
 SET IDENTITY_INSERT sectors OFF
+COMMIT TRANSACTION
 
 SELECT * FROM sectors WHERE sector_id = 220
 DELETE FROM sectors WHERE sector_id = 220
@@ -73,23 +75,26 @@ UPDATE packages
 SET monthly_payment = 100
 WHERE pack_id = 1;
 
-ROLLBACK
+COMMIT TRANSACTION
 
 ------------------------------------------------------------
 --DIRTY READ
-
+--------------------------------
 BEGIN TRANSACTION
 
 UPDATE sectors
 SET sector_name = 'DIRTY READ'
-WHERE sector_id = 10000
+WHERE sector_id = 1
 
 WAITFOR DELAY '00:00:10'
 ROLLBACK
 SELECT * FROM sectors
+-------------------------------
+----NON-REPEATABLE READ
+-------------------------------
+BEGIN TRANSACTION
 
---NON-REPEATABLE READ
-
+----NON-REPEATABLE READ
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 BEGIN TRAN
 SELECT * FROM sectors
@@ -97,6 +102,7 @@ WAITFOR DELAY '00:00:10'
 SELECT * FROM sectors
 COMMIT
 
+--------------------------------
 ---PHANTOM READS
 
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
@@ -104,4 +110,12 @@ BEGIN TRAN
 SELECT * FROM sectors
 WAITFOR DELAY '00:00:10'
 SELECT * FROM sectors
-COMMIT
+COMMIT TRANSACTION
+
+----------------------------
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+SET TRANSACTION ISOLATION LEVEL Repeatable Read;
+SET TRANSACTION ISOLATION LEVEL Serializable;
+
+
