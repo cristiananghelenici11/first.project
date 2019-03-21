@@ -10,13 +10,17 @@ SELECT MAX(Last_Name) AS LowestLastName
 FROM customers
 
 --1.2
-SELECT avg(packages.monthly_payment) 
+SELECT AVG(monthly_payment) AS AvgMonthlyPayment
 FROM packages
 
 --1.3
 SELECT TOP(1) Last_Name
 FROM customers
+WHERE Last_Name IS NOT NULL
 ORDER BY Last_Name ASC
+
+
+SELECT * FROM customers
 
 SELECT MIN(Last_Name) AS Last_Name1
 FROM customers
@@ -38,12 +42,13 @@ SELECT COUNT(DISTINCT speed) AS CountDistinctSpeed
 FROM packages
 
 --1.8
-SELECT COUNT(fax) AS CountNullFax
+SELECT COUNT(*) AS CountNullFax
 FROM customers
+
 WHERE fax IS NOT NULL
 
 --1.9
-SELECT COUNT(fax) AS CountNotNullFax
+SELECT COUNT(*) AS CountNotNullFax
 FROM customers
 WHERE fax IS NULL
 
@@ -77,13 +82,13 @@ GROUP BY sector_id
  --
 SELECT s.sector_id, MAX(monthly_payment) AS HighestMonthly_payment
 FROM packages AS p
-RIGHT JOIN sectors AS s ON p.sector_id = s.sector_id
+INNER JOIN sectors AS s ON p.sector_id = s.sector_id
 GROUP BY s.sector_id
 
 --2.5---
 
 --2.6
-SELECT p.pack_id, AVG(c.monthly_discount)
+SELECT p.pack_id, AVG(c.monthly_discount) AS AvgMonthly_discount
 FROM packages AS p
 LEFT JOIN customers AS c ON p.pack_id=c.pack_id
 GROUP BY p.pack_id
@@ -170,7 +175,7 @@ HAVING COUNT(pack_id) > 8
 
 SELECT COUNT(*) AS COUNT FROM customers 
 
--- IDENTITY_INSERT WITH INSERT SELECT
+-- INSERT SELECT
 SELECT customers.Customer_Id FROM customers WHERE Customer_Id>1500
 
 SET IDENTITY_INSERT customers ON
@@ -181,8 +186,6 @@ SET IDENTITY_INSERT customers OFF
 
 SELECT customers.Customer_Id FROM customers WHERE Customer_Id>1500
 
--- INSERT EXEC
-
 -- SELECT INTO
 IF OBJECT_ID('MyCustomers', 'U') IS NOT NULL
 	DROP TABLE MyCustomers;
@@ -191,6 +194,7 @@ SELECT TOP(10)customers.City, customers.Last_Name
 INTO MyCustomers
 FROM customers
 
+SELECT * FROM MyCustomers
 TRUNCATE TABLE MyCustomers
 
 DELETE M
@@ -198,6 +202,8 @@ FROM MyCustomers AS M
 INNER JOIN Customers AS C ON M.City = C.City
 WHERE C.City = 'New York'
 
+
+--update join
 UPDATE customers
 	SET customers.monthly_discount -= 0.05
 	FROM customers AS c
@@ -216,11 +222,13 @@ INSERT INTO MyCustomersTest(Id, First_Name)
 		(1, 'Cristian'),
 		(2, 'Charles'),
 		(3, 'Alvin'),
-		(4, 'AlvinA');
+		(4, 'AlvinA'),
+		(30000, 'Alvin');
 
 SELECT * FROM MyCustomersTest
 
 DELETE MyCustomersTest;
+
 
 MERGE INTO MyCustomersTest AS m
 USING customers AS c
@@ -241,3 +249,19 @@ WHEN NOT MATCHED BY SOURCE THEN
 
 SELECT * FROM MyCustomersTest
 WHERE First_Name = 'default'
+
+---------------
+--output
+DELETE MyCustomersTest
+OUTPUT deleted.Id, deleted.First_Name
+WHERE  Id = 1;
+
+INSERT INTO MyCustomersTest (Id, First_Name)
+OUTPUT inserted.Id, inserted.First_Name
+	VALUES
+		(100, 'Cristian')
+
+UPDATE MyCustomersTest
+	SET First_Name = '222'
+OUTPUT deleted.Id, deleted.First_Name, inserted.Id, inserted.First_Name
+WHERE Id = 100

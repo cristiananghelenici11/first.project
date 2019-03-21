@@ -36,11 +36,11 @@ INSERT INTO Marks (TypeMark, Value, TeacherId, CourseId, UserId)
 		('3', 9, 3, 3, 3),
 		('4', 7, 1, 2, 3);
 
-INSERT INTO Comments (Subject, Message, CourseId, TeacherId)
+INSERT INTO Comments (Subject, Message, CourseId, TeacherId, UserId)
 	VALUES
-		('s1', 'Message1', 1, 1),
-		('s2', 'Message2', 2, 2),
-		('s3', 'Message3', 3, 3);
+		('s1', 'Message1', 1, 1, 1),
+		('s2', 'Message2', 2, 2, 2),
+		('s3', 'Message3', 3, 3, 3);
 
 INSERT INTO UniversityTeachers (UniversityId ,TeacherId)
 	VALUES
