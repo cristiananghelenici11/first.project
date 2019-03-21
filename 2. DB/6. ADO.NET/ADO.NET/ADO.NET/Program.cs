@@ -126,7 +126,7 @@ namespace ADO.NET
             Console.Write("Enter the Id of the row: ");
             int id = int.Parse(Console.ReadLine());
             Console.Write("Enter new name for user: ");
-            string newName = Console.ReadLine();
+            string newName = Console.ReadLine();            
 
             using (var connection = new SqlConnection(ConnectionString))
             {
