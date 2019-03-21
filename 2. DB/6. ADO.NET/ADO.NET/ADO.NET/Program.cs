@@ -149,7 +149,6 @@ namespace ADO.NET
                 }
 
                 row["Name"] = newName;
-                row["Age"] = 1;
 
                 adapter.Update(table);
             }
@@ -195,7 +194,6 @@ namespace ADO.NET
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-
                 var dataSet = new DataSet();
                 SqlDataAdapter adapter = CreateCustomerAdapter(connection);
 

@@ -109,7 +109,7 @@ WHERE speed = ( SELECT speed
 				WHERE pack_id = 30) AND monthly_payment > (SELECT monthly_payment
 														   FROM packages
 														   WHERE pack_id = 7)
---ACID 
+
 --11.	Display the package number, internet speed, and monthly payment for all packages whose monthly payment 
 	--is greater than the maximum monthly payment of packages with internet speed equals to “5Mbps” (Packages table).
 SELECT pack_id, speed, monthly_payment
