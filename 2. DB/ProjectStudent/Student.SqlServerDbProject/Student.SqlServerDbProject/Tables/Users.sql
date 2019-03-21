@@ -1,0 +1,15 @@
+﻿CREATE TABLE [dbo].[Users]
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[UserName] NVARCHAR(64),
+	[Password] NVARCHAR(64),
+	[FirstName] NVARCHAR(64),
+	[LastName] NVARCHAR(64),
+	[Idnp] BIGINT NOT NULL,
+	[Phone] VARCHAR(64) NOT NULL,
+	[Email] NVARCHAR(64) NOT NULL,
+	CONSTRAINT UK_UserIdnp UNIQUE (Idnp),
+	CONSTRAINT UK_UserEmail UNIQUE (Email),
+	CONSTRAINT UK_UserPassword UNIQUE ([Password]),
+	CONSTRAINT PK_Users PRIMARY KEY (Id)
+)

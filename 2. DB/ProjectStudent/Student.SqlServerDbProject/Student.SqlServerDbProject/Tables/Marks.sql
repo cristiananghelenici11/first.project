@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[Marks]
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[TypeMark] NVARCHAR(64) NOT NULL,
+	[Value] FLOAT(2),
+	[TeacherId] BIGINT,
+	[CourseId] BIGINT,
+	[UserId] BIGINT NOT NULL,
+	CONSTRAINT PK_Marks PRIMARY KEY (Id),
+	CONSTRAINT CHK_MarksValue CHECK ([Value]>0 AND [Value]<10),
+	CONSTRAINT CHK_Mark CHECK(TeacherId IS NOT NULL OR CourseId IS NOT NULL),
+	CONSTRAINT UC_Marks UNIQUE (TeacherId,CourseId,UserId),
+	CONSTRAINT FK_MarksToUsers FOREIGN KEY (UserId)
+	REFERENCES Users(Id),
+	CONSTRAINT FK_MarksToTeachers FOREIGN KEY (TeacherId)
+	REFERENCES Teachers(Id),
+	CONSTRAINT FK_MarksToCourse FOREIGN KEY (CourseId)
+	REFERENCES Courses(Id)
+)

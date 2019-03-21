@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[Teachers]
+(
+	[Id] BIGINT IDENTITY(1,1),
+	[Idnp] BIGINT NOT NULL,
+	[FirstName] NVARCHAR(64) NOT NULL,
+	[LastName] NVARCHAR(64) NOT NULL,
+	[Phone] VARCHAR(64) NOT NULL,
+	[Email] NVARCHAR(64) NOT NULL,
+	CONSTRAINT PK_Teachers PRIMARY KEY (Id),
+	CONSTRAINT UK_TeachersIdnp UNIQUE (Idnp),
+	CONSTRAINT UK_TeachersEmail UNIQUE (Email) 
+)
