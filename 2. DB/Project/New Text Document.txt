@@ -1,0 +1,1 @@
+Scaffold-DbContext "Data Source=MDDSK40062\SQLEXPRESS;Initial Catalog=Student;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models

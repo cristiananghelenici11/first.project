@@ -27,8 +27,8 @@ namespace ADO.NET
 
         private static void Main(string[] args)
         {
-            //CreateTable();
-            //InsertInDB();
+            CreateTable();
+            InsertInDB();
             DisplayMenu();
 
             Console.ReadKey();
