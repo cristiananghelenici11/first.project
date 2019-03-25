@@ -1,8 +1,7 @@
 ﻿namespace UniversityRating.DAL.Models
 {
-    public class CourseTeachers
+    public class CourseTeachers : Entity
     {
-        public long Id { get; set; }
         public long? TeacherId { get; set; }
         public long? CourseId { get; set; }
 

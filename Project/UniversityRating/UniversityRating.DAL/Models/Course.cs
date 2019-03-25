@@ -2,7 +2,7 @@
 
 namespace UniversityRating.DAL.Models
 {
-    public class Courses
+    public class Courses : Entity
     {
         public Courses()
         {
@@ -11,7 +11,6 @@ namespace UniversityRating.DAL.Models
             Marks = new HashSet<Marks>();
         }
 
-        public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Credits { get; set; }

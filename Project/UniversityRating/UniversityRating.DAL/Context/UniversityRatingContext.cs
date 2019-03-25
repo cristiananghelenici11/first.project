@@ -24,7 +24,7 @@ namespace UniversityRating.DAL.Context
         public virtual DbSet<Faculties> Faculties { get; set; }
         public virtual DbSet<Marks> Marks { get; set; }
         public virtual DbSet<Teachers> Teachers { get; set; }
-        public virtual DbSet<Universities> Universities { get; set; }
+        public virtual DbSet<University> Universities { get; set; }
         public virtual DbSet<UniversityTeachers> UniversityTeachers { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -177,7 +177,7 @@ namespace UniversityRating.DAL.Context
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Universities>(entity =>
+            modelBuilder.Entity<University>(entity =>
             {
                 entity.Property(e => e.Address)
                     .IsRequired()

@@ -1,8 +1,7 @@
 ﻿namespace UniversityRating.DAL.Models
 {
-    public class Marks
+    public class Marks : Entity
     {
-        public long Id { get; set; }
         public string TypeMark { get; set; }
         public float? Value { get; set; }
         public long? TeacherId { get; set; }

@@ -2,7 +2,7 @@
 
 namespace UniversityRating.DAL.Models
 {
-    public class Teachers
+    public class Teachers : Entity
     {
         public Teachers()
         {
@@ -12,7 +12,6 @@ namespace UniversityRating.DAL.Models
             UniversityTeachers = new HashSet<UniversityTeachers>();
         }
 
-        public long Id { get; set; }
         public long Idnp { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

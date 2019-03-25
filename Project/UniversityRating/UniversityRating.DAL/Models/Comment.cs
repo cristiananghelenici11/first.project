@@ -1,8 +1,7 @@
 ﻿namespace UniversityRating.DAL.Models
 {
-    public class Comment
+    public class Comment : Entity
     {
-        public long Id { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
         public long? CourseId { get; set; }

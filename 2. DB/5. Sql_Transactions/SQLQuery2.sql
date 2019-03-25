@@ -27,7 +27,7 @@ COMMIT TRANSACTION
 BEGIN TRANSACTION
 
 UPDATE sectors
-SET sector_name = 'change2'
+SET sector_name = 'change3'
 WHERE sector_id = 1
 
 COMMIT TRANSACTION
