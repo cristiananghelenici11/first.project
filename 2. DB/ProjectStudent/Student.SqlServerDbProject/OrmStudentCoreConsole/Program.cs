@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DomainStudent;
 using StudentFirstCore.Models;
 using StudentFirstCore.Repositories;
+using DomainStudent;
+using Microsoft.EntityFrameworkCore;
+using Universities = StudentFirstCore.Models.Universities;
 
 namespace OrmStudentCoreConsole
 {
@@ -35,12 +37,12 @@ namespace OrmStudentCoreConsole
                 }
             }
             ////////////////////////////
-            
-            EFGenericRepository<Universities> universityRepo = new EFGenericRepository<Universities>(new StudentContext());
-     
-            IEnumerable<Universities> universities2 = universityRepo.GetWithInclude(u => u.Faculties);
-            foreach (Universities university  in universities2)
-            {    
+
+            EFGenericRepository<StudentFirstCore.Models.Universities> universityRepo = new EFGenericRepository<StudentFirstCore.Models.Universities>(new StudentContext());
+
+            IEnumerable<StudentFirstCore.Models.Universities> universities29 = universityRepo.GetWithInclude(u => u.Faculties);
+            foreach (StudentFirstCore.Models.Universities university  in universities29)
+            {
                 Console.WriteLine($"{university.Name} ({university.Description}) Faculties:");
                 foreach (var f in university.Faculties)
                 {
@@ -49,7 +51,52 @@ namespace OrmStudentCoreConsole
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////// by default val, cum pot la int sa adaugi nul
+          
+            
+            Console.WriteLine("-----------------------------------------------");
+            using (var context = new StudentContext())
+            {
+                //Grouping
+                var universities = context
+                    .Universities.Include(x => x.Faculties)
+                    .GroupBy(x => x.Name)
+                    .Select(x => new
+                    {
+                        Name = x.Key,
+                        AvgAge = x.Average(y => y.Age)                    });
 
+                foreach (var university in universities)
+                {
+                    Console.WriteLine($"{university.Name}, {university.AvgAge}");
+                }
+
+                var universities2 = context
+                    .Faculties
+                    .Where(x => x.Name != null)
+                    .GroupBy(x => x.Name)
+                    .Select(x => new
+                    {
+                        Name = x.Key,
+                        Count = x.Count()
+                    })
+                    .Where(x=> x.Count >= 1);
+                foreach (var university in universities2)
+                {
+                    Console.WriteLine($"{university.Name}, {university.Count}");
+                }
+
+                //GROUPJOIN
+                var topFaculties = context.Faculties
+                    .GroupBy(x => x.Universtity.Name)
+                    .Select(x => new
+                    {
+                        Name = x.Key,
+                        CountFaculties = x.Count()
+                    })
+                    .OrderByDescending(x => x.Name);
+
+            }
 
             Console.WriteLine("End Program");
             Console.ReadKey();
