@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Relationships.DAL.Context;
 
 namespace Relationships.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20190326082414_m10")]
+    partial class m10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,16 +47,6 @@ namespace Relationships.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Addresses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            City = "Chisinau",
-                            State = "ssde",
-                            StudentId = 1L,
-                            ZipCode = "erw"
-                        });
                 });
 
             modelBuilder.Entity("Relationships.DAL.Models.Mark", b =>
@@ -100,16 +92,6 @@ namespace Relationships.DAL.Migrations
                     b.HasIndex("UniversityId");
 
                     b.ToTable("Student");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            FirstName = "wqrewqr",
-                            Idnp = 0L,
-                            Phone = 1356,
-                            UniversityId = 1L
-                        });
                 });
 
             modelBuilder.Entity("Relationships.DAL.Models.Teacher", b =>
