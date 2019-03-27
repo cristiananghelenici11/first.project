@@ -9,6 +9,8 @@ namespace Relationships.DAL.Context
     {
         public void Configure(EntityTypeBuilder<University> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Age)
                 .IsRequired()
                 .HasMaxLength(3);

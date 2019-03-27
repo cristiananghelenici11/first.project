@@ -52,7 +52,7 @@ namespace OrmStudentCoreConsole
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////// by default val, cum pot la int sa adaugi nul
+            //////////////////////////////////////////
 
 
             Console.WriteLine("-----------------------------------------------");
@@ -174,9 +174,9 @@ namespace OrmStudentCoreConsole
                     .Select(x => new
                     {
                         Description = x.Description ?? "mising description",
-                        AgeRange = 
-                            x.Age >= 0 && x.Age < 10 ? "0-10":
-                            x.Age > 10               ? "old university":
+                        AgeRange =
+                            x.Age >= 0 && x.Age < 10 ? "0-10" :
+                            x.Age > 10 ? "old university" :
                             "default"
                     });
                 foreach (var u in ageRangeUniversity)
@@ -208,10 +208,50 @@ namespace OrmStudentCoreConsole
                 {
                     Console.WriteLine($"{o.Name}");
                 }
+
+                Console.WriteLine("---> paginating <---");
+                var pageExemple = context
+                    .Universities
+                    .Where(x => x.Age > 0)
+                    .Page();
+
+                foreach (var p in pageExemple)
+                {
+                    Console.WriteLine($"{p.Name},{p.Description}");
+                }
+
+
+                Console.WriteLine("---> dynamic <---");
+                IQueryable<Universities> queryUniversity = context.Universities;
+                IQueryable<Universities> universityDynamic = FilterDeviceList(queryUniversity, new Universities{Name = "UTM"});
+                foreach (Universities university in universityDynamic)
+                {
+                    Console.WriteLine($"{university.Name}, {university.Description}, {university.Age}");
+                }
+
             }
 
             Console.WriteLine("\n---> End Program <---");
             Console.ReadKey();
+
+        }
+        private static IQueryable<Universities> FilterDeviceList(IEnumerable<Universities> devices, Universities device)
+        {
+            IQueryable<Universities> query = devices.AsQueryable();
+
+            if (device.Name != null)
+                query = query.Where(d => d.Name == device.Name);
+
+            if (device.Description != null)
+                query = query.Where(d => d.Description == device.Description);
+
+            if (device.Age > 0)
+                query = query.Where(d => d.Age == device.Age);
+
+            if (device.Contact != null)
+                query = query.Where(d => d.Contact == device.Contact);
+
+            return query;
         }
     }
 }
