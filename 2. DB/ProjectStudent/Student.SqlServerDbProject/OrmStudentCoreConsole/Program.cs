@@ -6,6 +6,7 @@ using StudentFirstCore.Models;
 using StudentFirstCore.Repositories;
 using DomainStudent;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Universities = StudentFirstCore.Models.Universities;
 
 namespace OrmStudentCoreConsole
@@ -41,7 +42,7 @@ namespace OrmStudentCoreConsole
             EFGenericRepository<StudentFirstCore.Models.Universities> universityRepo = new EFGenericRepository<StudentFirstCore.Models.Universities>(new StudentContext());
 
             IEnumerable<StudentFirstCore.Models.Universities> universities29 = universityRepo.GetWithInclude(u => u.Faculties);
-            foreach (StudentFirstCore.Models.Universities university  in universities29)
+            foreach (StudentFirstCore.Models.Universities university in universities29)
             {
                 Console.WriteLine($"{university.Name} ({university.Description}) Faculties:");
                 foreach (var f in university.Faculties)
@@ -52,19 +53,21 @@ namespace OrmStudentCoreConsole
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ////////////////////////////////////////// by default val, cum pot la int sa adaugi nul
-          
-            
+
+
             Console.WriteLine("-----------------------------------------------");
             using (var context = new StudentContext())
             {
                 //Grouping
+                Console.WriteLine("\n---> Group --->");
                 var universities = context
                     .Universities.Include(x => x.Faculties)
                     .GroupBy(x => x.Name)
                     .Select(x => new
                     {
                         Name = x.Key,
-                        AvgAge = x.Average(y => y.Age)                    });
+                        AvgAge = x.Average(y => y.Age)
+                    });
 
                 foreach (var university in universities)
                 {
@@ -80,25 +83,134 @@ namespace OrmStudentCoreConsole
                         Name = x.Key,
                         Count = x.Count()
                     })
-                    .Where(x=> x.Count >= 1);
+                    .Where(x => x.Count >= 1);
                 foreach (var university in universities2)
                 {
                     Console.WriteLine($"{university.Name}, {university.Count}");
                 }
 
                 //GROUPJOIN
-                var topFaculties = context.Faculties
-                    .GroupBy(x => x.Universtity.Name)
+                Console.WriteLine("\n---> Group join --->");
+                var topUniversities = context.Universities
+                    .GroupBy(x => x.Name)
                     .Select(x => new
                     {
                         Name = x.Key,
-                        CountFaculties = x.Count()
+                        CountFaculties = x.Average(y => y.Faculties.Count)
                     })
                     .OrderByDescending(x => x.Name);
 
+                var Universities2 = topUniversities.GroupJoin(
+                    context.Universities,
+                    x => x.Name,
+                    x => x.Name,
+                    (u, Descriptions) => new
+                    {
+                        u.Name,
+                        Descriptions = Descriptions.Select(y => y.Description).ToList()
+                    });
+
+                foreach (var university in Universities2)
+                {
+                    Console.WriteLine($"{university.Name}");
+                    foreach (string description in university.Descriptions)
+                    {
+                        Console.WriteLine($"{description}");
+                    }
+                }
+
+                //Ienumerable vs Iqueryable
+                IEnumerable<Faculties> faculties = context
+                    .Faculties
+                    .Where(x => x.UniverstityId == 1);
+                IEnumerable<Faculties> facultiesWithIEnumerable = faculties.Where(x => x.Universtity.Age > 29);
+
+                IQueryable<Faculties> faculties2 = context
+                    .Faculties
+                    .Where(x => x.UniverstityId == 1);
+                IQueryable<Faculties> facultiesWithIQueryable = faculties2.Where(x => x.Universtity.Age > 29);
+
+
+                // AsNoTracking()
+                Universities firstUniversity = context.Universities.AsNoTracking().FirstOrDefault();
+                if (firstUniversity != null) firstUniversity.Name = "---";
+                context.SaveChanges();
+
+                Console.WriteLine("\n---> Subqueries: Select example <---");
+                var teachers = context
+                    .Teachers
+                    .Select(x => new
+                    {
+                        Name = x.FirstName + x.LastName,
+                        Marks = x.Marks.Average(y => y.Value)
+                    });
+                foreach (var teacher in teachers)
+                {
+                    Console.WriteLine($"{teacher.Name}, {teacher.Marks}");
+                }
+
+                Console.WriteLine("---> Subqueries: Filter example (ALL & ANY) <---");
+                Console.WriteLine("\nAll");
+                IQueryable<Teachers> topTeachersAll = context
+                    .Teachers
+                    .Where(x => x.Marks.All(y => y.Value >= 8));
+                foreach (Teachers teacher in topTeachersAll)
+                {
+                    Console.WriteLine($"{teacher.FirstName + teacher.LastName}");
+                }
+
+                Console.WriteLine("\nAny");
+                IQueryable<Teachers> topTeachersAny = context
+                    .Teachers
+                    .Where(x => x.Marks.Any(y => y.Value >= 8));
+                foreach (Teachers teacher in topTeachersAny)
+                {
+                    Console.WriteLine($"{teacher.FirstName + teacher.LastName}");
+                }
+
+                Console.WriteLine("\nCASE WHEN");
+                var ageRangeUniversity = context
+                    .Universities
+                    .Select(x => new
+                    {
+                        Description = x.Description ?? "mising description",
+                        AgeRange = 
+                            x.Age >= 0 && x.Age < 10 ? "0-10":
+                            x.Age > 10               ? "old university":
+                            "default"
+                    });
+                foreach (var u in ageRangeUniversity)
+                {
+                    Console.WriteLine($"{u.Description}, {u.AgeRange}");
+                }
+
+                //
+                IQueryable<Universities> query = context.Universities;
+                var page = 100;
+                var pageSize = 10;
+
+                context
+                    .Universities
+                    .OrderBy(x => x.Name)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize);
+
+                Console.WriteLine("---> SQL statements <---");
+                var other = context
+                    .Universities
+                    .FromSql("SELECT * FROM Universities WHERE Age > 0")
+                    .Where(x => x.Age > 0)
+                    .Select(x => new
+                    {
+                        x.Name
+                    });
+                foreach (var o in other)
+                {
+                    Console.WriteLine($"{o.Name}");
+                }
             }
 
-            Console.WriteLine("End Program");
+            Console.WriteLine("\n---> End Program <---");
             Console.ReadKey();
         }
     }
