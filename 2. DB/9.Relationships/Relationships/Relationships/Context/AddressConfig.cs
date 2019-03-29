@@ -15,6 +15,8 @@ namespace Relationships.DAL.Context
             builder.Property(x => x.RowVersion)
                 .IsRowVersion();
 
+            //builder.Property(p => p.RowVersion).IsConcurrencyToken();
+
             builder.
                 Property(p => p.State)
                 .HasMaxLength(50)

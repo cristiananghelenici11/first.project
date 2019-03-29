@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Relationships.DAL.Models
@@ -14,6 +15,8 @@ namespace Relationships.DAL.Models
 
         public string ZipCode { get; set; }
 
+        //[ConcurrencyCheck]
+        //[Timestamp]
         public byte[] RowVersion { get; set; }
 
         [ForeignKey(nameof(StudentId))]

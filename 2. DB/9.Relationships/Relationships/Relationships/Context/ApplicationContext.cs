@@ -13,12 +13,10 @@ namespace Relationships.DAL.Context
 
         public ApplicationContext()
         {
-
         }        
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-
         }
 
         public DbSet<University> Universities { get; set; }

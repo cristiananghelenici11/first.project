@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relationships.DAL", "Relationships\Relationships.DAL.csproj", "{C55D74BA-FF7A-4433-8D2E-58AC3F14CBDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relationships.DAL", "Relationships\Relationships.DAL.csproj", "{C55D74BA-FF7A-4433-8D2E-58AC3F14CBDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relationships.Console", "Relationships.Console\Relationships.Console.csproj", "{98C5D45B-45E5-4DD4-A034-DD2AFA0062B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relationships", "Relationships.Console\Relationships.csproj", "{98C5D45B-45E5-4DD4-A034-DD2AFA0062B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

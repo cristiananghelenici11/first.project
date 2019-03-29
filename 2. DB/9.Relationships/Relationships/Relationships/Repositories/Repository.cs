@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Relationships.DAL.Context;
 using Relationships.DAL.Interfaces;
 using Relationships.DAL.Models;
 
 namespace Relationships.DAL.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity :  Entity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity :  class
     {
-        DbContext _context;
-        DbSet<TEntity> _dbSet;
+        private readonly ApplicationContext _context;
+        private readonly DbSet<TEntity> _dbSet;
  
-        public Repository(DbContext context)
+        public Repository(ApplicationContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();
         }
  
-        public IEnumerable<TEntity> Get()
+        public IList<TEntity> GetAll()
         {
-            return _dbSet.AsNoTracking().ToList();
+            return _dbSet.ToList();
         }
          
-        public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> GetByPredicate(Func<TEntity, bool> predicate)
         {
-            return _dbSet.AsNoTracking().Where(predicate).ToList();
+            return _dbSet.Where(predicate).ToList();
         }
         public TEntity FindById(long id)
         {
@@ -49,23 +50,14 @@ namespace Relationships.DAL.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
+        public IList<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            return Include(includeProperties).ToList();
-        }
- 
-        public IEnumerable<TEntity> GetWithInclude(Func<TEntity,bool> predicate, 
-            params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            var query =  Include(includeProperties);
-            return query.Where(predicate).ToList();
-        }
+            foreach (Expression<Func<TEntity, object>> includeProperty in includeProperties)
+            {
+                _dbSet.Include(includeProperty);
+            }
 
-        private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            IQueryable<TEntity> query = _dbSet.AsNoTracking();
-            return includeProperties
-                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+            return _dbSet.ToList();
         }
     }
 }

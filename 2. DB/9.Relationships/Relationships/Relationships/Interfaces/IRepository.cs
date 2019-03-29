@@ -7,8 +7,8 @@ namespace Relationships.DAL.Interfaces
     {
         void Create(TEntity item);
         TEntity FindById(long id);
-        IEnumerable<TEntity> Get();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+        IList<TEntity> GetAll();
+        IEnumerable<TEntity> GetByPredicate(Func<TEntity, bool> predicate);
         void Remove(TEntity item);
         void Update(TEntity item);
     }

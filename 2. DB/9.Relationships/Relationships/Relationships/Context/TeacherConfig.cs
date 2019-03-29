@@ -15,8 +15,6 @@ namespace Relationships.DAL.Context
             builder.HasMany(x => x.MarkTeachers)
                 .WithOne(x => x.Teacher)
                 .HasForeignKey(x => x.TeacherId);
-           
-
         }
     }
 }

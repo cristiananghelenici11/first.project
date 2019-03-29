@@ -2,7 +2,7 @@
 {
     public class MarkCourse : Mark
     {
-        public long? CourseId { get; set; }
+        public long CourseId { get; set; }
 
     }
 }

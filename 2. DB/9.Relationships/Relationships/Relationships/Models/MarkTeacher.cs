@@ -6,7 +6,7 @@ namespace Relationships.DAL.Models
 {
     public class MarkTeacher : Mark
     {
-        public long? TeacherId { get; set; }
-        public Teacher Teacher { get; set; }
+        public long TeacherId { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

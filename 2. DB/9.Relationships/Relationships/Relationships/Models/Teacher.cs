@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,6 +21,5 @@ namespace Relationships.DAL.Models
         public virtual ICollection<UniversityTeacher> UniversityTeachers { get; set; }
 
         public virtual ICollection<MarkTeacher> MarkTeachers { get; set; }
-
     }
 }

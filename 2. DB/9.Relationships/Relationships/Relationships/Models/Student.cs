@@ -8,9 +8,7 @@ namespace Relationships.DAL.Models
     [Table("Student")]
     public class Student : Entity
     {
-        [Column("Idnp")]
         public long Idnp { get; set; }
-        [InverseProperty(nameof(FirstName))]
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -19,10 +17,10 @@ namespace Relationships.DAL.Models
 
         public string Email { get; set; }
 
-        [ForeignKey(nameof(UniversityId))]
+        //[ForeignKey(nameof(UniversityId))]
         public long UniversityId { get; set; }
 
-        public University University { get; set; }
+        public virtual University University { get; set; }
 
         public virtual Address Address { get; set; }
     }

@@ -1,5 +1,5 @@
 ﻿using System;
-using Relationships.Console;
+using Relationships;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,11 +12,10 @@ using Relationships.DAL.Context;
 using Relationships.DAL.Models;
 using Relationships.DAL.Repositories;
 
-namespace Relationships.Console
+namespace Relationships
 {
     public class Program
     {
-        public static string connectionString = @"Data Source=MDDSK40062\SQLEXPRESS;Initial Catalog=Relationships;Integrated Security=True";
         private static void Main(string[] args)
         {
             using (var db = new ApplicationContext())
@@ -38,6 +37,8 @@ namespace Relationships.Console
                     UniversityId = 1
                 };
                 var studentRepository = new Repository<Student>(db);
+
+                //Console.WriteLine(db.Entry(new University()).State);
                 //studentRepository.Create(student);
                 var address = new Address()
                 {
@@ -52,25 +53,46 @@ namespace Relationships.Console
             }
 
             var client1 = new Thread(ChangeZipCode);
-            //client1.Start();    
-            
-            var client2 = new Thread(ChangeZipCode);
-            //client2.Start();
+            client1.Start();
 
-            Transaction();
-            System.Console.WriteLine("....");
-            System.Console.ReadKey();
+            var client2 = new Thread(ChangeZipCode);
+            client2.Start();
+
+            var dbContext = new ApplicationContext();
+
+            //Polymorphic query 
+            var query = dbContext.Marks.ToList();
+
+            //Non-polymorphic query 
+            var query2 = dbContext.Marks.OfType<MarkCourse>().ToList();
+
+            //var teacher = new Teacher(){FirstName = "Anghelenici", LastName = "Cristian"};
+
+            //dbContext.SaveChanges();
+//            dbContext.MarkCourses.Add(new MarkCourse { CourseId = 1, Value = 10 });
+//            var s = dbContext.Marks.OfType<MarkCourse>().ToList();
+//            foreach (MarkCourse markCourse in s)
+//            {
+//                Console.WriteLine($"{markCourse.Id}, {markCourse.Value}");
+//            }
+
+            Selecting();
+            Console.WriteLine("....");
+            Console.ReadKey();
         }
 
         private static void ChangeZipCode()
         {
-            using (var applicationContext = new ApplicationContext())
+            var applicationContext = new ApplicationContext();
+            Address address = applicationContext.Addresses.FirstOrDefault();
+
+            if (address != null)
             {
-                Address address = applicationContext.Addresses.FirstOrDefault();
                 address.ZipCode = "444";
                 applicationContext.Update(address);
-                applicationContext.SaveChanges();
             }
+
+            applicationContext.SaveChanges();
         }
 
         private static void Transaction()
@@ -105,7 +127,7 @@ namespace Relationships.Console
 
                         dbContextTransaction.Commit();
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
 
                     }
@@ -117,6 +139,7 @@ namespace Relationships.Console
                 TransactionScopeOption.Required,
                 new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted }))
             {
+                string connectionString = @"Data Source=MDDSK40062\SQLEXPRESS;Initial Catalog=Relationships;Integrated Security=True";
                 using (var connection = new SqlConnection(connectionString))
                 {
                     try
@@ -127,7 +150,7 @@ namespace Relationships.Console
 
                         using (var context = new ApplicationContext())
                         {
-                            context.Universities.Add(new University { Name = "hq", Age = 11});
+                            context.Universities.Add(new University { Name = "hq", Age = 11 });
                             context.SaveChanges();
                         }
                         scope.Complete();
@@ -142,7 +165,7 @@ namespace Relationships.Console
             //It is also possible to enlist in an explicit transaction.
 
             using (var transaction = new CommittableTransaction(
-                new TransactionOptions {IsolationLevel = IsolationLevel.ReadCommitted}))
+                new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted }))
             {
                 try
                 {
@@ -151,7 +174,7 @@ namespace Relationships.Console
                         context.Database.OpenConnection();
                         context.Database.EnlistTransaction(transaction);
 
-                        context.Universities.Add(new University {Name = "Enlistment", Age = 100});
+                        context.Universities.Add(new University { Name = "Enlistment", Age = 100 });
                         context.SaveChanges();
                         context.Database.CloseConnection();
                     }
@@ -161,6 +184,117 @@ namespace Relationships.Console
                 {
 
                 }
+            }
+
+        }
+
+        private static void Loading()
+        {
+            using (var context = new ApplicationContext())
+            {
+                //Eager loading
+                Console.WriteLine("---> Eager loading <---");
+                var universities = context.Universities.Include(x => x.Students).ThenInclude(x => x.Address);
+                foreach (var university in universities)
+                {
+                    Console.WriteLine($"{university.Name}");
+                    foreach (var student in university.Students)
+                    {
+                        Console.WriteLine($"\t{student?.FirstName}, {student?.LastName}, {student?.Idnp},Address---: {student?.Address?.State}");
+                    }
+                }
+
+                //Lazy loading
+                Console.WriteLine("---> Lazy loading <---");
+                var universities2 = context.Universities.ToList();
+                foreach (var university in universities2)
+                {
+                    Console.WriteLine($"{university.Name}");
+                    foreach (var student in university.Students)
+                    {
+                        Console.WriteLine($"\t{student?.FirstName}, {student?.LastName}, {student?.Idnp},Address---: {student?.Address?.State}");
+                    }
+                }
+
+                //Explicit loading
+                Console.WriteLine("---> Explicit loading <---");
+                var teachers = context.Teachers
+                    .FirstOrDefault();
+
+                context.Entry(teachers)
+                    .Collection(t => t.MarkTeachers)
+                    .Load();
+                foreach (var t in teachers.MarkTeachers)
+                {
+                    Console.WriteLine($"Nota: {t.Value}");
+                }
+            }
+        }
+
+        private static void Selecting()
+        {
+            using (var db = new ApplicationContext())
+            {
+                //db.Students.Add(new Student {FirstName = "Anghelenici", LastName = "Cristian", UniversityId = 1});
+                //db.SaveChanges();
+                //Find
+                Student student = db.Students.Find((long)7);
+                Console.WriteLine($"{student.FirstName}, {student.LastName}");
+
+                University s1 = (from s in db.Universities
+                                 where s.Name == "UTM"
+                                 select s).FirstOrDefault();
+
+                University s12 = db.Universities.FirstOrDefault(x => x.Name == "UTM");
+
+                //Ordering
+                IEnumerable<University> s2 = from s in db.Universities
+                                             orderby s.Name ascending
+                                             select s;
+
+                IEnumerable<University> s21 = db.Universities.OrderBy(s => s.Name);
+                foreach (University university in s21)
+                {
+                    Console.WriteLine($"{university.Name}");
+                }
+
+                //Anonymous object result
+                var s3 = from s in db.Universities
+                         where s.Name == "UTM"
+                         select new
+                         {
+                             Id = s.Id,
+                             Name = s.Name
+                         };
+
+                var s31 = db.Universities.Where(x => x.Name == "UTM").Select(x => new
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                });
+
+                //JOIN
+                //JOIN Types - INNER JOIN
+                IQueryable<University> outer = db.Universities;
+                IQueryable<Teacher> inner = db.Teachers;
+
+                var categorySubcategories = outer.Join(inner, 
+                    category => category.Id,
+                    subcategory => subcategory.Id,
+                    (category, subcategory) =>
+                        new { Category = category.Name, Subcategory = subcategory.FirstName });
+                foreach (var subcategory in categorySubcategories)
+                {
+                    Console.WriteLine($"{subcategory.Category}, {subcategory.Subcategory}");
+                }
+
+                //INNER JOIN
+                var v1 = from x in db.Universities
+                    join Teacher in db.Teachers on x.Id equals Teacher.Id
+                    select new { Category = x.Name, Subcategory = Teacher.Email };
+
+                //
+
             }
 
         }

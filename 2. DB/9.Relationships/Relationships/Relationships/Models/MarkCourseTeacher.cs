@@ -6,9 +6,7 @@ namespace Relationships.DAL.Models
 {
     public class MarkCourseTeacher : Mark
     {
-        public long? CourseId { get; set; }
-        public long? TeacherId { get; set; }
-
-
+        public long CourseId { get; set; }
+        public long TeacherId { get; set; }
     }
 }

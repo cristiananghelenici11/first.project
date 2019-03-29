@@ -37,7 +37,6 @@ namespace OrmStudentCoreConsole
                     Console.WriteLine($"{course.Id}, {course.Name}, {course.Description}, {course.Faculty?.Name}");
                 }
             }
-            ////////////////////////////
 
             EFGenericRepository<StudentFirstCore.Models.Universities> universityRepo = new EFGenericRepository<StudentFirstCore.Models.Universities>(new StudentContext());
 
@@ -52,8 +51,6 @@ namespace OrmStudentCoreConsole
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////
-
 
             Console.WriteLine("-----------------------------------------------");
             using (var context = new StudentContext())
@@ -61,7 +58,7 @@ namespace OrmStudentCoreConsole
                 //Grouping
                 Console.WriteLine("\n---> Group --->");
                 var universities = context
-                    .Universities.Include(x => x.Faculties)
+                    .Universities
                     .GroupBy(x => x.Name)
                     .Select(x => new
                     {
@@ -228,6 +225,42 @@ namespace OrmStudentCoreConsole
                 {
                     Console.WriteLine($"{university.Name}, {university.Description}, {university.Age}");
                 }
+                //cursuri une nui nis un student(profesor) cu note mai mic de 4
+
+                Console.WriteLine("courses------------------>>>>>>>>>>>>>>>>>>");
+//                var courses = context.Courses.Include(x => x.Marks).ThenInclude(x => x.Teacher)
+//                    .Where(x => x.Marks.Select(p => p.Value > 4).FirstOrDefault());
+
+                //teacher care nu au note mai mari ca 4
+                Console.WriteLine("Teacher------------------>>>>>>>>>>>>>>>>>>");
+
+                var teachers1= context.Marks.Include(x => x.Teacher).Where(x=> x.Value > 8).Select(x=> x.Teacher);
+
+                context.Teachers.Where(x => x.Marks.All(y => y.Value > 8)).ToList();
+                //teacher cite comentarii are
+
+                //context.Teachers.Where(x => x.Comments.Count(y => y.Id));
+
+                context.Teachers.Select(x => new
+                {
+                    //Name = x.Key,
+                    x.FirstName, 
+                    CountComent = x.Comments.Count(),
+                    avg = x.Marks.Average(p => p.Value)
+                });
+
+                context.Comments.Include(x => x.Teacher).GroupBy(x => x.TeacherId).Select(x => new
+                {
+                    Name = x.Key,
+                    CountComents = x.Key
+                });
+
+                foreach (var teacher in teachers1)
+                {
+                    Console.WriteLine($"{teacher.FirstName}, {teacher.LastName}");
+
+                }
+
 
             }
 
