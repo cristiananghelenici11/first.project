@@ -28,6 +28,11 @@ namespace Test
 
             using (var dbContext = new ApplicationContext())
             {
+
+                var vv1 = dbContext.Persons.Include(x => x.Telephones).ToList();
+                var xx2 = dbContext.Persons.SelectMany(x => x.Telephones).ToList();
+                var vv3 = dbContext.Persons.Select(x => x.Telephones).ToList();
+
                 
 
                 //dami lista la toate telefoanele care persoanele au age>22
@@ -65,8 +70,7 @@ namespace Test
 
                 //da persoana la care tel e samsung 
                 //5
-                //var persons3 = dbContext.Persons.Where(x=> x.Telephones)
-
+                var persons3 = dbContext.Persons.Where(x => x.Telephones.Count() > 1);
                 var test = dbContext.Telephones.Where(x => x.Person.Age == 2);
                 var test2 = dbContext.Telephones.Where(x => x.Mark == "Samsung").Include(x => x.Person);
                 foreach (var v in test2)
