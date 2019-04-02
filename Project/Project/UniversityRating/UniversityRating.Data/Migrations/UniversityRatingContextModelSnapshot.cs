@@ -25,30 +25,24 @@ namespace UniversityRating.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("CourseId");
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Message")
                         .IsRequired();
 
                     b.Property<string>("Subject")
-                        .HasMaxLength(64);
+                        .IsRequired();
 
-                    b.Property<long?>("TeacherId");
-
-                    b.Property<long?>("UserId");
+                    b.Property<long>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("UserId");
 
-                    b.HasIndex("TeacherId", "CourseId", "UserId")
-                        .IsUnique()
-                        .HasName("UC_Coments")
-                        .HasFilter("[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL AND [UserId] IS NOT NULL");
-
                     b.ToTable("Comments");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Comment");
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Course", b =>
@@ -84,9 +78,9 @@ namespace UniversityRating.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("CourseId");
+                    b.Property<long>("CourseId");
 
-                    b.Property<long?>("TeacherId");
+                    b.Property<long>("TeacherId");
 
                     b.HasKey("Id");
 
@@ -94,8 +88,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasIndex("TeacherId", "CourseId")
                         .IsUnique()
-                        .HasName("UK_CourseTeachers")
-                        .HasFilter("[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL");
+                        .HasName("UK_CourseTeachers");
 
                     b.ToTable("CourseTeachers");
                 });
@@ -133,30 +126,20 @@ namespace UniversityRating.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("CourseId");
-
-                    b.Property<long?>("TeacherId");
-
-                    b.Property<string>("TypeMark")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<long>("UserId");
 
-                    b.Property<float?>("Value");
+                    b.Property<float>("Value");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("UserId");
 
-                    b.HasIndex("TeacherId", "CourseId", "UserId")
-                        .IsUnique()
-                        .HasName("UC_Marks")
-                        .HasFilter("[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL");
-
                     b.ToTable("Marks");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Mark");
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Teacher", b =>
@@ -295,22 +278,79 @@ namespace UniversityRating.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CommentCourse", b =>
+                {
+                    b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
+
+                    b.Property<long?>("CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasDiscriminator().HasValue("CommentCourse");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CommentCourseTeacher", b =>
+                {
+                    b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
+
+                    b.Property<long?>("CourseTeacherId");
+
+                    b.HasIndex("CourseTeacherId");
+
+                    b.HasDiscriminator().HasValue("CommentCourseTeacher");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CommentTeacher", b =>
+                {
+                    b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
+
+                    b.Property<long?>("TeacherId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.HasDiscriminator().HasValue("CommentTeacher");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.MarkCourse", b =>
+                {
+                    b.HasBaseType("UniversityRating.Data.Core.DomainModels.Mark");
+
+                    b.Property<long?>("CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasDiscriminator().HasValue("MarkCourse");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.MarkCourseTeacher", b =>
+                {
+                    b.HasBaseType("UniversityRating.Data.Core.DomainModels.Mark");
+
+                    b.Property<long?>("CourseTeacherId");
+
+                    b.HasIndex("CourseTeacherId");
+
+                    b.HasDiscriminator().HasValue("MarkCourseTeacher");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.MarkTeacher", b =>
+                {
+                    b.HasBaseType("UniversityRating.Data.Core.DomainModels.Mark");
+
+                    b.Property<long?>("TeacherId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.HasDiscriminator().HasValue("MarkTeacher");
+                });
+
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Comment", b =>
                 {
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
-                        .WithMany("Comments")
-                        .HasForeignKey("CourseId")
-                        .HasConstraintName("FK_CommentToCourses");
-
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
-                        .WithMany("Comments")
-                        .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_CommentToTeachers");
-
                     b.HasOne("UniversityRating.Data.Core.DomainModels.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_CommentToUsers");
+                        .HasConstraintName("FK_UserToComment")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Course", b =>
@@ -318,7 +358,8 @@ namespace UniversityRating.Data.Migrations
                     b.HasOne("UniversityRating.Data.Core.DomainModels.Faculty", "Faculty")
                         .WithMany("Courses")
                         .HasForeignKey("FacultyId")
-                        .HasConstraintName("FK_CourseToFaculty");
+                        .HasConstraintName("FK_CourseToFaculty")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CourseTeacher", b =>
@@ -326,12 +367,14 @@ namespace UniversityRating.Data.Migrations
                     b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
                         .WithMany("CourseTeachers")
                         .HasForeignKey("CourseId")
-                        .HasConstraintName("FK_CPToCourses");
+                        .HasConstraintName("FK_CPToCourses")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
                         .WithMany("CourseTeachers")
                         .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_CPToTeachers");
+                        .HasConstraintName("FK_CPToTeachers")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Faculty", b =>
@@ -339,25 +382,17 @@ namespace UniversityRating.Data.Migrations
                     b.HasOne("UniversityRating.Data.Core.DomainModels.University", "Universtity")
                         .WithMany("Faculties")
                         .HasForeignKey("UniverstityId")
-                        .HasConstraintName("FK_FacultyToUniversity");
+                        .HasConstraintName("FK_FacultyToUniversity")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Mark", b =>
                 {
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
-                        .WithMany("Marks")
-                        .HasForeignKey("CourseId")
-                        .HasConstraintName("FK_MarksToCourse");
-
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
-                        .WithMany("Marks")
-                        .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_MarksToTeachers");
-
                     b.HasOne("UniversityRating.Data.Core.DomainModels.User", "User")
                         .WithMany("Marks")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_MarksToUsers");
+                        .HasConstraintName("FK_UserToMark")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.UniversityTeacher", b =>
@@ -365,12 +400,68 @@ namespace UniversityRating.Data.Migrations
                     b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
                         .WithMany("UniversityTeachers")
                         .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_UPToTeachers");
+                        .HasConstraintName("FK_UPToTeachers")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("UniversityRating.Data.Core.DomainModels.University", "University")
                         .WithMany("UniversityTeachers")
                         .HasForeignKey("UniversityId")
-                        .HasConstraintName("FK_UPToUniversities");
+                        .HasConstraintName("FK_UPToUniversities")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CommentCourse", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
+                        .WithMany("CommentCourses")
+                        .HasForeignKey("CourseId")
+                        .HasConstraintName("FK_CommentCourseToCourse")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CommentCourseTeacher", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.CourseTeacher", "CourseTeacher")
+                        .WithMany("CommentCourseTeachers")
+                        .HasForeignKey("CourseTeacherId")
+                        .HasConstraintName("FK_CommentCourseTeacherToCourseTeacher")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CommentTeacher", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
+                        .WithMany("CommentTeachers")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("FK_CommentTeacherToTeacher")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.MarkCourse", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
+                        .WithMany("MarkCourses")
+                        .HasForeignKey("CourseId")
+                        .HasConstraintName("FK_MarkCourseToCourse")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.MarkCourseTeacher", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.CourseTeacher", "CourseTeacher")
+                        .WithMany("MarkCourseTeachers")
+                        .HasForeignKey("CourseTeacherId")
+                        .HasConstraintName("FK_MarkCourseTeacherToCourseTeacher")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.MarkTeacher", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
+                        .WithMany("MarkTeachers")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("FK_MarkTeacherToTeacher")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

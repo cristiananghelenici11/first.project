@@ -33,6 +33,8 @@ namespace UniversityRating.Data.Configurations
                    .IsRequired()
                    .HasMaxLength(64)
                    .IsUnicode(false);
+
+
         }
     }
 }

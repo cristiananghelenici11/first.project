@@ -36,6 +36,16 @@ namespace UniversityRating.Data.Configurations
                    .IsUnicode(false);
 
             builder.Property(e => e.UserName).HasMaxLength(64);
+
+            builder.HasMany(x => x.Marks)
+                .WithOne(p => p.User)
+                .HasForeignKey(k => k.UserId)
+                .HasConstraintName("FK_UserToMark");
+
+            builder.HasMany(x => x.Comments)
+                .WithOne(p => p.User)
+                .HasForeignKey(k => k.UserId)
+                .HasConstraintName("FK_UserToComment");
         }
     }
 }

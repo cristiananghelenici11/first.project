@@ -6,9 +6,9 @@ namespace UniversityRating.Data.Core.DomainModels
     {
         public Course()
         {
-            Comments = new HashSet<Comment>();
+            CommentCourses = new HashSet<CommentCourse>();
             CourseTeachers = new HashSet<CourseTeacher>();
-            Marks = new HashSet<Mark>();
+            MarkCourses = new HashSet<MarkCourse>();
         }
 
         public string Name { get; set; }
@@ -18,8 +18,8 @@ namespace UniversityRating.Data.Core.DomainModels
         public long FacultyId { get; set; }
 
         public virtual Faculty Faculty { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CommentCourse> CommentCourses { get; set; }
         public virtual ICollection<CourseTeacher> CourseTeachers { get; set; }
-        public virtual ICollection<Mark> Marks { get; set; }
+        public virtual ICollection<MarkCourse> MarkCourses { get; set; }
     }
 }

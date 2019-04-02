@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UniversityRating.Data.Migrations
 {
-    public partial class FirstUniversityRating : Migration
+    public partial class first01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -132,48 +132,13 @@ namespace UniversityRating.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Subject = table.Column<string>(maxLength: 64, nullable: true),
-                    Message = table.Column<string>(nullable: false),
-                    CourseId = table.Column<long>(nullable: true),
-                    TeacherId = table.Column<long>(nullable: true),
-                    UserId = table.Column<long>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CommentToCourses",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CommentToTeachers",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CommentToUsers",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CourseTeachers",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TeacherId = table.Column<long>(nullable: true),
-                    CourseId = table.Column<long>(nullable: true)
+                    TeacherId = table.Column<long>(nullable: false),
+                    CourseId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,44 +158,89 @@ namespace UniversityRating.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Marks",
+                name: "Comments",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TypeMark = table.Column<string>(maxLength: 64, nullable: false),
-                    Value = table.Column<float>(nullable: true),
-                    TeacherId = table.Column<long>(nullable: true),
+                    Subject = table.Column<string>(nullable: false),
+                    Message = table.Column<string>(nullable: false),
+                    UserId = table.Column<long>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
                     CourseId = table.Column<long>(nullable: true),
-                    UserId = table.Column<long>(nullable: false)
+                    CourseTeacherId = table.Column<long>(nullable: true),
+                    TeacherId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Marks", x => x.Id);
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MarksToCourse",
+                        name: "FK_UserToComment",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CommentCourseToCourse",
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_MarksToTeachers",
+                        name: "FK_CommentCourseTeacherToCourseTeacher",
+                        column: x => x.CourseTeacherId,
+                        principalTable: "CourseTeachers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CommentTeacherToTeacher",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Marks",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<long>(nullable: false),
+                    Value = table.Column<float>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    CourseId = table.Column<long>(nullable: true),
+                    CourseTeacherId = table.Column<long>(nullable: true),
+                    TeacherId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Marks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MarksToUsers",
+                        name: "FK_UserToMark",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MarkCourseToCourse",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MarkCourseTeacherToCourseTeacher",
+                        column: x => x.CourseTeacherId,
+                        principalTable: "CourseTeachers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MarkTeacherToTeacher",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_CourseId",
-                table: "Comments",
-                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",
@@ -238,11 +248,19 @@ namespace UniversityRating.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "UC_Coments",
+                name: "IX_Comments_CourseId",
                 table: "Comments",
-                columns: new[] { "TeacherId", "CourseId", "UserId" },
-                unique: true,
-                filter: "[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL AND [UserId] IS NOT NULL");
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_CourseTeacherId",
+                table: "Comments",
+                column: "CourseTeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_TeacherId",
+                table: "Comments",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_FacultyId",
@@ -258,8 +276,7 @@ namespace UniversityRating.Data.Migrations
                 name: "UK_CourseTeachers",
                 table: "CourseTeachers",
                 columns: new[] { "TeacherId", "CourseId" },
-                unique: true,
-                filter: "[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Faculties_UniverstityId",
@@ -267,21 +284,24 @@ namespace UniversityRating.Data.Migrations
                 column: "UniverstityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Marks_CourseId",
-                table: "Marks",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Marks_UserId",
                 table: "Marks",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "UC_Marks",
+                name: "IX_Marks_CourseId",
                 table: "Marks",
-                columns: new[] { "TeacherId", "CourseId", "UserId" },
-                unique: true,
-                filter: "[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL");
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Marks_CourseTeacherId",
+                table: "Marks",
+                column: "CourseTeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Marks_TeacherId",
+                table: "Marks",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "UK_TeachersEmail",
@@ -332,19 +352,19 @@ namespace UniversityRating.Data.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "CourseTeachers");
-
-            migrationBuilder.DropTable(
                 name: "Marks");
 
             migrationBuilder.DropTable(
                 name: "UniversityTeachers");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "CourseTeachers");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "Teachers");
