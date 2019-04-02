@@ -57,39 +57,25 @@ namespace OrmStudentCoreConsole
             {
                 //Grouping
                 Console.WriteLine("\n---> Group --->");
-                var universities = context
-                    .Universities
-                    .GroupBy(x => x.Name)
+                var universities = context.Universities.GroupBy(x => x.Name)
                     .Select(x => new
                     {
                         Name = x.Key,
                         AvgAge = x.Average(y => y.Age)
                     });
 
-                foreach (var university in universities)
-                {
-                    Console.WriteLine($"{university.Name}, {university.AvgAge}");
-                }
-
-                var universities2 = context
-                    .Faculties
-                    .Where(x => x.Name != null)
+                var universities2 = context.Faculties.Where(x => x.Name != null)
                     .GroupBy(x => x.Name)
                     .Select(x => new
                     {
                         Name = x.Key,
-                        Count = x.Count()
+                        Count = x.Count(m=> m.Universtity != null)
                     })
                     .Where(x => x.Count >= 1);
-                foreach (var university in universities2)
-                {
-                    Console.WriteLine($"{university.Name}, {university.Count}");
-                }
 
                 //GROUPJOIN
                 Console.WriteLine("\n---> Group join --->");
-                var topUniversities = context.Universities
-                    .GroupBy(x => x.Name)
+                var topUniversities = context.Universities.GroupBy(x => x.Name)
                     .Select(x => new
                     {
                         Name = x.Key,
@@ -107,32 +93,6 @@ namespace OrmStudentCoreConsole
                         Descriptions = Descriptions.Select(y => y.Description).ToList()
                     });
 
-                foreach (var university in Universities2)
-                {
-                    Console.WriteLine($"{university.Name}");
-                    foreach (string description in university.Descriptions)
-                    {
-                        Console.WriteLine($"{description}");
-                    }
-                }
-
-                //Ienumerable vs Iqueryable
-                IEnumerable<Faculties> faculties = context
-                    .Faculties
-                    .Where(x => x.UniverstityId == 1);
-                IEnumerable<Faculties> facultiesWithIEnumerable = faculties.Where(x => x.Universtity.Age > 29);
-
-                IQueryable<Faculties> faculties2 = context
-                    .Faculties
-                    .Where(x => x.UniverstityId == 1);
-                IQueryable<Faculties> facultiesWithIQueryable = faculties2.Where(x => x.Universtity.Age > 29);
-
-
-                // AsNoTracking()
-                Universities firstUniversity = context.Universities.AsNoTracking().FirstOrDefault();
-                if (firstUniversity != null) firstUniversity.Name = "---";
-                context.SaveChanges();
-
                 Console.WriteLine("\n---> Subqueries: Select example <---");
                 var teachers = context
                     .Teachers
@@ -141,33 +101,19 @@ namespace OrmStudentCoreConsole
                         Name = x.FirstName + x.LastName,
                         Marks = x.Marks.Average(y => y.Value)
                     });
-                foreach (var teacher in teachers)
-                {
-                    Console.WriteLine($"{teacher.Name}, {teacher.Marks}");
-                }
 
                 Console.WriteLine("---> Subqueries: Filter example (ALL & ANY) <---");
                 Console.WriteLine("\nAll");
-                IQueryable<Teachers> topTeachersAll = context
-                    .Teachers
+                var topTeachersAll = context.Teachers
                     .Where(x => x.Marks.All(y => y.Value >= 8));
-                foreach (Teachers teacher in topTeachersAll)
-                {
-                    Console.WriteLine($"{teacher.FirstName + teacher.LastName}");
-                }
+
 
                 Console.WriteLine("\nAny");
-                IQueryable<Teachers> topTeachersAny = context
-                    .Teachers
+                var topTeachersAny = context.Teachers
                     .Where(x => x.Marks.Any(y => y.Value >= 8));
-                foreach (Teachers teacher in topTeachersAny)
-                {
-                    Console.WriteLine($"{teacher.FirstName + teacher.LastName}");
-                }
 
                 Console.WriteLine("\nCASE WHEN");
-                var ageRangeUniversity = context
-                    .Universities
+                var ageRangeUniversity = context.Universities
                     .Select(x => new
                     {
                         Description = x.Description ?? "mising description",
@@ -176,46 +122,26 @@ namespace OrmStudentCoreConsole
                             x.Age > 10 ? "old university" :
                             "default"
                     });
-                foreach (var u in ageRangeUniversity)
+
+                //cursuri une nui nis un student(profesor) cu note mai mic de 4
+                context.Courses.Where(x => x.Marks.All(c => c.Value > 4));
+
+                //teacher care nu au note mai mari ca 4
+                context.Teachers.Where(x => x.Marks.All(s => s.Value > 4));
+
+                //teacher cite comentarii are, ++++ si media la note
+                context.Teachers.Select(x => new
                 {
-                    Console.WriteLine($"{u.Description}, {u.AgeRange}");
-                }
+                    Teacher = x.FirstName,
+                    Comments = x.Comments.Count(),
+                    AvgNote = x.Marks.Average(d=>d.Value)
+                });
 
-                //
-                IQueryable<Universities> query = context.Universities;
-                var page = 100;
-                var pageSize = 10;
-
-                context
-                    .Universities
-                    .OrderBy(x => x.Name)
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize);
-
-                Console.WriteLine("---> SQL statements <---");
-                var other = context
-                    .Universities
-                    .FromSql("SELECT * FROM Universities WHERE Age > 0")
-                    .Where(x => x.Age > 0)
+                var otherr = context.Universities.FromSql("SELECT * FROM Universities WHERE Age > 0")
                     .Select(x => new
                     {
                         x.Name
                     });
-                foreach (var o in other)
-                {
-                    Console.WriteLine($"{o.Name}");
-                }
-
-                Console.WriteLine("---> paginating <---");
-                var pageExemple = context
-                    .Universities
-                    .Where(x => x.Age > 0)
-                    .Page();
-
-                foreach (var p in pageExemple)
-                {
-                    Console.WriteLine($"{p.Name},{p.Description}");
-                }
 
 
                 Console.WriteLine("---> dynamic <---");
@@ -224,41 +150,6 @@ namespace OrmStudentCoreConsole
                 foreach (Universities university in universityDynamic)
                 {
                     Console.WriteLine($"{university.Name}, {university.Description}, {university.Age}");
-                }
-                //cursuri une nui nis un student(profesor) cu note mai mic de 4
-
-                Console.WriteLine("courses------------------>>>>>>>>>>>>>>>>>>");
-//                var courses = context.Courses.Include(x => x.Marks).ThenInclude(x => x.Teacher)
-//                    .Where(x => x.Marks.Select(p => p.Value > 4).FirstOrDefault());
-
-                //teacher care nu au note mai mari ca 4
-                Console.WriteLine("Teacher------------------>>>>>>>>>>>>>>>>>>");
-
-                var teachers1= context.Marks.Include(x => x.Teacher).Where(x=> x.Value > 8).Select(x=> x.Teacher);
-
-                context.Teachers.Where(x => x.Marks.All(y => y.Value > 8)).ToList();
-                //teacher cite comentarii are
-
-                //context.Teachers.Where(x => x.Comments.Count(y => y.Id));
-
-                context.Teachers.Select(x => new
-                {
-                    //Name = x.Key,
-                    x.FirstName, 
-                    CountComent = x.Comments.Count(),
-                    avg = x.Marks.Average(p => p.Value)
-                });
-
-                context.Comments.Include(x => x.Teacher).GroupBy(x => x.TeacherId).Select(x => new
-                {
-                    Name = x.Key,
-                    CountComents = x.Key
-                });
-
-                foreach (var teacher in teachers1)
-                {
-                    Console.WriteLine($"{teacher.FirstName}, {teacher.LastName}");
-
                 }
 
 

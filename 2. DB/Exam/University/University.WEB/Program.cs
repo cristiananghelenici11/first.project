@@ -33,13 +33,11 @@ namespace University.WEB
                 var sc22 = new StudentCourse { Course = c2, Student = s2, Mark = 9 };
                 var sc23 = new StudentCourse { Course = c2, Student = s3, Mark = 8 };
 
-                if (dbContext.Students == null)
-                {
-                    dbContext.AddRange(new List<StudentCourse> { sc11, sc12, sc13, sc21, sc22, sc23 });
-                    dbContext.AddRange(new List<Address> { a1, a2 });
-                    dbContext.AddRange(new List<Course> { c3 });
-                    dbContext.SaveChanges();
-                }
+                dbContext.AddRange(new List<StudentCourse> { sc11, sc12, sc13, sc21, sc22, sc23 });
+                dbContext.AddRange(new List<Address> { a1, a2 });
+                dbContext.AddRange(new List<Course> { c3 });
+                //dbContext.SaveChanges();
+
             }
 
             using (var dbContext = new UniversityContext())
@@ -67,7 +65,7 @@ namespace University.WEB
                     .Where(x => x.Student.Address.strada == "Studenilor")
                     .Select(x => x.Course.Name).ToList();
 
-                //show all address of student that attend course "oop"
+                //3. show all address of student that attend course "oop"
                 var s32 = dbContext.StudentCourses.Where(x => x.Course.Name == "OOP").Select(x => x.Student.Address);
 
                 //show student and avg of mark 
@@ -84,25 +82,25 @@ namespace University.WEB
                     AvgMark = x.Average(p => p.StudentCourses.Average(d => d.Mark))
                 });
 
-                //show student and avg of mark where mark > avg(Mark)
+                //4. show student and avg of mark where mark > avg(Mark)
                 var f40 = dbContext.Students.GroupBy(x => x.LName).Select(x => new
                 {
                     Student = x.Key,
                     AvgMark = x.Average(p => p.StudentCourses.Average(d => d.Mark))
                 }).Where(x => x.AvgMark > dbContext.StudentCourses.Average(p => p.Mark));
 
-                //show all address of students that attend more than 2 courses
+                //5. show all address of students that attend more than 2 courses
                 var s22 = dbContext.Students
                     .Where(x => x.StudentCourses.Count() > 2).Select(x => x.Address).ToList();
 
-                //show haow many courses each student attend 
+                //6. show haow many courses each student attend 
                 var v4 = dbContext.Students.Select(x => new
                 {
                     Name = x.FName,
                     CountCourse = x.StudentCourses.Count()
                 });
 
-                // show all student that attend "sql" course
+                //7. show all student that attend "sql" course
                 var v55 = dbContext.StudentCourses.Where(x => x.Course.Name == "OOP").Select(x => x.Student).ToList();
 
                 //show min mark for each student
@@ -114,14 +112,14 @@ namespace University.WEB
                 }).ToList();
 
 
-                //show all students and list of marks
+                //8. show all students and list of marks
                 var v7 = dbContext.Students.Select(x => new
                 {
                     Student = x,
                     CoursesAndMark = x.StudentCourses.Select(y => new { Mark = y.Mark, Cours = y.Course.Name })
                 });
 
-                //select avg mark for all courses si chiar daca nari noti
+                //9. select avg mark for all courses si chiar daca nari noti
 
                 var f4r = dbContext.Courses.Select(x => new
                 {
@@ -129,7 +127,7 @@ namespace University.WEB
                     AvgMark = x.StudentCourses.Count() > 0 ? x.StudentCourses.Average(p => p.Mark) : 0
                 }).ToList();
 
-                //selecteaza toate numele la student  , curs , nota
+                //10. selecteaza toate numele la student  , curs , nota
                 var tto = dbContext.StudentCourses.Select(x => new
                 {
                     NameStudent = x.Student.FName,
@@ -137,14 +135,14 @@ namespace University.WEB
                     Mark = x.Mark
                 }).Where(x => x.Mark > dbContext.StudentCourses.Average(p => p.Mark)).ToList();
 
-                //toate adresele la fiecare student
+                //11. toate adresele la fiecare student
                 var hhh = dbContext.Students.Select(x => new
                 {
                     Student = x,
                     Adresa = x.Address.strada
                 });
 
-                //grup join  dintre studentcurses si student
+                //12. grup join  dintre studentcurses si student
                 var groupJoin = dbContext.StudentCourses.GroupJoin(dbContext.Students,
                     x => x.StudentId,
                     x => x.Id,
@@ -155,7 +153,7 @@ namespace University.WEB
                     });
 
 
-                // selecteaza toti studentii cu notele lui
+                //13. selecteaza toti studentii cu notele lui
                 var groupJoin2 = dbContext.Students.GroupJoin(dbContext.StudentCourses,
                     x => x.Id,
                     x => x.StudentId,
@@ -165,23 +163,23 @@ namespace University.WEB
                         Nume = sc.Select(p => p.Mark)
                     }).ToList();
 
-                var jjj = dbContext.Students.Select(x => new
+                var groupJoin2Suquery = dbContext.Students.Select(x => new
                 {
                     Name = x.FName,
                     Marks = x.StudentCourses.Select(p => p.Mark)
                 });
 
-                //toti studentii care nu au adresa 
+                //14. toti studentii care nu au adresa 
                 var bnn = dbContext.Students.Where(x => x.Address == null);
 
-                //toti studentii care nu au adresa si dai adresa 
+                //15. toti studentii care nu au adresa si dai adresa 
                 var bnn2 = dbContext.Students.Where(x => x.Address == null).Select(x => new
                 {
                     Studen = x,
                     Address = new Address { strada = "cei mai buna ", ZipCode = "fartovii" }
                 });
 
-                //afisiaza toti studentii media la note ordonate descresc dupa nota si (si cu cit e mai mica decit nota precedenta)
+                //16. afisiaza toti studentii media la note ordonate descresc dupa nota si (si cu cit e mai mica decit nota precedenta)
                 var studentDto = dbContext.Students.Select(x => new StudentDto
                 {
                     Name = x.FName,
@@ -189,9 +187,14 @@ namespace University.WEB
                 }).OrderByDescending(x => x.AvgMark).ToList();
 
                 for (int i = 1; i < studentDto.Count; i++)
+                { studentDto[i].Diferenta = studentDto[i].AvgMark - studentDto[i - 1].AvgMark; }
+
+                //17. notele la studenc la care numele se incepe cu "C"
+                var students = dbContext.Students.Where(x => x.FName.StartsWith("C")).Select(x => new
                 {
-                    studentDto[i].Diferenta = studentDto[i].AvgMark - studentDto[i - 1].AvgMark;
-                }
+                    Student = x,
+                    Mark = x.StudentCourses.Select(p => p.Mark)
+                });
 
                 foreach (var s in studentDto)
                 {
@@ -199,12 +202,7 @@ namespace University.WEB
                 }
 
 
-                // notele la studenc la care numele se incepe cu "C"
-                var students = dbContext.Students.Where(x => x.FName.StartsWith("C")).Select(x => new
-                {
-                    Student = x,
-                    Mark = x.StudentCourses.Select(p => p.Mark)
-                });
+
 
                 //toate datele pentru pentru id =1
 

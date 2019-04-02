@@ -35,113 +35,49 @@ namespace Test
 
                 
 
-                //dami lista la toate telefoanele care persoanele au age>22
-                //1
+                //1. dami lista la toate telefoanele care persoanele au age>22
                 IQueryable<Telephone> telephones = dbContext.Telephones.Where(x => x.Person.Age > 22);
-                foreach (Telephone telephone in telephones)
-                {
-                    //Console.WriteLine($"{telephone.Mark}, {telephone.Number}");
-                }
 
-                //da toate telefoanele la care mark e samsung
-                //2
-
+                //2. da toate telefoanele la care mark e samsung
                 var telephones2 = dbContext.Telephones.Where(x => x.Mark == "Samsung");
                 foreach (Telephone telephone in telephones2)
                 {
                     //Console.WriteLine($"{telephone.Mark}, {telephone.Number}");
                 }
 
-                //da toate persoanele la care numele se incepe cu C
-                //3
+                //3. da toate persoanele la care numele se incepe cu C
                 var persons = dbContext.Persons.Where(x => x.Name.StartsWith("C"));
-                foreach (Person person in persons)
-                {
-                    //Console.WriteLine($"{person.Id}, {person.Name}, {person.Age}");
-                }
 
-                // da toate telefoanele la care persoana e Cristian
-                //4
+                //4. da toate telefoanele la care persoana e Cristian
                 var persons2 = dbContext.Telephones.Where(x => x.Person.Name.Contains("Andrei"));
-                foreach (Telephone telephone in persons2)
-                {
-                    //Console.WriteLine($"{telephone.Mark}, {telephone.Number}");
-                }
 
-                //da persoana la care tel e samsung 
-                //5
+                //5. da persoana la care tel e samsung 
                 var persons3 = dbContext.Persons.Where(x => x.Telephones.Count() > 1);
                 var test = dbContext.Telephones.Where(x => x.Person.Age == 2);
-                var test2 = dbContext.Telephones.Where(x => x.Mark == "Samsung").Include(x => x.Person);
-                foreach (var v in test2)
-                {
-                    //Console.WriteLine($"{v.Person.Name}, {v.Person.Age}");
-                }
+                dbContext.Persons.Select(x => x.Telephones.Select(v => v.Mark == "Samsung"));
 
-                //grupeaza toate telefoanele dupa utilizatori, ( si telefoanele sa sie samsung si utilizatoru cristi)
-
+                //6. grupeaza toate telefoanele dupa utilizatori, ( si telefoanele sa sie samsung si utilizatoru cristi)+++++++
                 var group = dbContext.Persons.GroupBy(x => x.Name).Select(x => new
                 {
                     Name = x.Key,
-                    Telephone = x.SelectMany(z=>z.Telephones).Where(m=>m.Mark=="Samsung")
+                    hh = x.SelectMany(c=> c.Telephones).Where(d=> d.Person.Name == "e"),
+                    Telephone = x.SelectMany(z=>z.Telephones).Where(m=>m.Mark=="Samsung"),
                 }).Where(x=>x.Name=="Cristian");
 
-                foreach (var g in group)
-                {
-                    //Console.WriteLine($"{g.Name}");
-                    foreach (var v in g.Telephone)
-                    {
-                        //Console.WriteLine($"\t{v.Mark}, {v.Number}");
-                    }
-                }
-
-                //Console.WriteLine("0000000000000000000");
-                //grupeaza toate tel dupa mark si afiseaza utilizatorii la aceasta marca
+                //7. grupeaza toate tel dupa mark si afiseaza utilizatorii la aceasta marca
                 var telephones3 = dbContext.Telephones.GroupBy(x => x.Mark).Select(x => new
                 {
                     Mark = x.Key,
                     Person = x.Select(p=>p.Person)
                 });
 
-                foreach (var telephone in telephones3)
-                {
-                    //Console.WriteLine($"{telephone.Mark}");
-                    foreach (var p in telephone.Person)
-                    {
-                        //Console.WriteLine($"\t{p.Name}");
-                    }
-                }
-
-                // da fiecare utilizator si lista de elefoane
+                //8. da fiecare utilizator si lista de elefoane
                 var users = dbContext.Persons.Select(x => new
                 {
                     User=x.Name,
-                    CountTel = x.Telephones.Where(p => p.Mark=="Samsung").Count()
+                    CountTel = x.Telephones.Count(p => p.Mark=="Samsung")
                 });
-
-                foreach (var user in users)
-                {
-                    Console.WriteLine($"{user.User}, {user.CountTel}");
-                }
-
-
-
-                //-----valoare sa sie mai mare de cit valoarea la totote
-
-//                var group = dbContext.Telephones.Select(x => new
-//                {
-//                    Name = x.,
-//                    CountTelephone = x.
-//                })
-
-
-                //var persons3 = dbContext.Persons.Where(x=> x.Telephones)
-
             }
-
-
-
-
 
             Console.ReadKey();
         }

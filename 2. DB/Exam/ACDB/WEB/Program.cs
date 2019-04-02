@@ -18,15 +18,15 @@ namespace WEB
             using (var db = new ACDBContext())
             {
                 //lEFTjOIN
-//                var LeftJoin = from x in db.Packages
-//                    join y in db.Customers on x.PackId equals y.PackId into ys
-//                    from y in db.Customers.DefaultIfEmpty()
-//                    select new {Category = x.PackId, SubCategory = y.FirstName};
-//
-//                foreach (var j in LeftJoin)
-//                {
-//                    //Console.WriteLine($"{j.Category}, {j.SubCategory}");
-//                }
+                var LeftJoin = from x in db.Packages
+                    join y in db.Customers on x.PackId equals y.PackId into ys
+                    from y in db.Customers.DefaultIfEmpty()
+                    select new {Category = x.PackId, SubCategory = y.FirstName};
+
+                foreach (var j in LeftJoin)
+                {
+                    //Console.WriteLine($"{j.Category}, {j.SubCategory}");
+                }
 
                 //cross join
 
@@ -55,6 +55,18 @@ namespace WEB
                 //                    Console.WriteLine($"{c.CustomerId}, {c.LastName}, {c.FirstName}, {c.JoinDate}");
                 //                }
 
+                //lEFTjOIN
+                var LeftJoinn = from x in db.Packages
+                    join y in db.Customers on x.PackId equals y.PackId into ys
+                    from y in db.Customers.DefaultIfEmpty()
+                    select new {Category = x.PackId, SubCategory = y.FirstName};
+
+                //cross join
+                var CrossJoin =
+                    from x in db.Packages
+                    from y in db.Customers
+                    select new {var1 = x.PackId, var2 = y.FirstName};
+
                 Console.WriteLine("1.	Display the lowest last name alphabetically (Customers table)");
                 Console.WriteLine(db.Customers.Max(x => x.LastName));
 
@@ -63,11 +75,6 @@ namespace WEB
                 var v3 = (from x in db.Customers
                           orderby x.LastName
                           select (x.LastName)).Take(1);
-
-                foreach (var v in v2)
-                {
-                    Console.WriteLine(v);
-                }
 
                 //----------
                 Console.WriteLine("2.	Display the average monthly payment (Packages table).");
@@ -120,25 +127,7 @@ namespace WEB
                 var v12 = db.Customers.Average(x => x.MonthlyDiscount);
                 var v13 = db.Customers.Min(x => x.MonthlyDiscount);
                 var v14 = db.Customers.Max(x => x.MonthlyDiscount);
-                var hzc = db.Customers.GroupBy(x => x.CustomerId).Select(x => new
-                {
-                    MinMontli = x.Min(p => p.MonthlyDiscount),
-                    Max = x.Max(p => p.MonthlyDiscount),
 
-                    //MinMontly = x.
-
-                });
-
-                var hzsc = db.Customers.Select(x=> new
-                {
-                    min = x.MonthlyDiscount.Value
-                });
-
-                //                var nnn = db.Customers.Select(x => new
-                //                {
-                //                    AvgMontlyDiscount = x.
-                //                });
-                Console.WriteLine($"{v12}, {v13}, {v14}");
 
                 //========================================================================================================
                 Console.WriteLine("1.	Display the state and the number of customers for each state (Customers table).");
@@ -184,18 +173,9 @@ namespace WEB
                     SectorsNumber = x.Key,
                     HighMontlyPayment = x.Max(y => y.MonthlyPayment)
                 });
-                foreach (var v in v18)
-                {
-                    Console.WriteLine($"{v.SectorsNumber}, {v?.HighMontlyPayment}");
-                }
+
                 //================
-
-                Console.WriteLine("6.	Display the package number and the average monthly discount for each package.");
-                
-                /////////////
                 //lEFTjOIN
-
-
                 var LeftJoin = from x in db.Packages
                     join y in db.Customers on x.PackId equals y.PackId into ys
                     from y in db.Customers.DefaultIfEmpty()
