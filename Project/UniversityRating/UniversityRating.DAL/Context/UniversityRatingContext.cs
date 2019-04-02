@@ -33,7 +33,7 @@ namespace UniversityRating.DAL.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Data Source=CRISTIAN\SQLEXPRESS;Initial Catalog=UniversityRating;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                    @"Data Source=MDDSK40062\SQLEXPRESS;Initial Catalog=UniversityRating;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniversityRating.DAL.Context;
 
 namespace UniversityRating.DAL.Migrations
 {
     [DbContext(typeof(UniversityRatingContext))]
-    partial class UniversityRatingContextModelSnapshot : ModelSnapshot
+    [Migration("20190402072644_m0")]
+    partial class m0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

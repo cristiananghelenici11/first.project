@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityRating.BLL", "Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityRating.DAL", "UniversityRating.DAL\UniversityRating.DAL.csproj", "{8922C98C-D695-4786-85B2-8AAC45585E06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityRating.WEB", "UniversityRating.WEB\UniversityRating.WEB.csproj", "{A7FAF6EB-A34D-4B75-B6D7-46E7FC99B117}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{8922C98C-D695-4786-85B2-8AAC45585E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8922C98C-D695-4786-85B2-8AAC45585E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8922C98C-D695-4786-85B2-8AAC45585E06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7FAF6EB-A34D-4B75-B6D7-46E7FC99B117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7FAF6EB-A34D-4B75-B6D7-46E7FC99B117}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7FAF6EB-A34D-4B75-B6D7-46E7FC99B117}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7FAF6EB-A34D-4B75-B6D7-46E7FC99B117}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

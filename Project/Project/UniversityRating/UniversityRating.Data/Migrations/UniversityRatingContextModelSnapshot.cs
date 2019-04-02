@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UniversityRating.DAL.Context;
+using UniversityRating.Data.Context;
 
-namespace UniversityRating.DAL.Migrations
+namespace UniversityRating.Data.Migrations
 {
     [DbContext(typeof(UniversityRatingContext))]
     partial class UniversityRatingContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace UniversityRating.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.Comment", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Comment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,29 +51,7 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.CourseTeachers", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("CourseId");
-
-                    b.Property<long?>("TeacherId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("TeacherId", "CourseId")
-                        .IsUnique()
-                        .HasName("UK_CourseTeachers")
-                        .HasFilter("[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL");
-
-                    b.ToTable("CourseTeachers");
-                });
-
-            modelBuilder.Entity("UniversityRating.DAL.Models.Courses", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Course", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +78,29 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.Faculties", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CourseTeacher", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("CourseId");
+
+                    b.Property<long?>("TeacherId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("TeacherId", "CourseId")
+                        .IsUnique()
+                        .HasName("UK_CourseTeachers")
+                        .HasFilter("[TeacherId] IS NOT NULL AND [CourseId] IS NOT NULL");
+
+                    b.ToTable("CourseTeachers");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Faculty", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,7 +127,7 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("Faculties");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.Marks", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Mark", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +159,7 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("Marks");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.Teachers", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Teacher", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,7 +197,7 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.University", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.University", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,7 +227,7 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("Universities");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.UniversityTeachers", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.UniversityTeacher", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -248,7 +248,7 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("UniversityTeachers");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.User", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -295,79 +295,79 @@ namespace UniversityRating.DAL.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.Comment", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Comment", b =>
                 {
-                    b.HasOne("UniversityRating.DAL.Models.Courses", "Course")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
                         .WithMany("Comments")
                         .HasForeignKey("CourseId")
                         .HasConstraintName("FK_CommentToCourses");
 
-                    b.HasOne("UniversityRating.DAL.Models.Teachers", "Teacher")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
                         .WithMany("Comments")
                         .HasForeignKey("TeacherId")
                         .HasConstraintName("FK_CommentToTeachers");
 
-                    b.HasOne("UniversityRating.DAL.Models.User", "User")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_CommentToUsers");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.CourseTeachers", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Course", b =>
                 {
-                    b.HasOne("UniversityRating.DAL.Models.Courses", "Course")
-                        .WithMany("CourseTeachers")
-                        .HasForeignKey("CourseId")
-                        .HasConstraintName("FK_CPToCourses");
-
-                    b.HasOne("UniversityRating.DAL.Models.Teachers", "Teacher")
-                        .WithMany("CourseTeachers")
-                        .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_CPToTeachers");
-                });
-
-            modelBuilder.Entity("UniversityRating.DAL.Models.Courses", b =>
-                {
-                    b.HasOne("UniversityRating.DAL.Models.Faculties", "Faculty")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Faculty", "Faculty")
                         .WithMany("Courses")
                         .HasForeignKey("FacultyId")
                         .HasConstraintName("FK_CourseToFaculty");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.Faculties", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CourseTeacher", b =>
                 {
-                    b.HasOne("UniversityRating.DAL.Models.University", "Universtity")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
+                        .WithMany("CourseTeachers")
+                        .HasForeignKey("CourseId")
+                        .HasConstraintName("FK_CPToCourses");
+
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
+                        .WithMany("CourseTeachers")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("FK_CPToTeachers");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Faculty", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.University", "Universtity")
                         .WithMany("Faculties")
                         .HasForeignKey("UniverstityId")
                         .HasConstraintName("FK_FacultyToUniversity");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.Marks", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Mark", b =>
                 {
-                    b.HasOne("UniversityRating.DAL.Models.Courses", "Course")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Course", "Course")
                         .WithMany("Marks")
                         .HasForeignKey("CourseId")
                         .HasConstraintName("FK_MarksToCourse");
 
-                    b.HasOne("UniversityRating.DAL.Models.Teachers", "Teacher")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
                         .WithMany("Marks")
                         .HasForeignKey("TeacherId")
                         .HasConstraintName("FK_MarksToTeachers");
 
-                    b.HasOne("UniversityRating.DAL.Models.User", "User")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.User", "User")
                         .WithMany("Marks")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_MarksToUsers");
                 });
 
-            modelBuilder.Entity("UniversityRating.DAL.Models.UniversityTeachers", b =>
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.UniversityTeacher", b =>
                 {
-                    b.HasOne("UniversityRating.DAL.Models.Teachers", "Teacher")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Teacher", "Teacher")
                         .WithMany("UniversityTeachers")
                         .HasForeignKey("TeacherId")
                         .HasConstraintName("FK_UPToTeachers");
 
-                    b.HasOne("UniversityRating.DAL.Models.University", "University")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.University", "University")
                         .WithMany("UniversityTeachers")
                         .HasForeignKey("UniversityId")
                         .HasConstraintName("FK_UPToUniversities");
