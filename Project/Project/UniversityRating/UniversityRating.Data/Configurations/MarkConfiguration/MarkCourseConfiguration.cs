@@ -8,9 +8,6 @@ namespace UniversityRating.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<MarkCourse> builder)
         {
-            builder.Property(e => e.Value)
-                .IsRequired();
-
             builder.HasOne(x => x.Course)
                 .WithMany(p => p.MarkCourses)
                 .HasForeignKey(d => d.CourseId)

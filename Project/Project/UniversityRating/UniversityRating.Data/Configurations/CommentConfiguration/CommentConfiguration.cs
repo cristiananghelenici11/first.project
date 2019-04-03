@@ -4,9 +4,9 @@ using UniversityRating.Data.Core.DomainModels;
 
 namespace UniversityRating.Data.Configurations
 {
-    public class CommentConfiguration : IEntityTypeConfiguration<Comment>
+    public class CommentConfiguration : IEntityTypeConfiguration<Core.DomainModels.Comment>
     {
-        public void Configure(EntityTypeBuilder<Comment> builder)
+        public void Configure(EntityTypeBuilder<Core.DomainModels.Comment> builder)
         {
             builder.Property(e => e.Message).IsRequired();
 
