@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UniversityRating.Data.Core.DomainModels;
+using UniversityRating.Data.Core.DomainModels.Identity;
 
 namespace UniversityRating.Data.Context
 {
-    public class UniversityRatingContext : DbContext
+    public class UniversityRatingContext : IdentityDbContext<User, Role, long>
     {
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CommentUniversity> CommentUniversities { get; set; }
@@ -25,20 +27,16 @@ namespace UniversityRating.Data.Context
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<University> Universities { get; set; }
         public virtual DbSet<UniversityTeacher> UniversityTeachers { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserCustomer> UserCustomers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public UniversityRatingContext(DbContextOptions<UniversityRatingContext> options) : base(options)
         {
-            //Amdaris
-            optionsBuilder.UseSqlServer(@"Data Source=MDDSK40062\SQLEXPRESS;Initial Catalog=University;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-            //home
-            //optionsBuilder.UseSqlServer(@"Data Source=CRISTIAN\SQLEXPRESS;Initial Catalog=University;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

@@ -17,6 +17,7 @@ namespace UniversityRating.Data.Core.DomainModels
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string TypeTeacher { get; set; }
 
         public virtual ICollection<CommentTeacher> CommentTeachers { get; set; }
         public virtual ICollection<CourseTeacher> CourseTeachers { get; set; }

@@ -4,9 +4,9 @@ using UniversityRating.Data.Core.DomainModels;
 
 namespace UniversityRating.Data.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<UserCustomer>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserCustomer> builder)
         {
             builder.HasIndex(e => e.Email)
                    .HasName("UK_UserEmail")
@@ -38,12 +38,12 @@ namespace UniversityRating.Data.Configurations
             builder.Property(e => e.UserName).HasMaxLength(64);
 
             builder.HasMany(x => x.Marks)
-                .WithOne(p => p.User)
+                .WithOne(p => p.UserCustomer)
                 .HasForeignKey(k => k.UserId)
                 .HasConstraintName("FK_UserToMark");
 
             builder.HasMany(x => x.Comments)
-                .WithOne(p => p.User)
+                .WithOne(p => p.UserCustomer)
                 .HasForeignKey(k => k.UserId)
                 .HasConstraintName("FK_UserToComment");
         }

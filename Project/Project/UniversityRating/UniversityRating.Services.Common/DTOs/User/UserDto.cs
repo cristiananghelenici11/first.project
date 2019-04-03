@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
+using UniversityRating.Services.Common.DTOs.Comment;
+using UniversityRating.Services.Common.DTOs.Mark;
 
-namespace UniversityRating.Data.Core.DomainModels
+namespace UniversityRating.Services.Common.DTOs.User
 {
-    public class User : Entity
+    public class UserDto
     {
-        public User()
-        {
-            Comments = new HashSet<Comment>();
-            Marks = new HashSet<Mark>();
-        }
-
+        public long Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
@@ -18,7 +15,7 @@ namespace UniversityRating.Data.Core.DomainModels
         public string Phone { get; set; }
         public string Email { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Mark> Marks { get; set; }
+        public virtual IEnumerable<CommentDto> Comments { get; set; }
+        public virtual IEnumerable<MarkDto> Marks { get; set; }
     }
 }

@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using UniversityRating.Presentation.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UniversityRating.Data.Context;
 
 namespace UniversityRating.Presentation
 {
@@ -34,13 +34,15 @@ namespace UniversityRating.Presentation
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddDbContext<UniversityRatingContext>(options =>
+                options.UseSqlServer(@"Data Source=MDDSK40062\SQLEXPRESS;Initial Catalog=University;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+//            services.AddDbContext<ApplicationDbContext>(options =>
+//                options.UseSqlServer(
+//                    Configuration.GetConnectionString("DefaultConnection")));
+//            services.AddDefaultIdentity<IdentityUser>()
+//                .AddDefaultUI(UIFramework.Bootstrap4)
+//                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
