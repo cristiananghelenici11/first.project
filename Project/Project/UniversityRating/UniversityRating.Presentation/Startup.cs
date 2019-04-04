@@ -51,7 +51,11 @@ namespace UniversityRating.Presentation
             services.AddDbContext<UniversityRatingContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
+
+//            services.AddDefaultIdentity<User>()
+//                .AddDefaultUI(UIFramework.Bootstrap4)
+//                .AddEntityFrameworkStores<UniversityRatingContext>();
+
             services.AddScoped<DbContext, UniversityRatingContext>();
             services.AddMvc();
 

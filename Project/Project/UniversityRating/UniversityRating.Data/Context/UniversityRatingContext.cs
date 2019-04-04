@@ -28,7 +28,7 @@ namespace UniversityRating.Data.Context
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<University> Universities { get; set; }
         public virtual DbSet<UniversityTeacher> UniversityTeachers { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+//        public virtual DbSet<User> Users { get; set; }
 
         public UniversityRatingContext(DbContextOptions<UniversityRatingContext> options) : base(options)
         {
