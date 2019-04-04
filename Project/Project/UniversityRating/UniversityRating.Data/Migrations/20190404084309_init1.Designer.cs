@@ -10,8 +10,8 @@ using UniversityRating.Data.Context;
 namespace UniversityRating.Data.Migrations
 {
     [DbContext(typeof(UniversityRatingContext))]
-    [Migration("20190403160333_m1")]
-    partial class m1
+    [Migration("20190404084309_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("RoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<long>", b =>
@@ -56,7 +56,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("UserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<long>", b =>
@@ -73,7 +73,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("UserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<long>", b =>
@@ -86,7 +86,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<long>", b =>
@@ -101,7 +101,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Comment", b =>
@@ -109,6 +109,8 @@ namespace UniversityRating.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("CustomerId");
 
                     b.Property<string>("Discriminator")
                         .IsRequired();
@@ -123,7 +125,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Comments");
 
@@ -178,6 +180,28 @@ namespace UniversityRating.Data.Migrations
                     b.ToTable("CourseTeachers");
                 });
 
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Customer", b =>
+                {
+                    b.Property<long>("Id");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(64);
+
+                    b.Property<int>("Year");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Customer");
+                });
+
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Faculty", b =>
                 {
                     b.Property<long>("Id")
@@ -227,7 +251,7 @@ namespace UniversityRating.Data.Migrations
                         .HasName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Identity.User", b =>
@@ -240,8 +264,6 @@ namespace UniversityRating.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<long?>("CustomerId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -271,9 +293,9 @@ namespace UniversityRating.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                    b.Property<int>("Year");
 
-                    b.HasIndex("CustomerId");
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -292,6 +314,8 @@ namespace UniversityRating.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long?>("CustomerId");
+
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
@@ -301,7 +325,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Marks");
 
@@ -399,53 +423,6 @@ namespace UniversityRating.Data.Migrations
                     b.ToTable("UniversityTeachers");
                 });
 
-            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.UserCustomer", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<string>("FirstName")
-                        .HasMaxLength(64);
-
-                    b.Property<long>("Idnp");
-
-                    b.Property<string>("LastName")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Password")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .IsUnicode(false);
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(64);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasName("UK_UserEmail");
-
-                    b.HasIndex("Idnp")
-                        .IsUnique()
-                        .HasName("UK_UserIdnp");
-
-                    b.HasIndex("Password")
-                        .IsUnique()
-                        .HasName("UK_UserPassword")
-                        .HasFilter("[Password] IS NOT NULL");
-
-                    b.ToTable("UserCustomers");
-                });
-
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.CommentCourse", b =>
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
@@ -488,6 +465,13 @@ namespace UniversityRating.Data.Migrations
                     b.HasIndex("UniversityId");
 
                     b.HasDiscriminator().HasValue("CommentUniversity");
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.UserCustomer", b =>
+                {
+                    b.HasBaseType("UniversityRating.Data.Core.DomainModels.Customer");
+
+                    b.HasDiscriminator().HasValue("UserCustomer");
                 });
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.MarkCourse", b =>
@@ -570,10 +554,9 @@ namespace UniversityRating.Data.Migrations
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Comment", b =>
                 {
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.UserCustomer", "UserCustomer")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Customer", "Customer")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK_UserToComment")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -610,20 +593,11 @@ namespace UniversityRating.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Identity.User", b =>
-                {
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.UserCustomer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Mark", b =>
                 {
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.UserCustomer", "UserCustomer")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Customer", "Customer")
                         .WithMany("Marks")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK_UserToMark")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -675,6 +649,14 @@ namespace UniversityRating.Data.Migrations
                         .WithMany("CommentUniversities")
                         .HasForeignKey("UniversityId")
                         .HasConstraintName("FK_CommentUniversitiesToUniversity")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.UserCustomer", b =>
+                {
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.Identity.User", "User")
+                        .WithOne("Customer")
+                        .HasForeignKey("UniversityRating.Data.Core.DomainModels.UserCustomer", "Id")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

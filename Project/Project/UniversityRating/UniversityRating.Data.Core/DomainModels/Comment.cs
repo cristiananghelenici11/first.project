@@ -7,6 +7,6 @@
 
         public long UserId { get; set; }
 
-        public virtual UserCustomer UserCustomer { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

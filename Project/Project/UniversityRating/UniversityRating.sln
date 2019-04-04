@@ -21,11 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityRating.Services.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityRating.Presentation", "UniversityRating.Presentation\UniversityRating.Presentation.csproj", "{FEB5BA00-11C7-468B-947D-0ED63DE51ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityRating.Services.Common", "UniversityRating.Services.Common\UniversityRating.Services.Common.csproj", "{D6491D81-7DB4-4DC5-BFE1-7850986E05B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityRating.Services.Common", "UniversityRating.Services.Common\UniversityRating.Services.Common.csproj", "{D6491D81-7DB4-4DC5-BFE1-7850986E05B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{EDEA0DED-9F6B-42EA-94FD-0EC890620DCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityRating.Infrastructure", "UniversityRating.Infrastructure\UniversityRating.Infrastructure.csproj", "{C94B4C46-309A-4D28-ABDD-903F112B3C9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityRating.Infrastructure", "UniversityRating.Infrastructure\UniversityRating.Infrastructure.csproj", "{C94B4C46-309A-4D28-ABDD-903F112B3C9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

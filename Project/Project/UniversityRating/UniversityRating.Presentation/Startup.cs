@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UniversityRating.Data.Context;
+using UniversityRating.Data.Core.DomainModels.Identity;
 
 namespace UniversityRating.Presentation
 {
@@ -28,14 +29,15 @@ namespace UniversityRating.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+//            services.Configure<CookiePolicyOptions>(options =>
+//            {
+//                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+//                options.CheckConsentNeeded = context => true;
+//                options.MinimumSameSitePolicy = SameSiteMode.None;
+//            });
+
             services.AddDbContext<UniversityRatingContext>(options =>
-                options.UseSqlServer(@"Data Source=MDDSK40062\SQLEXPRESS;Initial Catalog=University;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 //            services.AddDbContext<ApplicationDbContext>(options =>
 //                options.UseSqlServer(
@@ -44,7 +46,27 @@ namespace UniversityRating.Presentation
 //                .AddDefaultUI(UIFramework.Bootstrap4)
 //                .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddIdentity<User, Role>(opt =>
+                {
+                    opt.Password.RequiredLength = 6;
+                    opt.Password.RequireDigit = false;
+                    opt.Password.RequireLowercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                })
+                .AddEntityFrameworkStores<UniversityRatingContext>()
+                .AddDefaultTokenProviders();
+               
+//            services.AddAuthentication().AddFacebook(facebookOptions =>
+//            {
+//                facebookOptions.AppId = "626492187709103";
+//                facebookOptions.AppSecret = "60d9f4cdc0059c33b06daf1eaed953ed";
+//            });
+
+            services.AddScoped<DbContext, UniversityRatingContext>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +74,7 @@ namespace UniversityRating.Presentation
         {
             if (env.IsDevelopment())
             {
+                app.UseMvc();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
@@ -65,9 +88,7 @@ namespace UniversityRating.Presentation
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
             app.UseAuthentication();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

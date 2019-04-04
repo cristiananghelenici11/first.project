@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +28,7 @@ namespace UniversityRating.Data.Context
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<University> Universities { get; set; }
         public virtual DbSet<UniversityTeacher> UniversityTeachers { get; set; }
-        public virtual DbSet<UserCustomer> UserCustomers { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         public UniversityRatingContext(DbContextOptions<UniversityRatingContext> options) : base(options)
         {
@@ -43,6 +44,29 @@ namespace UniversityRating.Data.Context
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            modelBuilder.Entity<UserCustomer>()
+                .HasOne(e => e.User)
+                .WithOne(e => e.Customer)
+                .HasForeignKey<UserCustomer>(e => e.Id);
+
+            modelBuilder.Entity<Role>()
+                .ToTable("Roles");
+
+            modelBuilder.Entity<IdentityUserRole<long>>()
+                .ToTable("UserRoles");
+
+            modelBuilder.Entity<IdentityUserToken<long>>()
+                .ToTable("UserTokens");
+
+            modelBuilder.Entity<IdentityUserLogin<long>>()
+                .ToTable("UserLogins");
+
+            modelBuilder.Entity<IdentityUserClaim<long>>()
+                .ToTable("UserClaims");
+
+            modelBuilder.Entity<IdentityRoleClaim<long>>()
+                .ToTable("RoleClaims");
         }
 
     }
