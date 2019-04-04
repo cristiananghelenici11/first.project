@@ -28,7 +28,7 @@ namespace UniversityRating.Data.Context
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<University> Universities { get; set; }
         public virtual DbSet<UniversityTeacher> UniversityTeachers { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         public UniversityRatingContext(DbContextOptions<UniversityRatingContext> options) : base(options)
         {
@@ -45,10 +45,8 @@ namespace UniversityRating.Data.Context
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            modelBuilder.Entity<UserCustomer>()
-                .HasOne(e => e.User)
-                .WithOne(e => e.Customer)
-                .HasForeignKey<UserCustomer>(e => e.Id);
+            modelBuilder.Entity<User>()
+                .ToTable("Users");
 
             modelBuilder.Entity<Role>()
                 .ToTable("Roles");
