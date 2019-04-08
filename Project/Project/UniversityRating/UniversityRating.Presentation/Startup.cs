@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UniversityRating.Data.Context;
 using UniversityRating.Data.Core.DomainModels.Identity;
+using UniversityRating.Presentation.Services;
 
 namespace UniversityRating.Presentation
 {
@@ -37,16 +39,18 @@ namespace UniversityRating.Presentation
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddIdentity<User, Role>(opt =>
-            {
-                opt.Password.RequiredLength = 6;
-                opt.Password.RequireDigit = false;
-                opt.Password.RequireLowercase = false;
-                opt.Password.RequireNonAlphanumeric = false;
-                opt.Password.RequireUppercase = false;
-                opt.Password.RequireNonAlphanumeric = false;
-            })
+                {
+                    opt.Password.RequiredLength = 6;
+                    opt.Password.RequireDigit = false;
+                    opt.Password.RequireLowercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<UniversityRatingContext>()
                 .AddDefaultTokenProviders();
+
+                services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
 
             services.AddDbContext<UniversityRatingContext>(options =>
                 options.UseSqlServer(
@@ -59,6 +63,8 @@ namespace UniversityRating.Presentation
             services.AddScoped<DbContext, UniversityRatingContext>();
             services.AddMvc();
 
+//            services.AddTransient<IEmailSender,EmailSender>();
+//            services.AddTransient<IEmailSender,YourSmsSender>();
 
 //            services.AddAuthentication().AddFacebook(facebookOptions =>
 //            {
