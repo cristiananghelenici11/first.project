@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using UniversityRating.Data.Abstractions.Models;
 using UniversityRating.Data.Core.DomainModels;
 using UniversityRating.Services.Common.DTOs.Comment;
 using UniversityRating.Services.Common.DTOs.Mark;
+using UniversityRating.Services.Common.DTOs.Teacher;
 
 namespace UniversityRating.Infrastructure.Profiles
 {
@@ -62,6 +64,8 @@ namespace UniversityRating.Infrastructure.Profiles
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Value))
                 .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User))
                 .ForMember(dest => dest.CourseTeacher, opt => opt.MapFrom(src => src.CourseTeacher));
+
+            CreateMap<TopTeacher, TopTeacherDto>();
         }
         
     }

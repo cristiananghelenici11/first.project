@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UniversityRating.Services.Common\UniversityRating.Services.Common.csproj" />
+  </ItemGroup>
+
 </Project>

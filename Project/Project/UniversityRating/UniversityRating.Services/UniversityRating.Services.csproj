@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UniversityRating.Data.Abstractions\UniversityRating.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\UniversityRating.Data.Core\UniversityRating.Data.Core.csproj" />
+    <ProjectReference Include="..\UniversityRating.Services.Abstractions\UniversityRating.Services.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

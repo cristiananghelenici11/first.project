@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UniversityRating.Data.Abstractions\UniversityRating.Data.Abstractions.csproj" />
     <ProjectReference Include="..\UniversityRating.Data.Core\UniversityRating.Data.Core.csproj" />
+    <ProjectReference Include="..\UniversityRating.Presentation\UniversityRating.Presentation.csproj" />
     <ProjectReference Include="..\UniversityRating.Services.Common\UniversityRating.Services.Common.csproj" />
   </ItemGroup>
 

@@ -18,6 +18,5 @@ namespace UniversityRating.Data.Core.DomainModels.Identity
 
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Mark> Marks { get; set; }
-
     }
 }

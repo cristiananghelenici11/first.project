@@ -8,20 +8,20 @@ namespace UniversityRating.Data.Abstractions.Repositories
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
-        Task AddAsync(TEntity entity);
+        void Add(TEntity entity);
 
-        Task AddRangeAsync(IEnumerable<TEntity> entities);
+        void AddRange(IEnumerable<TEntity> entities);
 
-        Task<TEntity> GetByIdAsync(long id);
+        TEntity GetById(long id);
 
-        Task<TEntity> GetByIdAsync(long id, ISpecification<TEntity> specification);
+        TEntity GetById(long id, ISpecification<TEntity> specification);
 
-        Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification = null);
+        IEnumerable<TEntity> Find(ISpecification<TEntity> specification = null);
 
         void Remove(TEntity entity);
 
         void RemoveRange(IEnumerable<TEntity> entities);
 
-        Task<int> SaveChangesAsync();
+        int SaveChanges();
     }
 }

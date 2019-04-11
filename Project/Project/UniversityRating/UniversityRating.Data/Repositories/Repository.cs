@@ -20,7 +20,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             _dbSet = context.Set<TEntity>();
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async void Add(TEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(paramName: nameof(entity));
@@ -28,7 +28,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        public async void AddRange(IEnumerable<TEntity> entities)
         {
             if (entities == null)
                 throw new ArgumentNullException(paramName: nameof(entities));
@@ -36,23 +36,23 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public async Task<TEntity> GetByIdAsync(long id)
+        public TEntity GetById(long id)
         {
-            return await _dbSet.FindAsync(id);
+            return _dbSet.Find(id);
         }
 
-        public async Task<TEntity> GetByIdAsync(long id, ISpecification<TEntity> specification)
+        public TEntity GetById(long id, ISpecification<TEntity> specification)
         {
             IQueryable<TEntity> query = BuildQuery(specification);
 
-            return await query.FirstOrDefaultAsync(x => x.Id == id);
+            return query.FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification = null)
+        public IEnumerable<TEntity> Find(ISpecification<TEntity> specification = null)
         {
             IQueryable<TEntity> query = BuildQuery(specification);
 
-            return await query.ToListAsync();
+            return query.ToList();
         }
 
         public void Remove(TEntity entity)
@@ -71,12 +71,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             _dbSet.RemoveRange(entities);
         }
 
-        public async Task<int> SaveChangesAsync()
+        public int SaveChanges()
         {
-            return await _context.SaveChangesAsync();
+            return _context.SaveChanges();
         }
 
-        protected IQueryable<TEntity> BuildQuery(ISpecification<TEntity> specification)
+        protected IQueryable<TEntity> BuildQuery(ISpecification<TEntity> specification = null)
         {
             IQueryable<TEntity> query = _dbSet.AsNoTracking();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -14,9 +15,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UniversityRating.Data.Abstractions.Interfaces;
+using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Context;
 using UniversityRating.Data.Core.DomainModels.Identity;
+using UniversityRating.Data.Repositories;
 using UniversityRating.Presentation.Services;
+using UniversityRating.Services;
+using UniversityRating.Services.Abstractions;
 
 namespace UniversityRating.Presentation
 {
@@ -60,7 +66,15 @@ namespace UniversityRating.Presentation
 //                .AddDefaultUI(UIFramework.Bootstrap4)
 //                .AddEntityFrameworkStores<UniversityRatingContext>();
 
+            services.AddAutoMapper();
+
             services.AddScoped<DbContext, UniversityRatingContext>();
+            services.AddTransient(typeof(ISpecification<>), typeof(Specification<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<ITeacherService, TeacherService>();
+
+
             services.AddMvc();
 
 //            services.AddTransient<IEmailSender,EmailSender>();
