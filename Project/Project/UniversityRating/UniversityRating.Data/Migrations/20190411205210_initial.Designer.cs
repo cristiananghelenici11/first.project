@@ -10,8 +10,8 @@ using UniversityRating.Data.Context;
 namespace UniversityRating.Data.Migrations
 {
     [DbContext(typeof(UniversityRatingContext))]
-    [Migration("20190404145119_m1")]
-    partial class m1
+    [Migration("20190411205210_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

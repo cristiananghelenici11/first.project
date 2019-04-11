@@ -4,6 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UniversityRating.Data.Core.DomainModels;
@@ -32,7 +33,7 @@ namespace UniversityRating.Data.Context
 
         public UniversityRatingContext(DbContextOptions<UniversityRatingContext> options) : base(options)
         {
-        }
+        }        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -67,5 +68,15 @@ namespace UniversityRating.Data.Context
                 .ToTable("RoleClaims");
         }
 
+    }
+
+    public class ToDoContextFactory : IDesignTimeDbContextFactory<UniversityRatingContext>
+    {
+        public UniversityRatingContext CreateDbContext(string[] args)
+        {
+            var builder = new DbContextOptionsBuilder<UniversityRatingContext>();
+            builder.UseSqlServer("Data Source=CRISTIAN\\SQLEXPRESS;Initial Catalog=University;Integrated Security=True");
+            return new UniversityRatingContext(builder.Options);
+        }
     }
 }
