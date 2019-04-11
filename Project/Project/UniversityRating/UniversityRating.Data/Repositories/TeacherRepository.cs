@@ -22,7 +22,7 @@ namespace UniversityRating.Data.Repositories
                     LastName = t.LastName,
                     MarkAvg = t.MarkTeachers.Any() ? t.MarkTeachers.AsQueryable().Average(x => x.Value) : 0
                 })
-                .OrderBy(tt => tt.MarkAvg)
+                .OrderByDescending(tt => tt.MarkAvg)
                 .Take(numberOfTeachers)
                 .ToList();
         }

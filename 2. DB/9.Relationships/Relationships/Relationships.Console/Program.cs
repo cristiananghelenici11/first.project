@@ -20,51 +20,60 @@ namespace Relationships
         {
             using (var db = new ApplicationContext())
             {
-                var university = new University()
-                {
-                    Address = "grgter",
-                    Age = 45,
-                    Contact = "35345",
-                    Name = "utm"
-                };
-                var student = new Student()
-                {
-                    FirstName = "Cristian",
-                    LastName = "Anghelenici",
-                    Idnp = 1225278372,
-                    Phone = 232433,
-                    Email = "ere",
-                    UniversityId = 1
-                };
-                var studentRepository = new Repository<Student>(db);
+//                var university = new University()
+//                {
+//                    Address = "grgter",
+//                    Age = 45,
+//                    Contact = "35345",
+//                    Name = "utm"
+//                };
+//                var student = new Student()
+//                {
+//                    FirstName = "Cristian",
+//                    LastName = "Anghelenici",
+//                    Idnp = 1225278372,
+//                    Phone = 232433,
+//                    Email = "ere",
+//                    UniversityId = 1
+//                };
+//                var studentRepository = new Repository<Student>(db);
+//
+//                //Console.WriteLine(db.Entry(new University()).State);
+//                //studentRepository.Create(student);
+//                var address = new Address()
+//                {
+//                    City = "sfgsd",
+//                    Street = "erwer",
+//                    ZipCode = "235",
+//                    StudentId = 2
+//                };
+//                var addressRepository = new Repository<Address>(db);
+//                //addressRepository.Create(address);
+//
 
-                //Console.WriteLine(db.Entry(new University()).State);
-                //studentRepository.Create(student);
-                var address = new Address()
+                db.Add(new MarkTeacher()
                 {
-                    City = "sfgsd",
-                    Street = "erwer",
-                    ZipCode = "235",
-                    StudentId = 2
-                };
-                var addressRepository = new Repository<Address>(db);
-                //addressRepository.Create(address);
+                    Teacher = new Teacher(){FirstName = "Anghelenici", LastName = "Cristian"},
+                    Value = 8
+                });
+                db.SaveChanges();
+
 
             }
+//
+//            var client1 = new Thread(ChangeZipCode);
+//            client1.Start();
+//
+//            var client2 = new Thread(ChangeZipCode);
+//            client2.Start();
+//
+//            var dbContext = new ApplicationContext();
 
-            var client1 = new Thread(ChangeZipCode);
-            client1.Start();
-
-            var client2 = new Thread(ChangeZipCode);
-            client2.Start();
-
-            var dbContext = new ApplicationContext();
-
-            //Polymorphic query 
-            var query = dbContext.Marks.ToList();
-
-            //Non-polymorphic query 
-            var query2 = dbContext.Marks.OfType<MarkCourse>().ToList();
+//            //Polymorphic query 
+//            var query = dbContext.Marks.ToList();
+//
+//            //Non-polymorphic query 
+//            var query2 = dbContext.Marks.OfType<MarkCourse>().ToList();
 
             //var teacher = new Teacher(){FirstName = "Anghelenici", LastName = "Cristian"};
 
@@ -76,7 +85,7 @@ namespace Relationships
 //                Console.WriteLine($"{markCourse.Id}, {markCourse.Value}");
 //            }
 
-            Selecting();
+            //Selecting();
             Console.WriteLine("....");
             Console.ReadKey();
         }

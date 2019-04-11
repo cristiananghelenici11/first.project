@@ -72,7 +72,9 @@ namespace UniversityRating.Presentation
             services.AddTransient(typeof(ISpecification<>), typeof(Specification<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IUniversityRepository, UniversityRepository>();
             services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<IUniversityService, UniversityService>();
 
 
             services.AddMvc();
