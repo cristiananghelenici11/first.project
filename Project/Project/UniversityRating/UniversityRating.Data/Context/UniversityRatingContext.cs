@@ -70,13 +70,14 @@ namespace UniversityRating.Data.Context
 
     }
 
-    public class ToDoContextFactory : IDesignTimeDbContextFactory<UniversityRatingContext>
-    {
-        public UniversityRatingContext CreateDbContext(string[] args)
-        {
-            var builder = new DbContextOptionsBuilder<UniversityRatingContext>();
-            builder.UseSqlServer("Data Source=CRISTIAN\\SQLEXPRESS;Initial Catalog=University;Integrated Security=True");
-            return new UniversityRatingContext(builder.Options);
-        }
-    }
+//    public class ToDoContextFactory : IDesignTimeDbContextFactory<UniversityRatingContext>
+//    {
+//        public UniversityRatingContext CreateDbContext(string[] args)
+//        {
+//            var builder = new DbContextOptionsBuilder<UniversityRatingContext>();
+//            //builder.UseSqlServer("Data Source=CRISTIAN\\SQLEXPRESS;Initial Catalog=University;Integrated Security=True");
+//            builder.UseSqlServer("Data Source=MDDSK40062\\SQLEXPRESS;Initial Catalog=Student;Integrated Security=True");
+//            return new UniversityRatingContext(builder.Options);
+//        }
+//    }
 }

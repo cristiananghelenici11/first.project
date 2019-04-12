@@ -97,7 +97,7 @@
 
     <!--Navigation-->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#"><img src="/img/nuno.png"></a>
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="/img/nuno.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive">
             <span class="navbar-toggler-icon">
@@ -106,15 +106,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                
+
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Courses">Course</a>
+                @*</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#resources">Resources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#clients">Clients</a>
+                </li>*@
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                @*<li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>*@
+
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <a  class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
                     </li>
                     <li class="nav-item">
-                        <form  class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button  type="submit" class="nav-link btn btn-link">Logout</button>
+                        <form class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link">Logout</button>
                         </form>
                     </li>
 
@@ -129,25 +149,6 @@
                         <a class="nav-link" href="/Identity/Account/Register">Register</a>
                     </li>
                 }
-
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="Courses">Course</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#features">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#resources">Resources</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#clients">Clients</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
 
             </ul>
         </div>

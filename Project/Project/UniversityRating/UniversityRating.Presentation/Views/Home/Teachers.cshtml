@@ -1,0 +1,101 @@
+﻿@using UniversityRating.Presentation.Models.Teacher
+@model UniversityRating.Presentation.Models.Home.IndexViewModel
+
+@{
+    ViewData["Title"] = "Teachers";
+    Layout = "/Views/Shared/_LayoutDashboard.cshtml";
+
+}
+
+<div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Teacher</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+
+                    <li>
+                        <a href="">
+                            <i class="fa fa-search"></i>
+                            <p class="hidden-lg hidden-md">Search</p>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="">
+                            <p>Account</p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <p>Log out</p>
+                        </a>
+                    </li>
+                    <li class="separator hidden-lg hidden-md"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">List of Teachers</h4>
+                            <p class="category">Teachers of university in Moldova</p>
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Averange Mark</th>
+                                <th>Email</th>
+                                <th>Type Teacher</th>
+                                <th>University</th>
+                                </thead>
+                                <tbody>
+                                   @foreach (var teacher in Model.TeacherShows)
+                                    {
+                                    <tr>
+                                        <td>@($"{teacher.Id}")</td>
+                                        <td>@($"{teacher.FirstName} {teacher.LastName}")</td>
+                                        <td>@($"{teacher.AverangeMarks}")</td>
+                                        <td>@($"{teacher.Email}")</td>
+                                        <td>@($"{teacher.TypeTeacher}")</td>
+                                        <td>
+                                            @foreach (var university in teacher.Universities)
+                                             {
+                                                @($"{university} ")
+                                             }
+                                        </td>
+                                    </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

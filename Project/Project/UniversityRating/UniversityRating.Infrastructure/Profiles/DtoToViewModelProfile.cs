@@ -12,6 +12,7 @@ namespace UniversityRating.Infrastructure.Profiles
         {
             CreateMap<TopTeacherDto, TopTeacherViewModel>();
             CreateMap<TopUniversityDto, TopUniversityViewModel>();
+            CreateMap<TeacherShowDto, TeacherShowViewModel>();
         }
     }
 }

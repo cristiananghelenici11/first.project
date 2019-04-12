@@ -8,5 +8,6 @@ namespace UniversityRating.Presentation.Models.Home
     {
         public List<TopTeacherViewModel> TopTeachers { get; set; }
         public List<TopUniversityViewModel> TopUniversities { get; set; }
+        public List<TeacherShowViewModel> TeacherShows { get; set; }
     }
 }

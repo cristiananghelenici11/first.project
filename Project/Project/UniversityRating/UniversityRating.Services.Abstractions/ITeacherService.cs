@@ -6,5 +6,6 @@ namespace UniversityRating.Services.Abstractions
     public interface ITeacherService
     {
         List<TopTeacherDto> GetTopTeachers(int numberOfTeachers);
+        List<TeacherShowDto> GetAllTeachers();
     }
 }

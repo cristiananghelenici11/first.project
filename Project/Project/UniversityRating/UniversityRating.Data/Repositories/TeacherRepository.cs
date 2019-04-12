@@ -13,6 +13,22 @@ namespace UniversityRating.Data.Repositories
         {
         }
 
+        public List<TeacherShow> GetAllTeachers()
+        {
+            return BuildQuery()
+                .Select(t => new TeacherShow()
+                {
+                    Id = t.Id,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName,
+                    Email = t.Email,
+                    TypeTeacher = t.TypeTeacher,
+                    AverangeMarks = t.MarkTeachers.Any() ? t.MarkTeachers.Average(x => x.Value) : 0,
+                    Universities = t.UniversityTeachers.Select(x => x.University.Name).ToList()
+                })
+                .ToList();
+        }
+
         public List<TopTeacher> GetTopTeachers(int numberOfTeachers)
         {
             return BuildQuery()
