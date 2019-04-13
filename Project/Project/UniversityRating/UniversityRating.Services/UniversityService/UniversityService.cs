@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using UniversityRating.Data.Abstractions.Models;
+using UniversityRating.Data.Abstractions.Models.University;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.University;
 
-namespace UniversityRating.Services
+namespace UniversityRating.Services.UniversityService
 {
     public class UniversityService : IUniversityService
     {
@@ -17,6 +17,15 @@ namespace UniversityRating.Services
             _universityRepository = universityRepository;
             _mapper = mapper;
         }
+
+
+        public List<UniversityShowDto> GetAllUniversities()
+        {
+            List<UniversityShow> universityShows = _universityRepository.GetAllUniversities();
+
+            return _mapper.Map<List<UniversityShow>, List<UniversityShowDto>>(universityShows);
+        }
+
 
         public List<TopUniversityDto> GetTopUniversities(int numberOfUniversities)
         {

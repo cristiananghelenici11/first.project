@@ -1,4 +1,7 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using UniversityRating.Data.Core.DomainModels.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "About";
     Layout = "/Views/Shared/_LayoutDashboard.cshtml";
@@ -29,18 +32,31 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="">
-                            <p>Account</p>
-                        </a>
-                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li>
+                            <button type="submit" class="nav-link btn btn-link text-dark">
+                                <a asp-controller="Home" asp-action="User">Account</a>
+                            </button>
+                        </li>
 
-                    <li>
-                        <a href="#">
-                            <p>Log out</p>
-                        </a>
-                    </li>
-                    <li class="separator hidden-lg hidden-md"></li>
+                        <li>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>                        
+                        
+                    }
+                    else
+                    {
+                        <li >
+                            <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+
+                        </li>
+                        <li >
+                            <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -73,7 +89,7 @@
                                 <p class="category">Quote</p>
                                 <blockquote>
                                     <p>
-                                        Their endowment by a prince or monarch and their role in training government officials made early Mediterranean universities similar to Islamic madrasas, although madrasas were generally smaller, and individual teachers, rather than the madrasa itself, granted the license or degree.[20] Scholars like Arnold H. 
+                                        Their endowment by a prince or monarch and their role in training government officials made early Mediterranean universities similar to Islamic madrasas, although madrasas were generally smaller, and individual teachers, rather than the madrasa itself, granted the license or degree.[20] Scholars like Arnold H.
                                         Green and Hossein Nasr have argued that starting in the 10th century, some medieval Islamic madrasas became universities.[21][22] However, scholars like George Makdisi, Toby Huff and Norman Daniel[23] argue that the European university has no parallel in the medieval Islamic world.
                                     </p>
                                     <small>
@@ -90,8 +106,10 @@
                             </div>
 
                             <div class="typo-line">
-                                <h2><p class="category">Small Tag</p>Early modern universities
-                                    <br><small>".small" is a tag for the headers</small> </h2>
+                                <h2>
+                                    <p class="category">Small Tag</p>Early modern universities
+                                    <br><small>".small" is a tag for the headers</small>
+                                </h2>
                             </div>
 
 

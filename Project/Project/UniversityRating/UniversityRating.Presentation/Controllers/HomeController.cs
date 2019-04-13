@@ -43,9 +43,15 @@ namespace UniversityRating.Presentation.Controllers
         }        
 
         [HttpGet]
-        public IActionResult Courses()
+        public IActionResult Universities()
         {
-            return View();
+            List<UniversityShowDto> universityShowViewModels = _universityService.GetAllUniversities();
+
+            return View(new IndexViewModel
+            {
+                UniversityShowViewModels =
+                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels)
+            });
         }
 
         [HttpGet]
@@ -59,7 +65,7 @@ namespace UniversityRating.Presentation.Controllers
         {
             List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
 
-            return View(new IndexViewModel()
+            return View(new IndexViewModel
             {
                 TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(teacherShowDtos)
             });
@@ -81,6 +87,19 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Specialties()
         {
             return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Feedback()
+        {
+            List<UniversityShowDto> universityShowViewModels = _universityService.GetAllUniversities();
+
+            return View(new IndexViewModel
+            {
+                UniversityShowViewModels =
+                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels)
+            });
         }
 
         public IActionResult Privacy()

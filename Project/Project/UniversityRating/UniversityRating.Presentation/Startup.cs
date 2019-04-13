@@ -23,6 +23,7 @@ using UniversityRating.Data.Repositories;
 using UniversityRating.Presentation.Services;
 using UniversityRating.Services;
 using UniversityRating.Services.Abstractions;
+using UniversityRating.Services.UniversityService;
 
 namespace UniversityRating.Presentation
 {
@@ -56,7 +57,7 @@ namespace UniversityRating.Presentation
                 .AddEntityFrameworkStores<UniversityRatingContext>()
                 .AddDefaultTokenProviders();
 
-                services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
+                services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddDbContext<UniversityRatingContext>(options =>
                 options.UseSqlServer(

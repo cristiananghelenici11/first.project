@@ -1,4 +1,7 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using UniversityRating.Data.Core.DomainModels.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "About";
     Layout = "/Views/Shared/_LayoutDashboard.cshtml";
@@ -31,17 +34,31 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="">
-                            <p>Account</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <p>Log out</p>
-                        </a>
-                    </li>
-                    <li class="separator hidden-lg hidden-md"></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li>
+                            <button type="submit" class="nav-link btn btn-link text-dark">
+                                <a asp-controller="Home" asp-action="User">Account</a>
+                            </button>
+                        </li>
+
+                        <li>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>                        
+                        
+                    }
+                    else
+                    {
+                        <li >
+                            <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+
+                        </li>
+                        <li >
+                            <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

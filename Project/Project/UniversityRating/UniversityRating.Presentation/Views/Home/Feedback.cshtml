@@ -1,11 +1,12 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿
+@using Microsoft.AspNetCore.Identity
 @using UniversityRating.Data.Core.DomainModels.Identity
-@using UniversityRating.Presentation.Models.Teacher
-@model UniversityRating.Presentation.Models.Home.IndexViewModel
+@using UniversityRating.Presentation.Models.University
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@model UniversityRating.Presentation.Models.Home.IndexViewModel
 @{
-    ViewData["Title"] = "Teachers";
+    ViewData["Title"] = "Feedback";
     Layout = "/Views/Shared/_LayoutDashboard.cshtml";
 
 }
@@ -20,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Teacher</a>
+                <a class="navbar-brand" href="#">Feedback</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
@@ -46,16 +47,16 @@
                             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                             </form>
-                        </li>                        
-                        
+                        </li>
+
                     }
                     else
                     {
-                        <li >
+                        <li>
                             <a asp-area="Identity" asp-page="/Account/Register">Register</a>
 
                         </li>
-                        <li >
+                        <li>
                             <a asp-area="Identity" asp-page="/Account/Login">Login</a>
                         </li>
                     }
@@ -63,18 +64,34 @@
             </div>
         </div>
     </nav>
+</div>
 
-    <div class="content">
+
+
+@*<div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
+
+
+
                         <div class="header">
                             <h4 class="title">List of Teachers</h4>
                             <p class="category">Teachers of university in Moldova</p>
                         </div>
                         <div class="content table-responsive table-full-width">
+
+
+
                             <table class="table table-hover table-striped">
+                                <select>
+                                    <option value="volvo">Volvo</option>
+                                    <option value="saab">Saab</option>
+                                    <option value="mercedes">Mercedes</option>
+                                    <option value="audi">Audi</option>
+                                </select>
+
                                 <thead>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -84,22 +101,6 @@
                                 <th>University</th>
                                 </thead>
                                 <tbody>
-                                    @foreach (var teacher in Model.TeacherShows)
-                                    {
-                                        <tr>
-                                            <td>@($"{teacher.Id}")</td>
-                                            <td>@($"{teacher.FirstName} {teacher.LastName}")</td>
-                                            <td>@($"{teacher.AverangeMarks}")</td>
-                                            <td>@($"{teacher.Email}")</td>
-                                            <td>@($"{teacher.TypeTeacher}")</td>
-                                            <td>
-                                                @foreach (var university in teacher.Universities)
-                                                {
-                                                    @($"{university} ")
-                                                }
-                                            </td>
-                                        </tr>
-                                    }
 
                                 </tbody>
                             </table>
@@ -112,6 +113,40 @@
 
 
             </div>
+        </div>
+    </div>*@
+
+
+
+
+<div class="main-panel">
+    <div class="content">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">University Comments</h4>
+                                <p class="category">choose which university to view the comment </p>
+                            </div>
+                            <div class="content all-icons">
+                                @*<div class="row">*@
+
+                                <select>
+                                   @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                    {
+                                        <option value="@(university.Name)">@($"{university.Name}")</option>
+                                    }
+                                </select>
+                                @*</div>*@
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

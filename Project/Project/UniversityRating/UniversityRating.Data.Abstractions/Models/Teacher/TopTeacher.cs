@@ -1,4 +1,4 @@
-﻿namespace UniversityRating.Data.Abstractions.Models
+﻿namespace UniversityRating.Data.Abstractions.Models.Teacher
 {
     public class TopTeacher
     {

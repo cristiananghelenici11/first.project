@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using UniversityRating.Data.Abstractions.Models;
+using UniversityRating.Data.Abstractions.Models.Teacher;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
 

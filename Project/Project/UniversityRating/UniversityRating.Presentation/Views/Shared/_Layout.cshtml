@@ -109,35 +109,35 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="Courses">Course</a>
-                @*</li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#features">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#resources">Resources</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#clients">Clients</a>
-                </li>*@
+                    <a class="nav-link" asp-controller="Home" asp-action="Universities">Universities</a>
+                    @*</li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#resources">Resources</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#clients">Clients</a>
+                        </li>*@
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contact</a>
                 </li>
                 @*<li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>*@
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>*@
 
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-                    </li>
-                    <li class="nav-item">
-                        <form class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button type="submit" class="nav-link btn btn-link">Logout</button>
-                        </form>
+                        <a class="nav-link" asp-controller="Home" asp-action="User">Account</a>
                     </li>
 
+                    <li class="nav-item">
+                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button class="nav-link btn">Logout</button>
+                        </form>
+                    </li>
                 }
                 else
                 {

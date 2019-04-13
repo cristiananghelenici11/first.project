@@ -1,4 +1,5 @@
 ﻿@using UniversityRating.Presentation.Models.Teacher
+@using UniversityRating.Presentation.Models.University
 @model UniversityRating.Presentation.Models.Home.IndexViewModel
 
 @{
@@ -25,7 +26,7 @@
 <div class="caption text-center">
     <h1>Welcome to University Rating</h1>
     <h3>Choose the Best University</h3>
-    <a class="btn btn-outline-light  btn-lg" asp-controller="Home" asp-action="Courses"> Get Start </a>
+    <a class="btn btn-outline-light  btn-lg" asp-controller="Home" asp-action="Universities"> Get Start </a>
 </div>
 
 <!--End Landing Page Section-->
@@ -114,7 +115,7 @@
                 <h3 class="heading">Top Universities</h3>
                 <div class="heading-underline"></div>
             </div>
-        @foreach (var university in Model.TopUniversities)
+       @foreach (TopUniversityViewModel university in Model.TopUniversities)
         {
             <div class="col-md-4">
                 <h3>@($"{university.Name} ")</h3>

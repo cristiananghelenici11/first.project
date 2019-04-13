@@ -1,6 +1,13 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using UniversityRating.Data.Core.DomainModels.Identity
+@using UniversityRating.Presentation.Models.Teacher
+@using UniversityRating.Presentation.Models.University
+@model UniversityRating.Presentation.Models.Home.IndexViewModel
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 @{
-    ViewData["Title"] = "Courses";
+    ViewData["Title"] = "Universities";
     Layout = "/Views/Shared/_LayoutDashboard.cshtml";
 
 }
@@ -28,68 +35,44 @@
                     </li>
                 </ul>
 
-
-
-                @*@if (SignInManager.IsSignedIn(User))
+                <ul class="nav navbar-nav navbar-right">
+                   @if (SignInManager.IsSignedIn(User))
                     {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+                        <li>
+                            <button type="submit" class="nav-link btn btn-link text-dark">
+                                <a asp-controller="Home" asp-action="User">Account</a>
+                            </button>
                         </li>
-                        <li class="nav-item">
-                            <form class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" class="nav-link btn btn-link">Logout</button>
+
+                        <li>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                             </form>
-                        </li>
-
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-link">Logout</button>
-                                </form>
-                            </li>
-
-                            <li>
-                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-                            </li>
-                            <li class="separator hidden-lg"></li>
-                        </ul>
-
+                        </li>                        
+                        
                     }
                     else
                     {
+                        <li >
+                            <a asp-area="Identity" asp-page="/Account/Register">Register</a>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Identity/Account/Login">Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Identity/Account/Register">Register</a>
+                        <li >
+                            <a asp-area="Identity" asp-page="/Account/Login">Login</a>
                         </li>
-                    }*@
-
-
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="">
-                            <p>Account</p>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <p>Log out</p>
-                        </a>
-                    </li>
-                    <li class="separator hidden-lg"></li>
+                    }
                 </ul>
+
             </div>
         </div>
     </nav>
 
 </div>
 
-<div class="main-panel">
+
+
+
+@*<div class="main-panel">
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -298,4 +281,47 @@
             </div>
         </div>
     </div>
+    </div>*@
+
+
+<div class="main-panel">
+    <div class="content">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">List</h4>
+                                <p class="category">choose your specialities</p>
+                            </div>
+                            <div class="content all-icons">
+                                <div class="row">
+
+                                    @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                    {
+                                        <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+                                            <div class="font-icon-detail">
+                                                <i class="pe-7s-album"></i>
+                                                <input type="text" value="@($"{university.Name}")">
+                                                <input type="text" value="@($"{university.Description}")">
+                                                <input type="text" value="Contact : @($"{university.Contact}")">
+                                                <input type="text" value="Age : @($"{university.Age}")">
+                                                <input type="text" value="AvgMark : @($"{university.AverangeMark}")">
+                                            </div>
+
+                                        </div>
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>
