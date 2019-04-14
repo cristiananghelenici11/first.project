@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using UniversityRating.Data.Abstractions.Models;
+using UniversityRating.Data.Abstractions.Models.Comment;
 using UniversityRating.Data.Abstractions.Models.Teacher;
 using UniversityRating.Data.Abstractions.Models.University;
 using UniversityRating.Data.Core.DomainModels;
@@ -19,6 +20,8 @@ namespace UniversityRating.Infrastructure.Profiles
 
             CreateMap<TopUniversity, TopUniversityDto>();
             CreateMap<UniversityShow, UniversityShowDto>();
+
+//            CreateMap<CommentUniversityShow, CommentUniversityShowDto>();
         }
         
     }

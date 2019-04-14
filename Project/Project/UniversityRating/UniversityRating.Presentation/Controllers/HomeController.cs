@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using UniversityRating.Presentation.Models;
+using UniversityRating.Presentation.Models.Comment;
 using UniversityRating.Presentation.Models.Home;
 using UniversityRating.Presentation.Models.Teacher;
 using UniversityRating.Presentation.Models.University;
 using UniversityRating.Services.Abstractions;
+using UniversityRating.Services.Common.DTOs.Comment;
 using UniversityRating.Services.Common.DTOs.Teacher;
 using UniversityRating.Services.Common.DTOs.University;
 
@@ -93,13 +95,20 @@ namespace UniversityRating.Presentation.Controllers
         [HttpGet]
         public IActionResult Feedback()
         {
-            List<UniversityShowDto> universityShowViewModels = _universityService.GetAllUniversities();
+            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
 
             return View(new IndexViewModel
             {
-                UniversityShowViewModels =
-                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels)
+                TeacherShows = 
+                    _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(teacherShowDtos)
             });
+        }
+
+        [HttpPost]
+        public JsonResult Feedback(long Id)
+        {
+            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
+            return Json(teacherShowDtos);
         }
 
         public IActionResult Privacy()

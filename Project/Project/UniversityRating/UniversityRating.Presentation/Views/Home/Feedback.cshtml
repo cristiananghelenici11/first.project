@@ -132,11 +132,10 @@
                             </div>
                             <div class="content all-icons">
                                 @*<div class="row">*@
-
-                                <select>
-                                   @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                <select id="selectBox" onchange="getComments()">
+                                    @foreach (var teacher in Model.TeacherShows)
                                     {
-                                        <option value="@(university.Name)">@($"{university.Name}")</option>
+                                        <option value="@(teacher.Id)">@($"{teacher.FirstName}")</option>
                                     }
                                 </select>
                                 @*</div>*@
@@ -150,3 +149,19 @@
         </div>
     </div>
 </div>
+
+    <script>
+        function getComments() {
+            var selectBox = document.getElementById("selectBox");
+            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+            console.log("Test " + selectedValue)
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action( "Feedback","Home")",
+                data: { "str": selectedValue },
+                success: function(data) {
+                    console.log(data)
+                }
+        });
+        }
+    </script>

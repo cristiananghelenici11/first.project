@@ -21,6 +21,7 @@ namespace UniversityRating.Data.Repositories
             return BuildQuery()
                 .Select(u => new UniversityShow()
                 {
+                    Id = u.Id,
                     Name = u.Name,
                     Description = u.Description,
                     Contact = u.Contact,

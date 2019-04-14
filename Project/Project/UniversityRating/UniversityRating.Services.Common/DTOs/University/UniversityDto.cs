@@ -17,6 +17,5 @@ namespace UniversityRating.Services.Common.DTOs.University
 
         public virtual IEnumerable<FacultyDto> Faculties { get; set; }
         public virtual IEnumerable<TeacherDto> UniversityTeachers { get; set; }
-        public virtual IEnumerable<CommentUniversityDto> CommentUniversities { get; set; }
     }
 }

@@ -23,6 +23,7 @@ using UniversityRating.Data.Repositories;
 using UniversityRating.Presentation.Services;
 using UniversityRating.Services;
 using UniversityRating.Services.Abstractions;
+using UniversityRating.Services.TeacherService;
 using UniversityRating.Services.UniversityService;
 
 namespace UniversityRating.Presentation
@@ -76,6 +77,7 @@ namespace UniversityRating.Presentation
             services.AddScoped<IUniversityRepository, UniversityRepository>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IUniversityService, UniversityService>();
+//            services.AddScoped<ICommentService, CommentService>();
 
 
             services.AddMvc();

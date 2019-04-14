@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using UniversityRating.Data.Abstractions.Models;
 using UniversityRating.Data.Abstractions.Models.Teacher;
 using UniversityRating.Data.Abstractions.Repositories;
-using UniversityRating.Data.Core.DomainModels;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.Teacher;
 
-namespace UniversityRating.Services
+namespace UniversityRating.Services.TeacherService
 {
     public class TeacherService : ITeacherService
     {
