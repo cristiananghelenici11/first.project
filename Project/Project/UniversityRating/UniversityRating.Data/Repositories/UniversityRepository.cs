@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
@@ -26,7 +27,12 @@ namespace UniversityRating.Data.Repositories
                     Description = u.Description,
                     Contact = u.Contact,
                     Age = u.Age,
-                    AverangeMark = u.UniversityTeachers.Any() ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Average(y => y.Value)) : 0
+                    AverageMark = u.UniversityTeachers.Any()
+                        ? u.UniversityTeachers.Average(x =>
+                            x.Teacher.MarkTeachers.Any() 
+                                ? x.Teacher.MarkTeachers.Average(y => y.Value) 
+                                : 0)
+                        : 0
                 })
                 .ToList();
         }
@@ -41,7 +47,11 @@ namespace UniversityRating.Data.Repositories
                     Address = u.Address,
                     Age = u.Age,
                     Description = u.Description,
-                    AvgMark = u.UniversityTeachers.Any() ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Average(m => m.Value)) : 0
+                    AvgMark = u.UniversityTeachers.Any() 
+                        ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
+                        ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0 
+
+                    //AvgMark = 0// u.UniversityTeachers.Select(x => x.Teacher.MarkTeachers.Any()).Any() ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Average(m => m.Value)) : 0
                 })
                 .OrderByDescending(am => am.AvgMark)
                 .Take(numberOfUniversities)

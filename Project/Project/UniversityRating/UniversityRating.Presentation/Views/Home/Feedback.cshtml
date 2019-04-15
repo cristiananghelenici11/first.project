@@ -124,6 +124,13 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <form method="post" asp-controller="Home" asp-action="Test">
+                        <input type="text" id="IdSome" name="IdSome"/>
+
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
@@ -132,10 +139,10 @@
                             </div>
                             <div class="content all-icons">
                                 @*<div class="row">*@
-                                <select id="selectBox" onchange="getComments()">
-                                    @foreach (var teacher in Model.TeacherShows)
+                                <select id="selectBox">
+                                    @foreach (var university in Model.UniversityShowViewModels)
                                     {
-                                        <option value="@(teacher.Id)">@($"{teacher.FirstName}")</option>
+                                        <option value="@(university.Id)">@($"{university.Name}")</option>
                                     }
                                 </select>
                                 @*</div>*@
@@ -145,23 +152,31 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
+@section Scripts {
     <script>
-        function getComments() {
-            var selectBox = document.getElementById("selectBox");
-            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-            console.log("Test " + selectedValue)
-            $.ajax({
+        $(function() {
+            $("#selectBox").change(function() {
+                var url = '@Url.Action("UniversityFeedback")' + '?universityId=' + $(this).val();
+
+                $.get(url,
+                    function(result) {
+                        debugger;
+                        console.log(result);
+                    });
+
+                @*$.ajax({
                 type: "POST",
                 url: "@Url.Action( "Feedback","Home")",
                 data: { "str": selectedValue },
                 success: function(data) {
-                    console.log(data)
+                    console.log(data);
                 }
+            });*@
+            });
         });
-        }
     </script>
+}

@@ -7,6 +7,6 @@
         public string Description { get; set; }
         public string Contact { get; set; }
         public int Age { get; set; }
-        public double AverangeMark { get; set; }
+        public double AverageMark { get; set; }
     }
 }

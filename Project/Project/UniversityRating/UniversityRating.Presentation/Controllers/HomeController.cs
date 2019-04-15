@@ -22,12 +22,14 @@ namespace UniversityRating.Presentation.Controllers
         private readonly ITeacherService _teacherService;
         private readonly IUniversityService _universityService;
         private readonly IMapper _mapper;
+        private readonly ICommentService _commentService;
 
-        public HomeController(ITeacherService teacherService, IUniversityService universityService ,IMapper mapper)
+        public HomeController(ITeacherService teacherService, IUniversityService universityService, IMapper mapper, ICommentService commentService)
         {
             _universityService = universityService;
             _teacherService = teacherService;
             _mapper = mapper;
+            _commentService = commentService;
         }
 
         [HttpGet]
@@ -91,24 +93,24 @@ namespace UniversityRating.Presentation.Controllers
             return View();
         }
 
-
         [HttpGet]
         public IActionResult Feedback()
         {
-            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
+            List<UniversityShowDto> universityShowDtos = _universityService.GetAllUniversities();
 
             return View(new IndexViewModel
             {
-                TeacherShows = 
-                    _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(teacherShowDtos)
+                UniversityShowViewModels = 
+                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowDtos)
             });
         }
 
-        [HttpPost]
-        public JsonResult Feedback(long Id)
+        [HttpGet]
+        public IActionResult UniversityFeedback(long universityId)
         {
-            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
-            return Json(teacherShowDtos);
+            List<CommentUniversityShowDto> commentDtos = _commentService.GetCommentsByUniversityId(universityId);
+
+            return Json(commentDtos);
         }
 
         public IActionResult Privacy()
@@ -120,6 +122,17 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public class MyClass
+        {
+            public string IdSome { get; set; }
+        }
+
+        [HttpPost]
+        public IActionResult Test(MyClass myClass)
+        {
+            return RedirectToAction("Index");
         }
     }
 }
