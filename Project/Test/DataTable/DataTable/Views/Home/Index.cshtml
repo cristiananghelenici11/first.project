@@ -2,8 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-
 <h2>Employee CRUD Operations</h2>
 
 <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddOrEdit","Home")')"><i class="fa fa-plus"></i> Add New</a>
@@ -43,7 +41,11 @@
                     { "data": "age" },
                     { "data": "salary" },
                     {"data":"employeeId" , "render" : function (data) {
-                        return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("AddOrEdit","Home")/" + data + "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fa fa-trash'></i> Delete</a>";
+                        return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("AddOrEdit","Home")/" + 
+                            data + 
+                            "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+
+                            data+
+                            ")><i class='fa fa-trash'></i> Delete</a>";
                     },
                         "orderable": false,
                         "searchable":false,

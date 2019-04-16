@@ -68,67 +68,16 @@
 
 
 
-@*<div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-
-
-
-                        <div class="header">
-                            <h4 class="title">List of Teachers</h4>
-                            <p class="category">Teachers of university in Moldova</p>
-                        </div>
-                        <div class="content table-responsive table-full-width">
-
-
-
-                            <table class="table table-hover table-striped">
-                                <select>
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                </select>
-
-                                <thead>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Averange Mark</th>
-                                <th>Email</th>
-                                <th>Type Teacher</th>
-                                <th>University</th>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-            </div>
-        </div>
-    </div>*@
-
-
-
-
 <div class="main-panel">
     <div class="content">
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <form method="post" asp-controller="Home" asp-action="Test">
-                        <input type="text" id="IdSome" name="IdSome"/>
+                    @*<form method="post" asp-controller="Home" asp-action="Test">
+                        <input type="text" id="IdSome" name="IdSome" />
 
                         <button type="submit">Submit</button>
-                    </form>
+                    </form>*@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -139,15 +88,38 @@
                             </div>
                             <div class="content all-icons">
                                 @*<div class="row">*@
-                                <select id="selectBox">
+                                @*<select id="selectBox">
                                     @foreach (var university in Model.UniversityShowViewModels)
                                     {
                                         <option value="@(university.Id)">@($"{university.Name}")</option>
                                     }
-                                </select>
+                                </select>*@
                                 @*</div>*@
                             </div>
+
+                            <div class="content all-icons">
+
+                                <a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddOrEdit","Comment")')"><i class="fa fa-plus"></i> Add New</a>
+                                <table id="employeeTable" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>UserId</th>
+                                            <th>UniversityId</th>
+                                            <th>Subject</th>
+                                            <th>Message</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                                <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+                                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+                            </div>
+
+
                         </div>
+
 
                     </div>
                 </div>
@@ -155,8 +127,16 @@
         </div>
     </div>
 </div>
+                @*$.ajax({
+                type: "POST",
+                url: "@Url.Action( "Feedback","Home")",
+                data: { "str": selectedValue },
+                success: function(data) {
+                    console.log(data);
+                }
+            });*@
 
-@section Scripts {
+@*@section Scripts {
     <script>
         $(function() {
             $("#selectBox").change(function() {
@@ -168,15 +148,113 @@
                         console.log(result);
                     });
 
-                @*$.ajax({
-                type: "POST",
-                url: "@Url.Action( "Feedback","Home")",
-                data: { "str": selectedValue },
-                success: function(data) {
-                    console.log(data);
-                }
-            });*@
             });
         });
+    </script>
+}*@
+
+
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function() {
+            dataTable = $("#employeeTable").DataTable({
+                "ajax": {
+                    "url": "/Comment/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "userId" },
+                    { "data": "universityId" },
+                    { "data": "subject" },
+                    { "data": "message" },
+                    { "data": "id", "render": function(data) {
+                            return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("AddOrEdit", "Comment")/" +
+                                data +
+                                "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" +
+                                data +
+                                ")><i class='fa fa-trash'></i> Delete</a>";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px"
+                    }
+                ],
+                "language": {
+                    "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+                }
+            });
+        });
+
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function(response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Fill Employee Details',
+                        height: 500,
+                        width: 700,
+                        close: function() {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function(data) {
+                        if (data.success) {
+                            Popup.dialog('close');
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message,
+                                {
+                                    globalPosition: "top center",
+                                    className: "success"
+                                });
+
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id) {
+            if (confirm('Are You Sure to Delete this Employee Record ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "Comment")/' + id,
+                    success: function(data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message,
+                                {
+                                    globalPosition: "top center",
+                                    className: "success"
+                                });
+
+                        }
+                    }
+
+                });
+            }
+        }
     </script>
 }

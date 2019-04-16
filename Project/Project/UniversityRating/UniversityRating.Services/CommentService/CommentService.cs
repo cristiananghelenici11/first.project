@@ -2,6 +2,7 @@
 using AutoMapper;
 using UniversityRating.Data.Abstractions.Models.Comment;
 using UniversityRating.Data.Abstractions.Repositories;
+using UniversityRating.Data.Core.DomainModels;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.Comment;
 
@@ -26,6 +27,11 @@ namespace UniversityRating.Services.CommentService
 
 
             return _mapper.Map<List<CommentUniversityShow>, List<CommentUniversityShowDto>>(commentUniversityShows);
+        }
+
+        public void AddCommentUniversity(CommentUniversityShowDto commentUniversity)
+        {
+            _commentRepository.AddCommentUniversity(_mapper.Map<CommentUniversityShowDto, CommentUniversityShow>(commentUniversity));
         }
     }
 }

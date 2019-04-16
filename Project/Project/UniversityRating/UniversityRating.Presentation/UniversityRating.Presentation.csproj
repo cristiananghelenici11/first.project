@@ -22,4 +22,10 @@
     <ProjectReference Include="..\UniversityRating.Services\UniversityRating.Services.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Content\" />
+    <Folder Include="wwwroot\Scripts\" />
+  </ItemGroup>
+
 </Project>
