@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("AddOrEdit", "Comment", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
-    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.UniversityId)
     <div class="form-group">
         @Html.LabelFor(model => model.UserId, new { @class = "control-label" })
         @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })

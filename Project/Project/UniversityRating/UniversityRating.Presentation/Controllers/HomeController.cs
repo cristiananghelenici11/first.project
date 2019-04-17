@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using UniversityRating.Data.Core.DomainModels.Identity;
 using UniversityRating.Presentation.Models;
 using UniversityRating.Presentation.Models.Comment;
 using UniversityRating.Presentation.Models.Home;
@@ -64,16 +66,16 @@ namespace UniversityRating.Presentation.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Teachers()
-        {
-            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
-
-            return View(new IndexViewModel
-            {
-                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(teacherShowDtos)
-            });
-        }
+//        [HttpGet]
+//        public IActionResult Teachers()
+//        {
+//            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
+//
+//            return View(new IndexViewModel
+//            {
+//                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(teacherShowDtos)
+//            });
+//        }
 
         [HttpGet]
         public IActionResult About()
@@ -133,6 +135,25 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Test(MyClass myClass)
         {
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Teachers(int page)
+        {
+            
+            int pageSize = 5;   // количество элементов на странице
+
+            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
+            int count = _teacherService.GetAllTeachers().Count();
+            List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items)
+            };
+
+            return View(viewModel);
         }
     }
 }

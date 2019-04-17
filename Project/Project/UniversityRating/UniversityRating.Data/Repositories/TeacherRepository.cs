@@ -24,7 +24,7 @@ namespace UniversityRating.Data.Repositories
                     LastName = t.LastName,
                     Email = t.Email,
                     TypeTeacher = t.TypeTeacher,
-                    AverangeMarks = t.MarkTeachers.Any() ? t.MarkTeachers.Average(x => x.Value) : 0,
+                    AverageMarks = t.MarkTeachers.Any() ? t.MarkTeachers.Average(x => x.Value) : 0,
                     Universities = t.UniversityTeachers.Select(x => x.University.Name).ToList()
                 })
                 .ToList();

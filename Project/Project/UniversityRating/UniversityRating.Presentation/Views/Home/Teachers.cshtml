@@ -46,16 +46,16 @@
                             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                             </form>
-                        </li>                        
-                        
+                        </li>
+
                     }
                     else
                     {
-                        <li >
+                        <li>
                             <a asp-area="Identity" asp-page="/Account/Register">Register</a>
 
                         </li>
-                        <li >
+                        <li>
                             <a asp-area="Identity" asp-page="/Account/Login">Login</a>
                         </li>
                     }
@@ -73,18 +73,19 @@
                             <h4 class="title">List of Teachers</h4>
                             <p class="category">Teachers of university in Moldova</p>
                         </div>
-                        <div class="content table-responsive table-full-width">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Averange Mark</th>
-                                <th>Email</th>
-                                <th>Type Teacher</th>
-                                <th>University</th>
-                                </thead>
-                                <tbody>
-                                    @foreach (var teacher in Model.TeacherShows)
+                        <div class="content table-responsive table-full-width" id="teachers">
+
+                            @*<table class="table table-hover table-striped">
+                                    <thead>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Averange Mark</th>
+                                    <th>Email</th>
+                                    <th>Type Teacher</th>
+                                    <th>University</th>
+                                    </thead>
+                                    <tbody>
+                                   @foreach (var teacher in Model.TeacherShows)
                                     {
                                         <tr>
                                             <td>@($"{teacher.Id}")</td>
@@ -101,17 +102,114 @@
                                         </tr>
                                     }
 
+                                    </tbody>
+                                </table>*@
+
+
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Averange Mark</th>
+                                <th>Email</th>
+                                <th>Type Teacher</th>
+                                <th>University</th>
+                                </thead>
+                                <tbody>
+                                    @foreach (var teacher in Model.TeacherShows)
+                                    {
+                                        <tr>
+                                            <td>@($"{teacher.Id}")</td>
+                                            <td>@($"{teacher.FirstName} {teacher.LastName}")</td>
+                                            <td>@($"{teacher.AverageMarks}")</td>
+                                            <td>@($"{teacher.Email}")</td>
+                                            <td>@($"{teacher.TypeTeacher}")</td>
+                                            <td>
+                                                @foreach (var university in teacher.Universities)
+                                                {
+                                                    @($"{university} ")
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+
                                 </tbody>
                             </table>
+                            @if (Model.PageViewModel.HasPreviousPage)
+                            {
+                                <a asp-action="Index"
+                                   asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+                                   class="btn btn-default btn">
+                                    <i class="glyphicon glyphicon-chevron-left"></i>
+                                    Preview
+                                </a>
+                            }
+                            @if (Model.PageViewModel.HasNextPage)
+                            {
+                                <a asp-action="Index"
+                                   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+                                   class="btn btn-default btn">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                    Next
+                                </a>
+                            }
 
                         </div>
+                        <div>
+                            <button id="moreTeachers">button</button>
+                        </div>
+
                     </div>
                 </div>
-
-
-
 
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    var pageNumber = 0;
+    $("#moreTeachers").click(function () {
+        pageNumber++;
+        $.ajax({
+            url: "/Home/Teachers",
+            type: "GET",
+            data: ({ page: pageNumber }),
+            datatype: "application/json",
+            success: function (data) {
+
+                $("#moreTeachers").empty();
+
+                if (data.length < 10) {
+                    $("#moreTeachers").hide();
+                }
+
+                $.each(data,
+                    function (item) {
+                        $('#teachers').append
+                        (
+                            "<td>" +
+                            item.Id +
+                            "</td>" +
+                            "<td>" +
+                            item.FirstName +
+                            item.LastName +
+                            "</td>" +
+                            "<td>" +
+                            item.AverageMarks +
+                            "</td>" +
+                            "<td>" +
+                            item.Email +
+                            "</td>" +
+                            "<td>" +
+                            item.TypeTeacher +
+                            "</td>"
+                        );
+                    });
+            }
+        });
+    });
+
+</script>
