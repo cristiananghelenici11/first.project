@@ -64,57 +64,57 @@
 
             -->
 
-            <div class="sidebar-wrapper">
+            <div class="sidebar-wrapper" >
                 <div class="logo">
                     <a asp-controller="Home" asp-action="Index" class="simple-text">
                         University Rating
                     </a>
                 </div>
 
-                <ul class="nav">
-                    <li class="active">
+                <ul class="nav" >
+                    <li class="nav-item">
                         <a asp-controller="Home" asp-action="Universities">
                             <i class="pe-7s-graph"></i>
                             <p>Universities</p>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="ach">
                         <a asp-controller="Home" asp-action="Teachers">
                             <i class="pe-7s-note2"></i>
                             <p>Teachers</p>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="ach">
                         <a asp-controller="Home" asp-action="Specialties">
                             <i class="pe-7s-science"></i>
                             <p>Specialties</p>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="ach">
                         <a asp-controller="Home" asp-action="Feedback">
                             <i class="pe-7s-bell"></i>
                             <p>Feedback</p>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="ach">
                         <a asp-controller="Home" asp-action="User">
                             <i class="pe-7s-user"></i>
                             <p>User Profile</p>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="ach">
                         <a asp-controller="Home" asp-action="About">
                             <i class="pe-7s-news-paper"></i>
                             <p>About</p>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="ach">
                         <a asp-controller="Home" asp-action="Maps">
                             <i class="pe-7s-map-marker"></i>
                             <p>Maps</p>
@@ -173,3 +173,13 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+@section scripts{
+    <script>
+        $('.ach').on('click', function() {
+            $('li').removeClass('active');
+            $(this).closest('li').addClass('active');
+        });
+    </script>
+
+}
