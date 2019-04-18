@@ -74,10 +74,10 @@
             <div class="container-fluid">
                 <div class="row">
                     @*<form method="post" asp-controller="Home" asp-action="Test">
-                        <input type="text" id="IdSome" name="IdSome" />
+                            <input type="text" id="IdSome" name="IdSome" />
 
-                        <button type="submit">Submit</button>
-                    </form>*@
+                            <button type="submit">Submit</button>
+                        </form>*@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -89,11 +89,11 @@
                             <div class="content all-icons">
                                 @*<div class="row">*@
                                 @*<select id="selectBox">
-                                    @foreach (var university in Model.UniversityShowViewModels)
-                                    {
-                                        <option value="@(university.Id)">@($"{university.Name}")</option>
-                                    }
-                                </select>*@
+                                        @foreach (var university in Model.UniversityShowViewModels)
+                                        {
+                                            <option value="@(university.Id)">@($"{university.Name}")</option>
+                                        }
+                                    </select>*@
                                 @*</div>*@
                             </div>
 
@@ -127,31 +127,31 @@
         </div>
     </div>
 </div>
-                @*$.ajax({
-                type: "POST",
-                url: "@Url.Action( "Feedback","Home")",
-                data: { "str": selectedValue },
-                success: function(data) {
-                    console.log(data);
-                }
-            });*@
+@*$.ajax({
+        type: "POST",
+        url: "@Url.Action( "Feedback","Home")",
+        data: { "str": selectedValue },
+        success: function(data) {
+            console.log(data);
+        }
+    });*@
 
 @*@section Scripts {
-    <script>
-        $(function() {
-            $("#selectBox").change(function() {
-                var url = '@Url.Action("UniversityFeedback")' + '?universityId=' + $(this).val();
+        <script>
+            $(function() {
+                $("#selectBox").change(function() {
+                    var url = '@Url.Action("UniversityFeedback")' + '?universityId=' + $(this).val();
 
-                $.get(url,
-                    function(result) {
-                        debugger;
-                        console.log(result);
-                    });
+                    $.get(url,
+                        function(result) {
+                            debugger;
+                            console.log(result);
+                        });
 
+                });
             });
-        });
-    </script>
-}*@
+        </script>
+    }*@
 
 
 @section Scripts{

@@ -45,16 +45,16 @@
                             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                             </form>
-                        </li>                        
-                        
+                        </li>
+
                     }
                     else
                     {
-                        <li >
+                        <li>
                             <a asp-area="Identity" asp-page="/Account/Register">Register</a>
 
                         </li>
-                        <li >
+                        <li>
                             <a asp-area="Identity" asp-page="/Account/Login">Login</a>
                         </li>
                     }
@@ -79,10 +79,7 @@
                                 <form>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            @*<div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" placeholder="Username" value="@(@User.Identity.Name)">
-                                                </div>*@
+
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -159,19 +156,6 @@
     }
     else
     {
-        @*<div class="row">
-            <div class="col-md-12">
-                <div class="container-fluid">
-                    <div class="form-group">
-                        <label>SignUp or Register to have an account </label>
-                        <button type="submit" class="btn btn-info btn-fill pull-right">Register</button>
-                        <button type="submit" class="btn btn-info btn-fill pull-right">SignUp</button>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-
         <div class="col-md-8">
             <div class="card">
                 <div class="header">
@@ -196,12 +180,11 @@
                             </div>
                         </div>
 
-                    <div class="clearfix"></div>
+                        <div class="clearfix"></div>
                     </form>
 
                 </div>
             </div>
-            </div>
-
+        </div>
     }
 </div>
