@@ -20,7 +20,6 @@ namespace UniversityRating.Infrastructure.Profiles
             CreateMap<UniversityShowDto, UniversityShowViewModel>();
 
             CreateMap<CommentUniversityShowDto, CommentUniversityShowViewModel>();
-
         }
     }
 }

@@ -70,6 +70,8 @@ namespace UniversityRating.Presentation
 //                .AddEntityFrameworkStores<UniversityRatingContext>();
 
             services.AddAutoMapper();
+            //services.AddAutoMapper(additional => additional.AddProfiles(Assembly.Load("UniversityRating.Infrastructure")));
+
 
             services.AddScoped<DbContext, UniversityRatingContext>();
             services.AddTransient(typeof(ISpecification<>), typeof(Specification<>));
