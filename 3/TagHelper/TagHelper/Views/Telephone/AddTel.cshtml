@@ -1,0 +1,88 @@
+﻿@model TagHelper.Models.AddTel
+
+@{
+    ViewData["Title"] = "AddTel";
+    Layout = "_Layout";
+}
+
+<h1>Add Telephone</h1>
+
+<form asp-action="AddTel" asp-controller="Telephone" asp-antiforgery="true">
+    <div>
+        @*<div class="validation" asp-validation-summary="All"></div>*@
+        <div>
+            <label asp-for="Phone.Name"></label>
+            <input type="text" asp-for="Phone.Name" />
+            <span asp-validation-for="Phone.Name"></span>
+        </div>
+
+        <div>
+            <label asp-for="Phone.Price"></label>
+            <input asp-for="Phone.Price">
+            <span asp-validation-for="Phone.Price"></span>
+        </div>
+
+        <div>
+            <label asp-for="Phone.CompanyId"></label>
+            <select asp-for="Phone.CompanyId" asp-items="ViewBag.Companies"></select>
+            <span asp-validation-for="Phone.CompanyId"></span>
+        </div>
+
+        <div>
+            <label asp-for="Phone.About"></label>
+            <textarea asp-for="Phone.About" required></textarea>
+            <span asp-validation-for="Phone.About" class="test"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" />
+        </div>
+
+    </div>
+</form>
+
+<h1>Next Form</h1>
+
+<form asp-controller="Telephone" asp-action="Index" asp-antiforgery="true">
+    <div>
+        <label asp-for="DayTimeViewModel.Period"> Period</label>
+        <select asp-for="DayTimeViewModel.Period" asp-items="Html.GetEnumSelectList<DayTime>()"></select>
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>
+
+
+<form asp-antiforgery="true" asp-action="Index" asp-controller="Home">
+    <div>
+        <div class="validation" asp-validation-summary="All"></div>
+        <div>
+
+            <label asp-for="Phone.Name"></label><br />
+            <input type="text" asp-for="Phone.Name" />
+            <span asp-validation-for="Phone.Name"></span>
+        </div>
+
+        <div>
+            <label asp-for="Phone.Price"></label><br />
+            <input asp-for="Phone.Price" />
+            <span asp-validation-for="Phone.Price"></span>
+        </div>
+        <div>
+            <label asp-for="Phone.CompanyId"></label><br />
+            <select asp-for="Phone.CompanyId" asp-items="ViewBag.Companies">
+                <option selected="selected" disabled="disabled">Выберите компанию</option>
+            </select>
+            <span asp-validation-for="Phone.CompanyId"></span>
+        </div>
+        <div>
+            <input type="submit" value="Save" />
+        </div>
+    </div>
+</form>
+
+
+<div header>Первый параграф</div>
+<div header>Второй параграф</div>

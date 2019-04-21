@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<socials><vk/></socials>
+
+
+@{
+    List<string> countries = new List<string>(){"Moldova", "Italia", "Germania", "Cehia"};
+    List<string> cities = new List<string>(){"Chisinau", "Roma", "Berlin", "Praga"};
+    Book Book = new Book(){Author = "Cristian", Title = "Fii Bogat", Year = 2019};
+}
+
+<list elements="countries"></list>
+
+<list elements="cities"></list>
+
+<book-info book="Book"></book-info>

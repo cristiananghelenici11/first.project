@@ -1,0 +1,112 @@
+﻿@using TagHelper.HtmlHelpers
+
+@model TagHelper.Models.Phone
+
+@{
+    ViewData["Title"] = "HtmlHelper";
+}
+
+@{
+    string[] cities = { "Barcelona", "Madrid", "London" };
+    string[] countries = { "Spania", "Franta", "Anglia" };
+}
+
+<h1>Orase</h1>
+
+@Html.CreateList(cities)
+
+<br />
+<h1>Tari</h1>
+@ListHelper.CreateList(Html, countries)
+@* /////////////////////////////////// *@
+
+<h3>Forma Html obisnuita</h3>
+<form method="post" action="/Telephone/Create">
+    <div>
+        <label>Model</label>
+        <input type="text" name="name" />
+    </div>
+
+    <div>
+        <label>Price</label>
+        <input type=number name="price" />
+    </div>
+
+    <div>
+        <input type="submit" value="save" />
+    </div>
+</form>
+
+<h3>Html helper</h3>
+
+@using (Html.BeginForm("Create", "Telephone", FormMethod.Post))
+{
+    <div>
+        <label>Model</label>
+        @Html.TextBox("name", "", new { type = "text" })
+    </div>
+
+    <div>
+        @Html.Label("Price")
+        @Html.TextBox("price", "", new { type = "number" })
+    </div>
+    <div>
+        @Html.Hidden("PhoneId", "2")
+    </div>
+
+    <div>
+        @Html.TextArea("text", "Hello world")
+    </div>
+
+    <div>
+        @Html.Hidden("PhoneId", "2")
+    </div>
+
+    <div>
+        @Html.Password("UserPassword", "")
+    </div>
+
+    <div>
+        @Html.RadioButton("color", "red")
+        <span>Red</span>
+    </div>
+
+    <div>
+        @Html.CheckBox("Enable", "false")
+    </div>
+
+    <div>
+        @Html.DropDownList("phone", new SelectList(new string[] { "sss", "ss" }, "Text"))
+    </div>
+
+    <div>
+        @*@Html.DropDownList("Id", ViewBag.Phones as SelectList)*@    
+    </div>
+
+    <div>
+        @Html.ListBox("phones", new MultiSelectList(new string[] { "iPhone 7 Pro", "Galaxy 7 Edge", "HTC 10", "Honor 5X" }))
+    </div>
+
+
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+
+@using (Html.BeginForm("Create", "Telephone", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(p => p.Name, "Model")
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Price, "Price")
+        @Html.TextBoxFor(m => m.Price, new {type = "number"})
+    </div>
+
+    <div>
+        <input type="submit" value="trimite"/>
+    </div>
+}

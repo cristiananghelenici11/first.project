@@ -1,0 +1,29 @@
+﻿@using TagHelper.Models
+@model Phone
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Price)
+        @Html.EditorFor(m => m.Price)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Company)
+        @Html.DropDownListFor(m => m.CompanyId, ViewBag.companies as IEnumerable<SelectListItem>)
+    </div>
+
+    <div>
+        <input type="submit" value="save"/>
+    </div>
+}
+
