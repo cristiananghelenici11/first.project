@@ -1,0 +1,112 @@
+﻿@model Form
+@{
+    ViewData["Title"] = "VKTagHelper";
+}
+
+<h1>VKTagHelper</h1>
+
+<form asp-controller="Home" , asp-action="Form">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" type="text" maxlength="10" minlength="2" required/>
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Age"></label>
+        <input asp-for="Age" type="number" min="1" max="100"/>
+    </div>
+
+    <div>
+        <label asp-for="Date"></label>
+        <input asp-for="Date" type="date" required/>
+    </div>
+
+    <div>
+        <label asp-for="Tel"></label>
+        <input asp-for="Tel" , type="tel" required/>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" , required/>
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" required/>
+    </div>
+
+    <div>
+        <label asp-for="Sex"></label>
+        <input asp-for="Sex" type="checkbox" required/>
+    </div>
+
+    <div>
+        <input type="submit" value="Save"/>
+    </div>
+</form>
+
+<vk></vk>
+
+
+<form asp-antiforgery="true" asp-action="Create" asp-controller="Home">
+    <div>
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+
+        <div>
+            <label asp-for="Name"></label><br />
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div>
+            <label asp-for="Email"></label><br />
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div>
+            <label asp-for="Password"></label><br />
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div>
+            <label asp-for="ConfirmPassword"></label><br />
+            <input asp-for="ConfirmPassword" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+
+        <div>
+            <label asp-for="Age"></label><br />
+            <input asp-for="Age" />
+            <span asp-validation-for="Age"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" />
+        </div>
+
+    </div>
+</form>
+
+@section scripts{
+ 
+    <environment names="Development">
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
+                asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"
+                asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive">
+        </script>
+    </environment>
+}

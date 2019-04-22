@@ -1,0 +1,63 @@
+﻿@using Form.Helpers
+@using Newtonsoft.Json
+@model Form
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+@{
+    string[] cities = {"text1", "text2", "text3"};
+    string[] countries = {"textq1", "textq1", "textq1"};
+}
+<h1>Html Helper</h1>
+
+
+@using (Html.BeginForm("Form", "Home", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Name")
+        @Html.TextBox("Name", "", new{type="text", required="required", minlength="2", maxlength="5"})
+    </div>
+
+    <div>
+        @Html.Label("Age")
+        @Html.TextBox("Age", "", new {type = "number", required="required"})
+    </div>
+
+    <div>
+        @Html.Label("date")
+        @Html.TextBox("date", "", new{type="date", required="required"})
+    </div>
+
+    <div>
+        @Html.Label("tel")
+        @Html.TextBox("tel", "", new {type = "tel", required="required"})
+    </div>
+
+    <div>
+        @Html.Label("password")
+        @Html.Password("password", "", new{type="password", required="required"})
+    </div>
+
+    <div>
+        @Html.Label("ConfirmPassword")
+        @Html.Password("ConfirmPassword", "", new{type="password", required="required"})
+    </div>
+
+    <div>
+        @Html.Label("Email")
+        @Html.TextBox("email", "", new{type="email", required="required"})
+    </div>
+
+    <div>
+        @Html.Label("sex")
+        @Html.CheckBox("Enable", false)
+    </div>
+
+    <div>
+        <input type="submit" value="Save"/>
+    </div>
+}
+
+
+@Html.CreateList(cities);

@@ -1,0 +1,51 @@
+﻿@model Form
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Form</h1>
+
+<form method="post" action="/Home/Form/">
+    <div>
+        <label>Name</label>
+        <input type="text" name="Name" required maxlength="10" minlength="2" />
+    </div>
+
+    <div>
+        <label>Age</label>
+        <input type="number" name="Age" required maxlength="2" minlength="1" min="1" max="100" />
+    </div>
+
+    <div>
+        <label>Date</label>
+        <input type="date" name="Date" min="2018-22-04" max="2019-03-11" value="2019-22-04" required />
+    </div>
+
+    <div>
+        <label>Telephone</label>
+        <input type="tel" name="tel" />
+    </div>
+
+    <div>
+        <label>password</label>
+        <input type="password" name="password" required />
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input type="email" name="email" required />
+    </div>
+
+    <div>
+        <label>Sex</label>
+        <input type="checkbox" name="Sex" required />
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>
+
+<h2>first h1</h2>
+<h2>second h2</h2>
