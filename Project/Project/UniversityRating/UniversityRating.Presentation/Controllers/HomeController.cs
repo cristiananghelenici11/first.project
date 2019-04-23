@@ -160,18 +160,11 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult MoreTeachers(int page)
         {
             
-            int pageSize = 5;   // количество элементов на странице
+            int pageSize = 5;
 
             List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
             int count = _teacherService.GetAllTeachers().Count();
             List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            //PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            //IndexViewModel viewModel = new IndexViewModel
-            //{
-            //    PageViewModel = pageViewModel,
-            //    TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items)
-            //};
 
             var result = JsonConvert.SerializeObject(items);
             return Content(result, "aplication/json");

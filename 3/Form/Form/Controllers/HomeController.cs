@@ -33,7 +33,7 @@ namespace Form.Controllers
         [HttpPost]
         public string Form(Models.Form form)
         {
-         
+        
             return $"{form.Name}, {form.Age}, {form.Date}, {form.Tel}, {form.Password}, {form.Email}, {form.Sex}";
         }
 
@@ -68,6 +68,18 @@ namespace Form.Controllers
                 return Content($"{form.Name} - {form.Email}");
              
             return View(form);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteForm(long id)
+        {
+            if (ModelState.IsValid)
+            {
+
+                return Json(new { success = true, responseText = $"Expense deleted!" });
+            }
+            
+            return Json(new { success = false, responseText = $"Model is not valid!" });
         }
     }
 }

@@ -1,0 +1,220 @@
+﻿@model Form
+
+@{
+    ViewData["Title"] = "Crud";
+}
+
+<h1>Crud</h1>
+
+
+<form id="form">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" type="text" maxlength="10" minlength="2" required />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Age"></label>
+        <input asp-for="Age" type="number" min="1" max="100" />
+    </div>
+
+    <div>
+        <label asp-for="Date"></label>
+        <input asp-for="Date" type="date" required />
+    </div>
+
+    <div>
+        <label asp-for="Tel"></label>
+        <input asp-for="Tel" , type="tel" required />
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" , required />
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" required />
+    </div>
+
+    <div>
+        <label asp-for="Sex"></label>
+        <input asp-for="Sex" type="checkbox" required />
+    </div>
+
+
+    <div>
+        <input type="submit" value="Save" id="save" />
+    </div>
+</form>
+
+<table class="table table-hover table-striped" >
+    <thead>
+    <tr>
+
+    <th>Name</th>
+    <th>Age</th>
+    <th>Date Mark</th>
+    <th>Tel</th>
+    <th>Password</th>
+    <th>Email</th>
+    <th>Sex</th>
+    </tr>
+    </thead>
+    <tbody id="resultsTable">
+    </tbody>
+
+</table>
+   
+<div>
+    <a class="btn btn-success" id="moreTables" style="margin-bottom: 10px">
+        ShowMoreTables
+    </a>
+</div>
+
+
+<div >
+    <div id="editContents" style="text-align:center; padding:10px; bottom: 1px; z-index: 3; position: fixed; align-self: center;">
+        <button class="btn btn-primary btn-lg btn-custom" id="editExpenseModalButton">Edit</button>
+        <button class="btn btn-primary btn-lg btn-danger" data-toggle="modal" data-target="#deleteExpenseModal">Delete</button>
+    </div>
+    <table id="table" class="table-responsive header-fixed table-striped" data-toggle="table">
+        <thead style="">
+        <tr>
+            <th>Details</th>
+            <th>Date</th>
+            <th>Value</th>
+            <th>Account</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</div>
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(() => {
+            $("#form").on("submit",
+                function(e) {
+                    e.preventDefault(),
+                        $.ajax({
+                            type: "POST",
+                            data: JSON.stringify({
+                                Name: $('#Name').val(),
+                                Age: $('#Age').val(),
+                                Date: $('#Date').val(),
+                                Tel: $('#Tel').val(),
+                                Password: $('#Password').val(),
+                                Email: $('#Email').val(),
+                                Sex: $('#Sex').val()
+                            }),
+                            url: "/Crud/AddForm",
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function(response) {
+                                alert("it ok");
+                            }
+                        });
+                });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(() => {
+            var viewId = 1;
+            $('#moreTables').click(function() {
+                $.ajax({
+                    url: "/Crud/MoreTables",
+                    type: "GET",
+                    data: ({ id: viewId }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data);
+                        $.each(data,
+                            function(i, item) {
+                                $('#resultsTable').append
+                                (
+                                    "<tr>" +
+                                    "<td>" + item.Name + "</td>" +
+                                    "<td>" + item.Age + "</td>" +
+                                    "<td>" + item.Date + "</td>" +
+                                    "<td>" + item.Tel + "</td>" +
+                                    "<td>" + item.Password + "</td>" +
+                                    "<td>" + item.Email + "</td>" +
+                                    "<td>" + item.Sex + "</td>" +
+                                    "</tr>"
+                                );
+                            });
+
+//                        $.each(data,
+//                            function(i, item) {
+//                                console.log(item);
+//                                $('<tr>').append(
+//                                    $('<td>').text(item.Name),
+//                                    $('<td>').text(item.Age),
+//                                    $('<td>').text(item.Date),
+//                                    $('<td>').text(item.Tel),
+//                                    $('<td>').text(item.Password),
+//                                    $('<td>').text(item.Email),
+//                                    $('<td>').text(item.Sex)
+//                                ).appendTo('#resultsTable');
+//                            }
+//                        );
+                    }
+                });
+            });
+        });
+
+    </script>
+    
+    <script>
+        function deleteExpense() {
+            $('#deleteExpenseModal').modal('toggle');
+            $('#editContents').hide();
+            $.ajax({
+                type: "DELETE",
+                url: "/Main/deleteExpense?id=" + $('table > tbody > tr.active').attr('id'),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.success) {
+                        $('#notificationText').append(response.responseText);
+                        $('#notification').show();
+                        setTimeout(() => {
+                            $('#notificationText').html("");
+                            $('#notification').hide();
+                        }, 5000);
+                        $('#table > tbody').html("");
+                        pagenr = -1;
+                        getTen().then(() => {
+                            if (pagenr != -1)
+                                getTen();
+                        });
+                    } else {
+                        $('#notificationText').append(response.responseText);
+                        $('#notification').prop("style", "background-color:#fe5461");
+                        $('#notification').show();
+                        setTimeout(() => {
+                            $('#notificationText').html("");
+                            $('#notification').removeAttr("style");
+                            $('#notification').hide();
+                        }, 5000);
+                    }
+                },
+                error: function (response) {
+                    alert("error!");
+                }
+            });
+        };
+    </script>
+}
