@@ -6,46 +6,44 @@
 <h1>VKTagHelper</h1>
 
 <form asp-controller="Home" , asp-action="Form">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
 
     <div>
         <label asp-for="Name"></label>
-        <input asp-for="Name" type="text" maxlength="10" minlength="2" required/>
-        <span asp-validation-for="Name"></span>
+        <input asp-for="Name" type="text" maxlength="10" minlength="2" required />
     </div>
 
     <div>
         <label asp-for="Age"></label>
-        <input asp-for="Age" type="number" min="1" max="100"/>
+        <input asp-for="Age" type="number" min="1" max="100" />
     </div>
 
     <div>
         <label asp-for="Date"></label>
-        <input asp-for="Date" type="date" required/>
+        <input asp-for="Date" type="date" required />
     </div>
 
     <div>
         <label asp-for="Tel"></label>
-        <input asp-for="Tel" , type="tel" required/>
+        <input asp-for="Tel" , type="tel" required />
     </div>
 
     <div>
         <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" , required/>
+        <input asp-for="Password" type="password" , required />
     </div>
 
     <div>
         <label asp-for="Email"></label>
-        <input asp-for="Email" type="email" required/>
+        <input asp-for="Email" type="email" required />
     </div>
 
     <div>
         <label asp-for="Sex"></label>
-        <input asp-for="Sex" type="checkbox" required/>
+        <input asp-for="Sex" type="checkbox" required />
     </div>
 
     <div>
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Save" />
     </div>
 </form>
 
@@ -81,12 +79,6 @@
         </div>
 
         <div>
-            <label asp-for="Age"></label><br />
-            <input asp-for="Age" />
-            <span asp-validation-for="Age"></span>
-        </div>
-
-        <div>
             <input type="submit" value="Save" />
         </div>
 
@@ -94,7 +86,7 @@
 </form>
 
 @section scripts{
- 
+
     <environment names="Development">
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

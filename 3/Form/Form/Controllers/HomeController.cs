@@ -65,6 +65,7 @@ namespace Form.Controllers
             }
              
             if (ModelState.IsValid)
+
                 return Content($"{form.Name} - {form.Email}");
              
             return View(form);

@@ -14,7 +14,10 @@ namespace Form.Models
         public string Name { get; set; }
 
         [Required]
-        [Range(0, 130)]
+        [MinLength(12, ErrorMessage = "ddd")]
+        [MaxLength(11)]
+        [StringLength(12, MinimumLength = 34, ErrorMessage = "dd")]
+        [Range(int.MinValue, 130)]
         public int Age { get; set; }
 
         [Required]
