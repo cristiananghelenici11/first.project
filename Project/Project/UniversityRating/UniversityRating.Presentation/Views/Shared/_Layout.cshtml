@@ -36,7 +36,7 @@
                     <a class="nav-link" style="color: white" href="#contact">Contact</a>
                 </li>
 
-                @if (SignInManager.IsSignedIn(User))
+               @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="User">Account</a>

@@ -13,100 +13,41 @@
 }
 
 <div class="main-panel">
-    <nav class="navbar navbar-default navbar-fixed">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Universities</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-left">
-
-                    <li>
-                        <a href="">
-                            <i class="fa fa-search"></i>
-                            <p class="hidden-lg hidden-md">Search</p>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                   @if (SignInManager.IsSignedIn(User))
-                    {
-                        <li class="nav-item">
-                            <button type="submit" class="nav-link btn btn-link text-dark">
-                                <a asp-controller="Home" asp-action="User">Account</a>
-                            </button>
-                        </li>
-
-                        <li>
-                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                            </form>
-                        </li>                        
-                        
-                    }
-                    else
-                    {
-                        <li >
-                            <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-
-                        </li>
-                        <li >
-                            <a asp-area="Identity" asp-page="/Account/Login">Login</a>
-                        </li>
-                    }
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-
-</div>
-
-<div class="main-panel">
     <div class="content">
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">List</h4>
-                                <p class="category">choose your specialities</p>
-                            </div>
-                            <div class="content all-icons">
-                                <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">List</h4>
+                            <p class="category">choose your specialities</p>
+                        </div>
+                        <div class="content all-icons">
+                            <div class="row">
 
-                                    @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
-                                    {
-                                        <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
-                                            <div class="font-icon-detail">
-                                                <i class="pe-7s-album"></i>
-                                                <input type="text" value="@($"{university.Name}")">
-                                                <input type="text" value="@($"{university.Description}")">
-                                                <input type="text" value="Contact : @($"{university.Contact}")">
-                                                <input type="text" value="Age : @($"{university.Age}")">
-                                                <input type="text" value="AvgMark : @($"{university.AverageMark}")">
-                                            </div>
-
+                                @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                {
+                                    <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+                                        <div class="font-icon-detail">
+                                            <i class="pe-7s-album"></i>
+                                            <input type="text" value="@($"{university.Name}")">
+                                            <input type="text" value="@($"{university.Description}")">
+                                            <input type="text" value="Contact : @($"{university.Contact}")">
+                                            <input type="text" value="Age : @($"{university.Age}")">
+                                            <input type="text" value="AvgMark : @($"{university.AverageMark}")">
                                         </div>
-                                    }
+
+                                    </div>
+                                }
 
 
-                                </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
-
         </div>
+
     </div>
 </div>

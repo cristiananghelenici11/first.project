@@ -117,22 +117,11 @@ namespace UniversityRating.Presentation.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public class MyClass
-        {
-            public string IdSome { get; set; }
-        }
-
-        [HttpPost]
-        public IActionResult Test(MyClass myClass)
-        {
-            return RedirectToAction("Index");
-        }
-
         public IActionResult Teachers(int page)
         {
-            
-            int pageSize = 5;   // количество элементов на странице
+            List<UniversityShowDto> universities = _universityService.GetAllUniversities();
 
+            int pageSize = 5;
             List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
             int count = _teacherService.GetAllTeachers().Count();
             List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -141,7 +130,9 @@ namespace UniversityRating.Presentation.Controllers
             IndexViewModel viewModel = new IndexViewModel
             {
                 PageViewModel = pageViewModel,
-                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items)
+                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items), 
+                UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities)
+                
             };
 
             return View(viewModel);
