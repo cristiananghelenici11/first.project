@@ -23,14 +23,12 @@
 
 <div id="course" class="offset">
     <div class="col-12 narrow text-center">
-        <h1> Theme Advanced Bootstrap Course</h1>
+        <h1> Effective feedback for learning in universities </h1>
         <p class="lead">
-            Learn Bootstrap by creating an advanced Bootstrap 4
-            Responsive website Template from scratch, witch no steps skiped!
+            Appreciates the university to give advice to new students
         </p>
-        <a class="btn btn-secondary btn-md" href="http://bit.ly/advanced-bootstrap-course"
-           target="_blank">Bootstrap Course</a>
-
+        <a class="btn btn-secondary btn-md" asp-controller="Home" asp-action="Feedback"
+           target="_blank">Feedback</a>
 
     </div>
 </div>
@@ -50,10 +48,9 @@
                     <div class="feature">
                         <i class="fas fa-play-circle fa-4x" data-fa-transform="
 							shrink-3 up-5"></i>
-                        <h3>Custom animation</h3>
+                        <h3>Marks</h3>
                         <p>
-                            Animate.css and Waypoints.js allow for smooth animations
-                            scrolling down the site.
+                            You can appreciate the teachers, the university and the courses
                         </p>
                     </div>
                 </div>
@@ -62,10 +59,9 @@
                     <div class="feature">
                         <i class="fas fa-sliders-h fa-4x" data-fa-transform="
 							shrink-4.5 up-4.5"></i>
-                        <h3>Content Slider</h3>
+                        <h3>Comments</h3>
                         <p>
-                            Make navigation content sliders seampless with it's
-                            content carousel navigation
+                            You can add feedback on the teachers, the university and the courses
                         </p>
                     </div>
                 </div>
@@ -74,10 +70,9 @@
                     <div class="feature">
                         <i class="fab fa-wpforms fa-4x" data-fa-transform="
 							shrink-4 up-5"></i>
-                        <h3>Contact Form</h3>
+                        <h3>Ratings</h3>
                         <p>
-                            The bootstrap HTML form wil send directly to your email
-                            address using tehnology
+                            based on these comments and grades you can see different ratings
                         </p>
                     </div>
                 </div>
@@ -129,7 +124,7 @@
     <div class="jumbotron">
 
         <div class="col-12">
-            <h3 class="heading text-center">Top of Teachers</h3>
+            <h3 class="heading text-center">Top Teachers</h3>
             <div class="heading-underline"></div>
         </div>
 
@@ -139,7 +134,7 @@
                 <div class="col-md-6 clients">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="img/client1.png">
+                            <img src="img/teacher.png">
                         </div>
                         <div class="col-md-8">
                             <blockquote>
@@ -159,7 +154,7 @@
 
     <div class="col-12 narrow text-center">
         <p class="lead">Learn more about university</p>
-        <a class="btn btn-secondary btn-md" href="http://bit.ly/advanced-bootstrap-course"
+        <a class="btn btn-secondary btn-md" asp-controller="Home" asp-action="About"
            target="_blank">University Rating</a>
     </div>
 

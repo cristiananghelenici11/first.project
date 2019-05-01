@@ -61,22 +61,12 @@ namespace UniversityRating.Presentation.Controllers
             });
         }
 
+      
         [HttpGet]
         public IActionResult User()
         {
             return View();
         }
-
-//        [HttpGet]
-//        public IActionResult Teachers()
-//        {
-//            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
-//
-//            return View(new IndexViewModel
-//            {
-//                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(teacherShowDtos)
-//            });
-//        }
 
         [HttpGet]
         public IActionResult About()
