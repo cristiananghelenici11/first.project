@@ -1,0 +1,276 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using UniversityRating.Data.Core.DomainModels.Identity
+@using UniversityRating.Presentation.Models.Teacher
+@using UniversityRating.Presentation.Models.University
+@model UniversityRating.Presentation.Models.Home.IndexViewModel
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Universities";
+    Layout = "/Views/Shared/_LayoutDashboard.cshtml";
+
+}
+
+@*<div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">List</h4>
+                                <p class="category">choose your specialities</p>
+                            </div>
+                            <div class="content all-icons">
+                                <div class="row">
+
+                                    @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                    {
+                                        <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+                                            <div class="font-icon-detail">
+                                                <i class="pe-7s-album"></i>
+                                                <input type="text" value="@($"{university.Name}")">
+                                                <input type="text" value="@($"{university.Description}")">
+                                                <input type="text" value="Contact : @($"{university.Contact}")">
+                                                <input type="text" value="Age : @($"{university.Age}")">
+                                                <input type="text" value="AvgMark : @($"{university.AverageMark}")">
+                                            </div>
+
+                                        </div>
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>*@
+
+
+<div class="main-panel">
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">List of University</h4>
+                            <p class="category">Sort By</p>
+                            <div class="row">
+
+                                <div class="col-md-10">
+                                    <select name="Universities" class="form-control" id="sort" style="width: 150px">
+                                        <option title="r" value="0">Average Marks</option>
+                                        <option title="r" value="1">Age</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2 ">
+                                    <input class="form-control" style="width: 150px" type="text" placeholder="search"  id="search"/>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="content table-responsive table-full-width" id="teachers">
+
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Average Mark</th>
+                                        <th>Age</th>
+                                        <th>Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultsTable">
+                                   @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                    {
+                                        <tr>
+                                            <td>@($"{university.Id}")</td>
+                                            <td>@($"{university.Name}")</td>
+                                            <td>@($"{university.Description}")</td>
+                                            <td>@($"{university.AverageMark}")</td>
+                                            <td>@($"{university.Age}")</td>
+                                            <td>@($"{university.Contact}")</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                            <a class="btn btn-success" id="moreUniversities" style="margin-bottom: 10px">
+                                <i class="fa fa-plus"></i> Show More Universities
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+
+        $("#search").bind("change", function () {
+
+            $.ajax({
+                url: "/University/UniversitySearch",
+                type: "GET",
+                data: ({ search: $('#search').val()}),
+                success: function (data) {
+
+                    $("#resultsTable").empty();
+
+                    $.each(data,
+                        function (i, item) {
+                            $('#resultsTable').append
+                            (
+                                "<tr>" +
+
+                                "<td>" +
+                                item.Id +
+                                "</td>" +
+                                "<td>" +
+                                item.Name +
+                                "</td>" +
+                                "<td>" +
+                                item.Description +
+                                "</td>" +
+                                "<td>" +
+                                item.AverageMark +
+                                "</td>" +
+                                "<td>" +
+                                item.Age +
+                                "</td>" +
+                                "<td>" +
+                                item.Contact +
+                                "</td>" +
+
+                                "</tr>"
+                            );
+                        });
+                }
+            });
+        });
+    });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var pageNumber = 1;
+
+            $("#moreUniversities").click(function () {
+                pageNumber++;
+
+                $.ajax({
+                    url: "/University/UniversitySort",
+                    type: "GET",
+                    data: ({ sort: $('#university').val(), page: pageNumber }),
+                    success: function (data) {
+
+                        $.each(data,
+                            function (i, item) {
+                                $('#resultsTable').append
+                                (
+                                    "<tr>" +
+
+                                    "<td>" +
+                                    item.Id +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Name +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Description +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.AverageMark +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Age +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Contact +
+                                    "</td>" +
+
+                                    "</tr>"
+                                );
+                            });
+                    }
+                });
+            });
+
+            $("#sort").bind("change",
+                function () {
+
+                    pageNumber = 1;
+
+
+                    $.ajax({
+                        url: "/University/UniversitySort",
+                        type: "GET",
+                        data: ({ sort: $('#sort').val(), page: pageNumber }),
+                        success: function (data) {
+
+                            if (data.length < 4) {
+                                $("#moreUniversities").hide();
+                            }
+
+                            if (data.length > 4) {
+                                $("#moreUniversities").show();
+                            }
+
+                            $('#resultsTable').empty(),
+                                $.each(data,
+                                    function (i, item) {
+                                        $('#resultsTable').append
+                                        (
+                                            "<tr>" +
+
+                                            "<td>" +
+                                            item.Id +
+                                            "</td>" +
+                                            "<td>" +
+                                            item.Name +
+                                            "</td>" +
+                                            "<td>" +
+                                            item.Description +
+                                            "</td>" +
+                                            "<td>" +
+                                            item.AverageMark +
+                                            "</td>" +
+                                            "<td>" +
+                                            item.Age +
+                                            "</td>" +
+                                            "<td>" +
+                                            item.Contact +
+                                            "</td>" +
+
+                                            "</tr>"
+                                        );
+                                    });
+                        }
+                    });
+                });
+        });
+    </script>
+
+}

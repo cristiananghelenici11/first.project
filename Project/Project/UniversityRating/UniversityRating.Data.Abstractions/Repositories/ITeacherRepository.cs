@@ -9,5 +9,6 @@ namespace UniversityRating.Data.Abstractions.Repositories
     {
         List<TopTeacher> GetTopTeachers(int numberOfTeachers);
         List<TeacherShow> GetAllTeachers();
+        List<TeacherShow> GetAllTeachersByUniversityId(long UniversityId);
     }
 }

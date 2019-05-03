@@ -31,5 +31,12 @@ namespace UniversityRating.Services.TeacherService
 
             return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teacherShows);
         }
+
+        public List<TeacherShowDto> GetAllTeachersByUniversityId(long universityId)
+        {
+            List<TeacherShow> teachersByUniversityId = _teacherRepository.GetAllTeachersByUniversityId(universityId);
+
+            return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teachersByUniversityId);
+        }
     }
 }

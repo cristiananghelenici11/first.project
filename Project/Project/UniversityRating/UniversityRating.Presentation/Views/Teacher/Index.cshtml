@@ -40,7 +40,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Averange Mark</th>
+                                        <th>Average Mark</th>
                                         <th>Email</th>
                                         <th>Type Teacher</th>
                                         <th>University</th>
@@ -83,54 +83,6 @@
 </div>
 
 @section Scripts{
-    @*<script>
-        $(document).ready(() => {
-            var pageNumber = 1;
-            $("#moreTeachers").click(function() {
-                pageNumber++;
-                $.ajax({
-                    url: "/Home/MoreTeachers",
-                    type: "GET",
-                    data: ({ page: pageNumber }),
-                    success: function(data) {
-
-                        if (data.length < 5) {
-                            $("#moreTeachers").hide();
-                        }
-
-                        $.each(data,
-                            function(i, item) {
-                                $('#resultsTable').append
-                                (
-                                    "<tr>" +
-                                    "<td>" +
-                                    item.Id +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.FirstName +
-                                    item.LastName +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.AverageMarks +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Email +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.TypeTeacher +
-                                    "</td>" +
-                                    "<td>" +
-                                    $.each(item.Universities, function(index, value) { value }) +
-                                    "</td>" +
-                                    "</tr>"
-                                );
-                            });
-                    }
-                });
-            });
-        });
-
-    </script>*@
 
     <script>
         $(document).ready(function() {
@@ -141,7 +93,7 @@
                 pageNumber++;
 
                 $.ajax({
-                    url: "/Home/TeachersByUniversityId",
+                    url: "/Teacher/TeachersByUniversityId",
                     type: "GET",
                     data: ({ universityId: $('#university').val(), page: pageNumber }),
                     success: function(data) {
@@ -193,7 +145,7 @@
                                 $("#moreTeachers").hide();
                             }
 
-                            if (data.length > 4) 
+                            if (data.length > 4)
                             {
                                 $("#moreTeachers").show();
                             }

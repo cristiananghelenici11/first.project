@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -48,19 +49,6 @@ namespace UniversityRating.Presentation.Controllers
                 TopUniversities = _mapper.Map<List<TopUniversityDto>, List<TopUniversityViewModel>>(topUniversityDtos)
             });
         }        
-
-        [HttpGet]
-        public IActionResult Universities()
-        {
-            List<UniversityShowDto> universityShowViewModels = _universityService.GetAllUniversities();
-
-            return View(new IndexViewModel
-            {
-                UniversityShowViewModels =
-                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels)
-            });
-        }
-
       
         [HttpGet]
         public IActionResult User()
@@ -76,12 +64,6 @@ namespace UniversityRating.Presentation.Controllers
 
         [HttpGet]
         public IActionResult Maps()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Specialties()
         {
             return View();
         }
@@ -104,11 +86,6 @@ namespace UniversityRating.Presentation.Controllers
             List<CommentUniversityShowDto> commentDtos = _commentService.GetCommentsByUniversityId(universityId);
 
             return Json(commentDtos);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -138,18 +115,38 @@ namespace UniversityRating.Presentation.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public IActionResult MoreTeachers(int page)
         {
-            
-            int pageSize = 5;
+            var pageSize = 5;
 
             List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
             int count = _teacherService.GetAllTeachers().Count();
             List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-            var result = JsonConvert.SerializeObject(items);
-            return Content(result, "aplication/json");
+            string result = JsonConvert.SerializeObject(items);
+            return Content(result, "application/json");
+        }
 
+        [HttpGet]
+        public IActionResult TeachersByUniversityId(long universityId, int page)
+        {
+            var pageSize = 5;
+            if (universityId.Equals(0))
+            {
+                List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
+                int count = _teacherService.GetAllTeachers().Count();
+                List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+                return Content(JsonConvert.SerializeObject(items), "application/json");
+
+                //List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                //return Content(JsonConvert.SerializeObject(items), "application/json");
+            }
+            List<TeacherShowDto> teachersByUniversityId = _teacherService.GetAllTeachersByUniversityId(universityId);
+            string result = JsonConvert.SerializeObject(teachersByUniversityId);
+
+            return Content(result, "application/json");
         }
     }
 }
