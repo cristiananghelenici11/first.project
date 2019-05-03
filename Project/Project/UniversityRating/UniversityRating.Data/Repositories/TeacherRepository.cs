@@ -46,20 +46,6 @@ namespace UniversityRating.Data.Repositories
         
         public List<TeacherShow> GetAllTeachersByUniversityId(long universityId)
         {
-            var d = BuildQuery()
-                .Where(x => x.UniversityTeachers.Any(y => y.UniversityId.Equals(universityId)))
-                .Select(t => new TeacherShow
-                {
-                    Id = t.Id,
-                    FirstName = t.FirstName,
-                    LastName = t.LastName,
-                    Email = t.Email,
-                    TypeTeacher = t.TypeTeacher,
-                    AverageMarks = t.MarkTeachers.Any() ? t.MarkTeachers.Average(x => x.Value) : 0,
-                    Universities = t.UniversityTeachers.Select(x => x.University.Name).ToList()
-                })
-                .ToList();
-
             return BuildQuery()
                 .Where(x => x.UniversityTeachers.Any(y => y.UniversityId.Equals(universityId)))
                 .Select(t => new TeacherShow
@@ -75,5 +61,21 @@ namespace UniversityRating.Data.Repositories
                 .ToList();
         }
 
+        public List<TeacherShow> GetAllTeachersWithoutUniversity()
+        {
+            return BuildQuery()
+                .Where(x => x.UniversityTeachers.Count().Equals(0))
+                .Select(t => new TeacherShow
+                {
+                    Id = t.Id,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName,
+                    Email = t.Email,
+                    TypeTeacher = t.TypeTeacher,
+                    AverageMarks = t.MarkTeachers.Any() ? t.MarkTeachers.Average(x => x.Value) : 0,
+                    Universities = t.UniversityTeachers.Select(x => x.University.Name).ToList()
+                })
+                .ToList();
+        }
     }
 }

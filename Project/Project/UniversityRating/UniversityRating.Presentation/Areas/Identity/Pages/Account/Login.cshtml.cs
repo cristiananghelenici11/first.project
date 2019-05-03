@@ -68,7 +68,7 @@ namespace UniversityRating.Presentation.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/Home/Universities");
+            returnUrl = returnUrl ?? Url.Content("~/University/Index");
 
             if (ModelState.IsValid)
             {

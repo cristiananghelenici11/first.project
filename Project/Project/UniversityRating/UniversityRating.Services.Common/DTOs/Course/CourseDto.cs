@@ -12,12 +12,5 @@ namespace UniversityRating.Services.Common.DTOs.Course
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Credits { get; set; }
-        public int YearOfStudy { get; set; }
-
-        public FacultyDto Faculty { get; set; }
-        public IEnumerable<CommentCourseDto> CommentCourses { get; set; }
-        public IEnumerable<CourseTeacherDto> CourseTeachers { get; set; }
-        public  IEnumerable<MarkCourseDto> MarkCourses { get; set; }
     }
 }

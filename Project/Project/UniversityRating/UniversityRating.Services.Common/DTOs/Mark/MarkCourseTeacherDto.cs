@@ -2,7 +2,7 @@
 
 namespace UniversityRating.Services.Common.DTOs.Mark
 {
-    public class MarkCourseTeacherDto : MarkDto
+    public class MarkCourseTeacherDto
     {
         public CourseTeacherDto CourseTeacher { get; set; }
 

@@ -2,8 +2,16 @@
 
 namespace UniversityRating.Services.Common.DTOs.Mark
 {
-    public class MarkCourseDto : MarkDto
+    public class MarkCourseDto
     {
-        public CourseDto Course { get; set; }
+
+        public long? UniversityId { get; set; }
+
+        public long CourseId { get; set; }
+
+        public double Mark { get; set; }
+
+        public long UserId { get; set; }
+
     }
 }

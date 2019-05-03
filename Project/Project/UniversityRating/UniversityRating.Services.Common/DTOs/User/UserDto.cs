@@ -14,8 +14,5 @@ namespace UniversityRating.Services.Common.DTOs.User
         public long Idnp { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-
-        public virtual IEnumerable<CommentDto> Comments { get; set; }
-        public virtual IEnumerable<MarkDto> Marks { get; set; }
     }
 }

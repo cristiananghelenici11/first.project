@@ -7,6 +7,7 @@ namespace UniversityRating.Services.Abstractions
     {
         List<TopTeacherDto> GetTopTeachers(int numberOfTeachers);
         List<TeacherShowDto> GetAllTeachers();
-        List<TeacherShowDto> GetAllTeachersByUniversityId(long UniversityId);
+        List<TeacherShowDto> GetAllTeachersByUniversityId(long universityId);
+        List<TeacherShowDto> GetAllTeachersWithoutUniversity();
     }
 }

@@ -1,4 +1,5 @@
-﻿
+﻿@using UniversityRating.Presentation.Models.University
+
 @{
     ViewData["Title"] = "Index";
     Layout = "/Views/Shared/_LayoutDashboard.cshtml";
@@ -31,26 +32,158 @@
                                 </li>
                             </ul>
 
-
                             <div class="tab-content">
+                                
+                                    <div class="container tab-pane active" id="markTeacher">
+                                        <div class="row" style="padding-top: 50px; padding-bottom: 50px">
 
-                                <div id="markTeacher" class="container tab-pane active">
-                                    <br>
-                                    <h3>markTeacher</h3>
-                                    <p>Add a mark to teacher-------------</p>
-                                </div>
+                                            <form id="addMarkTeacher">
+                                                <div class="col-md-2">
+                                                    <p>Chose University</p>
+
+                                                    <select id="university" class="form-control" style="width: 150px">
+                                                        <option value="0">No University</option>
+                                                       @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                        {
+                                                            <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <p>Chose Teacher</p>
+                                                    <select id="teacher" class="form-control" style="width: 150px"></select>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <p>Chose Mark</p>
+                                                    <select class="form-control" style="width: 100px" id="markOnTeacher">
+                                                        <option value="1"> 1 </option>
+                                                        <option value="2"> 2 </option>
+                                                        <option value="3"> 3 </option>
+                                                        <option value="4"> 4 </option>
+                                                        <option value="5"> 5 </option>
+                                                        <option value="6"> 6 </option>
+                                                        <option value="7"> 7 </option>
+                                                        <option value="8"> 8 </option>
+                                                        <option value="9"> 9 </option>
+                                                        <option value="10"> 10 </option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <p>Add mark</p>
+                                                    <button type="submit" class="btn btn-success" style="margin-bottom: 10px" value="Add Mark">
+                                                        <i class="fa fa-plus-square" aria-hidden="true"></i>Add Mark
+                                                    </button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
 
                                 <div id="markCourse" class="container tab-pane fade">
-                                    <br>
-                                    <h3>markCourse</h3>
-                                    <p>Add a mark to Course-------------</p>
+
+                                    <div class="row" style="padding-top: 50px; padding-bottom: 50px">
+                                        <form id="addMarkCourse">
+                                            <div class="col-md-2">
+                                                <p>Chose University</p>
+                                                <select name="Universities" class="form-control" style="width: 150px" id="university2">
+                                                    @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                    {
+                                                        <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                    }
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <p>Chose Course</p>
+                                                <select name="Universities" class="form-control" style="width: 150px" id="teacher2"></select>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <p>Chose Mark</p>
+                                                <select class="form-control" style="width: 100px" id="markOnCourse">
+                                                    <option value="1"> 1 </option>
+                                                    <option value="2"> 2 </option>
+                                                    <option value="3"> 3 </option>
+                                                    <option value="4"> 4 </option>
+                                                    <option value="5"> 5 </option>
+                                                    <option value="6"> 6 </option>
+                                                    <option value="7"> 7 </option>
+                                                    <option value="8"> 8 </option>
+                                                    <option value="9"> 9 </option>
+                                                    <option value="10"> 10 </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <p>Add mark</p>
+                                                
+                                                <button type="submit" class="btn btn-success" style="margin-bottom: 10px" value="Add Mark">
+                                                    <i class="fa fa-plus-square" aria-hidden="true"></i>Add Mark
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <div id="markCourseTeacher" class="container tab-pane fade">
-                                    <br>
-                                    <h3>markCourseTeacher</h3>
-                                    <p>Add a mark to Course teacher-------------</p>
+
+                                    <div class="row" style="padding-top: 50px; padding-bottom: 50px">
+
+                                        <div class="col-md-2">
+                                            <p>Chose University</p>
+                                            <select class="form-control" style="width: 150px" id="university3">
+                                                <option value="0">No University</option>
+                                                @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                {
+                                                    <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <p>Chose Teacher</p>
+                                            <select class="form-control" style="width: 150px" id="teacher3">
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <p>Chose Course</p>
+                                            <select class="form-control" style="width: 150px" id="course2">
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <p>Chose Mark</p>
+                                            <select class="form-control" style="width: 100px">
+                                                <option value="1"> 1 </option>
+                                                <option value="2"> 2 </option>
+                                                <option value="3"> 3 </option>
+                                                <option value="4"> 4 </option>
+                                                <option value="5"> 5 </option>
+                                                <option value="6"> 6 </option>
+                                                <option value="7"> 7 </option>
+                                                <option value="8"> 8 </option>
+                                                <option value="9"> 9 </option>
+                                                <option value="10"> 10 </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <p>Add mark</p>
+                                            <a class="btn btn-success" style="margin-bottom: 10px">
+                                                <i class="fa fa-plus-square" aria-hidden="true"></i> Add Mark
+                                            </a>
+                                        </div>
+
+                                    </div>
                                 </div>
+
+
                             </div>
 
                         </div>
@@ -63,3 +196,216 @@
 
     </div>
 </div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+                
+            $.ajax({
+                url: "/Mark/TeachersByUniversityId",
+                type: "GET",
+                data: ({ universityId: $('#university').val()}),
+                success: function (data) {
+
+                    $('#teacher').empty(),
+                        $.each(data,
+                            function (i, item) {
+                                $('#teacher').append
+                                (
+
+                                    "<option value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
+
+                                );
+                            });
+                }
+            });
+
+            $("#university").bind("change",
+                function () {
+                    $.ajax({
+                        url: "/Mark/TeachersByUniversityId",
+                        type: "GET",
+                        data: ({ universityId: $('#university').val()}),
+                        success: function (data) {
+
+                            $('#teacher').empty(),
+                                $.each(data,
+                                    function (i, item) {
+                                        $('#teacher').append
+                                        (
+
+                                            "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
+
+                                        );
+                                    });
+                        }
+                    });
+                }); 
+            
+            $("#addMarkTeacher").on("submit",
+                function () {
+                    $.ajax({
+                        url: "/Mark/AddMarkTeacher",
+                        type: "POST",
+                        data: ({ UniversityId: $('#university').val(), TeacherId: $('#teacher').val(), Mark: $('#markOnTeacher').val()}),
+                        success: function (data) {
+
+                            alert(data);
+                        }
+                    });
+                });
+
+            
+        });
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+                
+            $.ajax({
+                url: "/Mark/CoursesByUniversityId",
+                type: "GET",
+                data: ({ universityId: $('#university2').val()}),
+                success: function (data) {
+
+                    $('#teacher2').empty(),
+                        $.each(data,
+                            function (i, item) {
+                                $('#teacher2').append
+                                (
+
+                                    "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+
+                                );
+                            });
+                }
+            });
+
+            $("#university2").bind("change",
+                function () {
+                    $.ajax({
+                        url: "/Mark/CoursesByUniversityId",
+                        type: "GET",
+                        data: ({ universityId: $('#university2').val()}),
+                        success: function (data) {
+
+                            $('#teacher2').empty(),
+                                $.each(data,
+                                    function (i, item) {
+                                        $('#teacher2').append
+                                        (
+
+                                            "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+
+                                        );
+                                    });
+                        }
+                    });
+                });
+
+            $("#addMarkCourse").on("submit",
+                function () {
+                    $.ajax({
+                        url: "/Mark/AddMarkCourse",
+                        type: "POST",
+                        data: ({ UniversityId: $('#university2').val(), CourseId: $('#teacher2').val(), Mark: $('#markOnCourse').val()}),
+                        success: function (data) {
+
+                            alert(data);
+                        }
+                    });
+                });
+        });
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+                
+            $.ajax({
+                url: "/Mark/TeachersByUniversityId",
+                type: "GET",
+                data: ({ universityId: $('#university3').val()}),
+                success: function (data) {
+
+                    $('#teacher3').empty(),
+                        $('#course').empty(),
+
+                        $.each(data,
+                            function (i, item) {
+                                $('#teacher3').append
+                                (
+
+                                    "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
+
+                                );
+                            });
+
+                }
+            });
+
+            $("#university3").bind("change",
+                function () {
+                    $.ajax({
+                        url: "/Mark/TeachersByUniversityId",
+                        type: "GET",
+                        data: ({ universityId: $('#university3').val()}),
+                        success: function (data) {
+
+                            $('#course').empty(),
+                                $('#teacher3').empty(),
+
+                                $.each(data,
+                                    function (i, item) {
+                                        $('#teacher3').append
+                                        (
+
+                                            "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
+
+                                        );
+                                    });
+
+                            $.ajax({
+                                url: "/Mark/CoursesByTeacherId",
+                                type: "GET",
+                                data: ({ teacherId: $('#teacher3').val()}),
+                                success: function (data) {
+
+                                    $('#course').empty(),
+                                        $.each(data,
+                                            function (i, item) {
+                                                $('#course').append
+                                                (
+                                                    "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+                                                );
+                                            });
+                                }
+                            });
+                        }
+                    });
+                });
+
+
+            $("#teacher3").bind("change",
+                function () {
+                    $.ajax({
+                        url: "/Mark/CoursesByTeacherId",
+                        type: "GET",
+                        data: ({ teacherId: $('#teacher3').val()}),
+                        success: function (data) {
+
+                            $('#course').empty(),
+                                $.each(data,
+                                    function (i, item) {
+                                        $('#course').append
+                                        (
+                                            "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+                                        );
+                                    });
+                        }
+                    });
+                });
+        });
+    </script>
+}

@@ -25,7 +25,7 @@
 
                             <select name="Universities" class="form-control" id="university" style="width: 240px">
                                 <option value="0">All Teacher</option>
-                                @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                               @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
                                 {
                                     <option title="@university.Description" value="@university.Id">@university.Name</option>
                                 }
