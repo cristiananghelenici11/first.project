@@ -11,8 +11,18 @@ namespace UniversityRating.Infrastructure.Profiles
         public ViewModelToDtoProfile()
         {
             CreateMap<CommentUniversityShowViewModel, CommentUniversityShowDto>();
+
             CreateMap<MarkTeacherViewModel, MarkTeacherDto>();
+
             CreateMap<MarkCourseViewModel, MarkCourseDto>();
+
+            CreateMap<CommentTeacherViewModel, CommentTeacherDto>();
+
+            CreateMap<CommentUniversityViewModel, CommentUniversityDto>();
+
+            CreateMap<CommentCourseTeacherViewModel, CommentCourseTeacherDto>();
+
+            CreateMap<CommentCourseViewModel, CommentCourseDto>();
         }
     }
 }

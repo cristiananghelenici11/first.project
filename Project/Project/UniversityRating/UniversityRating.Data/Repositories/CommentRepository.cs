@@ -10,7 +10,7 @@ using UniversityRating.Data.Core.DomainModels;
 
 namespace UniversityRating.Data.Repositories
 {
-    public class CommentRepository : Repository<CommentUniversity> , ICommentRepository
+    public class CommentRepository : Repository<Comment> , ICommentRepository
     {
         public CommentRepository(DbContext context) : base(context)
         {
@@ -18,30 +18,43 @@ namespace UniversityRating.Data.Repositories
 
     
 
-        public void AddCommentUniversity(CommentUniversityShow commentUniversity)
+        public void AddCommentUniversity(CommentUniversity commentUniversity)
         {
-            Add(new CommentUniversity()
-            {
-                UniversityId = commentUniversity.UniversityId,
-                UserId = commentUniversity.UserId,
-                Subject = commentUniversity.Subject,
-                Message = commentUniversity.Message
-            });
+            Add(commentUniversity);
             SaveChanges();
         }
 
         public List<CommentUniversityShow> GetCommentsByUniversityId(long universityId)
         {
-            return BuildQuery()
-                .Where(x => x.UniversityId == universityId)
-                .Select(c => new CommentUniversityShow
-                {
-                    Subject = c.Subject,
-                    Message = c.Message,
-                    UniversityId = c.UniversityId,
-                    UserId = c.UserId
-                })
-                .ToList();
+            //return BuildQuery()
+            //    .Where(x => x.)
+            //    .Select(c => new CommentUniversityShow
+            //    {
+            //        Subject = c.Subject,
+            //        Message = c.Message,
+            //        UniversityId = c.UniversityId,
+            //        UserId = c.UserId
+            //    })
+            //    .ToList();
+            return new List<CommentUniversityShow>();
+        }
+        
+        public void AddCommentTeacher(CommentTeacher commentTeacher)
+        {
+            Add(commentTeacher);
+            SaveChanges();
+        }
+
+        public void AddCommentCourse(CommentCourse commentCourse)
+        {
+            Add(commentCourse);
+            SaveChanges();
+        }
+
+        public void AddCommentCourseTeacher(CommentCourseTeacher commentCourseTeacher)
+        {
+            Add(commentCourseTeacher);
+            SaveChanges();
         }
     }
 }

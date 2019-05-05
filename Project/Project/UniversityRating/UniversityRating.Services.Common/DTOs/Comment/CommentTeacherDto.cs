@@ -2,8 +2,17 @@
 
 namespace UniversityRating.Services.Common.DTOs.Comment
 {
-    public class CommentTeacherDto : CommentDto
+    public class CommentTeacherDto
     {
-        public virtual TeacherDto Teacher { get; set; }
+        public long UniversityId { get; set; }
+
+        public long TeacherId { get; set; }
+
+        public string Subject { get; set; }
+
+        public string Message { get; set; }
+
+        public long UserId { get; set; }
+
     }
 }

@@ -9,6 +9,12 @@ namespace UniversityRating.Services.Abstractions
     {
         List<CommentUniversityShowDto> GetCommentsByUniversityId(long universityId);
 
-        void AddCommentUniversity(CommentUniversityShowDto commentUniversity);
+        void AddCommentUniversity(CommentUniversityDto commentUniversity);
+
+        void AddCommentTeacher(CommentTeacherDto commentTeacherDto);
+
+        void AddCommentCourse(CommentCourseDto commentCourseDto);
+
+        void AddCommentCourseTeacher(CommentCourseTeacherDto commentCourseTeacherDto);
     }
 }

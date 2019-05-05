@@ -21,21 +21,24 @@
 
     <environment include="Development">
 
-        <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="/assets/css/animate.min.css" rel="stylesheet"/>
-        <link href="/assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
-        <link href="/assets/css/demo.css" rel="stylesheet"/>
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/css/animate.min.css" rel="stylesheet" />
+        <link href="/assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+        <link href="/assets/css/demo.css" rel="stylesheet" />
 
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
-        <link href="/assets/css/pe-icon-7-stroke.css" rel="stylesheet"/>
+        <link href="/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
-        <meta charset="utf-8"/>
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@ViewBag.Title - My ASP.NET Application</title>
-        <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
-        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet"/>
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
 
     </environment>
 
@@ -127,6 +130,13 @@
                         <a asp-controller="Mark" asp-action="Index">
                             <i class="pe-7s-like2"></i>
                             <p>Add Mark</p>
+                        </a>
+                    </li>
+
+                    <li class="ach">
+                        <a asp-controller="Comment" asp-action="Index">
+                            <i class="far fa-comment-dots"></i>
+                            <p>Add Feedback</p>
                         </a>
                     </li>
 

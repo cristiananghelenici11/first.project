@@ -1,12 +1,8 @@
-﻿using UniversityRating.Services.Common.DTOs.Course;
-
-namespace UniversityRating.Services.Common.DTOs.Comment
+﻿namespace UniversityRating.Services.Common.DTOs.Comment
 {
-    public class CommentCourseDto
+    public class CommentUniversityDto
     {
         public long UniversityId { get; set; }
-
-        public long CourseId { get; set; }
 
         public long UserId { get; set; }
 

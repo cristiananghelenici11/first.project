@@ -13,11 +13,13 @@ namespace UniversityRating.Services.CommentService
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
+        private ICourseRepository _courseRepository;
 
-        public CommentService(ICommentRepository commentRepository, IMapper mapper)
+        public CommentService(ICommentRepository commentRepository, IMapper mapper, ICourseRepository courseRepository)
         {
             _commentRepository = commentRepository;
             _mapper = mapper;
+            _courseRepository = courseRepository;
         }
 
         public List<CommentUniversityShowDto> GetCommentsByUniversityId(long universityId)
@@ -29,9 +31,55 @@ namespace UniversityRating.Services.CommentService
             return _mapper.Map<List<CommentUniversityShow>, List<CommentUniversityShowDto>>(commentUniversityShows);
         }
 
-        public void AddCommentUniversity(CommentUniversityShowDto commentUniversity)
+        public void AddCommentUniversity(CommentUniversityDto commentUniversityDto)
         {
-            _commentRepository.AddCommentUniversity(_mapper.Map<CommentUniversityShowDto, CommentUniversityShow>(commentUniversity));
+            var commentUniversity = new CommentUniversity
+            {
+                Subject = commentUniversityDto.Subject,
+                Message = commentUniversityDto.Message,
+                UserId = commentUniversityDto.UserId,
+                UniversityId = commentUniversityDto.UniversityId
+            };
+
+            _commentRepository.AddCommentUniversity(commentUniversity);
+        }
+
+        public void AddCommentTeacher(CommentTeacherDto commentTeacherDto)
+        {
+            var commentTeacher = new CommentTeacher
+            {
+                Subject = commentTeacherDto.Subject,
+                Message = commentTeacherDto.Message,
+                TeacherId = commentTeacherDto.TeacherId,
+                UserId = commentTeacherDto.UserId
+            };
+            _commentRepository.AddCommentTeacher(commentTeacher);
+        }
+
+        public void AddCommentCourse(CommentCourseDto commentCourseDto)
+        {
+            var commentCourse = new CommentCourse
+            {
+                Subject = commentCourseDto.Subject,
+                Message = commentCourseDto.Message,
+                CourseId = commentCourseDto.CourseId,
+                UserId = commentCourseDto.UserId
+            };
+
+            _commentRepository.AddCommentCourse(commentCourse);
+        }
+
+        public void AddCommentCourseTeacher(CommentCourseTeacherDto commentCourseTeacherDto)
+        {
+            var commentCourseTeacher = new CommentCourseTeacher
+            {
+                Subject = commentCourseTeacherDto.Subject,
+                Message = commentCourseTeacherDto.Message,
+                CourseTeacherId = _courseRepository.GetCourseTeacherId(commentCourseTeacherDto.CourseId, commentCourseTeacherDto.TeacherId),
+                UserId = commentCourseTeacherDto.UserId
+            };
+
+            _commentRepository.AddCommentCourseTeacher(commentCourseTeacher);
         }
     }
 }
