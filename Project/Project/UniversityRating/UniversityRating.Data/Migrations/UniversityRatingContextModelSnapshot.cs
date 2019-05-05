@@ -297,7 +297,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.Property<long>("UserId");
 
-                    b.Property<float>("Value");
+                    b.Property<double>("Value");
 
                     b.HasKey("Id");
 
@@ -328,8 +328,7 @@ namespace UniversityRating.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(64);
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
+                    b.Property<long>("Phone")
                         .HasMaxLength(64)
                         .IsUnicode(false);
 

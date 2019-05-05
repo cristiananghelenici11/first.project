@@ -6,5 +6,6 @@ namespace UniversityRating.Data.Abstractions.Repositories
     {
         void AddMarkTeacher(MarkTeacher markTeacher);
         void AddMarkCourse(MarkCourse markCourse);
+        void AddMarkCourseTeacher(MarkCourseTeacher markCourseTeacher);
     }
 }

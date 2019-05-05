@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UniversityRating.Data.Migrations
 {
-    public partial class university_v1 : Migration
+    public partial class m1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,7 @@ namespace UniversityRating.Data.Migrations
                     Idnp = table.Column<long>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 64, nullable: false),
                     LastName = table.Column<string>(maxLength: 64, nullable: false),
-                    Phone = table.Column<string>(unicode: false, maxLength: 64, nullable: false),
+                    Phone = table.Column<long>(unicode: false, maxLength: 64, nullable: false),
                     Email = table.Column<string>(maxLength: 64, nullable: false),
                     TypeTeacher = table.Column<string>(nullable: true)
                 },
@@ -347,7 +347,7 @@ namespace UniversityRating.Data.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<long>(nullable: false),
-                    Value = table.Column<float>(nullable: false),
+                    Value = table.Column<double>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     CourseId = table.Column<long>(nullable: true),
                     CourseTeacherId = table.Column<long>(nullable: true),

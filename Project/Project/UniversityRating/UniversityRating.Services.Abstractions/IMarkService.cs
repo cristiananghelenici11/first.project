@@ -6,5 +6,6 @@ namespace UniversityRating.Services.Abstractions
     {
         void AddMarkTeacher(MarkTeacherDto markTeacher);
         void AddMarkCourse(MarkCourseDto markTeacher);
+        void AddMarkCourseTeacher(MarkCourseTeacherDto markCourseTeacher);
     }
 }

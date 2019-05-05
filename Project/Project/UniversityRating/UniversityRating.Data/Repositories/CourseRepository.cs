@@ -35,7 +35,20 @@ namespace UniversityRating.Data.Repositories
                     Name = c.Name,
                     Description = c.Description
                 })
-                .ToList();
+                .ToList();   
+        }
+
+        public long GetCourseTeacherId(long courseId, long teacherId)
+        {
+            var result = BuildQuery()
+                .Where(x => x.CourseTeachers.Any(y => (y.TeacherId.Equals(teacherId)) && (y.CourseId.Equals(courseId))))
+                .Select(c => new
+                {
+                    Id = c.CourseTeachers.Select(x => x.Id),
+                }).FirstOrDefault();
+
+            return result.Id.FirstOrDefault();
+
         }
     }
 }

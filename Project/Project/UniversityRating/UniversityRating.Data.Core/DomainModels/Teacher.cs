@@ -15,7 +15,7 @@ namespace UniversityRating.Data.Core.DomainModels
         public long Idnp { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Phone { get; set; }
+        public long Phone { get; set; }
         public string Email { get; set; }
         public string TypeTeacher { get; set; }
 

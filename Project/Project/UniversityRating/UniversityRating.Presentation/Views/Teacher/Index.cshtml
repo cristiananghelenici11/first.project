@@ -98,6 +98,10 @@
                     data: ({ universityId: $('#university').val(), page: pageNumber }),
                     success: function(data) {
 
+                        if (data.length < 4) {
+                            $("#moreTeachers").hide();
+                        }
+
                         $.each(data,
                             function(i, item) {
                                 $('#resultsTable').append
@@ -143,11 +147,6 @@
 
                             if (data.length < 4) {
                                 $("#moreTeachers").hide();
-                            }
-
-                            if (data.length > 4)
-                            {
-                                $("#moreTeachers").show();
                             }
 
                             $('#resultsTable').empty(),

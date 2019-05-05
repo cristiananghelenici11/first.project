@@ -9,11 +9,13 @@ namespace UniversityRating.Services.MarkService
 {
     public class MarkService : IMarkService
     {
+        private ICourseRepository _courseRepository;
         private IMapper _mapper;
         private IMarkRepository _markRepository;
 
-        public MarkService(IMapper mapper, IMarkRepository markRepository)
+        public MarkService(IMapper mapper, IMarkRepository markRepository, ICourseRepository courseRepository)
         {
+            _courseRepository = courseRepository;
             _mapper = mapper;
             _markRepository = markRepository;
         }
@@ -21,13 +23,11 @@ namespace UniversityRating.Services.MarkService
 
         public void AddMarkTeacher(MarkTeacherDto markTeacherDto)
         {
-            //_markRepository.AddMarkTeacher(_mapper.Map<MarkTeacherDto, MarkTeacher>(markTeacher));
-
             var markTeacher = new MarkTeacher()
             {
                 TeacherId = markTeacherDto.TeacherId,
                 UserId = markTeacherDto.UserId,
-                Value = Convert.ToSingle(markTeacherDto.Mark)
+                Value = markTeacherDto.Mark
             };
             _markRepository.AddMarkTeacher(markTeacher);
         }
@@ -39,9 +39,21 @@ namespace UniversityRating.Services.MarkService
             {
                 UserId = markCourseDto.UserId,
                 CourseId = markCourseDto.CourseId,
-                Value = Convert.ToSingle(markCourseDto.Mark)
+                Value = markCourseDto.Mark
             };
             _markRepository.AddMarkCourse(markCourse);
+        }
+
+        public void AddMarkCourseTeacher(MarkCourseTeacherDto markCourseTeacherDto)
+        {
+            var markCourseTeacher = new MarkCourseTeacher
+            {
+                UserId = markCourseTeacherDto.UserId,
+                CourseTeacherId = _courseRepository.GetCourseTeacherId(markCourseTeacherDto.CourseId, markCourseTeacherDto.TeacherId),
+                Value = markCourseTeacherDto.Mark
+            };
+            _markRepository.AddMarkCourseTeacher(markCourseTeacher);
+
         }
     }
 }

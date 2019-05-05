@@ -129,56 +129,53 @@
                                 </div>
 
                                 <div id="markCourseTeacher" class="container tab-pane fade">
-
                                     <div class="row" style="padding-top: 50px; padding-bottom: 50px">
 
-                                        <div class="col-md-2">
-                                            <p>Chose University</p>
-                                            <select class="form-control" style="width: 150px" id="university3">
-                                                <option value="0">No University</option>
-                                                @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
-                                                {
-                                                    <option title="@university.Description" value="@university.Id">@university.Name</option>
-                                                }
-                                            </select>
-                                        </div>
+                                        <form id="addMarkCourseTeacher">
+                                            <div class="col-md-2">
+                                                <p>Chose University</p>
+                                                <select class="form-control" style="width: 150px" id="universityMarkCourseTeacher">
+                                                    <option value="0">No University</option>
+                                                    @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                    {
+                                                        <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                    }
+                                                </select>
+                                            </div>
 
-                                        <div class="col-md-2">
-                                            <p>Chose Teacher</p>
-                                            <select class="form-control" style="width: 150px" id="teacher3">
+                                            <div class="col-md-2">
+                                                <p>Chose Teacher</p>
+                                                <select class="form-control" style="width: 150px" id="teacherMarkCourseTeacher"></select>
+                                            </div>
 
-                                            </select>
-                                        </div>
+                                            <div class="col-md-2">
+                                                <p>Chose Course</p>
+                                                <select class="form-control" style="width: 150px" id="courseMarkCourseTeacher"></select>
+                                            </div>
 
-                                        <div class="col-md-2">
-                                            <p>Chose Course</p>
-                                            <select class="form-control" style="width: 150px" id="course2">
+                                            <div class="col-md-2">
+                                                <p>Chose Mark</p>
+                                                <select class="form-control" style="width: 100px" id="markOnCourseTeacher">
+                                                    <option value="1"> 1 </option>
+                                                    <option value="2"> 2 </option>
+                                                    <option value="3"> 3 </option>
+                                                    <option value="4"> 4 </option>
+                                                    <option value="5"> 5 </option>
+                                                    <option value="6"> 6 </option>
+                                                    <option value="7"> 7 </option>
+                                                    <option value="8"> 8 </option>
+                                                    <option value="9"> 9 </option>
+                                                    <option value="10"> 10 </option>
+                                                </select>
+                                            </div>
 
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <p>Chose Mark</p>
-                                            <select class="form-control" style="width: 100px">
-                                                <option value="1"> 1 </option>
-                                                <option value="2"> 2 </option>
-                                                <option value="3"> 3 </option>
-                                                <option value="4"> 4 </option>
-                                                <option value="5"> 5 </option>
-                                                <option value="6"> 6 </option>
-                                                <option value="7"> 7 </option>
-                                                <option value="8"> 8 </option>
-                                                <option value="9"> 9 </option>
-                                                <option value="10"> 10 </option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <p>Add mark</p>
-                                            <a class="btn btn-success" style="margin-bottom: 10px">
-                                                <i class="fa fa-plus-square" aria-hidden="true"></i> Add Mark
-                                            </a>
-                                        </div>
+                                            <div class="col-md-2">
+                                                <p>Add mark</p>
+                                                <button type="submit" class="btn btn-success" style="margin-bottom: 10px" value="Add Mark">
+                                                    <i class="fa fa-plus-square" aria-hidden="true"></i>Add Mark
+                                                </button>
+                                            </div>
+                                        </form>
 
                                     </div>
                                 </div>
@@ -297,7 +294,7 @@
                                         $('#teacher2').append
                                         (
 
-                                            "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+                                            "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
 
                                         );
                                     });
@@ -326,15 +323,14 @@
             $.ajax({
                 url: "/Mark/TeachersByUniversityId",
                 type: "GET",
-                data: ({ universityId: $('#university3').val()}),
+                data: ({ universityId: $('#universityMarkCourseTeacher').val()}),
                 success: function (data) {
 
-                    $('#teacher3').empty(),
-                        $('#course').empty(),
+                    $('#teacherMarkCourseTeacher').empty(),
 
                         $.each(data,
                             function (i, item) {
-                                $('#teacher3').append
+                                $('#teacherMarkCourseTeacher').append
                                 (
 
                                     "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
@@ -345,20 +341,21 @@
                 }
             });
 
-            $("#university3").bind("change",
+            $("#universityMarkCourseTeacher").bind("change",
                 function () {
                     $.ajax({
                         url: "/Mark/TeachersByUniversityId",
                         type: "GET",
-                        data: ({ universityId: $('#university3').val()}),
+                        data: ({ universityId: $('#universityMarkCourseTeacher').val()}),
                         success: function (data) {
 
-                            $('#course').empty(),
-                                $('#teacher3').empty(),
+                                $('#teacherMarkCourseTeacher').empty(),
+                                $('#courseMarkCourseTeacher').empty(),
+
 
                                 $.each(data,
                                     function (i, item) {
-                                        $('#teacher3').append
+                                        $('#teacherMarkCourseTeacher').append
                                         (
 
                                             "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
@@ -369,13 +366,12 @@
                             $.ajax({
                                 url: "/Mark/CoursesByTeacherId",
                                 type: "GET",
-                                data: ({ teacherId: $('#teacher3').val()}),
+                                data: ({ teacherId: $('#teacherMarkCourseTeacher').val()}),
                                 success: function (data) {
 
-                                    $('#course').empty(),
                                         $.each(data,
                                             function (i, item) {
-                                                $('#course').append
+                                                $('#courseMarkCourseTeacher').append
                                                 (
                                                     "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
                                                 );
@@ -387,25 +383,43 @@
                 });
 
 
-            $("#teacher3").bind("change",
+            $("#teacherMarkCourseTeacher").bind("change",
                 function () {
                     $.ajax({
                         url: "/Mark/CoursesByTeacherId",
                         type: "GET",
-                        data: ({ teacherId: $('#teacher3').val()}),
+                        data: ({ teacherId: $('#teacherMarkCourseTeacher').val()}),
                         success: function (data) {
 
-                            $('#course').empty(),
+                            $('#courseMarkCourseTeacher').empty(),
                                 $.each(data,
                                     function (i, item) {
-                                        $('#course').append
+                                        $('#courseMarkCourseTeacher').append
                                         (
-                                            "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+                                            "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
                                         );
                                     });
                         }
                     });
                 });
+
+            $("#addMarkCourseTeacher").on("submit",
+                function () {
+                    $.ajax({
+                        url: "/Mark/AddMarkCourseTeacher",
+                        type: "POST",
+                        data: ({ 
+                            UniversityId: $('#universityMarkCourseTeacher').val(), 
+                            CourseId: $('#courseMarkCourseTeacher').val(), 
+                            TeacherId: $('#teacherMarkCourseTeacher').val(), 
+                            Mark: $('#markOnCourseTeacher').val()}),
+                        success: function (data) {
+                            alert(data);
+                        }
+
+                    });
+                });
+
         });
     </script>
 }

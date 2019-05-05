@@ -1,20 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UniversityRating.Services.Common.DTOs.CourseTeacher;
 
-namespace UniversityRating.Services.Common.DTOs.Mark
+namespace UniversityRating.Presentation.Models.Mark
 {
-    public class MarkCourseTeacherDto
+    public class MarkCourseTeacherViewModel
     {
-        
         public long? UniversityId { get; set; }
 
+        [Required]
         public long TeacherId { get; set; }
 
+        [Required]
+        [Range(0, 10)]
         public double Mark { get; set; }
 
+        [Required]
         public long UserId { get; set; }
 
+        [Required]
         public long CourseId { get; set; }
-
     }
 }

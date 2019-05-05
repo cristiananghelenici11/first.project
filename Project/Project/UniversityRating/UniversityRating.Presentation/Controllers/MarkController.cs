@@ -107,6 +107,16 @@ namespace UniversityRating.Presentation.Controllers
 
             return Content(JsonConvert.SerializeObject($"Success add mark {markCourse.Mark}"), "application/json");
         }
+
+        [HttpPost]
+        public IActionResult AddMarkCourseTeacher(MarkCourseTeacherViewModel markCourseTeacher)
+        {
+            markCourseTeacher.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
+            _markService.AddMarkCourseTeacher(_mapper.Map<MarkCourseTeacherViewModel, MarkCourseTeacherDto>(markCourseTeacher));
+
+            return Content(JsonConvert.SerializeObject($"Success add mark {markCourseTeacher.Mark}"), "application/json");
+
+        }
     }
 }
 

@@ -135,7 +135,7 @@ namespace UniversityRating.Presentation.Controllers
             if (universityId.Equals(0))
             {
                 List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
-                int count = _teacherService.GetAllTeachers().Count();
+                int count = _teacherService.GetAllTeachers().Count;
                 List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
                 return Content(JsonConvert.SerializeObject(items), "application/json");

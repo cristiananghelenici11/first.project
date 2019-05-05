@@ -7,5 +7,6 @@ namespace UniversityRating.Data.Abstractions.Repositories
     {
         List<Course> GetAllCoursesByUniversityId(long universityId);
         List<Course> GetAllCoursesByTeacherId(long teacherId);
+        long GetCourseTeacherId(long courseId, long teacherId);
     }
 }

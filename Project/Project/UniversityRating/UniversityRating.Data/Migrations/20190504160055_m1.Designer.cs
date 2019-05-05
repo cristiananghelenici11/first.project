@@ -10,8 +10,8 @@ using UniversityRating.Data.Context;
 namespace UniversityRating.Data.Migrations
 {
     [DbContext(typeof(UniversityRatingContext))]
-    [Migration("20190501070952_university_v1")]
-    partial class university_v1
+    [Migration("20190504160055_m1")]
+    partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -299,7 +299,7 @@ namespace UniversityRating.Data.Migrations
 
                     b.Property<long>("UserId");
 
-                    b.Property<float>("Value");
+                    b.Property<double>("Value");
 
                     b.HasKey("Id");
 
@@ -330,8 +330,7 @@ namespace UniversityRating.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(64);
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
+                    b.Property<long>("Phone")
                         .HasMaxLength(64)
                         .IsUnicode(false);
 

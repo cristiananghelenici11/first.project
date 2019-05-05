@@ -22,6 +22,11 @@ namespace UniversityRating.Data.Repositories
             SaveChanges();
         }
 
+        public void AddMarkCourseTeacher(MarkCourseTeacher markCourseTeacher)
+        {
+            Add(markCourseTeacher);
+            SaveChanges();
+        }
 
     }
 }
