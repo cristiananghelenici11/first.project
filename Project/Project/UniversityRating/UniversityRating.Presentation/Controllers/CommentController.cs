@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -35,13 +36,23 @@ namespace UniversityRating.Presentation.Controllers
             _signInManager = signInManager;
         }
 
+        
         public IActionResult Index()
         {
+            int currentUser = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
+            List<CommentCourseDto> commentCourseDtos = _commentService.GetCommentCourseByUserId(currentUser);
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
+            List<CommentUniversityDto> commentUniversityDtos = _commentService.GetCommentUniversitiesByUserId(currentUser);
+            List<CommentTeacherDto> commentTeacherDtos = _commentService.GetCommentTeachersByUserId(currentUser);
+            List<CommentCourseTeacherDto> commentCourseTeacherDtos = _commentService.GetCommentCourseTeachersByUserId(currentUser);
 
             return View(new IndexViewModel
             {
-                UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities)
+                CommentTeacherViewModels = _mapper.Map<List<CommentTeacherDto>, List<CommentTeacherViewModel>>(commentTeacherDtos),
+                CommentCourseViewModels = _mapper.Map<List<CommentCourseDto>, List<CommentCourseViewModel>>(commentCourseDtos),
+                CommentUniversityViewModels = _mapper.Map<List<CommentUniversityDto>, List<CommentUniversityViewModel>>(commentUniversityDtos),
+                UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities),
+                CommentCourseTeacherViewModels = _mapper.Map<List<CommentCourseTeacherDto>, List<CommentCourseTeacherViewModel>>(commentCourseTeacherDtos)
             });
         }
 

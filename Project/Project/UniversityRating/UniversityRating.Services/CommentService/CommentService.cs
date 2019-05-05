@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
+using Remotion.Linq.Clauses;
 using UniversityRating.Data.Abstractions.Models.Comment;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
@@ -13,13 +15,29 @@ namespace UniversityRating.Services.CommentService
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
-        private ICourseRepository _courseRepository;
+        private readonly ICourseRepository _courseRepository;
+        private readonly IRepository<CommentUniversity> _repositoryCommentUniversity;
+        private readonly IRepository<CommentCourse> _repositoryCommentCourse;
+        private readonly IRepository<CommentTeacher> _repositoryCommentTeacher;
+        private readonly IRepository<CommentCourseTeacher> _repositoryCommentCourseTeacher;
 
-        public CommentService(ICommentRepository commentRepository, IMapper mapper, ICourseRepository courseRepository)
+        public CommentService(
+            ICommentRepository commentRepository, 
+            IMapper mapper, 
+            ICourseRepository courseRepository, 
+            IRepository<CommentUniversity> repositoryCommentUniversity,
+            IRepository<CommentCourse> repositoryCommentCourse,
+            IRepository<CommentTeacher> repositoryCommentTeacher,
+            IRepository<CommentCourseTeacher> repositoryCommentCourseTeacher
+            )
         {
             _commentRepository = commentRepository;
             _mapper = mapper;
             _courseRepository = courseRepository;
+            _repositoryCommentUniversity = repositoryCommentUniversity;
+            _repositoryCommentCourse = repositoryCommentCourse;
+            _repositoryCommentTeacher = repositoryCommentTeacher;
+            _repositoryCommentCourseTeacher = repositoryCommentCourseTeacher;
         }
 
         public List<CommentUniversityShowDto> GetCommentsByUniversityId(long universityId)
@@ -80,6 +98,70 @@ namespace UniversityRating.Services.CommentService
             };
 
             _commentRepository.AddCommentCourseTeacher(commentCourseTeacher);
+        }
+
+        public List<CommentUniversityDto> GetCommentUniversitiesByUserId(long id)
+        {
+            List<CommentUniversity> commentUniversities = _repositoryCommentUniversity.Find().Where(x => x.UserId.Equals(id)).ToList();
+            //List<CommentUniversity> commentUniversity = _commentRepository.GetCommentUniversitiesByUserId(id);
+            return _mapper.Map<List<CommentUniversity>, List<CommentUniversityDto>>(commentUniversities);
+        }
+
+        public List<CommentCourseDto> GetCommentCourseByUserId(long id)
+        {
+            List<CommentCourse> commentCourses = _repositoryCommentCourse.Find().Where(x => x.UserId.Equals(id)).ToList();
+            //return _mapper.Map<List<CommentCourse>, List<CommentCourseDto>>(commentCourses);
+            var result = new  List<CommentCourseDto>();
+            foreach (var comment in commentCourses)
+            {
+                result.Add(new CommentCourseDto
+                {
+                    UserId = comment.UserId,
+                    CourseId = comment.CourseId,
+                    Subject = comment.Subject,
+                    Message = comment.Message
+                });
+            }
+            return result;
+        }
+
+        public List<CommentTeacherDto> GetCommentTeachersByUserId(long id)
+        {
+            List<CommentTeacher> commentTeachers = _repositoryCommentTeacher.Find().Where(x => x.UserId.Equals(id)).ToList();
+            var result = new  List<CommentTeacherDto>();
+
+            foreach (var comment in commentTeachers)
+            {
+                result.Add(new CommentTeacherDto
+                {
+                    UserId = comment.UserId,
+                    TeacherId = comment.TeacherId,
+                    Subject = comment.Subject,
+                    Message = comment.Message
+
+                });
+            }
+
+            return result;
+        }
+
+        public List<CommentCourseTeacherDto> GetCommentCourseTeachersByUserId(long id)
+        {
+            List<CommentCourseTeacher> commentCourseTeacher = _repositoryCommentCourseTeacher.Find().Where(x => x.UserId.Equals(id)).ToList();
+
+            var result = new List<CommentCourseTeacherDto>();
+
+            foreach (var comment in commentCourseTeacher)
+            {
+                result.Add(new CommentCourseTeacherDto
+                {
+                    UserId = comment.UserId,
+                    Subject = comment.Subject,
+                    Message = comment.Message
+                });
+            }
+
+            return result;
         }
     }
 }

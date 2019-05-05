@@ -63,6 +63,12 @@ namespace UniversityRating.Presentation.Controllers
         }
 
         [HttpGet]
+        public IActionResult Specialties()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Maps()
         {
             return View();

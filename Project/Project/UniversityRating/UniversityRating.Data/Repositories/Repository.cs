@@ -9,7 +9,7 @@ using UniversityRating.Data.Core.DomainModels;
 
 namespace UniversityRating.Data.Repositories
 {
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;

@@ -22,6 +22,10 @@ namespace UniversityRating.Infrastructure.Profiles
             CreateMap<UniversityShow, UniversityShowDto>();
 
             CreateMap<CommentUniversityShow, CommentUniversityShowDto>();
+
+            CreateMap<CommentUniversity, CommentUniversityDto>();
+            CreateMap<CommentCourse, CommentCourseDto>()
+                .ForMember(x => x.UniversityId, opt => opt.Ignore());
         }
         
     }

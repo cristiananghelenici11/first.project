@@ -6,7 +6,7 @@ namespace UniversityRating.Services.Common.DTOs.Comment
     {
         public long UniversityId { get; set; }
 
-        public long CourseId { get; set; }
+        public long? CourseId { get; set; }
 
         public long UserId { get; set; }
 

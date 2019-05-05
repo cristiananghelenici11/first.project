@@ -16,8 +16,6 @@ namespace UniversityRating.Data.Repositories
         {
         }
 
-    
-
         public void AddCommentUniversity(CommentUniversity commentUniversity)
         {
             Add(commentUniversity);
@@ -55,6 +53,18 @@ namespace UniversityRating.Data.Repositories
         {
             Add(commentCourseTeacher);
             SaveChanges();
+        }
+
+        public List<CommentUniversity> GetCommentUniversitiesByUserId(long id)
+        {
+            return BuildQuery()
+                .Where(x => x.UserId.Equals(id))
+                .Select(x => new CommentUniversity
+                {
+                    Message = x.Message,
+                    Subject = x.Subject,
+                })
+                .ToList();
         }
     }
 }

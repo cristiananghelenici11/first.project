@@ -16,5 +16,13 @@ namespace UniversityRating.Services.Abstractions
         void AddCommentCourse(CommentCourseDto commentCourseDto);
 
         void AddCommentCourseTeacher(CommentCourseTeacherDto commentCourseTeacherDto);
+
+        List<CommentUniversityDto> GetCommentUniversitiesByUserId(long id);
+
+        List<CommentCourseDto> GetCommentCourseByUserId(long id);
+
+        List<CommentTeacherDto> GetCommentTeachersByUserId(long id);
+
+        List<CommentCourseTeacherDto> GetCommentCourseTeachersByUserId(long id);
     }
 }
