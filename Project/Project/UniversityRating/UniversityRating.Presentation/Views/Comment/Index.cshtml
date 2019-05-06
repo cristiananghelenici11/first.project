@@ -40,12 +40,13 @@
 
                                     <div class="container tab-pane active" id="commentUniversity">
                                         <div class="row" style="padding-top: 50px; padding-bottom: 50px">
+
                                             <form id="addCommentUniversity">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <p>Chose University</p>
                                                         <select id="university" class="form-control" style="width: 150px">
-                                                            @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                           @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
                                                             {
                                                                 <option title="@university.Description" value="@university.Id">@university.Name</option>
                                                             }
@@ -81,7 +82,7 @@
                                         </div>
                                         @* --------------------------------------------------------------- *@
                                         <ul class="media-list">
-                                           @foreach (var comment in Model.CommentUniversityViewModels)
+                                            @foreach (var comment in Model.CommentUniversityViewModels)
                                             {
                                                 <li class="media">
                                                     <a class="pull-left" style="padding-top: 25px">
@@ -97,8 +98,18 @@
                                                             </h4>
                                                             <p> Subject: @comment.Subject</p>
                                                             <p> Message: @comment.Message</p>
-                                                            <a class="btn btn-primary text-uppercase" id="reply"><span class="glyphicon glyphicon-edit"></span>Modify</a>
-                                                            <a class="btn btn-danger text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-erase"></span>Delete</a>
+
+                                                            <form asp-action="DeleteComment" asp-route-id="@comment.Id" data-ajax="true">
+                                                                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                                                    <span class="glyphicon glyphicon-erase"></span>Delete
+                                                                </button>
+                                                                
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                    <span class="glyphicon glyphicon-pencil"></span>Modify
+                                                                </a>
+                                                            </form>
+
+
                                                         </div>
                                                     </div>
 
@@ -106,8 +117,8 @@
                                             }
                                         </ul>
 
-                                            @* ----------------------------------------------- *@
-                                        </div>
+                                        @* ----------------------------------------------- *@
+                                    </div>
 
                                     <div class="container tab-pane fade" id="commentTeacher">
                                         <div class="row" style="padding-top: 50px; padding-bottom: 50px">
@@ -175,8 +186,17 @@
                                                             </h4>
                                                             <p> Subject: @comment.Subject</p>
                                                             <p> Message: @comment.Message</p>
-                                                            <a class="btn btn-primary text-uppercase" id="reply"><span class="glyphicon glyphicon-edit"></span>Modify</a>
-                                                            <a class="btn btn-danger text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-erase"></span>Delete</a>
+
+                                                            <form asp-action="DeleteComment" asp-route-id="@comment.Id" data-ajax="true">
+
+                                                                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                                                    <span class="glyphicon glyphicon-erase"></span>Delete
+                                                                </button>
+
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                    <span class="glyphicon glyphicon-pencil"></span>Modify
+                                                                </a>
+                                                            </form>
                                                         </div>
                                                     </div>
 
@@ -251,8 +271,17 @@
                                                             </h4>
                                                             <p> Subject: @comment.Subject</p>
                                                             <p> Message: @comment.Message</p>
-                                                            <a class="btn btn-primary text-uppercase" id="reply"><span class="glyphicon glyphicon-edit"></span>Modify</a>
-                                                            <a class="btn btn-danger text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-erase"></span>Delete</a>
+
+                                                            <form asp-action="DeleteComment" asp-route-id="@comment.Id" data-ajax="true">
+                                                                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                                                    <span class="glyphicon glyphicon-erase"></span>Delete
+                                                                </button>
+
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                    <span class="glyphicon glyphicon-pencil"></span>Modify
+                                                                </a>
+                                                            </form>
+
                                                         </div>
                                                     </div>
 
@@ -335,8 +364,16 @@
                                                             </h4>
                                                             <p> Subject: @comment.Subject</p>
                                                             <p> Message: @comment.Message</p>
-                                                            <a class="btn btn-primary text-uppercase" id="reply"><span class="glyphicon glyphicon-edit"></span>Modify</a>
-                                                            <a class="btn btn-danger text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-erase"></span>Delete</a>
+
+                                                            <form asp-action="DeleteComment" asp-route-id="@comment.Id" data-ajax="true">
+                                                                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                                                    <span class="glyphicon glyphicon-erase"></span>Delete
+                                                                </button>
+
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                    <span class="glyphicon glyphicon-pencil"></span>Modify
+                                                                </a>
+                                                            </form>
                                                         </div>
                                                     </div>
 
@@ -363,6 +400,30 @@
 </div>
 
 @section Scripts{
+
+    <script>
+        var Popup;
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function(response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Edit Your Comment',
+                        height: 400,
+                        width: 700,
+                        close: function() {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+
+    </script>
 
     <script>
         $(document).ready(function () {

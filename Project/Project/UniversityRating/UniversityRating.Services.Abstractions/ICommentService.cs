@@ -24,5 +24,7 @@ namespace UniversityRating.Services.Abstractions
         List<CommentTeacherDto> GetCommentTeachersByUserId(long id);
 
         List<CommentCourseTeacherDto> GetCommentCourseTeachersByUserId(long id);
+
+        void DeleteCommentById(long id);
     }
 }

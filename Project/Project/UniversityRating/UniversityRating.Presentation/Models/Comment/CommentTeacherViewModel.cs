@@ -4,6 +4,8 @@ namespace UniversityRating.Presentation.Models.Comment
 {
     public class CommentTeacherViewModel
     {
+        public long Id { get; set; }
+
         [Required]
         public long UniversityId { get; set; }
 

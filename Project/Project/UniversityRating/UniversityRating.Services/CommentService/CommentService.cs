@@ -20,6 +20,7 @@ namespace UniversityRating.Services.CommentService
         private readonly IRepository<CommentCourse> _repositoryCommentCourse;
         private readonly IRepository<CommentTeacher> _repositoryCommentTeacher;
         private readonly IRepository<CommentCourseTeacher> _repositoryCommentCourseTeacher;
+        private readonly IRepository<Comment> _repositoryComment;
 
         public CommentService(
             ICommentRepository commentRepository, 
@@ -28,7 +29,8 @@ namespace UniversityRating.Services.CommentService
             IRepository<CommentUniversity> repositoryCommentUniversity,
             IRepository<CommentCourse> repositoryCommentCourse,
             IRepository<CommentTeacher> repositoryCommentTeacher,
-            IRepository<CommentCourseTeacher> repositoryCommentCourseTeacher
+            IRepository<CommentCourseTeacher> repositoryCommentCourseTeacher,
+            IRepository<Comment> repositoryComment
             )
         {
             _commentRepository = commentRepository;
@@ -38,6 +40,7 @@ namespace UniversityRating.Services.CommentService
             _repositoryCommentCourse = repositoryCommentCourse;
             _repositoryCommentTeacher = repositoryCommentTeacher;
             _repositoryCommentCourseTeacher = repositoryCommentCourseTeacher;
+            _repositoryComment = repositoryComment;
         }
 
         public List<CommentUniversityShowDto> GetCommentsByUniversityId(long universityId)
@@ -119,7 +122,8 @@ namespace UniversityRating.Services.CommentService
                     UserId = comment.UserId,
                     CourseId = comment.CourseId,
                     Subject = comment.Subject,
-                    Message = comment.Message
+                    Message = comment.Message,
+                    Id = comment.Id
                 });
             }
             return result;
@@ -137,8 +141,8 @@ namespace UniversityRating.Services.CommentService
                     UserId = comment.UserId,
                     TeacherId = comment.TeacherId,
                     Subject = comment.Subject,
-                    Message = comment.Message
-
+                    Message = comment.Message,
+                    Id = comment.Id
                 });
             }
 
@@ -157,11 +161,19 @@ namespace UniversityRating.Services.CommentService
                 {
                     UserId = comment.UserId,
                     Subject = comment.Subject,
-                    Message = comment.Message
+                    Message = comment.Message,
+                    Id = comment.Id
                 });
             }
 
             return result;
+        }
+
+        public void DeleteCommentById(long id)
+        {
+            Comment comment = _repositoryComment.GetById(id);
+            _repositoryComment.Remove(comment);
+            _repositoryComment.SaveChanges();
         }
     }
 }

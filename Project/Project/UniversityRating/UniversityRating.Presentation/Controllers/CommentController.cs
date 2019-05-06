@@ -21,8 +21,8 @@ namespace UniversityRating.Presentation.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICommentService _commentService;
-        private IUniversityService _universityService;
-        private SignInManager<User> _signInManager;
+        private readonly IUniversityService _universityService;
+        private readonly SignInManager<User> _signInManager;
 
         public CommentController(
             IMapper mapper, 
@@ -105,6 +105,16 @@ namespace UniversityRating.Presentation.Controllers
             return Content(result, "application/json");
         }
 
+        [HttpPost]
+        public IActionResult DeleteComment(long id)
+        {
+            if (!ModelState.IsValid) return Content(JsonConvert.SerializeObject("Not valid"));
+
+            _commentService.DeleteCommentById(id);
+
+            return RedirectToAction("Index");
+        }
+
         
 
 
@@ -123,6 +133,18 @@ namespace UniversityRating.Presentation.Controllers
         }
         [HttpGet]
         public ActionResult AddOrEdit(int id = 0)
+        {
+            if (id == 0)
+                return View(new CommentUniversityShowDto());
+
+            List<CommentUniversityShowDto> commentUniversityShowDtos = _commentService.GetCommentsByUniversityId(2);
+
+            return View(commentUniversityShowDtos.FirstOrDefault(x => x.UniversityId == id));
+
+        }        
+        
+        [HttpGet]
+        public ActionResult EditComment(int id = 0)
         {
             if (id == 0)
                 return View(new CommentUniversityShowDto());

@@ -2,6 +2,8 @@
 {
     public class CommentUniversityDto
     {
+        public long Id { get; set; }
+
         public long UniversityId { get; set; }
 
         public long UserId { get; set; }

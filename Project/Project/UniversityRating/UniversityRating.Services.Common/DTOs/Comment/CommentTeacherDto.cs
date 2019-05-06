@@ -4,6 +4,8 @@ namespace UniversityRating.Services.Common.DTOs.Comment
 {
     public class CommentTeacherDto  
     {
+        public long Id { get; set; }
+
         public long UniversityId { get; set; }
 
         public long? TeacherId { get; set; }
