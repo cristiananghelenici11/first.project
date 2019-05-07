@@ -12,7 +12,7 @@ namespace UniversityRating.Services.Common.DTOs.Faculty
         public string Address { get; set; }
         public string Description { get; set; }
 
-        public UniversityDto Universtity { get; set; }
+        public UniversityDto University { get; set; }
         public IEnumerable<CourseDto> Courses { get; set; }
     }
 }

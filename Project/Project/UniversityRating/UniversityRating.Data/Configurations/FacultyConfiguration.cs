@@ -20,9 +20,9 @@ namespace UniversityRating.Data.Configurations
                    .IsRequired()
                    .HasMaxLength(64);
 
-            builder.HasOne(d => d.Universtity)
+            builder.HasOne(d => d.University)
                    .WithMany(p => p.Faculties)
-                   .HasForeignKey(d => d.UniverstityId)
+                   .HasForeignKey(d => d.UniversityId)
                    .OnDelete(DeleteBehavior.ClientSetNull)
                    .HasConstraintName("FK_FacultyToUniversity");
         }

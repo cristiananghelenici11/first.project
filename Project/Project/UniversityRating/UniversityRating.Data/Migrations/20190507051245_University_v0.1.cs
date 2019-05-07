@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UniversityRating.Data.Migrations
 {
-    public partial class m1 : Migration
+    public partial class University_v01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -117,14 +117,14 @@ namespace UniversityRating.Data.Migrations
                     Name = table.Column<string>(maxLength: 64, nullable: false),
                     Address = table.Column<string>(maxLength: 128, nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: false),
-                    UniverstityId = table.Column<long>(nullable: false)
+                    UniversityId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Faculties", x => x.Id);
                     table.ForeignKey(
                         name: "FK_FacultyToUniversity",
-                        column: x => x.UniverstityId,
+                        column: x => x.UniversityId,
                         principalTable: "Universities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -424,9 +424,9 @@ namespace UniversityRating.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculties_UniverstityId",
+                name: "IX_Faculties_UniversityId",
                 table: "Faculties",
-                column: "UniverstityId");
+                column: "UniversityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Marks_UserId",

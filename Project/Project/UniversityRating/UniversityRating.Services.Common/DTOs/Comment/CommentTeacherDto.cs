@@ -8,7 +8,7 @@ namespace UniversityRating.Services.Common.DTOs.Comment
 
         public long UniversityId { get; set; }
 
-        public long? TeacherId { get; set; }
+        public long TeacherId { get; set; }
 
         public string Subject { get; set; }
 

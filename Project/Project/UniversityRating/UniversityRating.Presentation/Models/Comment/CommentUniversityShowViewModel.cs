@@ -10,6 +10,6 @@
 
         public long UserId { get; set; }
 
-        public long? UniversityId { get; set; }
+        public long UniversityId { get; set; }
     }
 }

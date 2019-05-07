@@ -10,8 +10,8 @@ using UniversityRating.Data.Context;
 namespace UniversityRating.Data.Migrations
 {
     [DbContext(typeof(UniversityRatingContext))]
-    [Migration("20190504160055_m1")]
-    partial class m1
+    [Migration("20190507051245_University_v0.1")]
+    partial class University_v01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,11 +196,11 @@ namespace UniversityRating.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(64);
 
-                    b.Property<long>("UniverstityId");
+                    b.Property<long>("UniversityId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UniverstityId");
+                    b.HasIndex("UniversityId");
 
                     b.ToTable("Faculties");
                 });
@@ -404,7 +404,7 @@ namespace UniversityRating.Data.Migrations
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
 
-                    b.Property<long?>("CourseId");
+                    b.Property<long>("CourseId");
 
                     b.HasIndex("CourseId");
 
@@ -415,7 +415,7 @@ namespace UniversityRating.Data.Migrations
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
 
-                    b.Property<long?>("CourseTeacherId");
+                    b.Property<long>("CourseTeacherId");
 
                     b.HasIndex("CourseTeacherId");
 
@@ -426,7 +426,7 @@ namespace UniversityRating.Data.Migrations
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
 
-                    b.Property<long?>("TeacherId");
+                    b.Property<long>("TeacherId");
 
                     b.HasIndex("TeacherId");
 
@@ -437,7 +437,7 @@ namespace UniversityRating.Data.Migrations
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Comment");
 
-                    b.Property<long?>("UniversityId");
+                    b.Property<long>("UniversityId");
 
                     b.HasIndex("UniversityId");
 
@@ -448,7 +448,7 @@ namespace UniversityRating.Data.Migrations
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Mark");
 
-                    b.Property<long?>("CourseId");
+                    b.Property<long>("CourseId");
 
                     b.HasIndex("CourseId");
 
@@ -459,7 +459,7 @@ namespace UniversityRating.Data.Migrations
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Mark");
 
-                    b.Property<long?>("CourseTeacherId");
+                    b.Property<long>("CourseTeacherId");
 
                     b.HasIndex("CourseTeacherId");
 
@@ -470,7 +470,7 @@ namespace UniversityRating.Data.Migrations
                 {
                     b.HasBaseType("UniversityRating.Data.Core.DomainModels.Mark");
 
-                    b.Property<long?>("TeacherId");
+                    b.Property<long>("TeacherId");
 
                     b.HasIndex("TeacherId");
 
@@ -556,9 +556,9 @@ namespace UniversityRating.Data.Migrations
 
             modelBuilder.Entity("UniversityRating.Data.Core.DomainModels.Faculty", b =>
                 {
-                    b.HasOne("UniversityRating.Data.Core.DomainModels.University", "Universtity")
+                    b.HasOne("UniversityRating.Data.Core.DomainModels.University", "University")
                         .WithMany("Faculties")
-                        .HasForeignKey("UniverstityId")
+                        .HasForeignKey("UniversityId")
                         .HasConstraintName("FK_FacultyToUniversity")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

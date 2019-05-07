@@ -15,7 +15,7 @@ namespace UniversityRating.Data.Repositories
         public List<Course> GetAllCoursesByUniversityId(long universityId)
         {
             return BuildQuery()
-                .Where(x => x.Faculty.Universtity.Id.Equals(universityId))
+                .Where(x => x.Faculty.University.Id.Equals(universityId))
                 .Select(c => new Course()
                 {
                     Id = c.Id,

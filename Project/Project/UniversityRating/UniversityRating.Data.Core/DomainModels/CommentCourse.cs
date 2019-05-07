@@ -2,7 +2,7 @@
 {
     public class CommentCourse : Comment
     {
-        public long? CourseId { get; set; }
+        public long CourseId { get; set; }
         public virtual Course Course { get; set; }
     }
 }

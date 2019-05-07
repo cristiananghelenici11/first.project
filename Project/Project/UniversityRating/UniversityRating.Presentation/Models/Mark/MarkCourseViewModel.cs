@@ -4,7 +4,7 @@ namespace UniversityRating.Presentation.Models.Mark
 {
     public class MarkCourseViewModel
     {
-        public long? UniversityId { get; set; }
+        public long UniversityId { get; set; }
 
         [Required]
         public long CourseId { get; set; }
