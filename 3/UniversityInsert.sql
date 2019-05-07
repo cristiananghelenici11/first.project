@@ -49,7 +49,7 @@ INSERT INTO Teachers(FirstName, LastName, Idnp, Email, Phone, TypeTeacher)
 		('Voicu', 'Bianca', 7495867387503, 'voicu.bianca@gmail.com', 069435614, 'lector superior');
 
 
-INSERT INTO Faculties(Name, Description, Address, UniverstityId)
+INSERT INTO Faculties(Name, Description, Address, UniversityId)
 	VALUES
 		('FET', 'Facultatea Electronică și Telecomunicații', 'bd. Ştefan cel Mare, 168, corpul de studii nr. 1', 2),
 		('FEIE', 'Facultatea Energetică și Inginerie Electrică', 'str. 31 August 1989, 78, corpul de studii nr. 2', 2),
@@ -77,23 +77,24 @@ INSERT INTO Courses(Name, Description, Credits, FacultyId, YearOfStudy)
 
 INSERT INTO UniversityTeachers(UniversityId, TeacherId)
 	Values
-		(2, 42),
-		(2, 43),
-		(2, 44),
-		(2, 45),
-		(2, 46),
-		(2, 47),
-		(2, 48),
-		(2, 49);
+		(2, 2),
+		(2, 3),
+		(2, 4),
+		(2, 5),
+		(2, 6),
+		(2, 7),
+		(2, 8),
+		(2, 9);
 
 
 INSERT INTO CourseTeachers(CourseId, TeacherId)
 	VALUES
-		(2, 42),
-		(3, 43),
-		(4, 44),
-		(5, 45),
-		(6, 46),
-		(7, 47),
-		(8, 48),
-		(9, 49);
+		(2, 1),
+		(2, 2),
+		(3, 3),
+		(4, 4),
+		(5, 5),
+		(6, 6),
+		(7, 7),
+		(8, 8),
+		(9, 9);

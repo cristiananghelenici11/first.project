@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore.Query;
 using Remotion.Linq.Clauses;
+using UniversityRating.Data.Abstractions.Extensions;
 using UniversityRating.Data.Abstractions.Models.Comment;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
+using UniversityRating.Data.Repositories;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.Comment;
 
@@ -151,22 +154,14 @@ namespace UniversityRating.Services.CommentService
 
         public List<CommentCourseTeacherDto> GetCommentCourseTeachersByUserId(long id)
         {
-            List<CommentCourseTeacher> commentCourseTeacher = _repositoryCommentCourseTeacher.Find().Where(x => x.UserId.Equals(id)).ToList();
+            
+            var spec = new Specification<CommentCourseTeacher> {Predicate = teacher => teacher.User.Id == id};
+            spec.Include(x => x.CourseTeacher)
+                .ThenInclude(x => x.Course)
+                .ThenInclude(x => x.Faculty);
 
-            var result = new List<CommentCourseTeacherDto>();
-
-            foreach (var comment in commentCourseTeacher)
-            {
-                result.Add(new CommentCourseTeacherDto
-                {
-                    UserId = comment.UserId,
-                    Subject = comment.Subject,
-                    Message = comment.Message,
-                    Id = comment.Id
-                });
-            }
-
-            return result;
+            List<CommentCourseTeacher> commentCourseTeachers = _repositoryCommentCourseTeacher.Find(spec).ToList();
+            return _mapper.Map<List<CommentCourseTeacher>, List<CommentCourseTeacherDto>>(commentCourseTeachers);
         }
 
         public void DeleteCommentById(long id)
@@ -174,6 +169,24 @@ namespace UniversityRating.Services.CommentService
             Comment comment = _repositoryComment.GetById(id);
             _repositoryComment.Remove(comment);
             _repositoryComment.SaveChanges();
+        }
+
+        public CommentDto GetCommentById(long id)
+        {
+            Comment comment = _commentRepository.GetById(id);
+            return _mapper.Map<Comment, CommentDto>(comment);
+        }
+
+        public void UpdateComment(CommentDto comment)
+        {
+            _commentRepository.Update(new Comment
+            {
+                Id = comment.Id, 
+                Message = comment.Message, 
+                Subject = comment.Subject, 
+                UserId = comment.UserId
+            });
+            _commentRepository.SaveChanges();
         }
     }
 }

@@ -132,15 +132,17 @@
                             <p>Feedback</p>
                         </a>
                         <ul class="collapse nav" id="commentsMenu">
+                           @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li>
+                                    <a asp-controller="Comment" asp-action="AddComment">
+                                        <i class="far fa-comment-dots"></i>
+                                        <p>Add Feedback</p>
+                                    </a>
+                                </li>
+                            }
                             <li>
-                                <a asp-controller="Comment" asp-action="Index">
-                                    <i class="far fa-comment-dots"></i>
-                                    <p>Add Feedback</p>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a asp-controller="Home" asp-action="Feedback">
+                                <a asp-controller="Comment" asp-action="ViewComment">
                                     <i class="pe-7s-bell"></i>
                                     <p>View Feedback </p>
                                 </a>
@@ -187,7 +189,6 @@
     <environment include="Development">
         <script src="/lib/jquery/dist/jquery.min.js"></script>
         <script src="/Scripts/jquery-ui-1.12.1.min.js"></script>
-
 
         <script src="/assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
         <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>

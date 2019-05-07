@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
-using UniversityRating.Data.Abstractions.Models.Comment;
 using UniversityRating.Presentation.Models.Comment;
+using UniversityRating.Presentation.Models.Mark;
 using UniversityRating.Presentation.Models.Teacher;
 using UniversityRating.Presentation.Models.University;
 using UniversityRating.Services.Common.DTOs.Comment;
+using UniversityRating.Services.Common.DTOs.Mark;
 using UniversityRating.Services.Common.DTOs.Teacher;
 using UniversityRating.Services.Common.DTOs.University;
 
-namespace UniversityRating.Infrastructure.Profiles
+namespace UniversityRating.Presentation.Profiles
 {
     public class DtoToViewModelProfile : Profile
     {
@@ -24,6 +25,9 @@ namespace UniversityRating.Infrastructure.Profiles
             CreateMap<CommentUniversityDto, CommentUniversityViewModel>();
             CreateMap<CommentCourseDto, CommentCourseViewModel>();
             CreateMap<CommentCourseTeacherDto, CommentCourseTeacherViewModel>();
+
+            CreateMap<EditMarkDto, EditMarkViewModel>();
+
         }
     }
 }

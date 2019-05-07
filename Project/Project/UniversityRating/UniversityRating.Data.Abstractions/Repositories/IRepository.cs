@@ -18,6 +18,9 @@ namespace UniversityRating.Data.Abstractions.Repositories
 
         IEnumerable<TEntity> Find(ISpecification<TEntity> specification = null);
 
+        void Update(TEntity entity);
+
+
         void Remove(TEntity entity);
 
         void RemoveRange(IEnumerable<TEntity> entities);

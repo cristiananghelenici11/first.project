@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UniversityRating.Presentation.Models.Comment;
+using UniversityRating.Presentation.Models.Mark;
 using UniversityRating.Presentation.Models.Teacher;
 using UniversityRating.Presentation.Models.University;
 
@@ -17,5 +18,8 @@ namespace UniversityRating.Presentation.Models.Home
         public List<CommentTeacherViewModel> CommentTeacherViewModels { get; set; }
         public List<CommentCourseTeacherViewModel> CommentCourseTeacherViewModels { get; set; }
 
+        public List<EditMarkTeacherViewModel> EditMarkTeacherViewModels { get; set; }
+        
+        public List<EditMarkCourseViewModel> EditMarkCourseViewModels {get; set;} 
     }
 }

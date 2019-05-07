@@ -22,7 +22,6 @@ namespace UniversityRating.Presentation.Controllers
         private IUniversityService _universityService;
         private ITeacherService _teacherService;
         private ICourseService _courseService;
-        private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IMarkService _markService;
 
@@ -32,27 +31,30 @@ namespace UniversityRating.Presentation.Controllers
             ITeacherService teacherService, 
             ICourseService courseService, 
             IMarkService markService,
-            UserManager<User> userManager, 
             SignInManager<User> signInManager)
         {
             _mapper = mapper;
             _universityService = universityService;
             _teacherService = teacherService;
             _courseService = courseService;
-            _userManager = _userManager;
             _signInManager = signInManager;
             _markService = markService;
-
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            long currentUser = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
+
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
+            List<EditMarkTeacherDto> editMarkTeacherViewModels = _markService.GetMarkTeacherByUserId(currentUser);
+            List<EditMarkCourseDto> editMarkCourseDtos = _markService.GetMarkCourseByUserId(currentUser);
 
             return View(new IndexViewModel
             {
-                UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities)
+                UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities),
+                EditMarkTeacherViewModels = _mapper.Map<List<EditMarkTeacherDto>, List<EditMarkTeacherViewModel>>(editMarkTeacherViewModels),
+                EditMarkCourseViewModels = _mapper.Map<List<EditMarkCourseDto>, List<EditMarkCourseViewModel>>(editMarkCourseDtos)
             });
         }
 
@@ -115,8 +117,37 @@ namespace UniversityRating.Presentation.Controllers
             _markService.AddMarkCourseTeacher(_mapper.Map<MarkCourseTeacherViewModel, MarkCourseTeacherDto>(markCourseTeacher));
 
             return Content(JsonConvert.SerializeObject($"Success add mark {markCourseTeacher.Mark}"), "application/json");
+        }
 
+        [HttpPost]
+        public IActionResult DeleteMark(int id)
+        {
+            if (!ModelState.IsValid) return Content(JsonConvert.SerializeObject("Not valid"));
+            _markService.DeleteMarkById(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult EditMark(long id)
+        {
+            EditMarkDto markDto = _markService.GetMarkById(id);
+
+            EditMarkViewModel model = markDto == null
+                ? new EditMarkViewModel()
+                : _mapper.Map<EditMarkDto, EditMarkViewModel>(markDto);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditMark(EditMarkViewModel model)
+        {
+
+            if (!ModelState.IsValid) return View(model);
+            _markService.UpdateMark(_mapper.Map<EditMarkViewModel, EditMarkDto>(model));
+
+            return RedirectToAction("Index");
         }
     }
 }
-

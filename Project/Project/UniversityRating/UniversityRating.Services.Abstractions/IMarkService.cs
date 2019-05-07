@@ -1,4 +1,5 @@
-﻿using UniversityRating.Services.Common.DTOs.Mark;
+﻿using System.Collections.Generic;
+using UniversityRating.Services.Common.DTOs.Mark;
 
 namespace UniversityRating.Services.Abstractions
 {
@@ -7,5 +8,10 @@ namespace UniversityRating.Services.Abstractions
         void AddMarkTeacher(MarkTeacherDto markTeacher);
         void AddMarkCourse(MarkCourseDto markTeacher);
         void AddMarkCourseTeacher(MarkCourseTeacherDto markCourseTeacher);
+        List<EditMarkTeacherDto> GetMarkTeacherByUserId(long currentUser);
+        void DeleteMarkById(long id);
+        EditMarkDto GetMarkById(long id);
+        void UpdateMark(EditMarkDto editMarkDto);
+        List<EditMarkCourseDto> GetMarkCourseByUserId(long id);
     }
 }

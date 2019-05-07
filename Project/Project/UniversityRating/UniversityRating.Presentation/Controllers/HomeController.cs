@@ -42,7 +42,6 @@ namespace UniversityRating.Presentation.Controllers
             List<TopTeacherDto> topTeacherDtos = _teacherService.GetTopTeachers(2);
             List<TopUniversityDto> topUniversityDtos = _universityService.GetTopUniversities(3);
 
-
             return View(new IndexViewModel
             {
                 TopTeachers = _mapper.Map<List<TopTeacherDto>, List<TopTeacherViewModel>>(topTeacherDtos),
@@ -72,18 +71,6 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Maps()
         {
             return View();
-        }
-
-        [HttpGet]
-        public IActionResult Feedback()
-        {
-            List<UniversityShowDto> universityShowDtos = _universityService.GetAllUniversities();
-
-            return View(new IndexViewModel
-            {
-                UniversityShowViewModels = 
-                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowDtos)
-            });
         }
 
         [HttpGet]
@@ -145,9 +132,6 @@ namespace UniversityRating.Presentation.Controllers
                 List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
                 return Content(JsonConvert.SerializeObject(items), "application/json");
-
-                //List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
-                //return Content(JsonConvert.SerializeObject(items), "application/json");
             }
             List<TeacherShowDto> teachersByUniversityId = _teacherService.GetAllTeachersByUniversityId(universityId);
             string result = JsonConvert.SerializeObject(teachersByUniversityId);

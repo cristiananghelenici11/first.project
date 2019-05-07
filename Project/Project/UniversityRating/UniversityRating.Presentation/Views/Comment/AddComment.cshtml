@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using UniversityRating.Data.Core.DomainModels.Identity
 @using UniversityRating.Presentation.Models.University
+@model UniversityRating.Presentation.Models.Home.IndexViewModel
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
@@ -104,12 +105,10 @@
                                                                     <span class="glyphicon glyphicon-erase"></span>Delete
                                                                 </button>
                                                                 
-                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment", new {id = comment.Id, UserId = comment.UserId})')">
                                                                     <span class="glyphicon glyphicon-pencil"></span>Modify
                                                                 </a>
                                                             </form>
-
-
                                                         </div>
                                                     </div>
 
@@ -193,7 +192,7 @@
                                                                     <span class="glyphicon glyphicon-erase"></span>Delete
                                                                 </button>
 
-                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment", new {id = comment.Id, UserId = comment.UserId})')">
                                                                     <span class="glyphicon glyphicon-pencil"></span>Modify
                                                                 </a>
                                                             </form>
@@ -277,7 +276,7 @@
                                                                     <span class="glyphicon glyphicon-erase"></span>Delete
                                                                 </button>
 
-                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment", new {id = comment.Id, UserId = comment.UserId})')">
                                                                     <span class="glyphicon glyphicon-pencil"></span>Modify
                                                                 </a>
                                                             </form>
@@ -370,7 +369,7 @@
                                                                     <span class="glyphicon glyphicon-erase"></span>Delete
                                                                 </button>
 
-                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment")')">
+                                                                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment", new {id = comment.Id, UserId = comment.UserId})')">
                                                                     <span class="glyphicon glyphicon-pencil"></span>Modify
                                                                 </a>
                                                             </form>

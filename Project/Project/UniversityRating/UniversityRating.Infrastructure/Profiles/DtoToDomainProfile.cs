@@ -18,6 +18,8 @@ namespace UniversityRating.Infrastructure.Profiles
             //    .ForMember(x => x.Value, y => y.MapFrom(z => z.Mark))
             //    .ForAllOtherMembers(y => y.Ignore());
             
+            CreateMap<EditMarkDto, Mark>();
+
         }
         
     }

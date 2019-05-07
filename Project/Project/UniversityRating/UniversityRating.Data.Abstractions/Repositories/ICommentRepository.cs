@@ -17,7 +17,5 @@ namespace UniversityRating.Data.Abstractions.Repositories
         void AddCommentCourseTeacher(CommentCourseTeacher commentCourseTeacher);
 
         List<CommentUniversity> GetCommentUniversitiesByUserId(long id);
-
-
     }
 }

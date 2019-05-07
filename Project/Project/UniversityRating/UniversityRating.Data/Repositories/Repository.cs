@@ -55,6 +55,14 @@ namespace UniversityRating.Data.Repositories
             return query.ToList();
         }
 
+        public void Update(TEntity entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(paramName: nameof(entity));
+
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+
         public void Remove(TEntity entity)
         {
             if (entity == null)

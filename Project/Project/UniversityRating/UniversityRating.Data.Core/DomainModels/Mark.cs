@@ -2,7 +2,7 @@
 
 namespace UniversityRating.Data.Core.DomainModels
 {
-    public abstract class Mark : Entity
+    public class Mark : Entity
     {
         public long UserId { get; set; }
         public double Value { get; set; }

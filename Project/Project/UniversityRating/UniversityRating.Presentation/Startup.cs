@@ -20,6 +20,8 @@ using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Context;
 using UniversityRating.Data.Core.DomainModels.Identity;
 using UniversityRating.Data.Repositories;
+using UniversityRating.Infrastructure.Profiles;
+using UniversityRating.Presentation.Profiles;
 using UniversityRating.Presentation.Services;
 using UniversityRating.Services;
 using UniversityRating.Services.Abstractions;
@@ -71,7 +73,14 @@ namespace UniversityRating.Presentation
 //                .AddDefaultUI(UIFramework.Bootstrap4)
 //                .AddEntityFrameworkStores<UniversityRatingContext>();
 
-            services.AddAutoMapper();
+            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(expression =>
+            {
+                expression.AddProfile<DomainToDtoProfile>();
+                expression.AddProfile<DtoProfileToDomain>();
+                expression.AddProfile<DtoToViewModelProfile>();
+                expression.AddProfile<ViewModelToDtoProfile>();
+            });
             //services.AddAutoMapper(additional => additional.AddProfiles(Assembly.Load("UniversityRating.Infrastructure")));
 
 

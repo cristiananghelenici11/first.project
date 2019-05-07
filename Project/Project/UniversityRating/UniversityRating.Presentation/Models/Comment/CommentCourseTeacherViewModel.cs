@@ -27,3 +27,5 @@ namespace UniversityRating.Presentation.Models.Comment
         public string Message { get; set; }
     }
 }
+
+

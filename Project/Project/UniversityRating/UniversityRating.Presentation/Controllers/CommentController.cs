@@ -37,9 +37,10 @@ namespace UniversityRating.Presentation.Controllers
         }
 
         
-        public IActionResult Index()
+        public IActionResult AddComment()
         {
-            int currentUser = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
+            long currentUser = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
+
             List<CommentCourseDto> commentCourseDtos = _commentService.GetCommentCourseByUserId(currentUser);
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
             List<CommentUniversityDto> commentUniversityDtos = _commentService.GetCommentUniversitiesByUserId(currentUser);
@@ -112,10 +113,45 @@ namespace UniversityRating.Presentation.Controllers
 
             _commentService.DeleteCommentById(id);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AddComment");
         }
 
+        [HttpGet]
+        public IActionResult ViewComment()
+        {
+            List<UniversityShowDto> universityShowDtos = _universityService.GetAllUniversities();
+
+            return View(new IndexViewModel
+            {
+                UniversityShowViewModels = 
+                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowDtos)
+            });
+        }
         
+        [HttpGet]
+        public ActionResult EditComment(long id)
+        {
+            CommentDto commentDto = _commentService.GetCommentById(id);
+
+            EditCommentViewModel model = commentDto == null
+                ? new EditCommentViewModel()
+                : _mapper.Map<CommentDto, EditCommentViewModel>(commentDto);
+
+            return View(model);
+        }
+        
+        [HttpPost]
+        public ActionResult EditComment(EditCommentViewModel model)
+        {
+
+            if (!ModelState.IsValid) return View(model);
+            _commentService.UpdateComment(_mapper.Map<EditCommentViewModel, CommentDto>(model));
+
+            return RedirectToAction("AddComment");
+        }
+
+
+
 
 
 
@@ -143,17 +179,7 @@ namespace UniversityRating.Presentation.Controllers
 
         }        
         
-        [HttpGet]
-        public ActionResult EditComment(int id = 0)
-        {
-            if (id == 0)
-                return View(new CommentUniversityShowDto());
 
-            List<CommentUniversityShowDto> commentUniversityShowDtos = _commentService.GetCommentsByUniversityId(2);
-
-            return View(commentUniversityShowDtos.FirstOrDefault(x => x.UniversityId == id));
-
-        }
 
         [HttpPost]
         public ActionResult AddOrEdit(CommentUniversityShowViewModel comment)
