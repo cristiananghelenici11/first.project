@@ -31,15 +31,11 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Index(int page)
         {
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
-
-            const int pageSize = 5;
-
-            int count = _teacherService.GetAllTeachers().Count;
-            List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * 5).Take(5).ToList();
 
             var viewModel = new IndexViewModel
             {
-                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items),
+                TeacherShowViewModels = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items),
                 UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities)
 
             };
@@ -50,30 +46,92 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult MoreTeachers(int page)
         {
             const int pageSize = 5;
-
-            int count = _teacherService.GetAllTeachers().Count;
             List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             string result = JsonConvert.SerializeObject(items);
             return Content(result, "application/json");
         }
 
+        //[HttpGet]
+        //public IActionResult TeachersByUniversityId(long universityId, int page)
+        //{
+        //    const int pageSize = 5;
+        //    if (universityId.Equals(0))
+        //    {
+        //        int count = _teacherService.GetAllTeachers().Count();
+        //        List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+        //        return Content(JsonConvert.SerializeObject(items), "application/json");
+        //    }
+
+        //    List<TeacherShowDto> teachersByUniversityId = _teacherService.GetAllTeachersByUniversityId(universityId);
+        //    string result = JsonConvert.SerializeObject(teachersByUniversityId);
+
+        //    return Content(result, "application/json");
+        //}
+
         [HttpGet]
-        public IActionResult TeachersByUniversityId(long universityId, int page)
+        public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            const int pageSize = 5;
+            IEnumerable<TeacherShowDto> items2;
+            IEnumerable<TeacherShowDto> items;
+            if (search == null)
+            {
+                items2 = _teacherService.GetAllTeachersByUniversityId(universityId);
+                items = _teacherService.GetAllTeachers();
+            }
+            else
+            {
+                items2 = _teacherService.GetAllTeachersByUniversityId(universityId).Where(x => x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()));
+                items = _teacherService.GetAllTeachers().Where(x => x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()));
+            }
+
             if (universityId.Equals(0))
             {
-                int count = _teacherService.GetAllTeachers().Count();
-                List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-                return Content(JsonConvert.SerializeObject(items), "application/json");
+                if (skipRecords)
+                    items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+                items = items.Take(numberOfRecordsPerPage);
+                var model = _mapper.Map<List<TeacherShowViewModel>>(items.ToList());
+                return PartialView("_TeacherTableRecords", model);
             }
-            
-            List<TeacherShowDto> teachersByUniversityId = _teacherService.GetAllTeachersByUniversityId(universityId);
-            string result = JsonConvert.SerializeObject(teachersByUniversityId);
 
-            return Content(result, "application/json");
+            if (skipRecords)
+                items2 = items2.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+            items2 = items2.Take(pageNumber * numberOfRecordsPerPage);
+            var model2 = _mapper.Map<List<TeacherShowViewModel>>(items2.ToList());
+            return PartialView("_TeacherTableRecords", model2);
         }
+
     }
 }
+
+//[HttpGet]
+//public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+//{
+//    IEnumerable<UniversityShowDto> items = _universityService.GetAllUniversities();
+
+//    if (universitiesSortColumn != null)
+//    {
+//        if (sortType == SortType.Asc)
+//        {
+//            items = universitiesSortColumn == UniversitiesSortColumn.Age
+//                ? items.OrderBy(x => x.Age)
+//                : items.OrderBy(x => x.AverageMark);
+//        }
+//        else
+//        {
+//            items = universitiesSortColumn == UniversitiesSortColumn.Age
+//                ? items.OrderByDescending(x => x.Age)
+//                : items.OrderByDescending(x => x.AverageMark);
+//        }
+//    }
+
+//    if (skipRecords)
+//        items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+
+//    items = items.Take(pageNumber * numberOfRecordsPerPage);
+
+//    var model = _mapper.Map<List<UniversityShowViewModel>>(items.ToList());
+
+//    return PartialView("_UniversityTableRecords", model);
+//}

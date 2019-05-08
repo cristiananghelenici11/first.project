@@ -71,78 +71,60 @@
 
 @section Scripts{
     <script>
-    $(document).ready(function () {
-        $("#search").bind("change", function () {
+        $(document).ready(function () {
+            $("#search").bind("change", function () {
 
-            $.ajax({
-                url: "/University/UniversitySearch",
-                type: "GET",
-                data: ({ search: $('#search').val()}),
-                success: function (data) {
+                $.ajax({
+                    url: "/University/UniversitySearch",
+                    type: "GET",
+                    data: ({ search: $('#search').val()}),
+                    success: function (data) {
 
-                    $("#resultsTable").empty();
+                        $("#resultsTable").empty();
 
-                    $.each(data,
-                        function (i, item) {
-                            $('#resultsTable').append
-                            (
-                                "<tr>" +
-                                "<td>" +
-                                item.Id +
-                                "</td>" +
-                                "<td>" +
-                                item.Name +
-                                "</td>" +
-                                "<td>" +
-                                item.Description +
-                                "</td>" +
-                                "<td>" +
-                                item.AverageMark +
-                                "</td>" +
-                                "<td>" +
-                                item.Age +
-                                "</td>" +
-                                "<td>" +
-                                item.Contact +
-                                "</td>" +
+                        $.each(data,
+                            function (i, item) {
+                                $('#resultsTable').append
+                                (
+                                    "<tr>" +
+                                    "<td>" +
+                                    item.Id +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Name +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Description +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.AverageMark +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Age +
+                                    "</td>" +
+                                    "<td>" +
+                                    item.Contact +
+                                    "</td>" +
 
-                                "</tr>"
-                            );
-                        });
-                }
+                                    "</tr>"
+                                );
+                            });
+                    }
+                });
             });
         });
-    });
     </script>
 
     <script>
+        var pageNumber = 1;
         $(function () {
-
-            var getUniversities = function() { 
-                var url = '@Url.Action("UniversitySort")' +
-                    '?universitiesSortColumn=' +
-                    $("#sortColumn").val() +
-                    '&sortType=Desc' +
-                    '&pageNumber=' +
-                    $("#moreUniversities").attr('data-page-number');
-
-                $.get(url,
-                    function(response) {
-                        $("#resultsTable").html($(response));
-                    });
-            };
-
             $("#moreUniversities").click(function () {
-                var pageNumber = parseInt($(this).attr('data-page-number')) + 1;
-
-                $(this).attr('data-page-number', pageNumber);
-
+                pageNumber ++;
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
                     '&sortType=Desc' +
-                    '&pageNumber=' +
-                    $("#moreUniversities").attr('data-page-number');
+                    '&pageNumber=' + pageNumber;
 
                 $.get(url,
                     function(response) {
@@ -151,12 +133,12 @@
             });
 
             $("#sortColumn").change(function() {
+                pageNumber = 1;
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
                     '&sortType=Desc' +
-                    '&pageNumber=' +
-                    $("#moreUniversities").attr('data-page-number') + 
+                    '&pageNumber=' + pageNumber + 
                     '&skipRecords=' + false;
 
                 $.get(url,
@@ -164,10 +146,57 @@
                         $("#resultsTable").html($(response));
                     });
             });
-
         });
     </script>
+    
 
+    @*<script>
+        $("#moreUniversities").click(function () {
+            var pageNumber = parseInt($(this).attr('data-page-number')) + 1;
+
+            $(this).attr('data-page-number', pageNumber);
+
+            var url = '@Url.Action("UniversitySort")' +
+                '?universitiesSortColumn=' +
+                $("#sortColumn").val() +
+                '&sortType=Desc' +
+                '&pageNumber=' +
+                $("#moreUniversities").attr('data-page-number');
+
+            $.get(url,
+                function(response) {
+                    $("#resultsTable").append($(response));
+                });
+        });
+
+        $("#sortColumn").change(function() {
+            var url = '@Url.Action("UniversitySort")' +
+                '?universitiesSortColumn=' +
+                $("#sortColumn").val() +
+                '&sortType=Desc' +
+                '&pageNumber=' +
+                $("#moreUniversities").attr('data-page-number') + 
+                '&skipRecords=' + false;
+
+            $.get(url,
+                function(response) {
+                    $("#resultsTable").html($(response));
+                });
+        });
+    </script>*@
+    @*var getUniversities = function() { 
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +
+                    '&sortType=Desc' +
+                    '&pageNumber=' +
+                    $("#moreUniversities").attr('data-page-number');
+
+                $.get(url,
+                    function(response) {
+                        $("#resultsTable").html($(response));
+                    });
+            };*@
 }
 
 

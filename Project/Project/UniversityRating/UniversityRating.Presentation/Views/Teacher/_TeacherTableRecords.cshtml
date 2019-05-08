@@ -1,0 +1,19 @@
+﻿@using UniversityRating.Presentation.Models.Teacher
+@model List<UniversityRating.Presentation.Models.Teacher.TeacherShowViewModel>
+
+@foreach (TeacherShowViewModel teacher in Model)
+{
+    <tr>
+        <td>@($"{teacher.Id}")</td>
+        <td>@($"{teacher.FirstName} {teacher.LastName}")</td>
+        <td>@($"{teacher.AverageMarks}")</td>
+        <td>@($"{teacher.Email}")</td>
+        <td>@($"{teacher.TypeTeacher}")</td>
+        <td>
+            @foreach (string university in teacher.Universities)
+            {
+                @($"{university} ")
+            }
+        </td>
+    </tr>
+}
