@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using UniversityRating.Data.Core.DomainModels.Identity
-@using UniversityRating.Presentation.Enums
 @using UniversityRating.Presentation.Models.Teacher
 @using UniversityRating.Presentation.Models.University
+@using UniversityRating.Services.Common.DTOs.Enums
 @model UniversityRating.Presentation.Models.Home.IndexViewModel
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -35,21 +35,17 @@
                                     <input class="form-control" style="width: 150px" type="text" placeholder="search"  id="search"/>
                                 </div>
                             </div>
-
-
-
                         </div>
 
                         <div class="content table-responsive table-full-width" id="teachers">
-
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped table-striped table-bordered table-sm" data-toggle="table" data-sort-name="date" data-sort-order="desc">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th >Id</th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th>Average Mark</th>
-                                        <th>Age</th>
+                                        <th><a href = "#" id="orderMark"><i class="fas fa-sort"></i></a>Average Mark</th>
+                                        <th><a href="#" id="orderAge"><i class="fas fa-sort"></i></a>Age</th>
                                         <th>Contact</th>
                                     </tr>
                                 </thead>
@@ -121,11 +117,12 @@
 
     <script>
         $(function () {
+
             var getUniversities = function() { 
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
-                    '&sortType=Asc' +
+                    '&sortType=Desc' +
                     '&pageNumber=' +
                     $("#moreUniversities").attr('data-page-number');
 
@@ -143,7 +140,7 @@
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
-                    '&sortType=Asc' +
+                    '&sortType=Desc' +
                     '&pageNumber=' +
                     $("#moreUniversities").attr('data-page-number');
 
@@ -157,7 +154,7 @@
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
-                    '&sortType=Asc' +
+                    '&sortType=Desc' +
                     '&pageNumber=' +
                     $("#moreUniversities").attr('data-page-number') + 
                     '&skipRecords=' + false;
@@ -167,7 +164,10 @@
                         $("#resultsTable").html($(response));
                     });
             });
+
         });
     </script>
 
 }
+
+

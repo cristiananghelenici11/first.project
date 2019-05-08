@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UniversityRating.Services.Common.DTOs.Enums;
 using UniversityRating.Services.Common.DTOs.University;
 
 namespace UniversityRating.Services.Abstractions
@@ -7,6 +8,7 @@ namespace UniversityRating.Services.Abstractions
     {
         List<TopUniversityDto> GetTopUniversities(int numberOfTeachers);
         List<UniversityShowDto> GetAllUniversities();
-
+        List<UniversityShowDto> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber,
+            int numberOfRecordsPerPage = 10, bool skipRecords = true);
     }
 }

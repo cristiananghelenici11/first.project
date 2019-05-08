@@ -1,4 +1,4 @@
-﻿namespace UniversityRating.Presentation.Enums
+﻿namespace UniversityRating.Services.Common.DTOs.Enums
 {
     public enum SortType
     {

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UniversityRating.Data.Core\UniversityRating.Data.Core.csproj" />
+    <ProjectReference Include="..\UniversityRating.Services.Common\UniversityRating.Services.Common.csproj" />
   </ItemGroup>
 
 </Project>

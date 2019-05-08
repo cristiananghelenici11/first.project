@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
-using UniversityRating.Data.Abstractions.Models;
 using UniversityRating.Data.Abstractions.Models.University;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
+using UniversityRating.Services.Common.DTOs.Enums;
 
 namespace UniversityRating.Data.Repositories
 {
@@ -53,6 +50,48 @@ namespace UniversityRating.Data.Repositories
                 .OrderByDescending(am => am.AvgMark)
                 .Take(numberOfUniversities)
                 .ToList();
+        }
+
+        
+        public List<UniversityShow> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber,
+            int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            IEnumerable<UniversityShow> items = BuildQuery()
+                .Select(u => new UniversityShow()
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Description = u.Description,
+                    Contact = u.Contact,
+                    Age = u.Age,
+                    AverageMark = u.UniversityTeachers.Any()
+                        ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
+                            ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
+                });
+
+            if (universitiesSortColumn != null)
+            {
+                if (sortType == SortType.Asc)
+                {
+                    items = universitiesSortColumn == UniversitiesSortColumn.Age
+                        ? items.OrderBy(x => x.Age)
+                        : items.OrderBy(x => x.AverageMark);
+                }
+                else
+                {
+                    items = universitiesSortColumn == UniversitiesSortColumn.Age
+                        ? items.OrderByDescending(x => x.Age)
+                        : items.OrderByDescending(x => x.AverageMark);
+                }
+            }
+
+            if (skipRecords)
+                items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage).ToList();
+
+            items = items.Take(pageNumber * numberOfRecordsPerPage).ToList();
+            List<UniversityShow> result = items.ToList();
+
+            return result;
         }
     }
 }
