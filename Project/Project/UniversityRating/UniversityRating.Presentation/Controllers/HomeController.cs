@@ -47,8 +47,14 @@ namespace UniversityRating.Presentation.Controllers
                 TopTeachers = _mapper.Map<List<TopTeacherDto>, List<TopTeacherViewModel>>(topTeacherDtos),
                 TopUniversities = _mapper.Map<List<TopUniversityDto>, List<TopUniversityViewModel>>(topUniversityDtos)
             });
-        }        
-      
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
         [HttpGet]
         public IActionResult User()
         {
@@ -71,72 +77,6 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Maps()
         {
             return View();
-        }
-
-        [HttpGet]
-        public IActionResult UniversityFeedback(long universityId)
-        {
-            List<CommentUniversityShowDto> commentDtos = _commentService.GetCommentsByUniversityId(universityId);
-
-            return Json(commentDtos);
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public IActionResult Teachers(int page)
-        {
-            List<UniversityShowDto> universities = _universityService.GetAllUniversities();
-
-            int pageSize = 5;
-            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
-            int count = _teacherService.GetAllTeachers().Count();
-            List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
-            {
-                PageViewModel = pageViewModel,
-                TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items), 
-                UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities)
-                
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpGet]
-        public IActionResult MoreTeachers(int page)
-        {
-            var pageSize = 5;
-
-            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
-            int count = _teacherService.GetAllTeachers().Count();
-            List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            string result = JsonConvert.SerializeObject(items);
-            return Content(result, "application/json");
-        }
-
-        [HttpGet]
-        public IActionResult TeachersByUniversityId(long universityId, int page)
-        {
-            var pageSize = 5;
-            if (universityId.Equals(0))
-            {
-                List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachers();
-                int count = _teacherService.GetAllTeachers().Count;
-                List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-                return Content(JsonConvert.SerializeObject(items), "application/json");
-            }
-            List<TeacherShowDto> teachersByUniversityId = _teacherService.GetAllTeachersByUniversityId(universityId);
-            string result = JsonConvert.SerializeObject(teachersByUniversityId);
-
-            return Content(result, "application/json");
         }
     }
 }

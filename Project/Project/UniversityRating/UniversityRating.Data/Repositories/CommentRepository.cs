@@ -22,21 +22,6 @@ namespace UniversityRating.Data.Repositories
             SaveChanges();
         }
 
-        public List<CommentUniversityShow> GetCommentsByUniversityId(long universityId)
-        {
-            //return BuildQuery()
-            //    .Where(x => x.)
-            //    .Select(c => new CommentUniversityShow
-            //    {
-            //        Subject = c.Subject,
-            //        Message = c.Message,
-            //        UniversityId = c.UniversityId,
-            //        UserId = c.UserId
-            //    })
-            //    .ToList();
-            return new List<CommentUniversityShow>();
-        }
-        
         public void AddCommentTeacher(CommentTeacher commentTeacher)
         {
             Add(commentTeacher);

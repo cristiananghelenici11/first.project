@@ -46,15 +46,6 @@ namespace UniversityRating.Services.CommentService
             _repositoryComment = repositoryComment;
         }
 
-        public List<CommentUniversityShowDto> GetCommentsByUniversityId(long universityId)
-        {
-            List<CommentUniversityShow> commentUniversityShows =
-                _commentRepository.GetCommentsByUniversityId(universityId);
-
-
-            return _mapper.Map<List<CommentUniversityShow>, List<CommentUniversityShowDto>>(commentUniversityShows);
-        }
-
         public void AddCommentUniversity(CommentUniversityDto commentUniversityDto)
         {
             var commentUniversity = new CommentUniversity
@@ -109,14 +100,12 @@ namespace UniversityRating.Services.CommentService
         public List<CommentUniversityDto> GetCommentUniversitiesByUserId(long id)
         {
             List<CommentUniversity> commentUniversities = _repositoryCommentUniversity.Find().Where(x => x.UserId.Equals(id)).ToList();
-            //List<CommentUniversity> commentUniversity = _commentRepository.GetCommentUniversitiesByUserId(id);
             return _mapper.Map<List<CommentUniversity>, List<CommentUniversityDto>>(commentUniversities);
         }
 
         public List<CommentCourseDto> GetCommentCourseByUserId(long id)
         {
             List<CommentCourse> commentCourses = _repositoryCommentCourse.Find().Where(x => x.UserId.Equals(id)).ToList();
-            //return _mapper.Map<List<CommentCourse>, List<CommentCourseDto>>(commentCourses);
             var result = new  List<CommentCourseDto>();
             foreach (var comment in commentCourses)
             {

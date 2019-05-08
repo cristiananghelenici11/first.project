@@ -18,13 +18,15 @@ namespace UniversityRating.Services.MarkService
         private readonly IMarkRepository _markRepository;
         private readonly IRepository<MarkTeacher> _repositoryMarkTeacher;
         private readonly IRepository<MarkCourse> _repositoryMarkCourse;
+        private readonly IRepository<MarkCourseTeacher> _repositoryMarkCourseTeacher;
 
         public MarkService(
             IMapper mapper,
             IMarkRepository markRepository,
             ICourseRepository courseRepository,
             IRepository<MarkTeacher> repositoryMarkTeacher,
-            IRepository<MarkCourse> repositoryMarkCourse
+            IRepository<MarkCourse> repositoryMarkCourse,
+            IRepository<MarkCourseTeacher> repositoryMarkCourseTeacher
             )
         {
             _courseRepository = courseRepository;
@@ -32,6 +34,7 @@ namespace UniversityRating.Services.MarkService
             _markRepository = markRepository;
             _repositoryMarkTeacher = repositoryMarkTeacher;
             _repositoryMarkCourse = repositoryMarkCourse;
+            _repositoryMarkCourseTeacher = repositoryMarkCourseTeacher;
         }
 
 
@@ -139,6 +142,31 @@ namespace UniversityRating.Services.MarkService
                 });
             }
             return editMarkCourseDtos;
+        }
+
+        public List<EditMarkCourseTeacherDto> GetMarkCourseTeacherByUserId(long id)
+        {
+            var spec = new Specification<MarkCourseTeacher> { Predicate = course => course.User.Id.Equals(id) };
+            spec.Include(x => x.CourseTeacher)
+                .ThenInclude(x => x.Course.Faculty.University);
+            List<MarkCourseTeacher> markCourseTeachers = _repositoryMarkCourseTeacher.Find(spec).ToList();
+
+            List<EditMarkCourseTeacherDto> editMarkCourseTeacherDtos = new List<EditMarkCourseTeacherDto>();
+
+            foreach (MarkCourseTeacher markCourseTeacher in markCourseTeachers)
+            {
+                editMarkCourseTeacherDtos.Add(new EditMarkCourseTeacherDto
+                {
+                    Id = markCourseTeacher.Id,
+                    UserId = markCourseTeacher.UserId,
+                    Mark = markCourseTeacher.Value,
+                    CourseId = markCourseTeacher.CourseTeacher.CourseId,
+                    CourseName = markCourseTeacher.CourseTeacher.Course.Name,
+                    UniversityId = markCourseTeacher.CourseTeacher.Course.Faculty.University.Id,
+                    UniversityName = markCourseTeacher.CourseTeacher.Course.Faculty.University.Name
+                });
+            }
+            return editMarkCourseTeacherDtos;
         }
     }
 }

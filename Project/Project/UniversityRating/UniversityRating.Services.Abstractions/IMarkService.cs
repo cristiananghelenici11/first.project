@@ -13,5 +13,6 @@ namespace UniversityRating.Services.Abstractions
         EditMarkDto GetMarkById(long id);
         void UpdateMark(EditMarkDto editMarkDto);
         List<EditMarkCourseDto> GetMarkCourseByUserId(long id);
+        List<EditMarkCourseTeacherDto> GetMarkCourseTeacherByUserId(long id);
     }
 }

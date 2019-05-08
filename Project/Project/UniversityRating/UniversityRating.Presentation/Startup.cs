@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +16,6 @@ using UniversityRating.Data.Repositories;
 using UniversityRating.Infrastructure.Profiles;
 using UniversityRating.Presentation.Profiles;
 using UniversityRating.Presentation.Services;
-using UniversityRating.Services;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.CommentService;
 using UniversityRating.Services.CourseService;
@@ -69,11 +61,6 @@ namespace UniversityRating.Presentation
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-//            services.AddDefaultIdentity<User>()
-//                .AddDefaultUI(UIFramework.Bootstrap4)
-//                .AddEntityFrameworkStores<UniversityRatingContext>();
-
-            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddAutoMapper(expression =>
             {
                 expression.AddProfile<DomainToDtoProfile>();
@@ -81,7 +68,6 @@ namespace UniversityRating.Presentation
                 expression.AddProfile<DtoToViewModelProfile>();
                 expression.AddProfile<ViewModelToDtoProfile>();
             });
-            //services.AddAutoMapper(additional => additional.AddProfiles(Assembly.Load("UniversityRating.Infrastructure")));
 
 
             services.AddScoped<DbContext, UniversityRatingContext>();
@@ -101,19 +87,6 @@ namespace UniversityRating.Presentation
 
 
             services.AddMvc();
-
-//            services.AddTransient<IEmailSender,EmailSender>();
-//            services.AddTransient<IEmailSender,YourSmsSender>();
-
-//            services.AddAuthentication().AddFacebook(facebookOptions =>
-//            {
-//                facebookOptions.AppId = "626492187709103";
-//                facebookOptions.AppSecret = "60d9f4cdc0059c33b06daf1eaed953ed";
-//            });
-
-//            services.AddDefaultIdentity<IdentityUser>()
-//                .AddDefaultUI(UIFramework.Bootstrap4)
-//                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

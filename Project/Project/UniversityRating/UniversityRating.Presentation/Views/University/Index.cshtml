@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using UniversityRating.Data.Core.DomainModels.Identity
+@using UniversityRating.Presentation.Enums
 @using UniversityRating.Presentation.Models.Teacher
 @using UniversityRating.Presentation.Models.University
 @model UniversityRating.Presentation.Models.Home.IndexViewModel
@@ -11,47 +12,6 @@
     Layout = "/Views/Shared/_LayoutDashboard.cshtml";
 
 }
-
-@*<div class="main-panel">
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">List</h4>
-                                <p class="category">choose your specialities</p>
-                            </div>
-                            <div class="content all-icons">
-                                <div class="row">
-
-                                    @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
-                                    {
-                                        <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
-                                            <div class="font-icon-detail">
-                                                <i class="pe-7s-album"></i>
-                                                <input type="text" value="@($"{university.Name}")">
-                                                <input type="text" value="@($"{university.Description}")">
-                                                <input type="text" value="Contact : @($"{university.Contact}")">
-                                                <input type="text" value="Age : @($"{university.Age}")">
-                                                <input type="text" value="AvgMark : @($"{university.AverageMark}")">
-                                            </div>
-
-                                        </div>
-                                    }
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>*@
-
 
 <div class="main-panel">
 
@@ -66,9 +26,8 @@
                             <div class="row">
 
                                 <div class="col-md-10">
-                                    <select name="Universities" class="form-control" id="sort" style="width: 150px">
-                                        <option title="r" value="0">Average Marks</option>
-                                        <option title="r" value="1">Age</option>
+                                    <select name="Universities" class="form-control" id="sortColumn" style="width: 150px" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
+                                        <option selected="selected" value="">Please select</option>
                                     </select>
                                 </div>
 
@@ -95,24 +54,13 @@
                                     </tr>
                                 </thead>
                                 <tbody id="resultsTable">
-                                   @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
-                                    {
-                                        <tr>
-                                            <td>@($"{university.Id}")</td>
-                                            <td>@($"{university.Name}")</td>
-                                            <td>@($"{university.Description}")</td>
-                                            <td>@($"{university.AverageMark}")</td>
-                                            <td>@($"{university.Age}")</td>
-                                            <td>@($"{university.Contact}")</td>
-                                        </tr>
-                                    }
-
+                                   @await Html.PartialAsync("_UniversityTableRecords", Model.UniversityShowViewModels)
                                 </tbody>
                             </table>
                         </div>
 
                         <div>
-                            <a class="btn btn-success" id="moreUniversities" style="margin-bottom: 10px">
+                            <a class="btn btn-success" id="moreUniversities" style="margin-bottom: 10px" data-page-number="1">
                                 <i class="fa fa-plus"></i> Show More Universities
                             </a>
                         </div>
@@ -172,102 +120,53 @@
     </script>
 
     <script>
-        $(document).ready(function () {
-            var pageNumber = 1;
+        $(function () {
+            var getUniversities = function() { 
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +
+                    '&sortType=Asc' +
+                    '&pageNumber=' +
+                    $("#moreUniversities").attr('data-page-number');
+
+                $.get(url,
+                    function(response) {
+                        $("#resultsTable").html($(response));
+                    });
+            };
 
             $("#moreUniversities").click(function () {
-                pageNumber++;
+                var pageNumber = parseInt($(this).attr('data-page-number')) + 1;
 
-                $.ajax({
-                    url: "/University/UniversitySort",
-                    type: "GET",
-                    data: ({ sort: $('#university').val(), page: pageNumber }),
-                    success: function (data) {
+                $(this).attr('data-page-number', pageNumber);
 
-                        $.each(data,
-                            function (i, item) {
-                                $('#resultsTable').append
-                                (
-                                    "<tr>" +
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +
+                    '&sortType=Asc' +
+                    '&pageNumber=' +
+                    $("#moreUniversities").attr('data-page-number');
 
-                                    "<td>" +
-                                    item.Id +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Name +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Description +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.AverageMark +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Age +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Contact +
-                                    "</td>" +
-
-                                    "</tr>"
-                                );
-                            });
-                    }
-                });
+                $.get(url,
+                    function(response) {
+                        $("#resultsTable").append($(response));
+                    });
             });
 
-            $("#sort").bind("change",
-                function () {
+            $("#sortColumn").change(function() {
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +
+                    '&sortType=Asc' +
+                    '&pageNumber=' +
+                    $("#moreUniversities").attr('data-page-number') + 
+                    '&skipRecords=' + false;
 
-                    pageNumber = 1;
-
-
-                    $.ajax({
-                        url: "/University/UniversitySort",
-                        type: "GET",
-                        data: ({ sort: $('#sort').val(), page: pageNumber }),
-                        success: function (data) {
-
-                            if (data.length < 4) {
-                                $("#moreUniversities").hide();
-                            }
-
-                            if (data.length > 4) {
-                                $("#moreUniversities").show();
-                            }
-
-                            $('#resultsTable').empty(),
-                                $.each(data,
-                                    function (i, item) {
-                                        $('#resultsTable').append
-                                        (
-                                            "<tr>" +
-
-                                            "<td>" +
-                                            item.Id +
-                                            "</td>" +
-                                            "<td>" +
-                                            item.Name +
-                                            "</td>" +
-                                            "<td>" +
-                                            item.Description +
-                                            "</td>" +
-                                            "<td>" +
-                                            item.AverageMark +
-                                            "</td>" +
-                                            "<td>" +
-                                            item.Age +
-                                            "</td>" +
-                                            "<td>" +
-                                            item.Contact +
-                                            "</td>" +
-
-                                            "</tr>"
-                                        );
-                                    });
-                        }
+                $.get(url,
+                    function(response) {
+                        $("#resultsTable").html($(response));
                     });
-                });
+            });
         });
     </script>
 

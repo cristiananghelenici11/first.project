@@ -49,12 +49,14 @@ namespace UniversityRating.Presentation.Controllers
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
             List<EditMarkTeacherDto> editMarkTeacherViewModels = _markService.GetMarkTeacherByUserId(currentUser);
             List<EditMarkCourseDto> editMarkCourseDtos = _markService.GetMarkCourseByUserId(currentUser);
+            List<EditMarkCourseTeacherDto> editMarkCourseTeacherDtos = _markService.GetMarkCourseTeacherByUserId(currentUser);
 
             return View(new IndexViewModel
             {
                 UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities),
                 EditMarkTeacherViewModels = _mapper.Map<List<EditMarkTeacherDto>, List<EditMarkTeacherViewModel>>(editMarkTeacherViewModels),
-                EditMarkCourseViewModels = _mapper.Map<List<EditMarkCourseDto>, List<EditMarkCourseViewModel>>(editMarkCourseDtos)
+                EditMarkCourseViewModels = _mapper.Map<List<EditMarkCourseDto>, List<EditMarkCourseViewModel>>(editMarkCourseDtos),
+                EditMarkCourseTeacherViewModels = _mapper.Map<List<EditMarkCourseTeacherDto>, List<EditMarkCourseTeacherViewModel>>(editMarkCourseTeacherDtos)
             });
         }
 
@@ -143,7 +145,6 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public ActionResult EditMark(EditMarkViewModel model)
         {
-
             if (!ModelState.IsValid) return View(model);
             _markService.UpdateMark(_mapper.Map<EditMarkViewModel, EditMarkDto>(model));
 

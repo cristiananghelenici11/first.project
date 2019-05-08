@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
 
@@ -6,6 +7,7 @@ namespace UniversityRating.Data.Repositories
 {
     public class MarkRepository : Repository<Mark>, IMarkRepository
     {
+
         public MarkRepository(DbContext context) : base(context)
         {
         }
@@ -27,6 +29,5 @@ namespace UniversityRating.Data.Repositories
             Add(markCourseTeacher);
             SaveChanges();
         }
-
     }
 }

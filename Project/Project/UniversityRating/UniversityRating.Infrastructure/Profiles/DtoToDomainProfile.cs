@@ -12,15 +12,7 @@ namespace UniversityRating.Infrastructure.Profiles
         public DtoProfileToDomain()
         {
             CreateMap<CommentUniversityShowDto, CommentUniversity>();
-            //CreateMap<MarkTeacherDto, MarkTeacher>()
-            //    .ForMember(x => x.TeacherId, y => y.MapFrom(z => z.TeacherId))
-            //    .ForMember(x => x.UserId, y => y.MapFrom(z => z.UserId))
-            //    .ForMember(x => x.Value, y => y.MapFrom(z => z.Mark))
-            //    .ForAllOtherMembers(y => y.Ignore());
-            
             CreateMap<EditMarkDto, Mark>();
-
         }
-        
     }
 }

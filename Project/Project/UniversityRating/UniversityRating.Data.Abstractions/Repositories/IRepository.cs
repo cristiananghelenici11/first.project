@@ -20,6 +20,7 @@ namespace UniversityRating.Data.Abstractions.Repositories
 
         void Update(TEntity entity);
 
+        List<TEntity> GetAll();
 
         void Remove(TEntity entity);
 

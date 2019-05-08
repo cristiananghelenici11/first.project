@@ -6,7 +6,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <div class="landing">
     <div class="home-wrap">
         <div class="home-inner">
@@ -27,7 +26,7 @@
         <p class="lead">
             Appreciates the university to give advice to new students
         </p>
-        <a class="btn btn-secondary btn-md" asp-controller="Home" asp-action="Feedback"
+        <a class="btn btn-secondary btn-md" asp-controller="Comment" asp-action="AddComment"
            target="_blank">Feedback</a>
 
     </div>
@@ -76,14 +75,9 @@
                         </p>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
     </div>
-
-
 </div>
 
 <div id="resources" class=offset>
@@ -105,8 +99,6 @@
                     <p class="lead">@($"Averange Mark : {university.AvgMark}")</p>
                 </div>
             }
-
-
         </div>
 
         <div class="fixed-wrap">
@@ -114,20 +106,15 @@
 
             </div>
         </div>
-
     </div>
-
 </div>
 
 <div id="clients" class=offset>
-
     <div class="jumbotron">
-
         <div class="col-12">
             <h3 class="heading text-center">Top Teachers</h3>
             <div class="heading-underline"></div>
         </div>
-
         <div class="row">
             @foreach (TopTeacherViewModel teacher in Model.TopTeachers)
             {
@@ -147,9 +134,7 @@
                     </div>
                 </div>
             }
-
         </div>
-
     </div>
 
     <div class="col-12 narrow text-center">
@@ -157,5 +142,4 @@
         <a class="btn btn-secondary btn-md" asp-controller="Home" asp-action="About"
            target="_blank">University Rating</a>
     </div>
-
 </div>

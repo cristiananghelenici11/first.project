@@ -23,6 +23,8 @@ namespace UniversityRating.Infrastructure.Profiles
             CreateMap<CommentCourseTeacherViewModel, CommentCourseTeacherDto>();
 
             CreateMap<CommentCourseViewModel, CommentCourseDto>();
+
+            CreateMap<EditMarkCourseTeacherViewModel, EditMarkCourseTeacherDto>();
         }
     }
 }

@@ -48,6 +48,11 @@ namespace UniversityRating.Data.Repositories
             return query.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<TEntity> GetAll()
+        {
+            return _dbSet.AsNoTracking().ToList();
+        }
+
         public IEnumerable<TEntity> Find(ISpecification<TEntity> specification = null)
         {
             IQueryable<TEntity> query = BuildQuery(specification);

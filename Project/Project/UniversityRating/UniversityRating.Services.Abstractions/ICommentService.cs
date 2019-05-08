@@ -7,8 +7,6 @@ namespace UniversityRating.Services.Abstractions
 {
     public interface ICommentService
     {
-        List<CommentUniversityShowDto> GetCommentsByUniversityId(long universityId);
-
         void AddCommentUniversity(CommentUniversityDto commentUniversity);
 
         void AddCommentTeacher(CommentTeacherDto commentTeacherDto);

@@ -37,10 +37,8 @@ namespace UniversityRating.Presentation.Controllers
             int count = _teacherService.GetAllTeachers().Count;
             List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-            var pageViewModel = new PageViewModel(count, page, pageSize);
             var viewModel = new IndexViewModel
             {
-                PageViewModel = pageViewModel,
                 TeacherShows = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items),
                 UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities)
 

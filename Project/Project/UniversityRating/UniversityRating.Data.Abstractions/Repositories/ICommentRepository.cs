@@ -6,8 +6,6 @@ namespace UniversityRating.Data.Abstractions.Repositories
 {
     public interface ICommentRepository : IRepository<Comment>
     {
-        List<CommentUniversityShow> GetCommentsByUniversityId(long universityId);
-
         void AddCommentUniversity(CommentUniversity commentUniversity);
 
         void AddCommentTeacher(CommentTeacher commentTeacher);

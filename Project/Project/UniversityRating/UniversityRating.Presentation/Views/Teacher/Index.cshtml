@@ -8,9 +8,7 @@
 @{
     ViewData["Title"] = "Teachers";
     Layout = "/Views/Shared/_LayoutDashboard.cshtml";
-
 }
-@*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
 
 <div class="main-panel">
 
@@ -140,7 +138,7 @@
 
 
                     $.ajax({
-                        url: "/Home/TeachersByUniversityId",
+                        url: "/Teacher/TeachersByUniversityId",
                         type: "GET",
                         data: ({ universityId: $('#university').val(), page: pageNumber }),
                         success: function(data) {

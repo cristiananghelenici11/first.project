@@ -13,6 +13,7 @@ namespace UniversityRating.Data.Repositories
 {
     public class UniversityRepository : Repository<University>, IUniversityRepository
     {
+
         public UniversityRepository(DbContext context) : base(context)
         {
         }
@@ -28,11 +29,8 @@ namespace UniversityRating.Data.Repositories
                     Contact = u.Contact,
                     Age = u.Age,
                     AverageMark = u.UniversityTeachers.Any()
-                        ? u.UniversityTeachers.Average(x =>
-                            x.Teacher.MarkTeachers.Any() 
-                                ? x.Teacher.MarkTeachers.Average(y => y.Value) 
-                                : 0)
-                        : 0
+                        ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
+                            ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
                 })
                 .ToList();
         }
@@ -47,11 +45,10 @@ namespace UniversityRating.Data.Repositories
                     Address = u.Address,
                     Age = u.Age,
                     Description = u.Description,
-                    AvgMark = u.UniversityTeachers.Any() 
+                    AvgMark = u.UniversityTeachers.Any()
                         ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
-                        ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0 
+                        ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0
 
-                    //AvgMark = 0// u.UniversityTeachers.Select(x => x.Teacher.MarkTeachers.Any()).Any() ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Average(m => m.Value)) : 0
                 })
                 .OrderByDescending(am => am.AvgMark)
                 .Take(numberOfUniversities)

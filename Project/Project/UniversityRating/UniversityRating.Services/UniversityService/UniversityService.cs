@@ -22,7 +22,6 @@ namespace UniversityRating.Services.UniversityService
         public List<UniversityShowDto> GetAllUniversities()
         {
             List<UniversityShow> universityShows = _universityRepository.GetAllUniversities();
-
             return _mapper.Map<List<UniversityShow>, List<UniversityShowDto>>(universityShows);
         }
 

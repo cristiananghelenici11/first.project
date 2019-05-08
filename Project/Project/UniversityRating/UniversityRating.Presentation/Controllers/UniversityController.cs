@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using UniversityRating.Presentation.Enums;
 using UniversityRating.Presentation.Models.Home;
 using UniversityRating.Presentation.Models.University;
 using UniversityRating.Services.Abstractions;
@@ -31,27 +32,40 @@ namespace UniversityRating.Presentation.Controllers
             return View(new IndexViewModel
             {
                 UniversityShowViewModels =
-                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels)
+                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels).Take(10).ToList()
             });
         }
 
 
         [HttpGet]
-        public IActionResult UniversitySort(int sort, int page)
+        public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            const int pageSize = 5;
-            if (sort.Equals(0))
-            {
-                int count = _universityService.GetAllUniversities().Count;
-                List<UniversityShowDto> items = _universityService.GetAllUniversities().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            IEnumerable<UniversityShowDto> items = _universityService.GetAllUniversities();
 
-                return Content(JsonConvert.SerializeObject(items.OrderByDescending(x => x.AverageMark)), "application/json");
+            if (universitiesSortColumn != null)
+            {
+                if (sortType == SortType.Asc)
+                {
+                    items = universitiesSortColumn == UniversitiesSortColumn.Age
+                        ? items.OrderBy(x => x.Age)
+                        : items.OrderBy(x => x.AverageMark);
+                }
+                else
+                {
+                    items = universitiesSortColumn == UniversitiesSortColumn.Age
+                        ? items.OrderByDescending(x => x.Age)
+                        : items.OrderByDescending(x => x.AverageMark);
+                }
             }
 
-            IOrderedEnumerable<UniversityShowDto> universityShow = _universityService.GetAllUniversities().OrderByDescending(x => x.Age);
-            string result = JsonConvert.SerializeObject(universityShow);
+            if (skipRecords)
+                items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
 
-            return Content(result, "application/json");
+            items = items.Take(pageNumber * numberOfRecordsPerPage);
+
+            var model = _mapper.Map<List<UniversityShowViewModel>>(items.ToList());
+
+            return PartialView("_UniversityTableRecords", model);
         }
 
         [HttpGet]
