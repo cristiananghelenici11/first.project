@@ -52,24 +52,6 @@ namespace UniversityRating.Presentation.Controllers
             return Content(result, "application/json");
         }
 
-        //[HttpGet]
-        //public IActionResult TeachersByUniversityId(long universityId, int page)
-        //{
-        //    const int pageSize = 5;
-        //    if (universityId.Equals(0))
-        //    {
-        //        int count = _teacherService.GetAllTeachers().Count();
-        //        List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-        //        return Content(JsonConvert.SerializeObject(items), "application/json");
-        //    }
-
-        //    List<TeacherShowDto> teachersByUniversityId = _teacherService.GetAllTeachersByUniversityId(universityId);
-        //    string result = JsonConvert.SerializeObject(teachersByUniversityId);
-
-        //    return Content(result, "application/json");
-        //}
-
         [HttpGet]
         public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
@@ -104,34 +86,3 @@ namespace UniversityRating.Presentation.Controllers
 
     }
 }
-
-//[HttpGet]
-//public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, int numberOfRecordsPerPage = 10, bool skipRecords = true)
-//{
-//    IEnumerable<UniversityShowDto> items = _universityService.GetAllUniversities();
-
-//    if (universitiesSortColumn != null)
-//    {
-//        if (sortType == SortType.Asc)
-//        {
-//            items = universitiesSortColumn == UniversitiesSortColumn.Age
-//                ? items.OrderBy(x => x.Age)
-//                : items.OrderBy(x => x.AverageMark);
-//        }
-//        else
-//        {
-//            items = universitiesSortColumn == UniversitiesSortColumn.Age
-//                ? items.OrderByDescending(x => x.Age)
-//                : items.OrderByDescending(x => x.AverageMark);
-//        }
-//    }
-
-//    if (skipRecords)
-//        items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-
-//    items = items.Take(pageNumber * numberOfRecordsPerPage);
-
-//    var model = _mapper.Map<List<UniversityShowViewModel>>(items.ToList());
-
-//    return PartialView("_UniversityTableRecords", model);
-//}

@@ -70,7 +70,7 @@
 </div>
 
 @section Scripts{
-    <script>
+    @*<script>
         $(document).ready(function () {
             $("#search").bind("change", function () {
 
@@ -113,10 +113,27 @@
                 });
             });
         });
-    </script>
+    </script>*@
 
     <script>
         var pageNumber = 1;
+
+        $("#search").bind("change",function() {
+            pageNumber = 1;
+            var url = '@Url.Action("UniversitySort")' +
+                '?universitiesSortColumn=' +
+                $("#sortColumn").val() +
+                '&sortType=Desc' +
+                '&pageNumber=' + pageNumber + 
+                '&search=' + $("#search").val() +
+                '&skipRecords=' + false;
+            $("#resultsTable").empty();
+            $.get(url,
+                function(response) {
+                    $("#resultsTable").append($(response));
+                });
+        });
+
         $(function () {
             $("#moreUniversities").click(function () {
                 pageNumber ++;
@@ -124,7 +141,8 @@
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
                     '&sortType=Desc' +
-                    '&pageNumber=' + pageNumber;
+                    '&pageNumber=' + pageNumber +
+                    '&search=' + $("#search").val();
 
                 $.get(url,
                     function(response) {
@@ -139,6 +157,7 @@
                     $("#sortColumn").val() +
                     '&sortType=Desc' +
                     '&pageNumber=' + pageNumber + 
+                    '&search=' + $("#search").val() +
                     '&skipRecords=' + false;
 
                 $.get(url,

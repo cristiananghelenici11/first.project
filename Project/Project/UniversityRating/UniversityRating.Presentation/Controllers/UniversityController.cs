@@ -36,10 +36,9 @@ namespace UniversityRating.Presentation.Controllers
             });
         }
         [HttpGet]
-        public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-
-            List<UniversityShowDto> universities = _universityService.GetAllUniversities(universitiesSortColumn, sortType, pageNumber,
+            List<UniversityShowDto> universities = _universityService.GetAllUniversities(universitiesSortColumn, sortType, pageNumber, search,
                 numberOfRecordsPerPage = 10, skipRecords = true);
 
             var model = _mapper.Map<List<UniversityShowViewModel>>(universities);
@@ -79,17 +78,17 @@ namespace UniversityRating.Presentation.Controllers
         //    return PartialView("_UniversityTableRecords", model);
         //}
 
-        [HttpGet]
-        public IActionResult UniversitySearch(string search)
-        {
-            if (search != null)
-            {
-                IEnumerable<UniversityShowDto> universities = _universityService.GetAllUniversities().Where(x => x.Name.ToUpper().Equals(search.ToUpper()));
-                string result = JsonConvert.SerializeObject(universities);
-                return Content(result, "application/json");
-            }
-            return Ok();
-        }
+        //[HttpGet]
+        //public IActionResult UniversitySearch(string search)
+        //{
+        //    if (search != null)
+        //    {
+        //        IEnumerable<UniversityShowDto> universities = _universityService.GetAllUniversities().Where(x => x.Name.ToUpper().Equals(search.ToUpper()));
+        //        string result = JsonConvert.SerializeObject(universities);
+        //        return Content(result, "application/json");
+        //    }
+        //    return Ok();
+        //}
 
     }
 }

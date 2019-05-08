@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using UniversityRating.Data.Abstractions.Models.University;
 using UniversityRating.Data.Abstractions.Repositories;
@@ -52,12 +53,31 @@ namespace UniversityRating.Data.Repositories
                 .ToList();
         }
 
-        
-        public List<UniversityShow> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber,
+
+        public List<UniversityShow> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search,
             int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            IEnumerable<UniversityShow> items = BuildQuery()
-                .Select(u => new UniversityShow()
+            IEnumerable<UniversityShow> items;
+            if (!string.IsNullOrEmpty(search))
+            {
+                items = BuildQuery()
+                    .Where(x => x.Name.ToUpper().Contains(search.ToUpper()) || x.Description.ToUpper().Contains(search.ToUpper()))
+                    .Select(u => new UniversityShow
+                    {
+                        Id = u.Id,
+                        Name = u.Name,
+                        Description = u.Description,
+                        Contact = u.Contact,
+                        Age = u.Age,
+                        AverageMark = u.UniversityTeachers.Any()
+                            ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
+                                ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
+                    });
+            }
+            else
+            {
+                items = BuildQuery()
+                .Select(u => new UniversityShow
                 {
                     Id = u.Id,
                     Name = u.Name,
@@ -68,6 +88,8 @@ namespace UniversityRating.Data.Repositories
                         ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
                             ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
                 });
+            }
+
 
             if (universitiesSortColumn != null)
             {

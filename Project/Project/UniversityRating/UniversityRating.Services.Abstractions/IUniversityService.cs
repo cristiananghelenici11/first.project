@@ -8,7 +8,7 @@ namespace UniversityRating.Services.Abstractions
     {
         List<TopUniversityDto> GetTopUniversities(int numberOfTeachers);
         List<UniversityShowDto> GetAllUniversities();
-        List<UniversityShowDto> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber,
+        List<UniversityShowDto> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search,
             int numberOfRecordsPerPage = 10, bool skipRecords = true);
     }
 }

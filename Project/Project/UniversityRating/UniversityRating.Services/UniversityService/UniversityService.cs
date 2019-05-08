@@ -34,10 +34,10 @@ namespace UniversityRating.Services.UniversityService
             return _mapper.Map<List<TopUniversity>, List<TopUniversityDto>>(universities);
         }
 
-        public List<UniversityShowDto> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber,
+        public List<UniversityShowDto> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search,
             int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            List<UniversityShow> universities = _universityRepository.GetAllUniversities(universitiesSortColumn, sortType, pageNumber,
+            List<UniversityShow> universities = _universityRepository.GetAllUniversities(universitiesSortColumn, sortType, pageNumber, search,
             numberOfRecordsPerPage = 10, skipRecords = true);
            
             return _mapper.Map<List<UniversityShow>, List<UniversityShowDto>>(universities);
