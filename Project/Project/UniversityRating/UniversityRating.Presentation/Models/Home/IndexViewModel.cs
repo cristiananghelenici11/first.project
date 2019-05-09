@@ -22,5 +22,6 @@ namespace UniversityRating.Presentation.Models.Home
         
         public List<EditMarkCourseViewModel> EditMarkCourseViewModels {get; set;}
         public List<EditMarkCourseTeacherViewModel> EditMarkCourseTeacherViewModels { get; set;}
+        public List<CommentViewModel> CommentViewModels { get; set; }
     }
 }

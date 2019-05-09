@@ -70,51 +70,6 @@
 </div>
 
 @section Scripts{
-    @*<script>
-        $(document).ready(function () {
-            $("#search").bind("change", function () {
-
-                $.ajax({
-                    url: "/University/UniversitySearch",
-                    type: "GET",
-                    data: ({ search: $('#search').val()}),
-                    success: function (data) {
-
-                        $("#resultsTable").empty();
-
-                        $.each(data,
-                            function (i, item) {
-                                $('#resultsTable').append
-                                (
-                                    "<tr>" +
-                                    "<td>" +
-                                    item.Id +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Name +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Description +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.AverageMark +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Age +
-                                    "</td>" +
-                                    "<td>" +
-                                    item.Contact +
-                                    "</td>" +
-
-                                    "</tr>"
-                                );
-                            });
-                    }
-                });
-            });
-        });
-    </script>*@
-
     <script>
         var pageNumber = 1;
 

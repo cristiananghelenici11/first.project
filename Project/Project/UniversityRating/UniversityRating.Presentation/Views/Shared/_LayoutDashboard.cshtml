@@ -40,48 +40,48 @@
 <body>
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="collapse navbar-collapse">
-
-                        <ul class="nav navbar-nav navbar-right">
-                           @if (SignInManager.IsSignedIn(User))
-                            {
-                                <li class="nav-item">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">
-                                        <a asp-controller="Home" asp-action="User">Account</a>
-                                    </button>
-                                </li>
-
-                                <li>
-                                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                                    </form>
-                                </li>
-
-                            }
-                            else
-                            {
-                                <li >
-                                    <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-
-                                </li>
-                                <li >
-                                    <a asp-area="Identity" asp-page="/Account/Login">Login</a>
-                                </li>
-                            }
-                        </ul>
-
-                    </div>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                 </div>
-            </nav>
+                <div class="collapse navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                       @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <button type="submit" class="nav-link btn btn-link text-dark">
+                                    <a asp-controller="Home" asp-action="User">Account</a>
+                                </button>
+                            </li>
+
+                            <li>
+                                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                </form>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+
+                            </li>
+                            <li>
+                                <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
 
     </div>
 
@@ -106,20 +106,22 @@
                             <p>Teachers</p>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="Mark" asp-action="Index">
-                            <i class="pe-7s-like2"></i>
-                            <p>Add Mark</p>
-                        </a>
-                    </li>
-
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li>
+                            <a asp-controller="Mark" asp-action="Index">
+                                <i class="pe-7s-like2"></i>
+                                <p>Add Mark</p>
+                            </a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a data-toggle="collapse" data-target="#commentsMenu">
                             <i class="pe-7s-graph" asp-controller="University" asp-action="Index"></i>
                             <p>Feedback</p>
                         </a>
                         <ul class="collapse nav" id="commentsMenu">
-                           @if (SignInManager.IsSignedIn(User))
+                            @if (SignInManager.IsSignedIn(User))
                             {
                                 <li>
                                     <a asp-controller="Comment" asp-action="AddComment">

@@ -1,6 +1,6 @@
-﻿namespace UniversityRating.Services.Common.DTOs.Comment
+﻿namespace UniversityRating.Presentation.Models.Comment
 {
-    public class CommentDto
+    public class CommentViewModel
     {
         public long Id { get; set; }
 

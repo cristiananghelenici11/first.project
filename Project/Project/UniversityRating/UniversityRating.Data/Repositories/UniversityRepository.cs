@@ -110,7 +110,7 @@ namespace UniversityRating.Data.Repositories
             if (skipRecords)
                 items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage).ToList();
 
-            items = items.Take(pageNumber * numberOfRecordsPerPage).ToList();
+            items = items.Take(numberOfRecordsPerPage).ToList();
             List<UniversityShow> result = items.ToList();
 
             return result;

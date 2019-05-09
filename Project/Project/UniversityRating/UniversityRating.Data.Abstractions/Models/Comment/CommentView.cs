@@ -1,6 +1,6 @@
 ﻿namespace UniversityRating.Data.Abstractions.Models.Comment
 {
-    public class CommentUniversityShow
+    public class CommentView
     {
         public long Id { get; set; }
 
@@ -8,8 +8,8 @@
 
         public string Message { get; set; }
 
-        public long UserId { get; set; }
+        public string UserName { get; set; }
 
-        public long? UniversityId { get; set; }
+        public string Type { get; set; }
     }
 }

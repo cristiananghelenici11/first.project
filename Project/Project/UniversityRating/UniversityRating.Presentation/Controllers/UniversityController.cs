@@ -78,17 +78,6 @@ namespace UniversityRating.Presentation.Controllers
         //    return PartialView("_UniversityTableRecords", model);
         //}
 
-        //[HttpGet]
-        //public IActionResult UniversitySearch(string search)
-        //{
-        //    if (search != null)
-        //    {
-        //        IEnumerable<UniversityShowDto> universities = _universityService.GetAllUniversities().Where(x => x.Name.ToUpper().Equals(search.ToUpper()));
-        //        string result = JsonConvert.SerializeObject(universities);
-        //        return Content(result, "application/json");
-        //    }
-        //    return Ok();
-        //}
 
     }
 }

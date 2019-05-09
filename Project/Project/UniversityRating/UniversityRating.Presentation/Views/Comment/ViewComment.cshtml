@@ -21,10 +21,217 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">University Comments</h4>
-                                <p class="category">choose which university to view the comment </p>
+                                <h2 class="title">Feedback on Universities</h2>
+                                <p class="category">choose type comment to view feedback</p>
+                                <br />
+
+                                <ul class="nav nav-pills" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#commentUniversity">Comment University</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#commentTeacher">Comment Teacher</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#commentCourse">Comment Course</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#commentCourseTeacher">Comment Course Teacher</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+
+                                    <div class="container tab-pane active" id="commentUniversity">
+                                        <div class="row" style="padding-top: 50px; padding-bottom: 50px">
+                                            <form id="addCommentUniversity">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <p>Chose University</p>
+                                                        <select id="universityComment" class="form-control" style="width: 150px">
+                                                            <option value="0">All</option>
+                                                           @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                            {
+                                                                <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5>All Feedback on Universities</h5>
+
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                            View All
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <ul class="media-list" id="universityCommentList">
+                                            @await Html.PartialAsync("_ViewListComment", Model.CommentViewModels)
+                                        </ul>
+                                    </div>
+
+                                    <div class="container tab-pane fade" id="commentTeacher">
+                                        <div class="row" style="padding-top: 50px; padding-bottom: 50px">
+                                            <form id="addCommentTeacher">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <p>Chose University</p>
+                                                        <select id="universityTeacher" class="form-control" style="width: 150px">
+                                                            <option value="0">No University</option>
+                                                            @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                            {
+                                                                <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <p>Chose Teacher</p>
+                                                        <select id="teacherComment" class="form-control" style="width: 150px"></select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5>All Feedback on Universities</h5>
+
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                            View All
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <ul class="media-list">
+                                            @foreach (var comment in Model.CommentTeacherViewModels)
+                                            {
+                                                <li class="media">
+                                                    <a class="pull-left" style="padding-top: 25px">
+                                                        <i class="fas fa-user" style="zoom: 800%"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <div class="well well-lg">
+                                                            <h4 class="media-heading">
+                                                                @if (User.Identity.IsAuthenticated)
+                                                                {
+                                                                    @User.Identity.Name
+                                                                }
+                                                            </h4>
+                                                            <p> Subject: @comment.Subject</p>
+                                                            <p> Message: @comment.Message</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+
+                                    <div id="commentCourse" class="container tab-pane fade">
+                                        <div class="row" style="padding-top: 50px; padding-bottom: 50px">
+                                            <form id="addCommentCourse">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <p>Chose University</p>
+                                                        <select class="form-control" style="width: 150px" id="universityCourse">
+                                                            @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                            {
+                                                                <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <p>Chose Course</p>
+                                                        <select class="form-control" style="width: 150px" id="course"></select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5>All Feedback on Universities</h5>
+
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                            View All
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <ul class="media-list">
+                                            @foreach (var comment in Model.CommentCourseViewModels)
+                                            {
+                                                <li class="media">
+                                                    <a class="pull-left" style="padding-top: 25px">
+                                                        <i class="fas fa-user" style="zoom: 800%"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <div class="well well-lg">
+                                                            <h4 class="media-heading">
+                                                                @if (User.Identity.IsAuthenticated)
+                                                                {
+                                                                    @User.Identity.Name
+                                                                }
+                                                            </h4>
+                                                            <p> Subject: @comment.Subject</p>
+                                                            <p> Message: @comment.Message</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+
+
+                                    <div id="commentCourseTeacher" class="container tab-pane fade">
+                                        <div class="row" style="padding-top: 50px; padding-bottom: 50px">
+                                            <form id="addCommentCourseTeacher">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <p>Chose University</p>
+                                                        <select class="form-control" style="width: 150px" id="universityCommentCourseTeacher">
+                                                            <option value="0">No University</option>
+                                                            @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                            {
+                                                                <option title="@university.Description" value="@university.Id">@university.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <p>Chose Teacher</p>
+                                                        <select class="form-control" style="width: 150px" id="teacherCommentCourseTeacher"></select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <p>Chose Course</p>
+                                                        <select class="form-control" style="width: 150px" id="courseCommentCourseTeacher"></select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5>All Feedback on Universities</h5>
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                            View All
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <ul class="media-list">
+                                            @foreach (var comment in Model.CommentCourseTeacherViewModels)
+                                            {
+                                                <li class="media">
+                                                    <a class="pull-left" style="padding-top: 25px">
+                                                        <i class="fas fa-user" style="zoom: 800%"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <div class="well well-lg">
+                                                            <h4 class="media-heading">
+                                                                @if (User.Identity.IsAuthenticated)
+                                                                {
+                                                                    @User.Identity.Name
+                                                                }
+                                                            </h4>
+                                                            <p> Subject: @comment.Subject</p>
+                                                            <p> Message: @comment.Message</p>
+                                                        </div>
+                                                    </div>
+
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            
 
                         </div>
                     </div>
@@ -33,3 +240,201 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+    $(function () {
+        var pageNumber = 1;
+        $.ajax({
+            url: "/Mark/TeachersByUniversityId",
+            type: "GET",
+            data: ({ universityId: $('#universityTeacher').val() }),
+            success: function (data) {
+
+                $('#teacherComment').empty(),
+                    $.each(data,
+                        function (i, item) {
+                            $('#teacherComment').append
+                            (
+                                "<option value=\"" +
+                                item.Id +
+                                "\">" +
+                                item.FirstName +
+                                " " +
+                                item.LastName +
+                                "</option>"
+                            );
+                        });
+            }
+        });
+
+        $("#universityTeacher").bind("change",
+            function () {
+                $.ajax({
+                    url: "/Mark/TeachersByUniversityId",
+                    type: "GET",
+                    data: ({ universityId: $('#universityTeacher').val() }),
+                    success: function (data) {
+
+                        $('#teacherComment').empty(),
+                            $.each(data,
+                                function (i, item) {
+                                    $('#teacherComment').append
+                                    (
+                                        "<option title=\"" +
+                                        item.AverageMarks +
+                                        "\" value=\"" +
+                                        item.Id +
+                                        "\">" +
+                                        item.FirstName +
+                                        " " +
+                                        item.LastName +
+                                        "</option>"
+                                    );
+                                });
+                    }
+                });
+            });
+        $("#universityComment").bind("change", function() {
+            pageNumber = 1;
+            var url = '@Url.Action("UniversityComments")' +
+                '?pageNumber=' + pageNumber + 
+                '&universityId=' + $("#universityComment").val() +
+                '&skipRecords=' + false;
+
+            $.get(url,
+                function(response) {
+                    $("#universityCommentList").html($(response));
+                });
+        });
+    });
+
+    </script>
+
+    <script>
+        $.ajax({
+            url: "/Mark/CoursesByUniversityId",
+            type: "GET",
+            data: ({ universityId: $('#universityCourse').val() }),
+            success: function (data) {
+
+                $('#course').empty(),
+                    $.each(data,
+                        function (i, item) {
+                            $('#course').append
+                            (
+
+                                "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+
+                            );
+                        });
+            }
+        });
+
+        $("#universityCourse").bind("change",
+            function () {
+                $.ajax({
+                    url: "/Mark/CoursesByUniversityId",
+                    type: "GET",
+                    data: ({ universityId: $('#universityCourse').val() }),
+                    success: function (data) {
+
+                        $('#course').empty(),
+                            $.each(data,
+                                function (i, item) {
+                                    $('#course').append
+                                    (
+
+                                        "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
+
+                                    );
+                                });
+                    }
+                });
+            });
+    </script>
+    <script>
+        $.ajax({
+            url: "/Mark/TeachersByUniversityId",
+            type: "GET",
+            data: ({ universityId: $('#universityCommentCourseTeacher').val() }),
+            success: function (data) {
+
+                $('#teacherCommentCourseTeacher').empty(),
+
+                    $.each(data,
+                        function (i, item) {
+                            $('#teacherCommentCourseTeacher').append
+                            (
+
+                                "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
+
+                            );
+                        });
+
+            }
+        });
+
+        $("#universityCommentCourseTeacher").bind("change",
+            function () {
+                $.ajax({
+                    url: "/Mark/TeachersByUniversityId",
+                    type: "GET",
+                    data: ({ universityId: $('#universityCommentCourseTeacher').val() }),
+                    success: function (data) {
+
+                        $('#teacherCommentCourseTeacher').empty(),
+                            $('#courseCommentCourseTeacher').empty(),
+
+
+                            $.each(data,
+                                function (i, item) {
+                                    $('#teacherCommentCourseTeacher').append
+                                    (
+
+                                        "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
+
+                                    );
+                                });
+
+                        $.ajax({
+                            url: "/Mark/CoursesByTeacherId",
+                            type: "GET",
+                            data: ({ teacherId: $('#teacherCommentCourseTeacher').val() }),
+                            success: function (data) {
+
+                                $.each(data,
+                                    function (i, item) {
+                                        $('#courseCommentCourseTeacher').append
+                                        (
+                                            "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
+                                        );
+                                    });
+                            }
+                        });
+                    }
+                });
+            });
+
+
+        $("#teacherCommentCourseTeacher").bind("change",
+            function () {
+                $.ajax({
+                    url: "/Mark/CoursesByTeacherId",
+                    type: "GET",
+                    data: ({ teacherId: $('#teacherCommentCourseTeacher').val() }),
+                    success: function (data) {
+
+                        $('#courseCommentCourseTeacher').empty(),
+                            $.each(data,
+                                function (i, item) {
+                                    $('#courseCommentCourseTeacher').append
+                                    (
+                                        "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
+                                    );
+                                });
+                    }
+                });
+            });
+    </script>
+}

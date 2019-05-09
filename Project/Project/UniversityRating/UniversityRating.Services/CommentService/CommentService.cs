@@ -160,13 +160,13 @@ namespace UniversityRating.Services.CommentService
             _repositoryComment.SaveChanges();
         }
 
-        public CommentDto GetCommentById(long id)
+        public EditCommentDto GetCommentById(long id)
         {
             Comment comment = _commentRepository.GetById(id);
-            return _mapper.Map<Comment, CommentDto>(comment);
+            return _mapper.Map<Comment, EditCommentDto>(comment);
         }
 
-        public void UpdateComment(CommentDto comment)
+        public void UpdateComment(EditCommentDto comment)
         {
             _commentRepository.Update(new Comment
             {
@@ -176,6 +176,14 @@ namespace UniversityRating.Services.CommentService
                 UserId = comment.UserId
             });
             _commentRepository.SaveChanges();
+        }
+
+        public List<CommentDto> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            List<CommentView> comments = _commentRepository.GetUniversityComments(pageNumber, universityId,
+                numberOfRecordsPerPage = 10, skipRecords = true);
+
+            return _mapper.Map<List<CommentView>, List<CommentDto>>(comments);
         }
     }
 }

@@ -25,7 +25,10 @@ namespace UniversityRating.Services.Abstractions
 
         void DeleteCommentById(long id);
 
-        CommentDto GetCommentById(long id);
-        void UpdateComment(CommentDto comment);
+        EditCommentDto GetCommentById(long id);
+
+        void UpdateComment(EditCommentDto comment);
+
+        List<CommentDto> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
     }
 }

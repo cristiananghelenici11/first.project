@@ -79,7 +79,7 @@ namespace UniversityRating.Presentation.Controllers
 
             if (skipRecords)
                 items2 = items2.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-            items2 = items2.Take(pageNumber * numberOfRecordsPerPage);
+            items2 = items2.Take(numberOfRecordsPerPage);
             var model2 = _mapper.Map<List<TeacherShowViewModel>>(items2.ToList());
             return PartialView("_TeacherTableRecords", model2);
         }

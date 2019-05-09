@@ -13,6 +13,7 @@ namespace UniversityRating.Infrastructure.Profiles
         {
             CreateMap<CommentUniversityShowDto, CommentUniversity>();
             CreateMap<EditMarkDto, Mark>();
+            CreateMap<CommentDto, CommentView>();
         }
     }
 }

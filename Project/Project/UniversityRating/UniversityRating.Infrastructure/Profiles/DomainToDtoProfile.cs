@@ -25,7 +25,9 @@ namespace UniversityRating.Presentation.Profiles
             CreateMap<CommentCourse, CommentCourseDto>()
                 .ForMember(x => x.UniversityId, opt => opt.Ignore());
 
-            CreateMap<Comment, CommentDto>();
+            CreateMap<Comment, EditCommentDto>();
+
+            CreateMap<CommentView, CommentDto>();
 
             CreateMap<CommentCourseTeacher, CommentCourseTeacherDto>()
                 .ForMember(x => x.CourseId, opt => opt.MapFrom(y => y.CourseTeacher.CourseId))

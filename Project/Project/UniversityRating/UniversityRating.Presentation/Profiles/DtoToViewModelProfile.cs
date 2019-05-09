@@ -27,7 +27,7 @@ namespace UniversityRating.Presentation.Profiles
             CreateMap<CommentCourseTeacherDto, CommentCourseTeacherViewModel>();
 
             CreateMap<EditMarkDto, EditMarkViewModel>();
-
+            CreateMap<CommentDto, CommentViewModel>();
         }
     }
 }

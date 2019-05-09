@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UniversityRating.Data.Migrations
 {
-    public partial class University_v01 : Migration
+    public partial class university_v01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

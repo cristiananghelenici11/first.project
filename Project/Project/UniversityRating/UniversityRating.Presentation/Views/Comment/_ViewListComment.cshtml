@@ -1,0 +1,22 @@
+﻿@using UniversityRating.Presentation.Models.Comment
+
+@model List<UniversityRating.Presentation.Models.Comment.CommentViewModel>
+
+    @foreach (CommentViewModel comment in Model)
+    {
+        <li class="media">
+            <a class="pull-left" style="padding-top: 25px">
+                <i class="fas fa-user" style="zoom: 800%"></i>
+            </a>
+            <div class="media-body">
+                <div class="well well-lg">
+                    <h4 class="media-heading">
+                       User: @comment.UserName
+                    </h4>
+                    <p> Type: @comment.Subject</p>
+                    <p> Subject: @comment.Subject</p>
+                    <p> Message: @comment.Message</p>
+                </div>
+            </div>
+        </li>
+    }

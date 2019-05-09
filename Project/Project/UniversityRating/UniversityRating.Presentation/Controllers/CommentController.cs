@@ -116,23 +116,35 @@ namespace UniversityRating.Presentation.Controllers
         [HttpGet]
         public IActionResult ViewComment()
         {
-            List<UniversityShowDto> universityShowDtos = _universityService.GetAllUniversities();
+            long currentUser = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
 
+            List<CommentCourseDto> commentCourseDtos = _commentService.GetCommentCourseByUserId(currentUser);
+            List<UniversityShowDto> universities = _universityService.GetAllUniversities();
+            List<CommentUniversityDto> commentUniversityDtos = _commentService.GetCommentUniversitiesByUserId(currentUser);
+            List<CommentTeacherDto> commentTeacherDtos = _commentService.GetCommentTeachersByUserId(currentUser);
+            List<CommentCourseTeacherDto> commentCourseTeacherDtos = _commentService.GetCommentCourseTeachersByUserId(currentUser);
+            var model = new List<CommentViewModel>();
+            model.Add(new CommentViewModel
+                {Id = 1, Subject = "ww", Message = "ss", UserName = "name", Type = "utm"});
             return View(new IndexViewModel
             {
-                UniversityShowViewModels = 
-                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowDtos)
+                CommentViewModels = model,
+                CommentUniversityViewModels = _mapper.Map<List<CommentUniversityDto>, List<CommentUniversityViewModel>>(commentUniversityDtos),
+                CommentTeacherViewModels = _mapper.Map<List<CommentTeacherDto>, List<CommentTeacherViewModel>>(commentTeacherDtos),
+                CommentCourseViewModels = _mapper.Map<List<CommentCourseDto>, List<CommentCourseViewModel>>(commentCourseDtos),
+                UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities),
+                CommentCourseTeacherViewModels = _mapper.Map<List<CommentCourseTeacherDto>, List<CommentCourseTeacherViewModel>>(commentCourseTeacherDtos)
             });
         }
         
         [HttpGet]
         public ActionResult EditComment(long id)
         {
-            CommentDto commentDto = _commentService.GetCommentById(id);
+            EditCommentDto commentDto = _commentService.GetCommentById(id);
 
             EditCommentViewModel model = commentDto == null
                 ? new EditCommentViewModel()
-                : _mapper.Map<CommentDto, EditCommentViewModel>(commentDto);
+                : _mapper.Map<EditCommentDto, EditCommentViewModel>(commentDto);
 
             return View(model);
         }
@@ -142,9 +154,18 @@ namespace UniversityRating.Presentation.Controllers
         {
 
             if (!ModelState.IsValid) return View(model);
-            _commentService.UpdateComment(_mapper.Map<EditCommentViewModel, CommentDto>(model));
+            _commentService.UpdateComment(_mapper.Map<EditCommentViewModel, EditCommentDto>(model));
 
             return RedirectToAction("AddComment");
+        }
+
+        [HttpGet]
+        public ActionResult UniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            List<CommentDto> commentDtos = _commentService.GetUniversityComments(pageNumber, universityId, numberOfRecordsPerPage = 10, skipRecords = true);
+
+            List<CommentViewModel> commentViewModels = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentDtos);
+            return PartialView("_ViewListComment", commentViewModels);
         }
     }
 }

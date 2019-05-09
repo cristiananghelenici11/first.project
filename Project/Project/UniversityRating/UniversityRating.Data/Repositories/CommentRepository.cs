@@ -51,5 +51,23 @@ namespace UniversityRating.Data.Repositories
                 })
                 .ToList();
         }
+
+        public List<CommentView> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            if (universityId.Equals(0))
+            {
+                var qq = BuildQuery()
+                    .Select(x => new CommentView()
+                    {
+                        Id = x.Id,
+                        Subject = x.Subject,
+                        Message = x.Message,
+                        UserName = x.User.LastName,
+                        Type = x.Subject
+                    }).ToList();
+                return qq;
+            }
+            return new List<CommentView>();
+        }
     }
 }
