@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +57,7 @@ namespace UniversityRating.Presentation
                 .AddEntityFrameworkStores<UniversityRatingContext>()
                 .AddDefaultTokenProviders();
 
-                services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddDbContext<UniversityRatingContext>(options =>
                 options.UseSqlServer(
@@ -84,6 +86,24 @@ namespace UniversityRating.Presentation
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IMarkService, MarkService>();
+
+
+            //services.AddDefaultIdentity<User>()
+            //    .AddDefaultUI(UIFramework.Bootstrap4)
+            //    .AddEntityFrameworkStores<UniversityRatingContext>();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "2232887083694227";
+                facebookOptions.AppSecret = "ad6f3e428f65726e97f67a9f1e8e23ad";
+            })
+                .AddGoogle(optionGoogle =>
+                    {
+                        optionGoogle.ClientSecret =
+                            "rZ5jBk-ajgb0MGDPSuJwCDZ-";
+                        optionGoogle.ClientId =
+                            "971621963125-h61fl2jbqnh5ugce3dfi6gc7dlfhvrip.apps.googleusercontent.com";
+                    });
 
 
             services.AddMvc();

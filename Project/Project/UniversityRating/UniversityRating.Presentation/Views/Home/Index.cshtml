@@ -1,4 +1,6 @@
-﻿@using UniversityRating.Presentation.Models.Teacher
+﻿@using Microsoft.AspNetCore.Identity
+@using UniversityRating.Data.Core.DomainModels.Identity
+@using UniversityRating.Presentation.Models.Teacher
 @using UniversityRating.Presentation.Models.University
 @model UniversityRating.Presentation.Models.Home.IndexViewModel
 
@@ -137,9 +139,15 @@
         </div>
     </div>
 
+    @*<div class="col-12 narrow text-center">
+            <p class="lead">Learn more about university</p>
+            <a class="btn btn-secondary btn-md" asp-controller="Home" asp-action="About"
+               target="_blank">University Rating</a>
+        </div>*@
+
     <div class="col-12 narrow text-center">
         <p class="lead">Learn more about university</p>
-        <a class="btn btn-secondary btn-md" asp-controller="Home" asp-action="About"
+        <a class="btn btn-secondary btn-md" asp-area="Identity" asp-page="/Account/ExternalLogin"
            target="_blank">University Rating</a>
     </div>
 </div>
