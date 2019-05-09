@@ -180,10 +180,216 @@ namespace UniversityRating.Services.CommentService
 
         public List<CommentDto> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            List<CommentView> comments = _commentRepository.GetUniversityComments(pageNumber, universityId,
-                numberOfRecordsPerPage = 10, skipRecords = true);
+            if (universityId.Equals(0))
+            {
+                var spec2 = new Specification<CommentUniversity>();
+                spec2.Include(x => x.University).Include(y => y.User);
+                IEnumerable<CommentUniversity> allComments = _repositoryCommentUniversity.Find(spec2);
 
-            return _mapper.Map<List<CommentView>, List<CommentDto>>(comments);
+                if (skipRecords)
+                    allComments = allComments.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+                allComments = allComments.Take(numberOfRecordsPerPage);
+                List<CommentDto> comments = new List<CommentDto>().ToList();
+
+                foreach (CommentUniversity commentUniversity in allComments)
+                {
+                    comments.Add(new CommentDto
+                    {
+                        Id = commentUniversity.Id,
+                        UserName = commentUniversity.User.Email,
+                        Subject = commentUniversity.Subject,
+                        Message = commentUniversity.Message,
+                        Type = commentUniversity.University.Name
+                    });
+                }
+
+                return comments;
+            }
+
+            var spec = new Specification<CommentUniversity> {Predicate = comment => comment.UniversityId.Equals(universityId)};
+            spec.Include(x => x.University).Include(y => y.User);
+            IEnumerable<CommentUniversity> commentUniversities = _repositoryCommentUniversity.Find(spec);
+
+            if (skipRecords)
+                commentUniversities = commentUniversities.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+
+            commentUniversities = commentUniversities.Take(numberOfRecordsPerPage);
+
+            List<CommentDto> commentDtos = new List<CommentDto>();
+            foreach (CommentUniversity commentUniversity in commentUniversities)
+            {
+                commentDtos.Add(new CommentDto
+                {
+                    Id = commentUniversity.Id,
+                    UserName = commentUniversity.User.Email,
+                    Subject = commentUniversity.Subject,
+                    Message = commentUniversity.Message,
+                    Type = commentUniversity.University.Name
+                });
+            }
+           
+            return commentDtos;
+        }
+        public List<CommentDto> GetCourseComments(int pageNumber, long courseId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            if (courseId.Equals(0))
+            {
+                var spec2 = new Specification<CommentCourse>();
+                spec2.Include(x => x.Course).Include(y => y.User).Include(x => x.Course.Faculty.University);
+                IEnumerable<CommentCourse> allComments = _repositoryCommentCourse.Find(spec2);
+
+                if (skipRecords)
+                    allComments = allComments.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+                allComments = allComments.Take(numberOfRecordsPerPage);
+                List<CommentDto> comments = new List<CommentDto>();
+
+                foreach (var comment in allComments)
+                {
+                    comments.Add(new CommentDto
+                    {
+                        Id = comment.Id,
+                        UserName = comment.User.Email,
+                        Subject = comment.Subject,
+                        Message = comment.Message,
+                        Type = comment.Course.Faculty.University.Name + " "+comment.Course.Description
+                    });
+                }
+
+                return comments;
+            }
+
+            var spec = new Specification<CommentCourse> {Predicate = comment => comment.CourseId.Equals(courseId)};
+            spec.Include(x => x.Course).Include(y => y.User).Include(x => x.Course.Faculty.University);
+            IEnumerable<CommentCourse> commentCourses = _repositoryCommentCourse.Find(spec);
+
+            if (skipRecords)
+                commentCourses = commentCourses.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+
+            commentCourses = commentCourses.Take(numberOfRecordsPerPage);
+
+            List<CommentDto> commentDtos = new List<CommentDto>();
+            foreach (var comment in commentCourses)
+            {
+                commentDtos.Add(new CommentDto
+                {
+                    Id = comment.Id,
+                    UserName = comment.User.Email,
+                    Subject = comment.Subject,
+                    Message = comment.Message,
+                    Type = comment.Course.Faculty.University.Name + " "+comment.Course.Description
+                });
+            }
+           
+            return commentDtos;
+        }
+
+        public List<CommentDto> GetTeacherComments(int pageNumber, long teacherId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            if (teacherId.Equals(0))
+            {
+                var spec2 = new Specification<CommentTeacher>();
+                spec2.Include(x => x.Teacher).Include(y => y.User).Include(x => x.Teacher.UniversityTeachers).ThenInclude(x=>x.University);
+                IEnumerable<CommentTeacher> allComments = _repositoryCommentTeacher.Find(spec2);
+
+                if (skipRecords)
+                    allComments = allComments.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+                allComments = allComments.Take(numberOfRecordsPerPage).ToList();
+                List<CommentDto> comments = new List<CommentDto>();
+
+                foreach (CommentTeacher comment in allComments)
+                {
+                    comments.Add(new CommentDto
+                    {
+                        Id = comment.Id,
+                        UserName = comment.User.Email,
+                        Subject = comment.Subject,
+                        Message = comment.Message,
+                        Type = comment.Teacher.UniversityTeachers.Select(x=>x.University.Name)+" "+comment.Teacher.FirstName + comment.Teacher.LastName
+                    });
+                }
+
+                return comments;
+            }
+
+            var spec = new Specification<CommentTeacher> {Predicate = comment => comment.TeacherId.Equals(teacherId)};
+            spec.Include(x => x.Teacher).Include(y => y.User).Include(x => x.Teacher.UniversityTeachers)
+                .ThenInclude(x => x.University);
+            IEnumerable<CommentTeacher> commentTeachers = _repositoryCommentTeacher.Find(spec);
+
+            if (skipRecords)
+                commentTeachers = commentTeachers.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+
+            commentTeachers = commentTeachers.Take(numberOfRecordsPerPage).ToList();
+
+            List<CommentDto> commentDtos = new List<CommentDto>();
+            foreach (CommentTeacher comment in commentTeachers)
+            {
+                commentDtos.Add(new CommentDto
+                {
+                    Id = comment.Id,
+                    UserName = comment.User.Email,
+                    Subject = comment.Subject,
+                    Message = comment.Message,
+                    Type = comment.Teacher.UniversityTeachers.Select(x=>x.University.Name)+" "+comment.Teacher.FirstName + comment.Teacher.LastName
+                });
+            }
+           
+            return commentDtos;
+        }
+
+        public List<CommentDto> GetCourseTeacherComments(int pageNumber, long courseId, long teacherId, int numberOfRecordsPerPage,
+            bool skipRecords)
+        {
+            if (teacherId.Equals(0) && courseId.Equals(0))
+            {
+                var spec2 = new Specification<CommentCourseTeacher>();
+                spec2.Include(x => x.CourseTeacher.Teacher).Include(x => x.User).Include(y => y.CourseTeacher.Course).Include(x => x.CourseTeacher.Course.Faculty.University);
+                IEnumerable<CommentCourseTeacher> allComments = _repositoryCommentCourseTeacher.Find(spec2);
+
+                if (skipRecords)
+                    allComments = allComments.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+                allComments = allComments.Take(numberOfRecordsPerPage).ToList();
+                List<CommentDto> comments = new List<CommentDto>();
+
+                foreach (var comment in allComments)
+                {
+                    comments.Add(new CommentDto
+                    {
+                        Id = comment.Id,
+                        UserName = comment.User.Email,
+                        Subject = comment.Subject,
+                        Message = comment.Message,
+                        Type = comment.CourseTeacher.Course.Faculty.University.Name + " " + comment.CourseTeacher.Teacher.FirstName + " " + comment.CourseTeacher.Teacher.LastName + " " +comment.CourseTeacher.Course.Description 
+                    });
+                }
+
+                return comments;
+            }
+
+            var spec = new Specification<CommentCourseTeacher> {Predicate = comment => comment.CourseTeacher.TeacherId.Equals(teacherId) && comment.CourseTeacher.CourseId.Equals(courseId)};
+            spec.Include(x => x.CourseTeacher.Teacher).Include(y => y.CourseTeacher.Course).Include(x => x.CourseTeacher.Course.Faculty.University);
+
+            IEnumerable<CommentCourseTeacher> commentCourseTeachers = _repositoryCommentCourseTeacher.Find(spec);
+
+            if (skipRecords)
+                commentCourseTeachers = commentCourseTeachers.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+
+            commentCourseTeachers = commentCourseTeachers.Take(numberOfRecordsPerPage);
+
+            List<CommentDto> commentDtos = new List<CommentDto>();
+            foreach (var comment in commentCourseTeachers)
+            {
+                commentDtos.Add(new CommentDto
+                {
+                    Id = comment.Id,
+                    UserName = comment.User.Email,
+                    Subject = comment.Subject,
+                    Message = comment.Message,
+                    Type = comment.CourseTeacher.Course.Faculty.University.Name + " " + comment.CourseTeacher.Teacher.FirstName + " " + comment.CourseTeacher.Teacher.LastName + " " +comment.CourseTeacher.Course.Description 
+                });
+            }
+           
+            return commentDtos;
         }
     }
 }

@@ -116,24 +116,20 @@ namespace UniversityRating.Presentation.Controllers
         [HttpGet]
         public IActionResult ViewComment()
         {
-            long currentUser = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
-
-            List<CommentCourseDto> commentCourseDtos = _commentService.GetCommentCourseByUserId(currentUser);
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
-            List<CommentUniversityDto> commentUniversityDtos = _commentService.GetCommentUniversitiesByUserId(currentUser);
-            List<CommentTeacherDto> commentTeacherDtos = _commentService.GetCommentTeachersByUserId(currentUser);
-            List<CommentCourseTeacherDto> commentCourseTeacherDtos = _commentService.GetCommentCourseTeachersByUserId(currentUser);
-            var model = new List<CommentViewModel>();
-            model.Add(new CommentViewModel
-                {Id = 1, Subject = "ww", Message = "ss", UserName = "name", Type = "utm"});
+
+            List<CommentDto> commentUniversityDtos = _commentService.GetUniversityComments(1, 0, 10);
+            List<CommentDto> commentTeacherDtos = _commentService.GetTeacherComments(1, 0, 10);
+            List<CommentDto> commentCourseDtos = _commentService.GetCourseComments(1, 0, 10);
+            List<CommentDto> commentCourseTeachers = _commentService.GetCourseTeacherComments(1, 0, 0, 10);
+
             return View(new IndexViewModel
             {
-                CommentViewModels = model,
-                CommentUniversityViewModels = _mapper.Map<List<CommentUniversityDto>, List<CommentUniversityViewModel>>(commentUniversityDtos),
-                CommentTeacherViewModels = _mapper.Map<List<CommentTeacherDto>, List<CommentTeacherViewModel>>(commentTeacherDtos),
-                CommentCourseViewModels = _mapper.Map<List<CommentCourseDto>, List<CommentCourseViewModel>>(commentCourseDtos),
+                CommentUniversity = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentUniversityDtos),
+                CommentTeacher = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentTeacherDtos),
+                CommentCourse = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentCourseDtos),
+                CommentCourseTeachers = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentCourseTeachers),
                 UniversityShowViewModels = _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universities),
-                CommentCourseTeacherViewModels = _mapper.Map<List<CommentCourseTeacherDto>, List<CommentCourseTeacherViewModel>>(commentCourseTeacherDtos)
             });
         }
         
@@ -163,9 +159,37 @@ namespace UniversityRating.Presentation.Controllers
         public ActionResult UniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
             List<CommentDto> commentDtos = _commentService.GetUniversityComments(pageNumber, universityId, numberOfRecordsPerPage = 10, skipRecords = true);
-
             List<CommentViewModel> commentViewModels = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentDtos);
+
+            return PartialView("_ViewListComment", commentViewModels);
+        }
+
+        [HttpGet]
+        public ActionResult CourseComment(int pageNumber, long courseId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            List<CommentDto> commentDtos = _commentService.GetCourseComments(pageNumber, courseId, numberOfRecordsPerPage = 10, skipRecords = true);
+            List<CommentViewModel> commentViewModels = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentDtos);
+
+            return PartialView("_ViewListComment", commentViewModels);
+        }
+
+        [HttpGet]
+        public ActionResult TeacherComment(int pageNumber, long teacherId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            List<CommentDto> commentDtos = _commentService.GetTeacherComments(pageNumber, teacherId, numberOfRecordsPerPage = 10, skipRecords = true);
+            List<CommentViewModel> commentViewModels = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentDtos);
+
+            return PartialView("_ViewListComment", commentViewModels);
+        }
+
+        [HttpGet]
+        public ActionResult CourseTeacherComment(int pageNumber, long courseId, long teacherId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            List<CommentDto> commentDtos = _commentService.GetCourseTeacherComments(pageNumber, courseId, teacherId, numberOfRecordsPerPage = 10, skipRecords = true);
+            List<CommentViewModel> commentViewModels = _mapper.Map<List<CommentDto>, List<CommentViewModel>>(commentDtos);
+
             return PartialView("_ViewListComment", commentViewModels);
         }
     }
 }
+

@@ -36,15 +36,14 @@ namespace UniversityRating.Presentation
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
             services.AddIdentity<User, Role>(opt =>
                 {
                     opt.Password.RequiredLength = 6;
@@ -92,18 +91,17 @@ namespace UniversityRating.Presentation
             //    .AddDefaultUI(UIFramework.Bootstrap4)
             //    .AddEntityFrameworkStores<UniversityRatingContext>();
 
-            services.AddAuthentication().AddFacebook(facebookOptions =>
-            {
-                facebookOptions.AppId = "2232887083694227";
-                facebookOptions.AppSecret = "ad6f3e428f65726e97f67a9f1e8e23ad";
-            })
+            services.AddAuthentication()
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = "2232887083694227";
+                    facebookOptions.AppSecret = "ad6f3e428f65726e97f67a9f1e8e23ad";
+                })
                 .AddGoogle(optionGoogle =>
-                    {
-                        optionGoogle.ClientSecret =
-                            "rZ5jBk-ajgb0MGDPSuJwCDZ-";
-                        optionGoogle.ClientId =
-                            "971621963125-h61fl2jbqnh5ugce3dfi6gc7dlfhvrip.apps.googleusercontent.com";
-                    });
+                {
+                    optionGoogle.ClientSecret = "rZ5jBk-ajgb0MGDPSuJwCDZ-";
+                    optionGoogle.ClientId = "971621963125-h61fl2jbqnh5ugce3dfi6gc7dlfhvrip.apps.googleusercontent.com";
+                });
 
 
             services.AddMvc();
@@ -111,7 +109,6 @@ namespace UniversityRating.Presentation
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

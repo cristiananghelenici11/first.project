@@ -50,7 +50,7 @@
                                                         <p>Chose University</p>
                                                         <select id="universityComment" class="form-control" style="width: 150px">
                                                             <option value="0">All</option>
-                                                           @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
+                                                            @foreach (UniversityShowViewModel university in Model.UniversityShowViewModels)
                                                             {
                                                                 <option title="@university.Description" value="@university.Id">@university.Name</option>
                                                             }
@@ -66,9 +66,14 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <ul class="media-list" id="universityCommentList">
-                                            @await Html.PartialAsync("_ViewListComment", Model.CommentViewModels)
+                                        <ul class="media-list" id="listUniversityComment">
+                                            @await Html.PartialAsync("_ViewListComment", Model.CommentUniversity)
                                         </ul>
+                                        <div class="col-md-10">
+                                            <a class="btn btn-success" id="moreUniversityComment" style="margin-bottom: 10px" data-page-number="1">
+                                                <i class="fa fa-plus"></i> Show More Teachers
+                                            </a>
+                                        </div>
                                     </div>
 
                                     <div class="container tab-pane fade" id="commentTeacher">
@@ -99,28 +104,14 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <ul class="media-list">
-                                            @foreach (var comment in Model.CommentTeacherViewModels)
-                                            {
-                                                <li class="media">
-                                                    <a class="pull-left" style="padding-top: 25px">
-                                                        <i class="fas fa-user" style="zoom: 800%"></i>
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="well well-lg">
-                                                            <h4 class="media-heading">
-                                                                @if (User.Identity.IsAuthenticated)
-                                                                {
-                                                                    @User.Identity.Name
-                                                                }
-                                                            </h4>
-                                                            <p> Subject: @comment.Subject</p>
-                                                            <p> Message: @comment.Message</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            }
+                                        <ul class="media-list" id="listTeacherComment">
+                                            @await Html.PartialAsync("_ViewListComment", Model.CommentTeacher)
                                         </ul>
+                                        <div class="col-md-10">
+                                            <a class="btn btn-success" id="moreTeacherComment" style="margin-bottom: 10px" data-page-number="1">
+                                                <i class="fa fa-plus"></i> Show More Teacher Comment
+                                            </a>
+                                        </div>
                                     </div>
 
                                     <div id="commentCourse" class="container tab-pane fade">
@@ -150,28 +141,14 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <ul class="media-list">
-                                            @foreach (var comment in Model.CommentCourseViewModels)
-                                            {
-                                                <li class="media">
-                                                    <a class="pull-left" style="padding-top: 25px">
-                                                        <i class="fas fa-user" style="zoom: 800%"></i>
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="well well-lg">
-                                                            <h4 class="media-heading">
-                                                                @if (User.Identity.IsAuthenticated)
-                                                                {
-                                                                    @User.Identity.Name
-                                                                }
-                                                            </h4>
-                                                            <p> Subject: @comment.Subject</p>
-                                                            <p> Message: @comment.Message</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            }
+                                        <ul class="media-list" id="listCourseComment">
+                                            @await Html.PartialAsync("_ViewListComment", Model.CommentCourse)
                                         </ul>
+                                        <div class="col-md-10">
+                                            <a class="btn btn-success" id="moreCourseComment" style="margin-bottom: 10px" data-page-number="1">
+                                                <i class="fa fa-plus"></i> Show More Course Comment
+                                            </a>
+                                        </div>
                                     </div>
 
 
@@ -206,29 +183,14 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <ul class="media-list">
-                                            @foreach (var comment in Model.CommentCourseTeacherViewModels)
-                                            {
-                                                <li class="media">
-                                                    <a class="pull-left" style="padding-top: 25px">
-                                                        <i class="fas fa-user" style="zoom: 800%"></i>
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="well well-lg">
-                                                            <h4 class="media-heading">
-                                                                @if (User.Identity.IsAuthenticated)
-                                                                {
-                                                                    @User.Identity.Name
-                                                                }
-                                                            </h4>
-                                                            <p> Subject: @comment.Subject</p>
-                                                            <p> Message: @comment.Message</p>
-                                                        </div>
-                                                    </div>
-
-                                                </li>
-                                            }
+                                        <ul class="media-list" id="listCourseTeacherComment">
+                                            @await Html.PartialAsync("_ViewListComment", Model.CommentCourseTeachers)
                                         </ul>
+                                        <div class="col-md-10">
+                                            <a class="btn btn-success" id="moreCourseTeacherComment" style="margin-bottom: 10px" data-page-number="1">
+                                                <i class="fa fa-plus"></i> Show More Course Comment
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -244,74 +206,118 @@
 @section Scripts{
     <script>
     $(function () {
-        var pageNumber = 1;
-        $.ajax({
-            url: "/Mark/TeachersByUniversityId",
-            type: "GET",
-            data: ({ universityId: $('#universityTeacher').val() }),
-            success: function (data) {
-
-                $('#teacherComment').empty(),
-                    $.each(data,
-                        function (i, item) {
-                            $('#teacherComment').append
-                            (
-                                "<option value=\"" +
-                                item.Id +
-                                "\">" +
-                                item.FirstName +
-                                " " +
-                                item.LastName +
-                                "</option>"
-                            );
-                        });
-            }
-        });
-
-        $("#universityTeacher").bind("change",
-            function () {
-                $.ajax({
-                    url: "/Mark/TeachersByUniversityId",
-                    type: "GET",
-                    data: ({ universityId: $('#universityTeacher').val() }),
-                    success: function (data) {
-
-                        $('#teacherComment').empty(),
-                            $.each(data,
-                                function (i, item) {
-                                    $('#teacherComment').append
-                                    (
-                                        "<option title=\"" +
-                                        item.AverageMarks +
-                                        "\" value=\"" +
-                                        item.Id +
-                                        "\">" +
-                                        item.FirstName +
-                                        " " +
-                                        item.LastName +
-                                        "</option>"
-                                    );
-                                });
-                    }
-                });
-            });
         $("#universityComment").bind("change", function() {
             pageNumber = 1;
             var url = '@Url.Action("UniversityComments")' +
-                '?pageNumber=' + pageNumber + 
+                '?pageNumber=' + pageNumber +
+                '&universityId=' + $("#universityComment").val() +
+                '&skipRecords=' + false;
+            $('#listUniversityComment').empty();
+            $.get(url,
+                function(response) {
+                    $("#listUniversityComment").html($(response));
+                });
+        });
+
+        $("#moreUniversityComment").click(function () {
+            pageNumber ++;
+            var url = '@Url.Action("UniversityComments")' +
+                '?pageNumber=' + pageNumber +
                 '&universityId=' + $("#universityComment").val() +
                 '&skipRecords=' + false;
 
             $.get(url,
                 function(response) {
-                    $("#universityCommentList").html($(response));
+                    $("#listUniversityComment").append($(response));
                 });
         });
     });
+    </script>
+
+    <script>
+        $(function () {
+            var pageNumber = 1;
+            $.ajax({
+                url: "/Mark/TeachersByUniversityId",
+                type: "GET",
+                data: ({ universityId: $('#universityTeacher').val() }),
+                success: function (data) {
+
+                    $('#teacherComment').empty(),
+                        $.each(data,
+                            function (i, item) {
+                                $('#teacherComment').append
+                                (
+                                    "<option value=\"" +
+                                    item.Id +
+                                    "\">" +
+                                    item.FirstName +
+                                    " " +
+                                    item.LastName +
+                                    "</option>"
+                                );
+                            });
+                }
+            });
+
+            $("#universityTeacher").bind("change",
+                function () {
+                    $.ajax({
+                        url: "/Mark/TeachersByUniversityId",
+                        type: "GET",
+                        data: ({ universityId: $('#universityTeacher').val() }),
+                        success: function (data) {
+
+                            $('#teacherComment').empty(),
+                                $.each(data,
+                                    function (i, item) {
+                                        $('#teacherComment').append
+                                        (
+                                            "<option title=\"" +
+                                            item.AverageMarks +
+                                            "\" value=\"" +
+                                            item.Id +
+                                            "\">" +
+                                            item.FirstName +
+                                            " " +
+                                            item.LastName +
+                                            "</option>"
+                                        );
+                                    });
+                        }
+                    });
+                });
+            $("#teacherComment").bind("change", function() {
+                pageNumber = 1;
+                var url = '@Url.Action("TeacherComment")' +
+                    '?pageNumber=' + pageNumber +
+                    '&teacherId=' + $("#teacherComment").val() +
+                    '&skipRecords=' + false;
+                $('#listTeacherComment').empty();
+                $.get(url,
+                    function(response) {
+                        $("#listTeacherComment").html($(response));
+                    });
+            });
+
+            $("#moreTeacherComment").click(function () {
+                pageNumber ++;
+                var url = '@Url.Action("UniversityComments")' +
+                    '?pageNumber=' + pageNumber +
+                    '&universityId=' + $("#teacherComment").val() +
+                    '&skipRecords=' + false;
+
+                $.get(url,
+                    function(response) {
+                        $("#listTeacherComment").append($(response));
+                    });
+            });
+        });
 
     </script>
 
     <script>
+        var pageNumber = 1;
         $.ajax({
             url: "/Mark/CoursesByUniversityId",
             type: "GET",
@@ -352,7 +358,34 @@
                     }
                 });
             });
+
+        $("#course").bind("change", function() {
+            pageNumber = 1;
+            var url = '@Url.Action("CourseComment")' +
+                '?pageNumber=' + pageNumber +
+                '&courseId=' + $("#course").val() +
+                '&skipRecords=' + false;
+            $('#listCourseComment').empty();
+            $.get(url,
+                function(response) {
+                    $("#listCourseComment").html($(response));
+                });
+        });
+
+        $("#moreCourseComment").click(function () {
+            pageNumber ++;
+            var url = '@Url.Action("CourseComment")' +
+                '?pageNumber=' + pageNumber +
+                '&courseId=' + $("#course").val() +
+                '&skipRecords=' + false;
+
+            $.get(url,
+                function(response) {
+                    $("#listCourseComment").append($(response));
+                });
+        });
     </script>
+
     <script>
         $.ajax({
             url: "/Mark/TeachersByUniversityId",
@@ -365,11 +398,11 @@
                     $.each(data,
                         function (i, item) {
                             $('#teacherCommentCourseTeacher').append
-                            (
+                                (
 
                                 "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
 
-                            );
+                                );
                         });
 
             }
@@ -390,11 +423,11 @@
                             $.each(data,
                                 function (i, item) {
                                     $('#teacherCommentCourseTeacher').append
-                                    (
+                                        (
 
                                         "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
 
-                                    );
+                                        );
                                 });
 
                         $.ajax({
@@ -406,9 +439,9 @@
                                 $.each(data,
                                     function (i, item) {
                                         $('#courseCommentCourseTeacher').append
-                                        (
+                                            (
                                             "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
-                                        );
+                                            );
                                     });
                             }
                         });
@@ -429,12 +462,42 @@
                             $.each(data,
                                 function (i, item) {
                                     $('#courseCommentCourseTeacher').append
-                                    (
+                                        (
                                         "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
-                                    );
+                                        );
                                 });
                     }
                 });
             });
+
+        $("#courseCommentCourseTeacher").bind("change", function() {
+            pageNumber = 1;
+            var url = '@Url.Action("CourseTeacherComment")' +
+                '?pageNumber=' + pageNumber +
+                '&courseId=' + $("#courseCommentCourseTeacher").val() +
+                '&teacherId=' + $("#teacherCommentCourseTeacher").val() +
+                '&skipRecords=' + false;
+            $('#listCourseTeacherComment').empty();
+            $.get(url,
+                function(response) {
+                    $("#listCourseTeacherComment").html($(response));
+                });
+        });
+
+        $("#moreCourseTeacherComment").click(function () {
+            pageNumber ++;
+            var url = '@Url.Action("CourseTeacherComment")' +
+                '?pageNumber=' + pageNumber +
+                '&courseId=' + $("#courseCommentCourseTeacher").val() +
+                '&teacherId=' + $("#teacherCommentCourseTeacher").val() +
+                '&skipRecords=' + false;
+
+            $.get(url,
+                function(response) {
+                    $("#listCourseTeacherComment").append($(response));
+                });
+        });
     </script>
+
+
 }

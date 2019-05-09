@@ -12,8 +12,11 @@ namespace UniversityRating.Data.Repositories
 {
     public class CommentRepository : Repository<Comment> , ICommentRepository
     {
-        public CommentRepository(DbContext context) : base(context)
+        private readonly IRepository<CommentUniversity> _commentUniversityRepository;
+
+        public CommentRepository(DbContext context, IRepository<CommentUniversity> commentUniversityRepository) : base(context)
         {
+            _commentUniversityRepository = commentUniversityRepository;
         }
 
         public void AddCommentUniversity(CommentUniversity commentUniversity)
@@ -54,20 +57,24 @@ namespace UniversityRating.Data.Repositories
 
         public List<CommentView> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            if (universityId.Equals(0))
-            {
-                var qq = BuildQuery()
-                    .Select(x => new CommentView()
-                    {
-                        Id = x.Id,
-                        Subject = x.Subject,
-                        Message = x.Message,
-                        UserName = x.User.LastName,
-                        Type = x.Subject
-                    }).ToList();
-                return qq;
-            }
+            //if (universityId.Equals(0))
+            //{
+            //    var allComments = _commentUniversityRepository.GetAll().ToList();
+            //       return allComments.ToList();
+
+            //    var qq = BuildQuery()
+            //        .Select(x => new CommentView()
+            //        {
+            //            Id = x.Id,
+            //            Subject = x.Subject,
+            //            Message = x.Message,
+            //            UserName = x.User.LastName,
+            //            Type = x.Subject
+            //        }).ToList();
+            //    return qq;
+            //}
             return new List<CommentView>();
         }
     }
 }
+
