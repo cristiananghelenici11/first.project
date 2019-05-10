@@ -61,10 +61,10 @@ namespace UniversityRating.Presentation.Controllers
 
             commentTeacherViewModel.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
             _commentService.AddCommentTeacher(_mapper.Map<CommentTeacherViewModel, CommentTeacherDto>(commentTeacherViewModel));
+            string result = JsonConvert.SerializeObject(
+                $"{commentTeacherViewModel.UniversityId} , {commentTeacherViewModel.TeacherId}, {commentTeacherViewModel.Subject}, {commentTeacherViewModel.Message}");
 
-            string result = JsonConvert.SerializeObject($"{commentTeacherViewModel.UniversityId} , {commentTeacherViewModel.TeacherId}, {commentTeacherViewModel.Subject}, {commentTeacherViewModel.Message}");
             return Content(result, "application/json");
-
         }
 
         [HttpPost]
@@ -74,8 +74,9 @@ namespace UniversityRating.Presentation.Controllers
 
             commentUniversityViewModel.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
             _commentService.AddCommentUniversity(_mapper.Map<CommentUniversityViewModel, CommentUniversityDto>(commentUniversityViewModel));
+            string result = JsonConvert.SerializeObject(
+                $"{commentUniversityViewModel.UniversityId}, {commentUniversityViewModel.Subject}, {commentUniversityViewModel.Message}");
 
-            string result = JsonConvert.SerializeObject($"{commentUniversityViewModel.UniversityId}, {commentUniversityViewModel.Subject}, {commentUniversityViewModel.Message}");
             return Content(result, "application/json");
         }
 
@@ -86,8 +87,9 @@ namespace UniversityRating.Presentation.Controllers
 
             commentCourseViewModel.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));;
             _commentService.AddCommentCourse(_mapper.Map<CommentCourseViewModel, CommentCourseDto>(commentCourseViewModel));
-            
-            string result = JsonConvert.SerializeObject($"{commentCourseViewModel.UniversityId} {commentCourseViewModel.CourseId}, {commentCourseViewModel.Subject}, {commentCourseViewModel.Message}");
+            string result = JsonConvert.SerializeObject(
+                $"{commentCourseViewModel.UniversityId} {commentCourseViewModel.CourseId}, {commentCourseViewModel.Subject}, {commentCourseViewModel.Message}");
+
             return Content(result, "application/json");
         }
 
@@ -98,8 +100,9 @@ namespace UniversityRating.Presentation.Controllers
             
             commentCourseTeacherView.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
             _commentService.AddCommentCourseTeacher(_mapper.Map<CommentCourseTeacherViewModel, CommentCourseTeacherDto>(commentCourseTeacherView));
+            string result = JsonConvert.SerializeObject(
+                $"{commentCourseTeacherView.UniversityId}, {commentCourseTeacherView.TeacherId}, {commentCourseTeacherView.CourseId}, {commentCourseTeacherView.Subject}, {commentCourseTeacherView.Message}");
 
-            string result = JsonConvert.SerializeObject($"{commentCourseTeacherView.UniversityId}, {commentCourseTeacherView.TeacherId}, {commentCourseTeacherView.CourseId}, {commentCourseTeacherView.Subject}, {commentCourseTeacherView.Message}");
             return Content(result, "application/json");
         }
 
@@ -107,7 +110,6 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult DeleteComment(long id)
         {
             if (!ModelState.IsValid) return Content(JsonConvert.SerializeObject("Not valid"));
-
             _commentService.DeleteCommentById(id);
 
             return RedirectToAction("AddComment");
@@ -117,7 +119,6 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult ViewComment()
         {
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
-
             List<CommentDto> commentUniversityDtos = _commentService.GetUniversityComments(1, 0, 10);
             List<CommentDto> commentTeacherDtos = _commentService.GetTeacherComments(1, 0, 10);
             List<CommentDto> commentCourseDtos = _commentService.GetCourseComments(1, 0, 10);
@@ -137,7 +138,6 @@ namespace UniversityRating.Presentation.Controllers
         public ActionResult EditComment(long id)
         {
             EditCommentDto commentDto = _commentService.GetCommentById(id);
-
             EditCommentViewModel model = commentDto == null
                 ? new EditCommentViewModel()
                 : _mapper.Map<EditCommentDto, EditCommentViewModel>(commentDto);
@@ -148,7 +148,6 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public ActionResult EditComment(EditCommentViewModel model)
         {
-
             if (!ModelState.IsValid) return View(model);
             _commentService.UpdateComment(_mapper.Map<EditCommentViewModel, EditCommentDto>(model));
 

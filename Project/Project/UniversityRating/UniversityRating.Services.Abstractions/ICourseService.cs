@@ -6,6 +6,7 @@ namespace UniversityRating.Services.Abstractions
     public interface ICourseService
     {
         List<CourseDto> GetAllCoursesByUniversityId(long universityId);
+
         List<CourseDto> GetAllCoursesByTeacherId(long teacherId);
     }
 }

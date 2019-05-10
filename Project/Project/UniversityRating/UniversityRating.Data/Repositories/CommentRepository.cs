@@ -57,22 +57,7 @@ namespace UniversityRating.Data.Repositories
 
         public List<CommentView> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            //if (universityId.Equals(0))
-            //{
-            //    var allComments = _commentUniversityRepository.GetAll().ToList();
-            //       return allComments.ToList();
-
-            //    var qq = BuildQuery()
-            //        .Select(x => new CommentView()
-            //        {
-            //            Id = x.Id,
-            //            Subject = x.Subject,
-            //            Message = x.Message,
-            //            UserName = x.User.LastName,
-            //            Type = x.Subject
-            //        }).ToList();
-            //    return qq;
-            //}
+            //var a = GetAll().OfType<CommentUniversity>().Select(x=>x.UniversityId);
             return new List<CommentView>();
         }
     }

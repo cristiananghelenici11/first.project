@@ -99,8 +99,12 @@ namespace UniversityRating.Services.CommentService
 
         public List<CommentUniversityDto> GetCommentUniversitiesByUserId(long id)
         {
-            List<CommentUniversity> commentUniversities = _repositoryCommentUniversity.Find().Where(x => x.UserId.Equals(id)).ToList();
-            return _mapper.Map<List<CommentUniversity>, List<CommentUniversityDto>>(commentUniversities);
+            var spec = new Specification<CommentUniversity> {Predicate = user => user.UserId.Equals(id)};
+            spec.Include(x => x.User);
+
+            IEnumerable<CommentUniversity> commentUniversities = _repositoryCommentUniversity.Find(spec);
+            var result = commentUniversities.ToList();
+            return _mapper.Map<List<CommentUniversity>, List<CommentUniversityDto>>(result);
         }
 
         public List<CommentCourseDto> GetCommentCourseByUserId(long id)
@@ -143,7 +147,6 @@ namespace UniversityRating.Services.CommentService
 
         public List<CommentCourseTeacherDto> GetCommentCourseTeachersByUserId(long id)
         {
-            
             var spec = new Specification<CommentCourseTeacher> {Predicate = teacher => teacher.User.Id == id};
             spec.Include(x => x.CourseTeacher)
                 .ThenInclude(x => x.Course)
@@ -230,6 +233,7 @@ namespace UniversityRating.Services.CommentService
            
             return commentDtos;
         }
+
         public List<CommentDto> GetCourseComments(int pageNumber, long courseId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
             if (courseId.Equals(0))
@@ -279,7 +283,6 @@ namespace UniversityRating.Services.CommentService
                     Type = comment.Course.Faculty.University.Name + " "+comment.Course.Description
                 });
             }
-           
             return commentDtos;
         }
 
@@ -304,7 +307,7 @@ namespace UniversityRating.Services.CommentService
                         UserName = comment.User.Email,
                         Subject = comment.Subject,
                         Message = comment.Message,
-                        Type = comment.Teacher.UniversityTeachers.Select(x=>x.University.Name)+" "+comment.Teacher.FirstName + comment.Teacher.LastName
+                        Type = comment.Teacher.UniversityTeachers.Select(x=>x.University.Name).FirstOrDefault() +" "+comment.Teacher.FirstName + comment.Teacher.LastName
                     });
                 }
 
@@ -362,7 +365,6 @@ namespace UniversityRating.Services.CommentService
                         Type = comment.CourseTeacher.Course.Faculty.University.Name + " " + comment.CourseTeacher.Teacher.FirstName + " " + comment.CourseTeacher.Teacher.LastName + " " +comment.CourseTeacher.Course.Description 
                     });
                 }
-
                 return comments;
             }
 
@@ -388,7 +390,6 @@ namespace UniversityRating.Services.CommentService
                     Type = comment.CourseTeacher.Course.Faculty.University.Name + " " + comment.CourseTeacher.Teacher.FirstName + " " + comment.CourseTeacher.Teacher.LastName + " " +comment.CourseTeacher.Course.Description 
                 });
             }
-           
             return commentDtos;
         }
     }

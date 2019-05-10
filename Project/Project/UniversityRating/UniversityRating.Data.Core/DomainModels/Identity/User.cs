@@ -13,10 +13,13 @@ namespace UniversityRating.Data.Core.DomainModels.Identity
         }
 
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public int Year { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
         public virtual ICollection<Mark> Marks { get; set; }
     }
 }

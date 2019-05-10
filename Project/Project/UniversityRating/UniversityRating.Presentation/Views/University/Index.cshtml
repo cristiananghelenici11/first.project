@@ -122,55 +122,6 @@
             });
         });
     </script>
-    
-
-    @*<script>
-        $("#moreUniversities").click(function () {
-            var pageNumber = parseInt($(this).attr('data-page-number')) + 1;
-
-            $(this).attr('data-page-number', pageNumber);
-
-            var url = '@Url.Action("UniversitySort")' +
-                '?universitiesSortColumn=' +
-                $("#sortColumn").val() +
-                '&sortType=Desc' +
-                '&pageNumber=' +
-                $("#moreUniversities").attr('data-page-number');
-
-            $.get(url,
-                function(response) {
-                    $("#resultsTable").append($(response));
-                });
-        });
-
-        $("#sortColumn").change(function() {
-            var url = '@Url.Action("UniversitySort")' +
-                '?universitiesSortColumn=' +
-                $("#sortColumn").val() +
-                '&sortType=Desc' +
-                '&pageNumber=' +
-                $("#moreUniversities").attr('data-page-number') + 
-                '&skipRecords=' + false;
-
-            $.get(url,
-                function(response) {
-                    $("#resultsTable").html($(response));
-                });
-        });
-    </script>*@
-    @*var getUniversities = function() { 
-                var url = '@Url.Action("UniversitySort")' +
-                    '?universitiesSortColumn=' +
-                    $("#sortColumn").val() +
-                    '&sortType=Desc' +
-                    '&pageNumber=' +
-                    $("#moreUniversities").attr('data-page-number');
-
-                $.get(url,
-                    function(response) {
-                        $("#resultsTable").html($(response));
-                    });
-            };*@
 }
 
 

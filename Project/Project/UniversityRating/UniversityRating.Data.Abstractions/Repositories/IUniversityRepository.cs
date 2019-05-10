@@ -9,8 +9,12 @@ namespace UniversityRating.Data.Abstractions.Repositories
     public interface IUniversityRepository : IRepository<University>
     {  
         List<TopUniversity> GetTopUniversities(int numberOfTeachers);
+
         List<UniversityShow> GetAllUniversities();
+
         List<UniversityShow> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search,
             int numberOfRecordsPerPage = 10, bool skipRecords = true);
+
+        void DeleteUniversityById(int id);
     }
 }

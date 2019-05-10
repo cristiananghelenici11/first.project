@@ -13,15 +13,23 @@ namespace UniversityRating.Data.Core.DomainModels
         }
 
         public long Idnp { get; set; }
+
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public long Phone { get; set; }
+
         public string Email { get; set; }
+
         public string TypeTeacher { get; set; }
 
         public virtual ICollection<CommentTeacher> CommentTeachers { get; set; }
+
         public virtual ICollection<CourseTeacher> CourseTeachers { get; set; }
+
         public virtual ICollection<MarkTeacher> MarkTeachers { get; set; }
+
         public virtual ICollection<UniversityTeacher> UniversityTeachers { get; set; }
     }
 }

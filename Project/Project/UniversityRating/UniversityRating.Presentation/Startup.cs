@@ -33,7 +33,6 @@ namespace UniversityRating.Presentation
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
@@ -70,7 +69,6 @@ namespace UniversityRating.Presentation
                 expression.AddProfile<ViewModelToDtoProfile>();
             });
 
-
             services.AddScoped<DbContext, UniversityRatingContext>();
             services.AddTransient(typeof(ISpecification<>), typeof(Specification<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -85,11 +83,6 @@ namespace UniversityRating.Presentation
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IMarkService, MarkService>();
-
-
-            //services.AddDefaultIdentity<User>()
-            //    .AddDefaultUI(UIFramework.Bootstrap4)
-            //    .AddEntityFrameworkStores<UniversityRatingContext>();
 
             services.AddAuthentication()
                 .AddFacebook(facebookOptions =>

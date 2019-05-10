@@ -1,0 +1,55 @@
+﻿@using UniversityRating.Presentation.Models.University
+@model List<UniversityRating.Presentation.Models.University.UniversityShowViewModel>
+
+@foreach (UniversityShowViewModel university in Model)
+{
+    <tr>
+        <td>@($"{university.Id}")</td>
+        <td>@($"{university.Name}")</td>
+        <td>@($"{university.Description}")</td>
+        <td>@($"{university.Age}")</td>
+        <td>@($"{university.Contact}")</td>
+        <td>
+            <form asp-action="DeleteUniversity" asp-route-id="@university.Id" data-ajax="true">
+                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditUniversity","AdminSetting", new
+                                                                                               {
+                                                                                                   Id = university.Id,
+                                                                                                   Name = university.Name,
+                                                                                                   Description = university.Description,
+                                                                                                   Age = university.Age,
+                                                                                                   Contact = university.Contact
+                                                                                               })')">
+                    <span class="glyphicon glyphicon-pencil"></span>Modify
+                </a>
+                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                    <span class="glyphicon glyphicon-erase"></span>Delete
+                </button>
+            </form>
+        </td>
+
+    </tr>
+}
+
+
+<script>
+    //var Popup;
+    function PopupForm(url) {
+        var formDiv = $('<div/>');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: false,
+                    title: 'Edit University',
+                    height: 450,
+                    width: 700,
+                    close: function () {
+                        Popup.dialog('destroy').remove();
+                    }
+
+                });
+            });
+    }
+</script>

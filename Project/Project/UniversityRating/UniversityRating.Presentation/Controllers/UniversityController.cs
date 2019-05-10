@@ -35,12 +35,12 @@ namespace UniversityRating.Presentation.Controllers
                     _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels).Take(10).ToList()
             });
         }
+
         [HttpGet]
         public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
             List<UniversityShowDto> universities = _universityService.GetAllUniversities(universitiesSortColumn, sortType, pageNumber, search,
                 numberOfRecordsPerPage = 10, skipRecords = true);
-
             var model = _mapper.Map<List<UniversityShowViewModel>>(universities);
 
             return PartialView("_UniversityTableRecords", model);
@@ -77,7 +77,5 @@ namespace UniversityRating.Presentation.Controllers
 
         //    return PartialView("_UniversityTableRecords", model);
         //}
-
-
     }
 }

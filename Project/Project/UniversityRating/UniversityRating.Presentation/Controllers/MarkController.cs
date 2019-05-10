@@ -134,7 +134,6 @@ namespace UniversityRating.Presentation.Controllers
         public ActionResult EditMark(long id)
         {
             EditMarkDto markDto = _markService.GetMarkById(id);
-
             EditMarkViewModel model = markDto == null
                 ? new EditMarkViewModel()
                 : _mapper.Map<EditMarkDto, EditMarkViewModel>(markDto);

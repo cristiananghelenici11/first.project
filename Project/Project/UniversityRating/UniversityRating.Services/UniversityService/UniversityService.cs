@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using UniversityRating.Data.Abstractions.Models.University;
 using UniversityRating.Data.Abstractions.Repositories;
+using UniversityRating.Data.Core.DomainModels;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.Enums;
 using UniversityRating.Services.Common.DTOs.University;
@@ -24,6 +25,7 @@ namespace UniversityRating.Services.UniversityService
         public List<UniversityShowDto> GetAllUniversities()
         {
             List<UniversityShow> universityShows = _universityRepository.GetAllUniversities();
+
             return _mapper.Map<List<UniversityShow>, List<UniversityShowDto>>(universityShows);
         }
 
@@ -41,6 +43,23 @@ namespace UniversityRating.Services.UniversityService
             numberOfRecordsPerPage = 10, skipRecords = true);
            
             return _mapper.Map<List<UniversityShow>, List<UniversityShowDto>>(universities);
+        }
+
+        public void DeleteUniversityById(int id)
+        {
+            _universityRepository.DeleteUniversityById(id);
+        }
+
+        public void Update(UniversityDto model)
+        {
+            _universityRepository.Update(_mapper.Map<University>(model));
+            _universityRepository.SaveChanges();
+        }
+
+        public void AddNewUniversity(UniversityDto universityDto)
+        {
+            _universityRepository.Add(_mapper.Map<University>(universityDto));
+            _universityRepository.SaveChanges();
         }
     }
 }

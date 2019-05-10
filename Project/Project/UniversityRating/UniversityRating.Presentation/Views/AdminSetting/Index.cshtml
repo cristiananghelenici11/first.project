@@ -1,0 +1,179 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using UniversityRating.Data.Core.DomainModels.Identity
+@using UniversityRating.Services.Common.DTOs.Enums
+@model UniversityRating.Presentation.Models.Home.IndexViewModel
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    ViewData["Title"] = "About";
+    Layout = "/Views/Shared/_LayoutDashboard.cshtml";
+
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2 class="title">Administrator page add Universities and Teachers</h2>
+                                <br />
+
+                                <ul class="nav nav-pills" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#commentUniversity">University</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#commentTeacher">Teacher</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+
+                                    <div class="container tab-pane active" id="commentUniversity">
+                                        <div class="header">
+                                            <a class="btn btn-success" style="width: 150px; margin-bottom: 5px;" onclick="PopupForm('@Url.Action("AddUniversity","AdminSetting")')">
+                                                Add new University
+                                            </a>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <select name="Universities" class="form-control" id="sortColumn" style="width: 150px" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
+                                                        <option selected="selected" value="">Please select</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-2 ">
+                                                    <input class="form-control" style="width: 150px" type="text" placeholder="search" id="search"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="content table-responsive table-full-width" id="teachers">
+                                            <table class="table table-hover table-striped table-striped table-bordered table-sm" data-toggle="table" data-sort-name="date" data-sort-order="desc">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                        <th>Age</th>
+                                                        <th>Contact</th>
+                                                        <th>Change</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="resultsTable">
+                                                    @await Html.PartialAsync("_UniversityTableRecordsAdmin", Model.UniversityShowViewModels)
+                                                </tbody>
+                                            </table>
+                                            <div class="col-md-2">
+                                                <a class="btn btn-success" id="moreUniversities" style="margin-bottom: 10px" data-page-number="1">
+                                                    <i class="fa fa-plus"></i> Show More University
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container tab-pane fade" id="commentTeacher">
+                                        <div class="header">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <a class="btn btn-success" style="width: 150px; margin-bottom: 5px;" onclick="PopupForm('@Url.Action("AddTeacher", "AdminSetting")')">
+                                                        Add new Teacher
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-2">
+                                                        <input class="form-control" style="width: 150px" type="text" placeholder="search" id="searchTeacher"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="content table-responsive table-full-width">
+                                            <table class="table table-hover table-striped table-striped table-bordered table-sm" data-toggle="table" data-sort-name="date" data-sort-order="desc">
+                                                <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>TypeTeacher</th>
+                                                    <th>Change</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="resultsTable">
+                                                @await Html.PartialAsync("_TeacherTableRecordsAdmin", Model.TeacherShowViewModels)
+                                                </tbody>
+                                            </table>
+                                            <div class="col-md-2">
+                                                <a class="btn btn-success" id="moreTeacher" style="margin-bottom: 10px" data-page-number="1">
+                                                    <i class="fa fa-plus"></i> Show More Teacher
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script>
+            var pageNumber = 1;
+
+            $(function () {
+                $("#moreUniversities").click(function () {
+                    pageNumber ++;
+                    var url = '@Url.Action("UniversitySort")' +
+                        '?universitiesSortColumn=' +
+                        $("#sortColumn").val() +
+                        '&sortType=Desc' +
+                        '&pageNumber=' + pageNumber +
+                        '&search=' + $("#search").val();
+
+                    $.get(url,
+                        function(response) {
+                            $("#resultsTable").append($(response));
+                        });
+                });
+                
+                $("#search").bind("change",function() {
+                    pageNumber = 1;
+                    var url = '@Url.Action("UniversitySort")' +
+                        '?universitiesSortColumn=' +
+                        $("#sortColumn").val() +
+                        '&sortType=Desc' +
+                        '&pageNumber=' + pageNumber +
+                        '&search=' + $("#search").val() +
+                        '&skipRecords=' + false;
+                    $("#resultsTable").empty();
+                    $.get(url,
+                        function(response) {
+                            $("#resultsTable").append($(response));
+                        });
+                });
+
+                $("#sortColumn").change(function() {
+                    pageNumber = 1;
+                    var url = '@Url.Action("UniversitySort")' +
+                        '?universitiesSortColumn=' +
+                        $("#sortColumn").val() +    
+                        '&sortType=Desc' +
+                        '&pageNumber=' + pageNumber + 
+                        '&search=' + $("#search").val() +
+                        '&skipRecords=' + false;
+
+                    $.get(url,
+                        function(response) {
+                            $("#resultsTable").html($(response));
+                        });
+                });
+            });
+        </script>
+}

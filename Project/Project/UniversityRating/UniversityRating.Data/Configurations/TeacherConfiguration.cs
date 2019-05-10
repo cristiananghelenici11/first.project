@@ -14,8 +14,7 @@ namespace UniversityRating.Data.Configurations
                    .IsUnique();
 
             builder.HasIndex(e => e.Idnp)
-                   .HasName("UK_TeachersIdnp")
-                   .IsUnique();
+                .HasName("UK_TeachersIdnp");
 
             builder.Property(e => e.Email)
                    .IsRequired()
@@ -23,18 +22,11 @@ namespace UniversityRating.Data.Configurations
 
             builder.Property(e => e.FirstName)
                    .IsRequired()
-                   .HasMaxLength(64);
+                   .HasMaxLength(150);
 
             builder.Property(e => e.LastName)
                    .IsRequired()
-                   .HasMaxLength(64);
-
-            builder.Property(e => e.Phone)
-                   .IsRequired()
-                   .HasMaxLength(64)
-                   .IsUnicode(false);
-
-
+                   .HasMaxLength(150);
         }
     }
 }

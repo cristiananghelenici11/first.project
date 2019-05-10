@@ -49,7 +49,6 @@ namespace UniversityRating.Services.MarkService
             _markRepository.AddMarkTeacher(markTeacher);
         }
 
-
         public void AddMarkCourse(MarkCourseDto markCourseDto)
         {
             var markCourse = new MarkCourse
@@ -70,7 +69,6 @@ namespace UniversityRating.Services.MarkService
                 Value = markCourseTeacherDto.Mark
             };
             _markRepository.AddMarkCourseTeacher(markCourseTeacher);
-
         }
 
         public List<EditMarkTeacherDto> GetMarkTeacherByUserId(long userId)
@@ -78,8 +76,8 @@ namespace UniversityRating.Services.MarkService
             var spec = new Specification<MarkTeacher> { Predicate = teacher => teacher.User.Id.Equals(userId) };
             spec.Include(x => x.Teacher)
                 .ThenInclude(x => x.UniversityTeachers).ThenInclude(x => x.University).ThenInclude(x => x.UniversityTeachers);
-            List<MarkTeacher> markTeachers = _repositoryMarkTeacher.Find(spec).ToList();
 
+            List<MarkTeacher> markTeachers = _repositoryMarkTeacher.Find(spec).ToList();
             List<EditMarkTeacherDto> editMarkTeacherDtos = new List<EditMarkTeacherDto>();
 
             foreach (MarkTeacher markTeacher in markTeachers)
@@ -124,8 +122,8 @@ namespace UniversityRating.Services.MarkService
             var spec = new Specification<MarkCourse> { Predicate = course => course.User.Id.Equals(id) };
             spec.Include(x => x.Course)
                 .ThenInclude(x => x.CourseTeachers).Include(x => x.Course.Faculty.University);
-            List<MarkCourse> markTeachers = _repositoryMarkCourse.Find(spec).ToList();
 
+            List<MarkCourse> markTeachers = _repositoryMarkCourse.Find(spec).ToList();
             List<EditMarkCourseDto> editMarkCourseDtos = new List<EditMarkCourseDto>();
 
             foreach (MarkCourse markCourse in markTeachers)
@@ -149,8 +147,8 @@ namespace UniversityRating.Services.MarkService
             var spec = new Specification<MarkCourseTeacher> { Predicate = course => course.User.Id.Equals(id) };
             spec.Include(x => x.CourseTeacher)
                 .ThenInclude(x => x.Course.Faculty.University);
-            List<MarkCourseTeacher> markCourseTeachers = _repositoryMarkCourseTeacher.Find(spec).ToList();
 
+            List<MarkCourseTeacher> markCourseTeachers = _repositoryMarkCourseTeacher.Find(spec).ToList();
             List<EditMarkCourseTeacherDto> editMarkCourseTeacherDtos = new List<EditMarkCourseTeacherDto>();
 
             foreach (MarkCourseTeacher markCourseTeacher in markCourseTeachers)
@@ -166,6 +164,7 @@ namespace UniversityRating.Services.MarkService
                     UniversityName = markCourseTeacher.CourseTeacher.Course.Faculty.University.Name
                 });
             }
+
             return editMarkCourseTeacherDtos;
         }
     }

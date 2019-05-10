@@ -40,10 +40,10 @@ namespace UniversityRating.Data.Context
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            }
+//            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+//            {
+//                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+//            }
 
             modelBuilder.Entity<User>()
                 .ToTable("Users");

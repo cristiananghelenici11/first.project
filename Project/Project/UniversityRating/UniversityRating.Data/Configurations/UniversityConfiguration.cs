@@ -8,11 +8,6 @@ namespace UniversityRating.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<University> builder)
         {
-
-            builder.Property(e => e.Address)
-                   .IsRequired()
-                   .HasMaxLength(128);
-
             builder.Property(e => e.Contact)
                    .IsRequired()
                    .HasMaxLength(64)

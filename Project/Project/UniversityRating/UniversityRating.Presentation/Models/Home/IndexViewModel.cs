@@ -12,14 +12,14 @@ namespace UniversityRating.Presentation.Models.Home
         public List<TopUniversityViewModel> TopUniversities { get; set; }
         public List<TeacherShowViewModel> TeacherShows { get; set; }
         public List<UniversityShowViewModel> UniversityShowViewModels { get; set; }
+
         public List<CommentUniversityViewModel> CommentUniversityViewModels { get; set; }
         public List<CommentCourseViewModel> CommentCourseViewModels { get; set; }
         public List<CommentTeacherViewModel> CommentTeacherViewModels { get; set; }
         public List<CommentCourseTeacherViewModel> CommentCourseTeacherViewModels { get; set; }
-        public List<TeacherShowViewModel> TeacherShowViewModels { get; set; }
 
+        public List<TeacherShowViewModel> TeacherShowViewModels { get; set; }
         public List<EditMarkTeacherViewModel> EditMarkTeacherViewModels { get; set; }
-        
         public List<EditMarkCourseViewModel> EditMarkCourseViewModels {get; set;}
         public List<EditMarkCourseTeacherViewModel> EditMarkCourseTeacherViewModels { get; set;}
 

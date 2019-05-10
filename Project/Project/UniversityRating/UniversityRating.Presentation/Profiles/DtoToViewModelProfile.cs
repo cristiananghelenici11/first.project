@@ -15,18 +15,23 @@ namespace UniversityRating.Presentation.Profiles
         public DtoToViewModelProfile()
         {
             CreateMap<TopTeacherDto, TopTeacherViewModel>();
+
             CreateMap<TeacherShowDto, TeacherShowViewModel>();
 
             CreateMap<TopUniversityDto, TopUniversityViewModel>();
+
             CreateMap<UniversityShowDto, UniversityShowViewModel>();
 
             CreateMap<CommentUniversityShowDto, CommentUniversityShowViewModel>();
 
             CreateMap<CommentUniversityDto, CommentUniversityViewModel>();
+
             CreateMap<CommentCourseDto, CommentCourseViewModel>();
+
             CreateMap<CommentCourseTeacherDto, CommentCourseTeacherViewModel>();
 
             CreateMap<EditMarkDto, EditMarkViewModel>();
+
             CreateMap<CommentDto, CommentViewModel>();
         }
     }

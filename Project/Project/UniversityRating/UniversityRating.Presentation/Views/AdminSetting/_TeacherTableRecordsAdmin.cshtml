@@ -1,0 +1,54 @@
+﻿@using UniversityRating.Presentation.Models.Teacher
+@model System.Collections.Generic.List<UniversityRating.Presentation.Models.Teacher.TeacherShowViewModel>
+
+@foreach (TeacherShowViewModel teacher in Model)
+{
+    <tr>
+        <td>@($"{teacher.Id}")</td>
+        <td>@($"{teacher.FirstName}, {teacher.LastName}")</td>
+        <td>@($"{teacher.Email}")</td>
+        <td>@($"{teacher.TypeTeacher}")</td>
+        <td>
+            <form asp-action="DeleteTeacher" asp-route-id="@teacher.Id" data-ajax="true">
+                <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditTeacher","AdminSetting", new
+                                                                                               {
+                                                                                                   Id = teacher.Id,
+                                                                                                   FirstName = teacher.FirstName,
+                                                                                                   LastName = teacher.LastName,
+                                                                                                   Email = teacher.Email,
+                                                                                                   TypeTeacher = teacher.TypeTeacher
+                                                                                               })')">
+                    <span class="glyphicon glyphicon-pencil"></span>Modify
+                </a>
+                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                    <span class="glyphicon glyphicon-erase"></span>Delete
+                </button>
+            </form>
+        </td>
+
+    </tr>
+}
+
+
+<script>
+    //var Popup;
+    function PopupForm(url) {
+        var formDiv = $('<div/>');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: false,
+                    title: 'Edit Teacher',
+                    height: 450,
+                    width: 700,
+                    close: function () {
+                        Popup.dialog('destroy').remove();
+                    }
+
+                });
+            });
+    }
+</script>

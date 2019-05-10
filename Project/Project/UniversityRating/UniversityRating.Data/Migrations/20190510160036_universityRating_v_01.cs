@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UniversityRating.Data.Migrations
 {
-    public partial class university_v01 : Migration
+    public partial class universityRating_v_01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,9 +30,9 @@ namespace UniversityRating.Data.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Idnp = table.Column<long>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 64, nullable: false),
-                    LastName = table.Column<string>(maxLength: 64, nullable: false),
-                    Phone = table.Column<long>(unicode: false, maxLength: 64, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 150, nullable: false),
+                    LastName = table.Column<string>(maxLength: 150, nullable: false),
+                    Phone = table.Column<long>(nullable: false),
                     Email = table.Column<string>(maxLength: 64, nullable: false),
                     TypeTeacher = table.Column<string>(nullable: true)
                 },
@@ -48,7 +48,7 @@ namespace UniversityRating.Data.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 64, nullable: false),
-                    Address = table.Column<string>(maxLength: 128, nullable: false),
+                    Address = table.Column<string>(nullable: true),
                     Description = table.Column<string>(maxLength: 256, nullable: false),
                     Contact = table.Column<string>(unicode: false, maxLength: 64, nullable: false),
                     Age = table.Column<int>(nullable: false)
@@ -105,7 +105,7 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,7 +174,7 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,7 +194,7 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,13 +212,13 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRoles_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -238,7 +238,7 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,13 +281,13 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CPToTeachers",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -313,13 +313,13 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CommentCourseToCourse",
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CommentCourseTeacherToCourseTeacher",
                         column: x => x.CourseTeacherId,
@@ -331,13 +331,13 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CommentUniversitiesToUniversity",
                         column: x => x.UniversityId,
                         principalTable: "Universities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -361,7 +361,7 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MarkCourseToCourse",
                         column: x => x.CourseId,
@@ -373,7 +373,7 @@ namespace UniversityRating.Data.Migrations
                         column: x => x.CourseTeacherId,
                         principalTable: "CourseTeachers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MarkTeacherToTeacher",
                         column: x => x.TeacherId,
@@ -469,8 +469,7 @@ namespace UniversityRating.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "UK_TeachersIdnp",
                 table: "Teachers",
-                column: "Idnp",
-                unique: true);
+                column: "Idnp");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UniversityTeachers_TeacherId",

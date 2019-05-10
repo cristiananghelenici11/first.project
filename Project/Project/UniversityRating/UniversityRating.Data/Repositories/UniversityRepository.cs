@@ -42,7 +42,7 @@ namespace UniversityRating.Data.Repositories
                     Contact = u.Contact,
                     Address = u.Address,
                     Age = u.Age,
-                    Description = u.Description,
+                    Description = u.Description,    
                     AvgMark = u.UniversityTeachers.Any()
                         ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
                         ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0
@@ -90,7 +90,6 @@ namespace UniversityRating.Data.Repositories
                 });
             }
 
-
             if (universitiesSortColumn != null)
             {
                 if (sortType == SortType.Asc)
@@ -109,12 +108,17 @@ namespace UniversityRating.Data.Repositories
 
             if (skipRecords)
                 items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-
             items = items.Take(numberOfRecordsPerPage);
-
             List<UniversityShow> result = items.ToList();
 
             return result;
+        }
+
+        public void DeleteUniversityById(int id)
+        {
+            University university = GetById(id);
+            Remove(university);
+            SaveChanges();
         }
     }
 }

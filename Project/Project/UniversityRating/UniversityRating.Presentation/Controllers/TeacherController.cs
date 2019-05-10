@@ -21,7 +21,10 @@ namespace UniversityRating.Presentation.Controllers
         private readonly ITeacherService _teacherService;
         private readonly IUniversityService _universityService;
 
-        public TeacherController(IMapper mapper, ITeacherService teacherService, IUniversityService universityService)
+        public TeacherController(
+            IMapper mapper, 
+            ITeacherService teacherService, 
+            IUniversityService universityService)
         {
             _mapper = mapper;
             _teacherService = teacherService;
@@ -42,15 +45,15 @@ namespace UniversityRating.Presentation.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
-        public IActionResult MoreTeachers(int page)
-        {
-            const int pageSize = 5;
-            List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        //[HttpGet]
+        //public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        //{
+        //    List<TeacherShowDto> teacherDtos =_teacherService.GetAllTeachersByUniversityId(universityId, pageNumber, search, numberOfRecordsPerPage = 10, skipRecords = true);
+        //    var teacherViewModel = _mapper.Map<List<TeacherShowViewModel>>(teacherDtos);
 
-            string result = JsonConvert.SerializeObject(items);
-            return Content(result, "application/json");
-        }
+        //    return PartialView("_TeacherTableRecords", teacherViewModel);
+        //}
+
 
         [HttpGet]
         public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
@@ -81,8 +84,9 @@ namespace UniversityRating.Presentation.Controllers
                 items2 = items2.Skip((pageNumber - 1) * numberOfRecordsPerPage);
             items2 = items2.Take(numberOfRecordsPerPage);
             var model2 = _mapper.Map<List<TeacherShowViewModel>>(items2.ToList());
+
+
             return PartialView("_TeacherTableRecords", model2);
         }
-
     }
 }

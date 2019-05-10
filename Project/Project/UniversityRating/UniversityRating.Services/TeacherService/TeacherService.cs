@@ -2,6 +2,7 @@
 using AutoMapper;
 using UniversityRating.Data.Abstractions.Models.Teacher;
 using UniversityRating.Data.Abstractions.Repositories;
+using UniversityRating.Data.Core.DomainModels;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.Teacher;
 
@@ -44,6 +45,32 @@ namespace UniversityRating.Services.TeacherService
             List<TeacherShow> teachersByUniversityId = _teacherRepository.GetAllTeachersWithoutUniversity();
 
             return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teachersByUniversityId);
+        }
+
+        public void Update(TeacherDto teacherDto)
+        {
+            _teacherRepository.Update(_mapper.Map<Teacher>(teacherDto));
+            _teacherRepository.SaveChanges();
+        }
+
+        public void DeleteTeacherById(int id)
+        {
+            _teacherRepository.DeleteTeacherById(id);
+        }
+
+        public void AddTeacher(TeacherDto teacherDto)
+        {
+            _teacherRepository.Add(_mapper.Map<Teacher>(teacherDto));
+            _teacherRepository.SaveChanges();
+        }
+
+        public List<TeacherShowDto> GetAllTeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage,
+            bool skipRecords)
+        {
+            List<TeacherShow> teacherShow = _teacherRepository.GetAllTeachersByUniversityId(universityId, pageNumber, search, numberOfRecordsPerPage, skipRecords);
+            List<TeacherShowDto> teacherShowDto = _mapper.Map<List<TeacherShowDto>>(teacherShow);
+
+            return teacherShowDto;
         }
     }
 }

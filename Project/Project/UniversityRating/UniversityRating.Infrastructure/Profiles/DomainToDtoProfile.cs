@@ -14,14 +14,17 @@ namespace UniversityRating.Presentation.Profiles
         public DomainToDtoProfile()
         {
             CreateMap<TopTeacher, TopTeacherDto>();
+
             CreateMap<TeacherShow, TeacherShowDto>();
 
             CreateMap<TopUniversity, TopUniversityDto>();
+
             CreateMap<UniversityShow, UniversityShowDto>();
 
             CreateMap<CommentUniversityShow, CommentUniversityShowDto>();
 
             CreateMap<CommentUniversity, CommentUniversityDto>();
+
             CreateMap<CommentCourse, CommentCourseDto>()
                 .ForMember(x => x.UniversityId, opt => opt.Ignore());
 
