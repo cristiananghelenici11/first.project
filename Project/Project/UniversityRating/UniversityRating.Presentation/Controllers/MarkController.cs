@@ -18,10 +18,10 @@ namespace UniversityRating.Presentation.Controllers
 {
     public class MarkController : Controller
     {
-        private IMapper _mapper;
-        private IUniversityService _universityService;
-        private ITeacherService _teacherService;
-        private ICourseService _courseService;
+        private readonly IMapper _mapper;
+        private readonly IUniversityService _universityService;
+        private readonly ITeacherService _teacherService;
+        private readonly ICourseService _courseService;
         private readonly SignInManager<User> _signInManager;
         private readonly IMarkService _markService;
 
@@ -45,7 +45,6 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Index()
         {
             long currentUser = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
-
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
             List<EditMarkTeacherDto> editMarkTeacherViewModels = _markService.GetMarkTeacherByUserId(currentUser);
             List<EditMarkCourseDto> editMarkCourseDtos = _markService.GetMarkCourseByUserId(currentUser);
@@ -97,6 +96,7 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public IActionResult AddMarkTeacher(MarkTeacherViewModel markTeacher)
         {
+            if (!ModelState.IsValid) return NoContent();
             markTeacher.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
             _markService.AddMarkTeacher(_mapper.Map<MarkTeacherViewModel, MarkTeacherDto>(markTeacher));
 
@@ -106,6 +106,7 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public IActionResult AddMarkCourse(MarkCourseViewModel markCourse)
         {
+            if (!ModelState.IsValid) return NoContent();
             markCourse.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
             _markService.AddMarkCourse(_mapper.Map<MarkCourseViewModel, MarkCourseDto>(markCourse));
 
@@ -115,6 +116,7 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public IActionResult AddMarkCourseTeacher(MarkCourseTeacherViewModel markCourseTeacher)
         {
+            if (!ModelState.IsValid) return NoContent();
             markCourseTeacher.UserId = Convert.ToInt32(_signInManager.UserManager.GetUserId(User));
             _markService.AddMarkCourseTeacher(_mapper.Map<MarkCourseTeacherViewModel, MarkCourseTeacherDto>(markCourseTeacher));
 

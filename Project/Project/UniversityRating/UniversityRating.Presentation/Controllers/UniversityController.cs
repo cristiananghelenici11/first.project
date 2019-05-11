@@ -2,12 +2,10 @@
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using UniversityRating.Presentation.Models.Home;
 using UniversityRating.Presentation.Models.University;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.Enums;
-using UniversityRating.Services.Common.DTOs.Teacher;
 using UniversityRating.Services.Common.DTOs.University;
 
 namespace UniversityRating.Presentation.Controllers
@@ -17,7 +15,9 @@ namespace UniversityRating.Presentation.Controllers
         private readonly IMapper _mapper;
         private readonly IUniversityService _universityService;
 
-        public UniversityController(IMapper mapper, IUniversityService universityService)
+        public UniversityController(
+            IMapper mapper, 
+            IUniversityService universityService)
         {
             _mapper = mapper;
             _universityService = universityService;
@@ -37,7 +37,8 @@ namespace UniversityRating.Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search, 
+            int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
             List<UniversityShowDto> universities = _universityService.GetAllUniversities(universitiesSortColumn, sortType, pageNumber, search,
                 numberOfRecordsPerPage = 10, skipRecords = true);
@@ -45,7 +46,6 @@ namespace UniversityRating.Presentation.Controllers
 
             return PartialView("_UniversityTableRecords", model);
         }
-
 
         //[HttpGet]
         //public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, int numberOfRecordsPerPage = 10, bool skipRecords = true)

@@ -21,10 +21,10 @@ namespace UniversityRating.Services.UniversityService
             _mapper = mapper;
         }
 
-
         public List<UniversityShowDto> GetAllUniversities()
         {
-            List<UniversityShow> universityShows = _universityRepository.GetAllUniversities();
+            List<University> universities = _universityRepository.GetAllUniversities();
+            List<UniversityShow> universityShows = _mapper.Map<List<University>, List<UniversityShow>>(universities);
 
             return _mapper.Map<List<UniversityShow>, List<UniversityShowDto>>(universityShows);
         }

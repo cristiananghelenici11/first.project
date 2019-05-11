@@ -1,10 +1,6 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using UniversityRating.Data.Abstractions.Models.Comment;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
 
@@ -12,11 +8,9 @@ namespace UniversityRating.Data.Repositories
 {
     public class CommentRepository : Repository<Comment> , ICommentRepository
     {
-        private readonly IRepository<CommentUniversity> _commentUniversityRepository;
 
-        public CommentRepository(DbContext context, IRepository<CommentUniversity> commentUniversityRepository) : base(context)
+        public CommentRepository(DbContext context) : base(context)
         {
-            _commentUniversityRepository = commentUniversityRepository;
         }
 
         public void AddCommentUniversity(CommentUniversity commentUniversity)
@@ -53,12 +47,6 @@ namespace UniversityRating.Data.Repositories
                     Subject = x.Subject,
                 })
                 .ToList();
-        }
-
-        public List<CommentView> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true)
-        {
-            //var a = GetAll().OfType<CommentUniversity>().Select(x=>x.UniversityId);
-            return new List<CommentView>();
         }
     }
 }

@@ -16,20 +16,10 @@ namespace UniversityRating.Data.Repositories
         {
         }
 
-        public List<UniversityShow> GetAllUniversities()
+        public List<University> GetAllUniversities()
         {
+
             return BuildQuery()
-                .Select(u => new UniversityShow()
-                {
-                    Id = u.Id,
-                    Name = u.Name,
-                    Description = u.Description,
-                    Contact = u.Contact,
-                    Age = u.Age,
-                    AverageMark = u.UniversityTeachers.Any()
-                        ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
-                            ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
-                })
                 .ToList();
         }
 
@@ -44,8 +34,8 @@ namespace UniversityRating.Data.Repositories
                     Age = u.Age,
                     Description = u.Description,    
                     AvgMark = u.UniversityTeachers.Any()
-                        ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
-                        ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0
+                        ? u.UniversityTeachers.Where(z => z.Teacher.MarkTeachers.Count > 0).Average(x => x.Teacher.MarkTeachers.Any()
+                            ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
 
                 })
                 .OrderByDescending(am => am.AvgMark)
@@ -53,11 +43,10 @@ namespace UniversityRating.Data.Repositories
                 .ToList();
         }
 
-
         public List<UniversityShow> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search,
             int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            IEnumerable<UniversityShow> items;
+            IQueryable<UniversityShow> items;
             if (!string.IsNullOrEmpty(search))
             {
                 items = BuildQuery()
@@ -70,7 +59,7 @@ namespace UniversityRating.Data.Repositories
                         Contact = u.Contact,
                         Age = u.Age,
                         AverageMark = u.UniversityTeachers.Any()
-                            ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
+                            ? u.UniversityTeachers.Where(z => z.Teacher.MarkTeachers.Count > 0).Average(x => x.Teacher.MarkTeachers.Any()
                                 ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
                     });
             }
@@ -85,7 +74,7 @@ namespace UniversityRating.Data.Repositories
                     Contact = u.Contact,
                     Age = u.Age,
                     AverageMark = u.UniversityTeachers.Any()
-                        ? u.UniversityTeachers.Average(x => x.Teacher.MarkTeachers.Any()
+                        ? u.UniversityTeachers.Where(z => z.Teacher.MarkTeachers.Count > 0).Average(x => x.Teacher.MarkTeachers.Any()
                             ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
                 });
             }
@@ -109,14 +98,15 @@ namespace UniversityRating.Data.Repositories
             if (skipRecords)
                 items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
             items = items.Take(numberOfRecordsPerPage);
-            List<UniversityShow> result = items.ToList();
+            List<UniversityShow> universityShows = items.ToList();
 
-            return result;
+            return universityShows;
         }
 
         public void DeleteUniversityById(int id)
         {
             University university = GetById(id);
+            if (university == null) return;
             Remove(university);
             SaveChanges();
         }

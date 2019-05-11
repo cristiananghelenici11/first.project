@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UniversityRating.Presentation.Models.Comment;
 using UniversityRating.Presentation.Models.Home;
 using UniversityRating.Presentation.Models.Teacher;
 using UniversityRating.Presentation.Models.University;
 using UniversityRating.Services.Abstractions;
-using UniversityRating.Services.Common.DTOs.Comment;
 using UniversityRating.Services.Common.DTOs.Enums;
 using UniversityRating.Services.Common.DTOs.Teacher;
 using UniversityRating.Services.Common.DTOs.University;
 
 namespace UniversityRating.Presentation.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminSettingController : Controller
     {
         private readonly IUniversityService _universityService;
@@ -45,7 +43,8 @@ namespace UniversityRating.Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search, 
+            int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
             List<UniversityShowDto> universities = _universityService.GetAllUniversities(universitiesSortColumn, sortType, pageNumber, search,
                 numberOfRecordsPerPage = 10, skipRecords = true);
@@ -77,7 +76,7 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public ActionResult EditUniversity(UniversityViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return NoContent();
             _universityService.Update(_mapper.Map<UniversityDto>(model));
 
             return RedirectToAction("Index");
@@ -109,6 +108,7 @@ namespace UniversityRating.Presentation.Controllers
         {
             if (!ModelState.IsValid) return View(teacherViewModel);
             _teacherService.AddTeacher(_mapper.Map<TeacherDto>(teacherViewModel));
+
             return RedirectToAction("Index");
         }
 
@@ -116,13 +116,14 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult DeleteTeacher(int id)
         {
             _teacherService.DeleteTeacherById(id);
+
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult EditTeacher(TeacherViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return NoContent();
             _teacherService.Update(_mapper.Map<TeacherDto>(model));
 
             return RedirectToAction("Index");

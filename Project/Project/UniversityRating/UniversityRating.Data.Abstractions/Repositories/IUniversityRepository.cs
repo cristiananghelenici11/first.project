@@ -10,7 +10,7 @@ namespace UniversityRating.Data.Abstractions.Repositories
     {  
         List<TopUniversity> GetTopUniversities(int numberOfTeachers);
 
-        List<UniversityShow> GetAllUniversities();
+        List<University> GetAllUniversities();
 
         List<UniversityShow> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search,
             int numberOfRecordsPerPage = 10, bool skipRecords = true);

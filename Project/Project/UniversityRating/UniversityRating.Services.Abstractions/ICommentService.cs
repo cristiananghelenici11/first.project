@@ -15,6 +15,14 @@ namespace UniversityRating.Services.Abstractions
 
         void AddCommentCourseTeacher(CommentCourseTeacherDto commentCourseTeacherDto);
 
+        List<CommentDto> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
+
+        List<CommentDto> GetCourseComments(int pageNumber, long courseId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
+
+        List<CommentDto> GetTeacherComments(int pageNumber, long teacherId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
+
+        List<CommentDto> GetCourseTeacherComments(int pageNumber, long courseId, long teacherId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
+
         List<CommentUniversityDto> GetCommentUniversitiesByUserId(long id);
 
         List<CommentCourseDto> GetCommentCourseByUserId(long id);
@@ -28,14 +36,6 @@ namespace UniversityRating.Services.Abstractions
         EditCommentDto GetCommentById(long id);
 
         void UpdateComment(EditCommentDto comment);
-
-        List<CommentDto> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
-
-        List<CommentDto> GetCourseComments(int pageNumber, long courseId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
-
-        List<CommentDto> GetTeacherComments(int pageNumber, long teacherId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
-
-        List<CommentDto> GetCourseTeacherComments(int pageNumber, long courseId, long teacherId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
     }
 }
 

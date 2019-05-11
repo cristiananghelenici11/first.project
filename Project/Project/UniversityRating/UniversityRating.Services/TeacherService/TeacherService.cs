@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using UniversityRating.Data.Abstractions.Models.Teacher;
 using UniversityRating.Data.Abstractions.Repositories;
@@ -21,30 +22,36 @@ namespace UniversityRating.Services.TeacherService
 
         public List<TopTeacherDto> GetTopTeachers(int numberOfTeachers)
         {
-            List<TopTeacher> teachers = _teacherRepository.GetTopTeachers(numberOfTeachers);
+                
+            List<Teacher> teachers = _teacherRepository.GetTopTeachers(numberOfTeachers);
+            List<TopTeacher> topTeachers = _mapper.Map<List<Teacher>, List<TopTeacher>>(teachers);
+            topTeachers.OrderByDescending(x => x.MarkAvg);
 
-            return _mapper.Map<List<TopTeacher>, List<TopTeacherDto>>(teachers);
+            return _mapper.Map<List<TopTeacher>, List<TopTeacherDto>>(topTeachers);
         }
 
         public List<TeacherShowDto> GetAllTeachers()
         {
-            List<TeacherShow> teacherShows = _teacherRepository.GetAllTeachers();
+            List<Teacher> teachers = _teacherRepository.GetAllTeachers();
+            List<TeacherShow> teacherShows = _mapper.Map<List<Teacher>, List<TeacherShow>>(teachers);
 
             return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teacherShows);
         }
 
         public List<TeacherShowDto> GetAllTeachersByUniversityId(long universityId)
         {
-            List<TeacherShow> teachersByUniversityId = _teacherRepository.GetAllTeachersByUniversityId(universityId);
-
-            return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teachersByUniversityId);
+            List<Teacher> teachers = _teacherRepository.GetAllTeachersByUniversityId(universityId);
+            List<TeacherShow> teacherShows = _mapper.Map<List<Teacher>, List<TeacherShow>>(teachers);
+            
+            return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teacherShows);
         }
 
         public List<TeacherShowDto> GetAllTeachersWithoutUniversity()
         {
-            List<TeacherShow> teachersByUniversityId = _teacherRepository.GetAllTeachersWithoutUniversity();
+            List<Teacher> teachers = _teacherRepository.GetAllTeachersWithoutUniversity();
+            List<TeacherShow> teacherShows = _mapper.Map<List<Teacher>, List<TeacherShow>>(teachers);
 
-            return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teachersByUniversityId);
+            return _mapper.Map<List<TeacherShow>, List<TeacherShowDto>>(teacherShows);
         }
 
         public void Update(TeacherDto teacherDto)

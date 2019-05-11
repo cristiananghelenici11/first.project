@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using UniversityRating.Data.Core.DomainModels.Identity;
 using UniversityRating.Presentation.Models;
-using UniversityRating.Presentation.Models.Comment;
 using UniversityRating.Presentation.Models.Home;
 using UniversityRating.Presentation.Models.Teacher;
 using UniversityRating.Presentation.Models.University;
 using UniversityRating.Services.Abstractions;
-using UniversityRating.Services.Common.DTOs.Comment;
 using UniversityRating.Services.Common.DTOs.Teacher;
 using UniversityRating.Services.Common.DTOs.University;
 
@@ -26,14 +17,15 @@ namespace UniversityRating.Presentation.Controllers
         private readonly ITeacherService _teacherService;
         private readonly IUniversityService _universityService;
         private readonly IMapper _mapper;
-        private readonly ICommentService _commentService;
 
-        public HomeController(ITeacherService teacherService, IUniversityService universityService, IMapper mapper, ICommentService commentService)
+        public HomeController(
+            ITeacherService teacherService, 
+            IUniversityService universityService, 
+            IMapper mapper)
         {
             _universityService = universityService;
             _teacherService = teacherService;
             _mapper = mapper;
-            _commentService = commentService;
         }
 
         [HttpGet]
@@ -57,24 +49,6 @@ namespace UniversityRating.Presentation.Controllers
 
         [HttpGet]
         public IActionResult User()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Specialties()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Maps()
         {
             return View();
         }

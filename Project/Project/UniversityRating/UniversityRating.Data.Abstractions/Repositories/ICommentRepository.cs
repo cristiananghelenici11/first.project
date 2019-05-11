@@ -15,7 +15,5 @@ namespace UniversityRating.Data.Abstractions.Repositories
         void AddCommentCourseTeacher(CommentCourseTeacher commentCourseTeacher);
 
         List<CommentUniversity> GetCommentUniversitiesByUserId(long id);
-
-        List<CommentView> GetUniversityComments(int pageNumber, long universityId, int numberOfRecordsPerPage = 10, bool skipRecords = true);
     }
 }

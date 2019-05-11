@@ -55,6 +55,7 @@ namespace UniversityRating.Presentation
                 .AddEntityFrameworkStores<UniversityRatingContext>()
                 .AddDefaultTokenProviders();
 
+
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddDbContext<UniversityRatingContext>(options =>

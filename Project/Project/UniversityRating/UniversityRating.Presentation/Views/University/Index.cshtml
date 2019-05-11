@@ -14,7 +14,6 @@
 }
 
 <div class="main-panel">
-
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -26,9 +25,10 @@
                             <div class="row">
 
                                 <div class="col-md-10">
-                                    <select name="Universities" class="form-control" id="sortColumn" style="width: 150px" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
+                                    <select name="Universities" class="form-control d-inline-block" id="sortColumn" style="width: 150px" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
                                         <option selected="selected" value="">Please select</option>
-                                    </select>
+
+                                    </select> <i class="fas fa-arrow-up" id ="sortTypeButton" data-sort-type="Asc"></i>
                                 </div>
 
                                 <div class="col-md-2 ">
@@ -72,32 +72,65 @@
 @section Scripts{
     <script>
         var pageNumber = 1;
+        $(function() {
+            $("#sortTypeButton").click(function() {
+                $(this).toggleClass("fa-arrow-up").toggleClass("fa-arrow-down");
 
-        $("#search").bind("change",function() {
-            pageNumber = 1;
-            var url = '@Url.Action("UniversitySort")' +
-                '?universitiesSortColumn=' +
-                $("#sortColumn").val() +
-                '&sortType=Desc' +
-                '&pageNumber=' + pageNumber + 
-                '&search=' + $("#search").val() +
-                '&skipRecords=' + false;
-            $("#resultsTable").empty();
-            $.get(url,
-                function(response) {
-                    $("#resultsTable").append($(response));
+                if ($(this).attr("data-sort-type") == "Asc") {
+                    $(this).attr("data-sort-type", "Desc");
+                } else {
+                    $(this).attr("data-sort-type", "Asc");
+                }
+                pageNumber = 1;
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +
+                    '&sortType=' + $(this).attr("data-sort-type") +
+                    '&pageNumber=' +
+                    pageNumber +
+                    '&search=' +
+                    $("#search").val() +
+                    '&skipRecords=' +
+                    false;
+
+                $.get(url,
+                    function(response) {
+                        $("#resultsTable").html($(response));
+                    });
+            });
+
+
+            $("#search").bind("change",
+                function() {
+                    pageNumber = 1;
+                    var url = '@Url.Action("UniversitySort")' +
+                        '?universitiesSortColumn=' +
+                        $("#sortColumn").val() +
+                        '&sortType=' + $(this).attr("data-sort-type") +
+                        '&pageNumber=' +
+                        pageNumber +
+                        '&search=' +
+                        $("#search").val() +
+                        '&skipRecords=' +
+                        false;
+                    $("#resultsTable").empty();
+                    $.get(url,
+                        function(response) {
+                            $("#resultsTable").append($(response));
+                        });
                 });
         });
-
-        $(function () {
-            $("#moreUniversities").click(function () {
+        $(function() {
+            $("#moreUniversities").click(function() {
                 pageNumber ++;
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
-                    '&sortType=Desc' +
-                    '&pageNumber=' + pageNumber +
-                    '&search=' + $("#search").val();
+                    '&sortType=' + $(this).attr("data-sort-type") +
+                    '&pageNumber=' +
+                    pageNumber +
+                    '&search=' +
+                    $("#search").val();
 
                 $.get(url,
                     function(response) {
@@ -110,10 +143,13 @@
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
                     $("#sortColumn").val() +
-                    '&sortType=Desc' +
-                    '&pageNumber=' + pageNumber + 
-                    '&search=' + $("#search").val() +
-                    '&skipRecords=' + false;
+                    '&sortType=' + $(this).attr("data-sort-type") +
+                    '&pageNumber=' +
+                    pageNumber +
+                    '&search=' +
+                    $("#search").val() +
+                    '&skipRecords=' +
+                    false;
 
                 $.get(url,
                     function(response) {

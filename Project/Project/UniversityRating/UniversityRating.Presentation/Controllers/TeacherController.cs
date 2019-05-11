@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using UniversityRating.Presentation.Models;
 using UniversityRating.Presentation.Models.Home;
 using UniversityRating.Presentation.Models.Teacher;
 using UniversityRating.Presentation.Models.University;
@@ -54,7 +50,6 @@ namespace UniversityRating.Presentation.Controllers
         //    return PartialView("_TeacherTableRecords", teacherViewModel);
         //}
 
-
         [HttpGet]
         public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
@@ -84,7 +79,6 @@ namespace UniversityRating.Presentation.Controllers
                 items2 = items2.Skip((pageNumber - 1) * numberOfRecordsPerPage);
             items2 = items2.Take(numberOfRecordsPerPage);
             var model2 = _mapper.Map<List<TeacherShowViewModel>>(items2.ToList());
-
 
             return PartialView("_TeacherTableRecords", model2);
         }

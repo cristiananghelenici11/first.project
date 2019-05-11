@@ -144,18 +144,25 @@
                             <p>User Profile</p>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="Home" asp-action="About">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>About</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-controller="AdminSetting" asp-action="Index">
-                            <i class="pe-7s-pendrive"></i>
-                            <p>Admin Settings</p>
-                        </a>
-                    </li>
+                    @if (User.IsInRole("moderator"))
+                    {
+                        <li>
+                            <a asp-controller="Home" asp-action="About">
+                                <i class="pe-7s-news-paper"></i>
+                                <p>About</p>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li>
+                            <a asp-controller="AdminSetting" asp-action="Index">
+                                <i class="pe-7s-pendrive"></i>
+                                <p>Admin Settings</p>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

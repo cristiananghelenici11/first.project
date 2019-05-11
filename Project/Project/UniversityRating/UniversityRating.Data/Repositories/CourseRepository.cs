@@ -16,7 +16,7 @@ namespace UniversityRating.Data.Repositories
         {
             return BuildQuery()
                 .Where(x => x.Faculty.University.Id.Equals(universityId))
-                .Select(c => new Course()
+                .Select(c => new Course
                 {
                     Id = c.Id,
                     Name = c.Name,
@@ -29,7 +29,7 @@ namespace UniversityRating.Data.Repositories
         {
             return BuildQuery()
                 .Where(x => x.CourseTeachers.Any(y => y.TeacherId.Equals(teacherId)))
-                .Select(c => new Course()
+                .Select(c => new Course
                 {
                     Id = c.Id,
                     Name = c.Name,
@@ -40,15 +40,14 @@ namespace UniversityRating.Data.Repositories
 
         public long GetCourseTeacherId(long courseId, long teacherId)
         {
-            var result = BuildQuery()
+            var courseTeacherId = BuildQuery()
                 .Where(x => x.CourseTeachers.Any(y => (y.TeacherId.Equals(teacherId)) && (y.CourseId.Equals(courseId))))
                 .Select(c => new
                 {
                     Id = c.CourseTeachers.Select(x => x.Id),
                 }).FirstOrDefault();
 
-            return result.Id.FirstOrDefault();
-
+            return courseTeacherId.Id.FirstOrDefault();
         }
     }
 }
