@@ -9,31 +9,27 @@
 }
 <form asp-controller="AdminSetting" asp-action="AddUniversity" method="post">
     <input type="hidden" asp-for="Id" />
-    
+    <div asp-validation-summary="All"></div>
     <div class="form-group">
         <label>Name</label>
-        <textarea asp-for="Name" class="form-control" rows="2"></textarea>
+        <textarea asp-for="Name" class="form-control" rows="2" required></textarea>
     </div>
-
     <div class="form-group">
         <label>Description</label>
-        <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+        <textarea asp-for="Description" class="form-control" rows="2" required></textarea>
     </div>
-
     <div class="form-group">
         <label class="col-2 col-form-label">Year</label>
         <div class="col-10">
-            <input class="form-control" type="number" asp-for="Age">
+            <input class="form-control" type="number" asp-for="Age" min="1000" max="3000">
         </div>
     </div>
-
     <div class="form-group">
         <label class="col-2 col-form-label">Contact</label>
         <div class="col-10">
-            <input class="form-control" type="tel" asp-for="Contact" id="example-tel-input">
+            <input class="form-control" type="tel" asp-for="Contact" id="example-tel-input" required>
         </div>
     </div>
-
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-primary" />
         <input type="reset" value="Reset" class="btn" />

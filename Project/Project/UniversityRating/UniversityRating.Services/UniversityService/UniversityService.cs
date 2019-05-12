@@ -50,16 +50,16 @@ namespace UniversityRating.Services.UniversityService
             _universityRepository.DeleteUniversityById(id);
         }
 
-        public void Update(UniversityDto model)
+        public void Update(UniversityDto universityDto)
         {
-            _universityRepository.Update(_mapper.Map<University>(model));
-            _universityRepository.SaveChanges();
+            var university = _mapper.Map<University>(universityDto);
+            _universityRepository.UpdateUniversity(university);
         }
 
         public void AddNewUniversity(UniversityDto universityDto)
         {
-            _universityRepository.Add(_mapper.Map<University>(universityDto));
-            _universityRepository.SaveChanges();
+            var university = _mapper.Map<University>(universityDto);
+            _universityRepository.AddNewUniversity(university);
         }
     }
 }

@@ -46,39 +46,27 @@ namespace UniversityRating.Data.Repositories
         public List<UniversityShow> GetAllUniversities(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, string search,
             int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            IQueryable<UniversityShow> items;
+            IQueryable<University> query = BuildQuery();
+            if (skipRecords)
+                query = query.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+            query = query.Take(numberOfRecordsPerPage);
             if (!string.IsNullOrEmpty(search))
             {
-                items = BuildQuery()
-                    .Where(x => x.Name.ToUpper().Contains(search.ToUpper()) || x.Description.ToUpper().Contains(search.ToUpper()))
-                    .Select(u => new UniversityShow
-                    {
-                        Id = u.Id,
-                        Name = u.Name,
-                        Description = u.Description,
-                        Contact = u.Contact,
-                        Age = u.Age,
-                        AverageMark = u.UniversityTeachers.Any()
-                            ? u.UniversityTeachers.Where(z => z.Teacher.MarkTeachers.Count > 0).Average(x => x.Teacher.MarkTeachers.Any()
-                                ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
-                    });
+                query = query.Where(x =>
+                    x.Name.ToUpper().Contains(search.ToUpper()) || x.Description.ToUpper().Contains(search.ToUpper()));
             }
-            else
+            IQueryable<UniversityShow> items = query.Select(u => new UniversityShow
             {
-                items = BuildQuery()
-                .Select(u => new UniversityShow
-                {
-                    Id = u.Id,
-                    Name = u.Name,
-                    Description = u.Description,
-                    Contact = u.Contact,
-                    Age = u.Age,
-                    AverageMark = u.UniversityTeachers.Any()
-                        ? u.UniversityTeachers.Where(z => z.Teacher.MarkTeachers.Count > 0).Average(x => x.Teacher.MarkTeachers.Any()
-                            ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
-                });
-            }
-
+                Id = u.Id,
+                Name = u.Name,
+                Description = u.Description,
+                Contact = u.Contact,
+                Age = u.Age,
+                AverageMark = u.UniversityTeachers.Any()
+                    ? u.UniversityTeachers.Where(z => z.Teacher.MarkTeachers.Count > 0).Average(x => x.Teacher.MarkTeachers.Any()
+                        ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
+            });
+           
             if (universitiesSortColumn != null)
             {
                 if (sortType == SortType.Asc)
@@ -95,12 +83,7 @@ namespace UniversityRating.Data.Repositories
                 }
             }
 
-            if (skipRecords)
-                items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-            items = items.Take(numberOfRecordsPerPage);
-            List<UniversityShow> universityShows = items.ToList();
-
-            return universityShows;
+            return items.ToList();
         }
 
         public void DeleteUniversityById(int id)
@@ -108,6 +91,19 @@ namespace UniversityRating.Data.Repositories
             University university = GetById(id);
             if (university == null) return;
             Remove(university);
+            SaveChanges();
+        }
+
+        public void AddNewUniversity(University university)
+        {
+            Add(university);
+            SaveChanges();
+        }
+
+        public void UpdateUniversity(University university)
+        {
+            if (university == null) return;
+            Update(university);
             SaveChanges();
         }
     }

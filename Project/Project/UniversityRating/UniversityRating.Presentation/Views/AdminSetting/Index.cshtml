@@ -25,16 +25,16 @@
 
                                 <ul class="nav nav-pills" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#commentUniversity">University</a>
+                                        <a class="nav-link active" data-toggle="tab" href="#University">University</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#commentTeacher">Teacher</a>
+                                        <a class="nav-link" data-toggle="tab" href="#Teacher">Teacher</a>
                                     </li>
                                 </ul>
 
                                 <div class="tab-content">
 
-                                    <div class="container tab-pane active" id="commentUniversity">
+                                    <div class="container tab-pane active" id="University">
                                         <div class="header">
                                             <a class="btn btn-success" style="width: 150px; margin-bottom: 5px;" onclick="PopupForm('@Url.Action("AddUniversity","AdminSetting")')">
                                                 Add new University
@@ -47,7 +47,7 @@
                                                 </div>
 
                                                 <div class="col-md-2 ">
-                                                    <input class="form-control" style="width: 150px" type="text" placeholder="search" id="search"/>
+                                                    <input class="form-control" style="width: 150px" type="text" placeholder="search" id="searchUniversity"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@
                                                         <th>Change</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="resultsTable">
+                                                <tbody id="resultsTableUniversity">
                                                     @await Html.PartialAsync("_UniversityTableRecordsAdmin", Model.UniversityShowViewModels)
                                                 </tbody>
                                             </table>
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="container tab-pane fade" id="commentTeacher">
+                                    <div class="container tab-pane fade" id="Teacher">
                                         <div class="header">
                                             <div class="row">
                                                 <div class="col-md-10">
@@ -100,12 +100,12 @@
                                                     <th>Change</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody id="resultsTable">
+                                                <tbody id="resultsTableTeacher">
                                                 @await Html.PartialAsync("_TeacherTableRecordsAdmin", Model.TeacherShowViewModels)
                                                 </tbody>
                                             </table>
                                             <div class="col-md-2">
-                                                <a class="btn btn-success" id="moreTeacher" style="margin-bottom: 10px" data-page-number="1">
+                                                <a class="btn btn-success" id="moreTeachers" style="margin-bottom: 10px" data-page-number="1">
                                                     <i class="fa fa-plus"></i> Show More Teacher
                                                 </a>
                                             </div>
@@ -125,55 +125,108 @@
 @section Scripts
 {
     <script>
-            var pageNumber = 1;
+        var pageNumber = 1;
 
-            $(function () {
-                $("#moreUniversities").click(function () {
-                    pageNumber ++;
-                    var url = '@Url.Action("UniversitySort")' +
-                        '?universitiesSortColumn=' +
-                        $("#sortColumn").val() +
-                        '&sortType=Desc' +
-                        '&pageNumber=' + pageNumber +
-                        '&search=' + $("#search").val();
+        $(function () {
+            $("#moreUniversities").click(function () {
+                pageNumber ++;
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +
+                    '&sortType=Desc' +
+                    '&pageNumber=' + pageNumber +
+                    '&search=' + $("#searchUniversity").val();
 
-                    $.get(url,
-                        function(response) {
-                            $("#resultsTable").append($(response));
-                        });
-                });
-                
-                $("#search").bind("change",function() {
-                    pageNumber = 1;
-                    var url = '@Url.Action("UniversitySort")' +
-                        '?universitiesSortColumn=' +
-                        $("#sortColumn").val() +
-                        '&sortType=Desc' +
-                        '&pageNumber=' + pageNumber +
-                        '&search=' + $("#search").val() +
-                        '&skipRecords=' + false;
-                    $("#resultsTable").empty();
-                    $.get(url,
-                        function(response) {
-                            $("#resultsTable").append($(response));
-                        });
-                });
-
-                $("#sortColumn").change(function() {
-                    pageNumber = 1;
-                    var url = '@Url.Action("UniversitySort")' +
-                        '?universitiesSortColumn=' +
-                        $("#sortColumn").val() +    
-                        '&sortType=Desc' +
-                        '&pageNumber=' + pageNumber + 
-                        '&search=' + $("#search").val() +
-                        '&skipRecords=' + false;
-
-                    $.get(url,
-                        function(response) {
-                            $("#resultsTable").html($(response));
-                        });
-                });
+                $.get(url,
+                    function(response) {
+                        $("#resultsTableUniversity").append($(response));
+                    });
             });
-        </script>
+                
+            $("#searchUniversity").bind("change",function() {
+                pageNumber = 1;
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +
+                    '&sortType=Desc' +
+                    '&pageNumber=' + pageNumber +
+                    '&search=' + $("#searchUniversity").val() +
+                    '&skipRecords=' + false;
+                $("#resultsTableUniversity").empty();
+                $.get(url,
+                    function(response) {
+                        $("#resultsTableUniversity").append($(response));
+                    });
+            });
+
+            $("#sortColumn").change(function() {
+                pageNumber = 1;
+                var url = '@Url.Action("UniversitySort")' +
+                    '?universitiesSortColumn=' +
+                    $("#sortColumn").val() +    
+                    '&sortType=Desc' +
+                    '&pageNumber=' + pageNumber + 
+                    '&search=' + $("#searchUniversity").val() +
+                    '&skipRecords=' + false;
+
+                $.get(url,
+                    function(response) {
+                        $("#resultsTableUniversity").html($(response));
+                    });
+            });
+        });
+    </script>
+
+    <script>
+        var pageNumber = 1;
+        $(function () {
+            $("#searchTeacher").bind("change", function () {
+                pageNumber = 1;
+                var url = '@Url.Action("TeachersByUniversityId")' +
+                    '?universityId=0' +
+                    '&pageNumber=' +
+                    pageNumber +
+                    '&search=' +
+                    $('#searchTeacher').val() +
+                    '&numberOfRecordsPerPage=10';
+                $("#resultsTableTeacher").empty();
+                $.get(url,
+                    function(response) {
+                        $("#resultsTableTeacher").append($(response));
+                    });
+            });
+
+            $("#university").bind("change", function () {
+                pageNumber = 1;
+
+                var url = '@Url.Action("TeachersByUniversityId")' +
+                    '?universityId=0' +
+                    '&pageNumber=' +
+                    pageNumber +
+                    '&search=' +
+                    $('#searchTeacher').val() +
+                    '&numberOfRecordsPerPage=10';
+                $("#resultsTableTeacher").empty();
+                $.get(url,
+                    function(response) {
+                        $("#resultsTableTeacher").append($(response));
+                    });
+            });
+
+            $("#moreTeachers").click(function () {
+                pageNumber ++;
+
+                var url = '@Url.Action("TeachersByUniversityId")' +
+                    '?universityId=0' + 
+                    '&pageNumber=' + pageNumber +
+                    '&search=' + $('#searchTeacher').val() +
+                    '&numberOfRecordsPerPage=10';
+
+                $.get(url,
+                    function(response) {
+                        $("#resultsTableTeacher").append($(response));
+                    });
+            });
+        });
+    </script>
 }

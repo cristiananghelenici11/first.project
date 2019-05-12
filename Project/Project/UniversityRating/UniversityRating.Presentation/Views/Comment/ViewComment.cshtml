@@ -59,7 +59,7 @@
                                                     <div class="col-md-4">
                                                         <h5>All Feedback on Universities</h5>
 
-                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px" id="allCommentUniversity">
                                                             View All
                                                         </button>
                                                     </div>
@@ -97,7 +97,7 @@
                                                     <div class="col-md-4">
                                                         <h5>All Feedback on Universities</h5>
 
-                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px" id="allCommentTeacher">
                                                             View All
                                                         </button>
                                                     </div>
@@ -134,7 +134,7 @@
                                                     <div class="col-md-4">
                                                         <h5>All Feedback on Universities</h5>
 
-                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px" id="allCommentCourse">
                                                             View All
                                                         </button>
                                                     </div>
@@ -176,7 +176,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5>All Feedback on Universities</h5>
-                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px">
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px" id="allCommentCourseTeacher">
                                                             View All
                                                         </button>
                                                     </div>
@@ -205,47 +205,68 @@
 
 @section Scripts{
     <script>
-    $(function () {
-        $("#universityComment").bind("change", function() {
-            pageNumber = 1;
-            var url = '@Url.Action("UniversityComments")' +
-                '?pageNumber=' + pageNumber +
-                '&universityId=' + $("#universityComment").val() +
-                '&skipRecords=' + false;
-            $('#listUniversityComment').empty();
-            $.get(url,
-                function(response) {
-                    $("#listUniversityComment").html($(response));
+        $(function() {
+            var pageNumber = 1;
+            $("#universityComment").bind("change",
+                function() {
+                    pageNumber = 1;
+                    var url = '@Url.Action("UniversityComments")' +
+                        '?pageNumber=' +
+                        pageNumber +
+                        '&universityId=' +
+                        $("#universityComment").val() +
+                        '&skipRecords=' +
+                        false;
+                    $('#listUniversityComment').empty();
+                    $.get(url,
+                        function(response) {
+                            $("#listUniversityComment").html($(response));
+                        });
                 });
-        });
 
-        $("#moreUniversityComment").click(function () {
-            pageNumber ++;
-            var url = '@Url.Action("UniversityComments")' +
-                '?pageNumber=' + pageNumber +
-                '&universityId=' + $("#universityComment").val() +
-                '&skipRecords=' + false;
+            $("#allCommentUniversity").click(function() {
+                var url = '@Url.Action("UniversityComments")' +
+                    '?pageNumber=1' +
+                    '&universityId=0' +
+                    '&skipRecords=' +
+                    false;
+                $('#listUniversityComment').empty();
+                $.get(url,
+                    function(response) {
+                        $("#listUniversityComment").append($(response));
+                    });
 
-            $.get(url,
-                function(response) {
-                    $("#listUniversityComment").append($(response));
+                $("#moreUniversityComment").click(function() {
+                    pageNumber ++;
+                    var url = '@Url.Action("UniversityComments")' +
+                        '?pageNumber=' +
+                        pageNumber +
+                        '&universityId=' +
+                        $("#universityComment").val() +
+                        '&skipRecords=' +
+                        false;
+
+                    $.get(url,
+                        function(response) {
+                            $("#listUniversityComment").append($(response));
+                        });
                 });
+            });
         });
-    });
     </script>
 
     <script>
-        $(function () {
+        $(function() {
             var pageNumber = 1;
             $.ajax({
                 url: "/Mark/TeachersByUniversityId",
                 type: "GET",
                 data: ({ universityId: $('#universityTeacher').val() }),
-                success: function (data) {
+                success: function(data) {
 
                     $('#teacherComment').empty(),
                         $.each(data,
-                            function (i, item) {
+                            function(i, item) {
                                 $('#teacherComment').append
                                 (
                                     "<option value=\"" +
@@ -261,16 +282,16 @@
             });
 
             $("#universityTeacher").bind("change",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/TeachersByUniversityId",
                         type: "GET",
                         data: ({ universityId: $('#universityTeacher').val() }),
-                        success: function (data) {
+                        success: function(data) {
 
                             $('#teacherComment').empty(),
                                 $.each(data,
-                                    function (i, item) {
+                                    function(i, item) {
                                         $('#teacherComment').append
                                         (
                                             "<option title=\"" +
@@ -287,12 +308,14 @@
                         }
                     });
                 });
-            $("#teacherComment").bind("change", function() {
+            $("#allCommentTeacher").click(function() {
                 pageNumber = 1;
                 var url = '@Url.Action("TeacherComment")' +
-                    '?pageNumber=' + pageNumber +
-                    '&teacherId=' + $("#teacherComment").val() +
-                    '&skipRecords=' + false;
+                    '?pageNumber=' +
+                    pageNumber +
+                    '&teacherId=0' +
+                    '&skipRecords=' +
+                    false;
                 $('#listTeacherComment').empty();
                 $.get(url,
                     function(response) {
@@ -300,12 +323,32 @@
                     });
             });
 
-            $("#moreTeacherComment").click(function () {
+            $("#teacherComment").bind("change",
+                function() {
+                    pageNumber = 1;
+                    var url = '@Url.Action("TeacherComment")' +
+                        '?pageNumber=' +
+                        pageNumber +
+                        '&teacherId=' +
+                        $("#teacherComment").val() +
+                        '&skipRecords=' +
+                        false;
+                    $('#listTeacherComment').empty();
+                    $.get(url,
+                        function(response) {
+                            $("#listTeacherComment").html($(response));
+                        });
+                });
+
+            $("#moreTeacherComment").click(function() {
                 pageNumber ++;
                 var url = '@Url.Action("UniversityComments")' +
-                    '?pageNumber=' + pageNumber +
-                    '&universityId=' + $("#teacherComment").val() +
-                    '&skipRecords=' + false;
+                    '?pageNumber=' +
+                    pageNumber +
+                    '&universityId=' +
+                    $("#teacherComment").val() +
+                    '&skipRecords=' +
+                    false;
 
                 $.get(url,
                     function(response) {
@@ -322,62 +365,79 @@
             url: "/Mark/CoursesByUniversityId",
             type: "GET",
             data: ({ universityId: $('#universityCourse').val() }),
-            success: function (data) {
+            success: function(data) {
 
                 $('#course').empty(),
                     $.each(data,
-                        function (i, item) {
+                        function(i, item) {
                             $('#course').append
                             (
-
                                 "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
-
                             );
                         });
             }
         });
 
         $("#universityCourse").bind("change",
-            function () {
+            function() {
                 $.ajax({
                     url: "/Mark/CoursesByUniversityId",
                     type: "GET",
                     data: ({ universityId: $('#universityCourse').val() }),
-                    success: function (data) {
+                    success: function(data) {
 
                         $('#course').empty(),
                             $.each(data,
-                                function (i, item) {
+                                function(i, item) {
                                     $('#course').append
                                     (
-
                                         "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
-
                                     );
                                 });
                     }
                 });
             });
 
-        $("#course").bind("change", function() {
-            pageNumber = 1;
-            var url = '@Url.Action("CourseComment")' +
-                '?pageNumber=' + pageNumber +
-                '&courseId=' + $("#course").val() +
-                '&skipRecords=' + false;
-            $('#listCourseComment').empty();
-            $.get(url,
-                function(response) {
-                    $("#listCourseComment").html($(response));
-                });
-        });
+        $("#course").bind("change",
+            function() {
+                pageNumber = 1;
+                var url = '@Url.Action("CourseComment")' +
+                    '?pageNumber=' +
+                    pageNumber +
+                    '&courseId=' +
+                    $("#course").val() +
+                    '&skipRecords=' +
+                    false;
+                $('#listCourseComment').empty();
+                $.get(url,
+                    function(response) {
+                        $("#listCourseComment").html($(response));
+                    });
+            });
+        
+        $("#allCommentCourse").click(
+            function() {
+                var url = '@Url.Action("CourseComment")' +
+                    '?pageNumber=1' +
+                    '&courseId=0' +
+                    '&skipRecords=' +
+                    false;
+                $('#listCourseComment').empty();
+                $.get(url,
+                    function(response) {
+                        $("#listCourseComment").html($(response));
+                    });
+            });
 
-        $("#moreCourseComment").click(function () {
+        $("#moreCourseComment").click(function() {
             pageNumber ++;
             var url = '@Url.Action("CourseComment")' +
-                '?pageNumber=' + pageNumber +
-                '&courseId=' + $("#course").val() +
-                '&skipRecords=' + false;
+                '?pageNumber=' +
+                pageNumber +
+                '&courseId=' +
+                $("#course").val() +
+                '&skipRecords=' +
+                false;
 
             $.get(url,
                 function(response) {
@@ -391,57 +451,66 @@
             url: "/Mark/TeachersByUniversityId",
             type: "GET",
             data: ({ universityId: $('#universityCommentCourseTeacher').val() }),
-            success: function (data) {
+            success: function(data) {
 
                 $('#teacherCommentCourseTeacher').empty(),
-
                     $.each(data,
-                        function (i, item) {
+                        function(i, item) {
                             $('#teacherCommentCourseTeacher').append
-                                (
-
-                                "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
-
-                                );
+                            (
+                                "<option title=\"" +
+                                item.AverageMarks +
+                                "\" value=\"" +
+                                item.Id +
+                                "\">" +
+                                item.FirstName +
+                                " " +
+                                item.LastName +
+                                "</option>"
+                            );
                         });
 
             }
         });
 
         $("#universityCommentCourseTeacher").bind("change",
-            function () {
+            function() {
                 $.ajax({
                     url: "/Mark/TeachersByUniversityId",
                     type: "GET",
                     data: ({ universityId: $('#universityCommentCourseTeacher').val() }),
-                    success: function (data) {
+                    success: function(data) {
 
                         $('#teacherCommentCourseTeacher').empty(),
                             $('#courseCommentCourseTeacher').empty(),
-
-
                             $.each(data,
-                                function (i, item) {
+                                function(i, item) {
                                     $('#teacherCommentCourseTeacher').append
-                                        (
-
-                                        "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
-
-                                        );
+                                    (
+                                        "<option title=\"" +
+                                        item.AverageMarks +
+                                        "\" value=\"" +
+                                        item.Id +
+                                        "\">" +
+                                        item.FirstName +
+                                        " " +
+                                        item.LastName +
+                                        "</option>"
+                                    );
                                 });
 
                         $.ajax({
                             url: "/Mark/CoursesByTeacherId",
                             type: "GET",
                             data: ({ teacherId: $('#teacherCommentCourseTeacher').val() }),
-                            success: function (data) {
+                            success: function(data) {
 
                                 $.each(data,
-                                    function (i, item) {
+                                    function(i, item) {
                                         $('#courseCommentCourseTeacher').append
-                                            (
+                                        (
                                             "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
-                                            );
+                                        );
                                     });
                             }
                         });
@@ -451,46 +520,70 @@
 
 
         $("#teacherCommentCourseTeacher").bind("change",
-            function () {
+            function() {
                 $.ajax({
                     url: "/Mark/CoursesByTeacherId",
                     type: "GET",
                     data: ({ teacherId: $('#teacherCommentCourseTeacher').val() }),
-                    success: function (data) {
+                    success: function(data) {
 
                         $('#courseCommentCourseTeacher').empty(),
                             $.each(data,
-                                function (i, item) {
+                                function(i, item) {
                                     $('#courseCommentCourseTeacher').append
-                                        (
+                                    (
                                         "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
-                                        );
+                                    );
                                 });
                     }
                 });
             });
 
-        $("#courseCommentCourseTeacher").bind("change", function() {
-            pageNumber = 1;
-            var url = '@Url.Action("CourseTeacherComment")' +
-                '?pageNumber=' + pageNumber +
-                '&courseId=' + $("#courseCommentCourseTeacher").val() +
-                '&teacherId=' + $("#teacherCommentCourseTeacher").val() +
-                '&skipRecords=' + false;
-            $('#listCourseTeacherComment').empty();
-            $.get(url,
-                function(response) {
-                    $("#listCourseTeacherComment").html($(response));
-                });
-        });
+        $("#courseCommentCourseTeacher").bind("change",
+            function() {
+                pageNumber = 1;
+                var url = '@Url.Action("CourseTeacherComment")' +
+                    '?pageNumber=' +
+                    pageNumber +
+                    '&courseId=' +
+                    $("#courseCommentCourseTeacher").val() +
+                    '&teacherId=' +
+                    $("#teacherCommentCourseTeacher").val() +
+                    '&skipRecords=' +
+                    false;
+                $('#listCourseTeacherComment').empty();
+                $.get(url,
+                    function(response) {
+                        $("#listCourseTeacherComment").html($(response));
+                    });
+            });
+        
+        $("#allCommentCourseTeacher").click(
+            function() {
+                var url = '@Url.Action("CourseTeacherComment")' +
+                    '?pageNumber=1' +
+                    '&courseId=0' +
+                    '&teacherId=0' +
+                    '&skipRecords=' +
+                    false;
+                $('#listCourseTeacherComment').empty();
+                $.get(url,
+                    function(response) {
+                        $("#listCourseTeacherComment").html($(response));
+                    });
+            });
 
-        $("#moreCourseTeacherComment").click(function () {
+        $("#moreCourseTeacherComment").click(function() {
             pageNumber ++;
             var url = '@Url.Action("CourseTeacherComment")' +
-                '?pageNumber=' + pageNumber +
-                '&courseId=' + $("#courseCommentCourseTeacher").val() +
-                '&teacherId=' + $("#teacherCommentCourseTeacher").val() +
-                '&skipRecords=' + false;
+                '?pageNumber=' +
+                pageNumber +
+                '&courseId=' +
+                $("#courseCommentCourseTeacher").val() +
+                '&teacherId=' +
+                $("#teacherCommentCourseTeacher").val() +
+                '&skipRecords=' +
+                false;
 
             $.get(url,
                 function(response) {
@@ -498,6 +591,4 @@
                 });
         });
     </script>
-
-
 }

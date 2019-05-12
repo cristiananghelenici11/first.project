@@ -1,4 +1,5 @@
-﻿using UniversityRating.Data.Core.DomainModels;
+﻿using System.Collections.Generic;
+using UniversityRating.Data.Core.DomainModels;
 
 namespace UniversityRating.Data.Abstractions.Repositories
 {
@@ -9,5 +10,7 @@ namespace UniversityRating.Data.Abstractions.Repositories
         void AddMarkCourse(MarkCourse markCourse);
 
         void AddMarkCourseTeacher(MarkCourseTeacher markCourseTeacher);
+
+        void DeleteMarkById(long id);
     }
 }

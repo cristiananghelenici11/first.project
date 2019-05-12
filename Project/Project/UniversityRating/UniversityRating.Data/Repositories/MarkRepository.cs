@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using UniversityRating.Data.Abstractions.Extensions;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
 
@@ -27,6 +29,13 @@ namespace UniversityRating.Data.Repositories
         public void AddMarkCourseTeacher(MarkCourseTeacher markCourseTeacher)
         {
             Add(markCourseTeacher);
+            SaveChanges();
+        }
+
+        public void DeleteMarkById(long id)
+        {
+            Mark mark = GetById(id);
+            Remove(mark);
             SaveChanges();
         }
     }

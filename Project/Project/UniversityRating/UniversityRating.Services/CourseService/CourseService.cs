@@ -11,8 +11,8 @@ namespace UniversityRating.Services.CourseService
 {
     public class CourseService : ICourseService
     {
-        private IMapper _mapper;
-        private ICourseRepository _courseRepository;
+        private readonly IMapper _mapper;
+        private readonly ICourseRepository _courseRepository;
 
         public CourseService(IMapper mapper, ICourseRepository courseRepository)
         {

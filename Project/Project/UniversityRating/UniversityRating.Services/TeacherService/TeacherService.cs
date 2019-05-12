@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using UniversityRating.Data.Abstractions.Extensions;
 using UniversityRating.Data.Abstractions.Models.Teacher;
 using UniversityRating.Data.Abstractions.Repositories;
 using UniversityRating.Data.Core.DomainModels;
+using UniversityRating.Data.Repositories;
 using UniversityRating.Services.Abstractions;
 using UniversityRating.Services.Common.DTOs.Teacher;
 
@@ -74,10 +77,37 @@ namespace UniversityRating.Services.TeacherService
         public List<TeacherShowDto> GetAllTeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage,
             bool skipRecords)
         {
-            List<TeacherShow> teacherShow = _teacherRepository.GetAllTeachersByUniversityId(universityId, pageNumber, search, numberOfRecordsPerPage, skipRecords);
-            List<TeacherShowDto> teacherShowDto = _mapper.Map<List<TeacherShowDto>>(teacherShow);
+            var spec = new Specification<Teacher>();
+            spec.Include(x => x.UniversityTeachers).ThenInclude(x => x.University);
+            if (!string.IsNullOrEmpty(search))
+            {
+                spec.Predicate = x =>
+                    x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper());
+            }
 
-            return teacherShowDto;
+            if (universityId == 0)
+            {
+                IEnumerable<Teacher> allTeachers1 = _teacherRepository.Find(spec);
+
+                if (skipRecords)
+                    allTeachers1 = allTeachers1.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+                allTeachers1 = allTeachers1.Take(numberOfRecordsPerPage);
+                return _mapper.Map<List<TeacherShowDto>>(allTeachers1);
+            }
+
+            spec.Predicate = x => x.UniversityTeachers.Any(y => y.UniversityId.Equals(universityId));
+
+            if (!string.IsNullOrEmpty(search))
+                spec.Predicate = x =>
+                    x.UniversityTeachers.Any(y => y.UniversityId.Equals(universityId)) &&
+                    x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper());
+
+            IEnumerable<Teacher> allTeachers = _teacherRepository.Find(spec);
+            if (skipRecords)
+                allTeachers = allTeachers.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+            allTeachers = allTeachers.Take(numberOfRecordsPerPage);
+            return _mapper.Map<List<TeacherShowDto>>(allTeachers);
+
         }
     }
 }

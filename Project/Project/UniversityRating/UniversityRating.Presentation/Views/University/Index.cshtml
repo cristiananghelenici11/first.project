@@ -23,16 +23,14 @@
                             <h4 class="title">List of University</h4>
                             <p class="category">Sort By</p>
                             <div class="row">
-
                                 <div class="col-md-10">
                                     <select name="Universities" class="form-control d-inline-block" id="sortColumn" style="width: 150px" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
-                                        <option selected="selected" value="">Please select</option>
-
-                                    </select> <i class="fas fa-arrow-up" id ="sortTypeButton" data-sort-type="Asc"></i>
+                                        <option selected="selected" value="select">Please select</option>
+                                    </select> 
+                                    <i class="fas fa-arrow-up" id="sortTypeButton" data-sort-type="Asc"></i>
                                 </div>
-
                                 <div class="col-md-2 ">
-                                    <input class="form-control" style="width: 150px" type="text" placeholder="search"  id="search"/>
+                                    <input class="form-control" style="width: 150px" type="text" placeholder="search" id="search"/>
                                 </div>
                             </div>
                         </div>
@@ -44,8 +42,8 @@
                                         <th >Id</th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th><a href = "#" id="orderMark"><i class="fas fa-sort"></i></a>Average Mark</th>
-                                        <th><a href="#" id="orderAge"><i class="fas fa-sort"></i></a>Age</th>
+                                        <th><a href = "#" id="orderMark"></a>Average Mark</th>
+                                        <th><a href="#" id="orderAge"></a>Age</th>
                                         <th>Contact</th>
                                     </tr>
                                 </thead>
@@ -99,7 +97,6 @@
                     });
             });
 
-
             $("#search").bind("change",
                 function() {
                     pageNumber = 1;
@@ -150,7 +147,6 @@
                     $("#search").val() +
                     '&skipRecords=' +
                     false;
-
                 $.get(url,
                     function(response) {
                         $("#resultsTable").html($(response));
@@ -159,5 +155,3 @@
         });
     </script>
 }
-
-

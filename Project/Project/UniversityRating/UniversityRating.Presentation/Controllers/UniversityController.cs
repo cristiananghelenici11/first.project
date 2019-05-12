@@ -47,35 +47,5 @@ namespace UniversityRating.Presentation.Controllers
             return PartialView("_UniversityTableRecords", model);
         }
 
-        //[HttpGet]
-        //public IActionResult UniversitySort(UniversitiesSortColumn? universitiesSortColumn, SortType sortType, int pageNumber, int numberOfRecordsPerPage = 10, bool skipRecords = true)
-        //{
-        //    IEnumerable<UniversityShowDto> items = _universityService.GetAllUniversities();
-
-        //    if (universitiesSortColumn != null)
-        //    {
-        //        if (sortType == SortType.Asc)
-        //        {
-        //            items = universitiesSortColumn == UniversitiesSortColumn.Age
-        //                ? items.OrderBy(x => x.Age)
-        //                : items.OrderBy(x => x.AverageMark);
-        //        }
-        //        else
-        //        {
-        //            items = universitiesSortColumn == UniversitiesSortColumn.Age
-        //                ? items.OrderByDescending(x => x.Age)
-        //                : items.OrderByDescending(x => x.AverageMark);
-        //        }
-        //    }
-
-        //    if (skipRecords)
-        //        items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-
-        //    items = items.Take(pageNumber * numberOfRecordsPerPage);
-
-        //    var model = _mapper.Map<List<UniversityShowViewModel>>(items.ToList());
-
-        //    return PartialView("_UniversityTableRecords", model);
-        //}
     }
 }

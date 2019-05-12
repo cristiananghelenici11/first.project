@@ -30,12 +30,11 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Index()
         {
             List<UniversityShowDto> universityShowViewModels = _universityService.GetAllUniversities();
-            List<TeacherShowDto> items = _teacherService.GetAllTeachers();
+            List<TeacherShowDto> teacherShowDtos = _teacherService.GetAllTeachersByUniversityId(0, 1, null, 10, true);
 
             return View(new IndexViewModel
             {
-                TeacherShowViewModels = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(items),
-
+                TeacherShowViewModels = _mapper.Map<List<TeacherShowDto>, List<TeacherShowViewModel>>(teacherShowDtos),
                 UniversityShowViewModels =
                     _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels)
                         .Take(10).ToList()
@@ -65,7 +64,6 @@ namespace UniversityRating.Presentation.Controllers
         public ActionResult EditUniversity(long id)
         {
             UniversityShowDto universityShowDto = _universityService.GetAllUniversities().FirstOrDefault(x => x.Id.Equals(id));
-
             UniversityShowViewModel model = universityShowDto == null
                 ? new UniversityShowViewModel()
                 : _mapper.Map<UniversityShowDto, UniversityShowViewModel>(universityShowDto);
@@ -85,7 +83,7 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public ActionResult AddUniversity(UniversityViewModel universityViewModel)
         {
-            if (!ModelState.IsValid) return View(universityViewModel);
+            if (!ModelState.IsValid) return NoContent();
             _universityService.AddNewUniversity(_mapper.Map<UniversityDto>(universityViewModel));
 
             return RedirectToAction("Index");
@@ -106,7 +104,7 @@ namespace UniversityRating.Presentation.Controllers
         [HttpPost]
         public IActionResult AddTeacher(TeacherViewModel teacherViewModel)
         {
-            if (!ModelState.IsValid) return View(teacherViewModel);
+            if (!ModelState.IsValid) return NoContent();
             _teacherService.AddTeacher(_mapper.Map<TeacherDto>(teacherViewModel));
 
             return RedirectToAction("Index");
@@ -140,6 +138,14 @@ namespace UniversityRating.Presentation.Controllers
 
             return View(model);
         }
-        
+
+        [HttpGet]
+        public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
+        {
+            List<TeacherShowDto> teacherDtos = _teacherService.GetAllTeachersByUniversityId(universityId, pageNumber, search, numberOfRecordsPerPage = 10, skipRecords = true);
+            var teacherViewModel = _mapper.Map<List<TeacherShowViewModel>>(teacherDtos);
+
+            return PartialView("_TeacherTableRecordsAdmin", teacherViewModel);
+        }
     }
 }

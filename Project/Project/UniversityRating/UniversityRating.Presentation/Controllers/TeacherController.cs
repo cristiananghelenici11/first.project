@@ -30,7 +30,7 @@ namespace UniversityRating.Presentation.Controllers
         public IActionResult Index(int page)
         {
             List<UniversityShowDto> universities = _universityService.GetAllUniversities();
-            List<TeacherShowDto> items = _teacherService.GetAllTeachers().Skip((page - 1) * 5).Take(5).ToList();
+            List<TeacherShowDto> items = _teacherService.GetAllTeachersByUniversityId(0, 1, null, 10, true);
 
             var viewModel = new IndexViewModel
             {
@@ -41,46 +41,13 @@ namespace UniversityRating.Presentation.Controllers
             return View(viewModel);
         }
 
-        //[HttpGet]
-        //public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
-        //{
-        //    List<TeacherShowDto> teacherDtos =_teacherService.GetAllTeachersByUniversityId(universityId, pageNumber, search, numberOfRecordsPerPage = 10, skipRecords = true);
-        //    var teacherViewModel = _mapper.Map<List<TeacherShowViewModel>>(teacherDtos);
-
-        //    return PartialView("_TeacherTableRecords", teacherViewModel);
-        //}
-
         [HttpGet]
         public IActionResult TeachersByUniversityId(long universityId, int pageNumber, string search, int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
-            IEnumerable<TeacherShowDto> items2;
-            IEnumerable<TeacherShowDto> items;
-            if (search == null)
-            {
-                items2 = _teacherService.GetAllTeachersByUniversityId(universityId);
-                items = _teacherService.GetAllTeachers();
-            }
-            else
-            {
-                items2 = _teacherService.GetAllTeachersByUniversityId(universityId).Where(x => x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()));
-                items = _teacherService.GetAllTeachers().Where(x => x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()));
-            }
+            List<TeacherShowDto> teacherDtos = _teacherService.GetAllTeachersByUniversityId(universityId, pageNumber, search, numberOfRecordsPerPage = 10, skipRecords = true);
+            var teacherViewModel = _mapper.Map<List<TeacherShowViewModel>>(teacherDtos);
 
-            if (universityId.Equals(0))
-            {
-                if (skipRecords)
-                    items = items.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-                items = items.Take(numberOfRecordsPerPage);
-                var model = _mapper.Map<List<TeacherShowViewModel>>(items.ToList());
-                return PartialView("_TeacherTableRecords", model);
-            }
-
-            if (skipRecords)
-                items2 = items2.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-            items2 = items2.Take(numberOfRecordsPerPage);
-            var model2 = _mapper.Map<List<TeacherShowViewModel>>(items2.ToList());
-
-            return PartialView("_TeacherTableRecords", model2);
+            return PartialView("_TeacherTableRecords", teacherViewModel);
         }
     }
 }

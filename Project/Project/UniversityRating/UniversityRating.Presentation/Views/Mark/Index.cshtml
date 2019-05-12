@@ -116,7 +116,6 @@
                                 </div>
 
                                 <div id="markCourse" class="container tab-pane fade">
-
                                     <div class="row" style="padding-top: 50px; padding-bottom: 50px">
                                         <form id="addMarkCourse">
                                             <div class="col-md-2">
@@ -128,12 +127,10 @@
                                                     }
                                                 </select>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <p>Chose Course</p>
                                                 <select name="Universities" class="form-control" style="width: 150px" id="teacher2"></select>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <p>Chose Mark</p>
                                                 <select class="form-control" style="width: 100px" id="markOnCourse">
@@ -149,7 +146,6 @@
                                                     <option value="10"> 10 </option>
                                                 </select>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <p>Add mark</p>
 
@@ -299,19 +295,19 @@
 @section Scripts{
     <script>
         var Popup;
+
         function PopupForm(url) {
             var formDiv = $('<div/>');
             $.get(url)
-                .done(function (response) {
+                .done(function(response) {
                     formDiv.html(response);
-
                     Popup = formDiv.dialog({
                         autoOpen: true,
                         resizable: false,
                         title: 'Edit Your Mark',
                         height: 200,
                         width: 200,
-                        close: function () {
+                        close: function() {
                             Popup.dialog('destroy').remove();
                         }
                     });
@@ -320,118 +316,129 @@
 
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $.ajax({
                 url: "/Mark/TeachersByUniversityId",
                 type: "GET",
                 data: ({ universityId: $('#university').val() }),
-                success: function (data) {
+                success: function(data) {
 
                     $('#teacher').empty(),
                         $.each(data,
-                            function (i, item) {
+                            function(i, item) {
                                 $('#teacher').append
-                                    (
-
-                                        "<option value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
-
-                                    );
+                                (
+                                    "<option value=\"" +
+                                    item.Id +
+                                    "\">" +
+                                    item.FirstName +
+                                    " " +
+                                    item.LastName +
+                                    "</option>"
+                                );
                             });
                 }
             });
 
             $("#university").bind("change",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/TeachersByUniversityId",
                         type: "GET",
                         data: ({ universityId: $('#university').val() }),
-                        success: function (data) {
+                        success: function(data) {
 
                             $('#teacher').empty(),
                                 $.each(data,
-                                    function (i, item) {
+                                    function(i, item) {
                                         $('#teacher').append
-                                            (
-
-                                                "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
-
-                                            );
+                                        (
+                                            "<option title=\"" +
+                                            item.AverageMarks +
+                                            "\" value=\"" +
+                                            item.Id +
+                                            "\">" +
+                                            item.FirstName +
+                                            " " +
+                                            item.LastName +
+                                            "</option>"
+                                        );
                                     });
                         }
                     });
                 });
 
             $("#addMarkTeacher").on("submit",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/AddMarkTeacher",
                         type: "POST",
-                        data: ({ UniversityId: $('#university').val(), TeacherId: $('#teacher').val(), Mark: $('#markOnTeacher').val() }),
-                        success: function (data) {
-
-                            alert(data);
+                        data: ({
+                            UniversityId: $('#university').val(),
+                            TeacherId: $('#teacher').val(),
+                            Mark: $('#markOnTeacher').val()
+                        }),
+                        success: function(data) {
+                            location.reload();
                         }
                     });
                 });
-
-
         });
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $.ajax({
                 url: "/Mark/CoursesByUniversityId",
                 type: "GET",
                 data: ({ universityId: $('#university2').val() }),
-                success: function (data) {
+                success: function(data) {
 
                     $('#teacher2').empty(),
                         $.each(data,
-                            function (i, item) {
+                            function(i, item) {
                                 $('#teacher2').append
-                                    (
-
-                                        "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
-
-                                    );
+                                (
+                                    "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+                                );
                             });
                 }
             });
 
             $("#university2").bind("change",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/CoursesByUniversityId",
                         type: "GET",
                         data: ({ universityId: $('#university2').val() }),
-                        success: function (data) {
+                        success: function(data) {
 
                             $('#teacher2').empty(),
                                 $.each(data,
-                                    function (i, item) {
+                                    function(i, item) {
                                         $('#teacher2').append
-                                            (
-
-                                                "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
-
-                                            );
+                                        (
+                                            "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
+                                        );
                                     });
                         }
                     });
                 });
 
             $("#addMarkCourse").on("submit",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/AddMarkCourse",
                         type: "POST",
-                        data: ({ UniversityId: $('#university2').val(), CourseId: $('#teacher2').val(), Mark: $('#markOnCourse').val() }),
-                        success: function (data) {
-
+                        data: ({
+                            UniversityId: $('#university2').val(),
+                            CourseId: $('#teacher2').val(),
+                            Mark: $('#markOnCourse').val()
+                        }),
+                        success: function(data) {
+                            location.reload();
                             alert(data);
                         }
                     });
@@ -440,63 +447,72 @@
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $.ajax({
                 url: "/Mark/TeachersByUniversityId",
                 type: "GET",
                 data: ({ universityId: $('#universityMarkCourseTeacher').val() }),
-                success: function (data) {
+                success: function(data) {
 
                     $('#teacherMarkCourseTeacher').empty(),
-
                         $.each(data,
-                            function (i, item) {
+                            function(i, item) {
                                 $('#teacherMarkCourseTeacher').append
-                                    (
-
-                                        "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
-
-                                    );
+                                (
+                                    "<option title=\"" +
+                                    item.AverageMarks +
+                                    "\" value=\"" +
+                                    item.Id +
+                                    "\">" +
+                                    item.FirstName +
+                                    " " +
+                                    item.LastName +
+                                    "</option>"
+                                );
                             });
 
                 }
             });
 
             $("#universityMarkCourseTeacher").bind("change",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/TeachersByUniversityId",
                         type: "GET",
                         data: ({ universityId: $('#universityMarkCourseTeacher').val() }),
-                        success: function (data) {
+                        success: function(data) {
 
                             $('#teacherMarkCourseTeacher').empty(),
                                 $('#courseMarkCourseTeacher').empty(),
-
-
                                 $.each(data,
-                                    function (i, item) {
+                                    function(i, item) {
                                         $('#teacherMarkCourseTeacher').append
-                                            (
-
-                                                "<option title=\"" + item.AverageMarks + "\" value=\"" + item.Id + "\">" + item.FirstName + " " + item.LastName + "</option>"
-
-                                            );
+                                        (
+                                            "<option title=\"" +
+                                            item.AverageMarks +
+                                            "\" value=\"" +
+                                            item.Id +
+                                            "\">" +
+                                            item.FirstName +
+                                            " " +
+                                            item.LastName +
+                                            "</option>"
+                                        );
                                     });
 
                             $.ajax({
                                 url: "/Mark/CoursesByTeacherId",
                                 type: "GET",
                                 data: ({ teacherId: $('#teacherMarkCourseTeacher').val() }),
-                                success: function (data) {
+                                success: function(data) {
 
                                     $.each(data,
-                                        function (i, item) {
+                                        function(i, item) {
                                             $('#courseMarkCourseTeacher').append
-                                                (
-                                                    "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
-                                                );
+                                            (
+                                                "<option value=\"" + item.Id + "\">" + item.Name + "</option>"
+                                            );
                                         });
                                 }
                             });
@@ -506,27 +522,27 @@
 
 
             $("#teacherMarkCourseTeacher").bind("change",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/CoursesByTeacherId",
                         type: "GET",
                         data: ({ teacherId: $('#teacherMarkCourseTeacher').val() }),
-                        success: function (data) {
+                        success: function(data) {
 
                             $('#courseMarkCourseTeacher').empty(),
                                 $.each(data,
-                                    function (i, item) {
+                                    function(i, item) {
                                         $('#courseMarkCourseTeacher').append
-                                            (
-                                                "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
-                                            );
+                                        (
+                                            "<option value=\"" + item.Id + "\">" + item.Description + "</option>"
+                                        );
                                     });
                         }
                     });
                 });
 
             $("#addMarkCourseTeacher").on("submit",
-                function () {
+                function() {
                     $.ajax({
                         url: "/Mark/AddMarkCourseTeacher",
                         type: "POST",
@@ -536,7 +552,7 @@
                             TeacherId: $('#teacherMarkCourseTeacher').val(),
                             Mark: $('#markOnCourseTeacher').val()
                         }),
-                        success: function (data) {
+                        success: function(data) {
                             alert(data);
                         }
 

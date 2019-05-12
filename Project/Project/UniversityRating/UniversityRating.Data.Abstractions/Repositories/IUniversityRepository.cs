@@ -16,5 +16,9 @@ namespace UniversityRating.Data.Abstractions.Repositories
             int numberOfRecordsPerPage = 10, bool skipRecords = true);
 
         void DeleteUniversityById(int id);
+
+        void AddNewUniversity(University university);
+
+        void UpdateUniversity(University university);
     }
 }
