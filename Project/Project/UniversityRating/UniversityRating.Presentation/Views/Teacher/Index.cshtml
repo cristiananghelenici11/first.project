@@ -65,14 +65,7 @@
                                     <i class="fa fa-plus"></i> Show More Teachers
                                 </a>
                             </div>
-                            <div class="col-md-2">
-                                <select class="form-control" style="width: 100px" id="numberOfRecordsPerPage">
-                                    <option value="5"> 5 </option>
-                                    <option value="10"> 10 </option>
-                                    <option value="20"> 20 </option>
-                                    <option value="30"> 50 </option>
-                                </select>
-                            </div>
+                          
                         </div>
                     </div>
                 </div>
@@ -94,7 +87,7 @@
                     '?universityId=' + $('#university').val() +
                     '&pageNumber=' + pageNumber +
                     '&search=' + $('#search').val() +
-                    '&numberOfRecordsPerPage=' + $('#numberOfRecordsPerPage').val();
+                    '&numberOfRecordsPerPage=10';
                 $("#resultsTable").empty();
                 $.get(url,
                     function(response) {
@@ -109,7 +102,7 @@
                     '?universityId=' + $('#university').val() +
                     '&pageNumber=' + pageNumber +
                     '&search=' + $('#search').val() +
-                    '&numberOfRecordsPerPage=' + $('#numberOfRecordsPerPage').val();
+                    '&numberOfRecordsPerPage=10';
                 $("#resultsTable").empty();
                 $.get(url,
                     function(response) {
@@ -124,7 +117,7 @@
                     '?universityId=' + $('#university').val() +
                     '&pageNumber=' + pageNumber +
                     '&search=' + $('#search').val() +
-                    '&numberOfRecordsPerPage=' + $('#numberOfRecordsPerPage').val();
+                    '&numberOfRecordsPerPage=10';
 
                 $.get(url,
                     function(response) {

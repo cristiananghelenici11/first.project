@@ -19,9 +19,16 @@ namespace UniversityRating.Data.Repositories
                 .ToList();
         }
 
-        public List<Teacher> GetTopTeachers(int numberOfTeachers)
+        public List<TopTeacher> GetTopTeachers(int numberOfTeachers)
         {
             return BuildQuery()
+                .Select(x => new TopTeacher
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    MarkAvg =  x.MarkTeachers.Any() ? x.MarkTeachers.Average(y => y.Value) : 0
+                })
+                .OrderByDescending(x => x.MarkAvg)
                 .Take(numberOfTeachers)
                 .ToList();
         }

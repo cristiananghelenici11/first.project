@@ -136,7 +136,7 @@ namespace UniversityRating.Presentation.Controllers
             if (!ModelState.IsValid) return Content(JsonConvert.SerializeObject("Not valid"));
             _commentService.DeleteCommentById(id);
 
-            return NoContent();
+            return RedirectToAction("ViewComment");
         }
 
         [HttpPost]

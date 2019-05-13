@@ -27,12 +27,12 @@ namespace UniversityRating.Presentation.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<UniversityShowDto> universityShowViewModels = _universityService.GetAllUniversities();
+            List<UniversityShowDto> universityShowViewModels = _universityService.GetAllUniversities(null, 0, 1, null);
 
             return View(new IndexViewModel
             {
                 UniversityShowViewModels =
-                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels).Take(10).ToList()
+                    _mapper.Map<List<UniversityShowDto>, List<UniversityShowViewModel>>(universityShowViewModels)
             });
         }
 

@@ -178,14 +178,14 @@
     </script>
 
     <script>
-        var pageNumber = 1;
+        var pageNumber1 = 1;
         $(function () {
             $("#searchTeacher").bind("change", function () {
-                pageNumber = 1;
+                pageNumber1 = 1;
                 var url = '@Url.Action("TeachersByUniversityId")' +
                     '?universityId=0' +
                     '&pageNumber=' +
-                    pageNumber +
+                    pageNumber1 +
                     '&search=' +
                     $('#searchTeacher').val() +
                     '&numberOfRecordsPerPage=10';
@@ -202,7 +202,7 @@
                 var url = '@Url.Action("TeachersByUniversityId")' +
                     '?universityId=0' +
                     '&pageNumber=' +
-                    pageNumber +
+                    pageNumber1 +
                     '&search=' +
                     $('#searchTeacher').val() +
                     '&numberOfRecordsPerPage=10';
@@ -214,11 +214,11 @@
             });
 
             $("#moreTeachers").click(function () {
-                pageNumber ++;
+                pageNumber1 ++;
 
                 var url = '@Url.Action("TeachersByUniversityId")' +
                     '?universityId=0' + 
-                    '&pageNumber=' + pageNumber +
+                    '&pageNumber=' + pageNumber1 +
                     '&search=' + $('#searchTeacher').val() +
                     '&numberOfRecordsPerPage=10';
 

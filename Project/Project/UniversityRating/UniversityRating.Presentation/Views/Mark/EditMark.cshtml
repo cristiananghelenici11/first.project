@@ -10,8 +10,9 @@
 <form asp-controller="Mark" asp-action="EditMark" method="post">
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="UserId" />
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group shadow-textarea">
-        <select class="form-control" style="width: 150px" asp-for="Value" value="Value">
+        <select class="form-control" style="width: 150px" asp-for="Value" value="Value" required>
             <option value="1"> 1 </option>
             <option value="2"> 2 </option>
             <option value="3"> 3 </option>

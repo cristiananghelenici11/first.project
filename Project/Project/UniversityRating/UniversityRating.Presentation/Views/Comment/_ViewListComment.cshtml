@@ -22,7 +22,6 @@
                     @if (User.IsInRole("moderator"))
                     {
                         <form asp-action="DeleteViewComment" asp-route-id="@comment.Id" data-ajax="true" data-ajax-success="deleteItem(this)">
-
                             <div class="col-md-1">
                                 <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
                                     <span class="glyphicon glyphicon-erase"></span>Delete

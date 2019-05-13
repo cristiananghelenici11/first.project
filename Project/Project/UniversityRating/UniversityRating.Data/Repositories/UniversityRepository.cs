@@ -47,9 +47,6 @@ namespace UniversityRating.Data.Repositories
             int numberOfRecordsPerPage = 10, bool skipRecords = true)
         {
             IQueryable<University> query = BuildQuery();
-            if (skipRecords)
-                query = query.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-            query = query.Take(numberOfRecordsPerPage);
             if (!string.IsNullOrEmpty(search))
             {
                 query = query.Where(x =>
@@ -66,7 +63,7 @@ namespace UniversityRating.Data.Repositories
                     ? u.UniversityTeachers.Where(z => z.Teacher.MarkTeachers.Count > 0).Average(x => x.Teacher.MarkTeachers.Any()
                         ? x.Teacher.MarkTeachers.Average(y => y.Value) : 0) : 0,
             });
-           
+
             if (universitiesSortColumn != null)
             {
                 if (sortType == SortType.Asc)
@@ -82,8 +79,9 @@ namespace UniversityRating.Data.Repositories
                         : items.OrderByDescending(x => x.AverageMark);
                 }
             }
+            IQueryable<UniversityShow> universityShows = items.Skip((pageNumber - 1) * numberOfRecordsPerPage).Take(numberOfRecordsPerPage);
 
-            return items.ToList();
+            return universityShows.ToList();
         }
 
         public void DeleteUniversityById(int id)

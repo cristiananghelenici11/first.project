@@ -7,7 +7,7 @@
         <td>@($"{university.Id}")</td>
         <td>@($"{university.Name}")</td>
         <td>@($"{university.Description}")</td>
-        <td>@($"{university.AverageMark}")</td>
+        <td>@($" {@Math.Round(university.AverageMark, 2)}")</td>
         <td>@($"{university.Age}")</td>
         <td>@($"{university.Contact}")</td>
     </tr>

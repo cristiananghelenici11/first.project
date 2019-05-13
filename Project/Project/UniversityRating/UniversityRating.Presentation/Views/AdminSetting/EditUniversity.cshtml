@@ -9,7 +9,8 @@
 
 <form asp-controller="AdminSetting" asp-action="EditUniversity" method="post">
     <input type="hidden" asp-for="Id" />
-    <div asp-validation-summary="All"></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
     <div class="form-group">
         <label>Name</label>
         <textarea asp-for="Name" class="form-control" rows="2" required></textarea>

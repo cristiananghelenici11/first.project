@@ -26,9 +26,7 @@ namespace UniversityRating.Services.TeacherService
         public List<TopTeacherDto> GetTopTeachers(int numberOfTeachers)
         {
                 
-            List<Teacher> teachers = _teacherRepository.GetTopTeachers(numberOfTeachers);
-            List<TopTeacher> topTeachers = _mapper.Map<List<Teacher>, List<TopTeacher>>(teachers);
-            topTeachers.OrderByDescending(x => x.MarkAvg);
+            List<TopTeacher> topTeachers = _teacherRepository.GetTopTeachers(numberOfTeachers);
 
             return _mapper.Map<List<TopTeacher>, List<TopTeacherDto>>(topTeachers);
         }
@@ -78,34 +76,43 @@ namespace UniversityRating.Services.TeacherService
             bool skipRecords)
         {
             var spec = new Specification<Teacher>();
-            spec.Include(x => x.UniversityTeachers).ThenInclude(x => x.University);
-            if (!string.IsNullOrEmpty(search))
-            {
-                spec.Predicate = x =>
-                    x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper());
-            }
+            spec.Include(s => s.MarkTeachers).Include(x => x.UniversityTeachers).ThenInclude(x => x.University);
 
             if (universityId == 0)
             {
-                IEnumerable<Teacher> allTeachers1 = _teacherRepository.Find(spec);
+                if (!string.IsNullOrEmpty(search))
+                {
+                    spec.Predicate = x =>
+                        x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper());
+                }
+                IEnumerable<Teacher> teachers = _teacherRepository.Find(spec);
 
                 if (skipRecords)
-                    allTeachers1 = allTeachers1.Skip((pageNumber - 1) * numberOfRecordsPerPage);
-                allTeachers1 = allTeachers1.Take(numberOfRecordsPerPage);
-                return _mapper.Map<List<TeacherShowDto>>(allTeachers1);
+                    teachers = teachers.Skip((pageNumber - 1) * numberOfRecordsPerPage);
+                teachers = teachers.Take(numberOfRecordsPerPage);
+
+                return _mapper.Map<List<TeacherShowDto>>(teachers);
             }
 
-            spec.Predicate = x => x.UniversityTeachers.Any(y => y.UniversityId.Equals(universityId));
 
             if (!string.IsNullOrEmpty(search))
+            {
                 spec.Predicate = x =>
                     x.UniversityTeachers.Any(y => y.UniversityId.Equals(universityId)) &&
-                    x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper());
+                    (x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()));
+            }
+            else
+            {
+                spec.Predicate = x => x.UniversityTeachers.Any(y => y.UniversityId.Equals(universityId));
+
+            }
 
             IEnumerable<Teacher> allTeachers = _teacherRepository.Find(spec);
             if (skipRecords)
                 allTeachers = allTeachers.Skip((pageNumber - 1) * numberOfRecordsPerPage);
             allTeachers = allTeachers.Take(numberOfRecordsPerPage);
+            var cd = _mapper.Map<List<TeacherShowDto>>(allTeachers);
+            Console.WriteLine(cd);
             return _mapper.Map<List<TeacherShowDto>>(allTeachers);
 
         }

@@ -24,10 +24,10 @@
                             <p class="category">Sort By</p>
                             <div class="row">
                                 <div class="col-md-10">
-                                    <select name="Universities" class="form-control d-inline-block" id="sortColumn" style="width: 150px" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
+                                    <select name="Universities" class="form-control d-inline-block" id="sortColumn" style="width: 150px; display: inline-block;" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
                                         <option selected="selected" value="select">Please select</option>
                                     </select> 
-                                    <i class="fas fa-arrow-up" id="sortTypeButton" data-sort-type="Asc"></i>
+                                    <i class="fas fa-arrow-up d-" id="sortTypeButton" data-sort-type="Asc"></i>
                                 </div>
                                 <div class="col-md-2 ">
                                     <input class="form-control" style="width: 150px" type="text" placeholder="search" id="search"/>

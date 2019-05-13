@@ -28,8 +28,7 @@
         <p class="lead">
             Appreciates the university to give advice to new students
         </p>
-        <a class="btn btn-secondary btn-md" asp-controller="Comment" asp-action="AddComment"
-           target="_blank">Feedback</a>
+        <a class="btn btn-secondary btn-md" asp-controller="Comment" asp-action="ViewComment">Feedback</a>
 
     </div>
 </div>
@@ -98,7 +97,7 @@
                         <i class="fas fa-bold fa-3x"></i>
                     </div>
                     <p class="lead">@($"{university.Description} ")</p>
-                    <p class="lead">@($"Averange Mark : {university.AvgMark}")</p>
+                    <p class="lead">@($"Average Mark : {@Math.Round(university.AvgMark, 2)}")</p>
                 </div>
             }
         </div>
@@ -130,7 +129,7 @@
                                 <i class="fas fa-quote-left"></i>
                                 @($"{teacher.LastName} {teacher.FirstName}")
                                 <hr class="clients-hr">
-                                <cite> Averange Mark : @Math.Round(teacher.MarkAvg, 2)</cite>
+                                <cite> Average Mark : @Math.Round(teacher.MarkAvg, 2)</cite>
                             </blockquote>
                         </div>
                     </div>
@@ -141,7 +140,7 @@
 
     <div class="col-12 narrow text-center">
         <p class="lead">Learn more about university</p>
-        <a class="btn btn-secondary btn-md" asp-controller="Home" asp-action="About">University Rating</a>
+        <a class="btn btn-secondary btn-md" asp-controller="University" asp-action="Index">University Rating</a>
     </div>
 
 </div>

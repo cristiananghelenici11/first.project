@@ -7,7 +7,7 @@ namespace UniversityRating.Data.Abstractions.Repositories
 {
     public interface ITeacherRepository : IRepository<Teacher>
     {
-        List<Teacher> GetTopTeachers(int numberOfTeachers);
+        List<TopTeacher> GetTopTeachers(int numberOfTeachers);
 
         List<Teacher> GetAllTeachers();
 
