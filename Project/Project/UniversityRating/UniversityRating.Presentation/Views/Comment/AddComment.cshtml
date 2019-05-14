@@ -56,7 +56,7 @@
 
                                                     <div class="col-md-10">
                                                         <p>Add Comment</p>
-                                                        <button type="submit" class="btn btn-success" style="margin-bottom: 10px">
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px" id="addCommentUniversityButton">
                                                             <i class="fa fa-plus-square" aria-hidden="true"></i>Add Comment
                                                         </button>
                                                     </div>
@@ -81,7 +81,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        @* --------------------------------------------------------------- *@
                                         <ul class="media-list">
                                             @foreach (var comment in Model.CommentUniversityViewModels)
                                             {
@@ -115,8 +114,6 @@
                                                 </li>
                                             }
                                         </ul>
-
-                                        @* ----------------------------------------------- *@
                                     </div>
 
                                     <div class="container tab-pane fade" id="commentTeacher">
@@ -133,15 +130,13 @@
                                                             }
                                                         </select>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <p>Chose Teacher</p>
                                                         <select id="teacherComment" class="form-control" style="width: 150px"></select>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <p>Add Comment</p>
-                                                        <button type="submit" class="btn btn-success" style="margin-bottom: 10px">
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px" id="addCommentTeacherButton">
                                                             <i class="fa fa-plus-square" aria-hidden="true"></i>Add Comment
                                                         </button>
                                                     </div>
@@ -154,7 +149,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="row">
                                                         <div class="col-md-8">
                                                             <div class="form-group">
@@ -166,8 +160,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        @* --------------------------------------------------------------- *@
-
                                         <ul class="media-list">
                                             @foreach (var comment in Model.CommentTeacherViewModels)
                                             {
@@ -202,8 +194,6 @@
                                                 </li>
                                             }
                                         </ul>
-
-                                        @* ----------------------------------------------- *@
                                     </div>
 
                                     <div id="commentCourse" class="container tab-pane fade">
@@ -226,7 +216,7 @@
 
                                                     <div class="col-md-2">
                                                         <p>Add comment</p>
-                                                        <button type="submit" class="btn btn-success" style="margin-bottom: 10px">
+                                                        <button type="button" class="btn btn-success" style="margin-bottom: 10px" id="addCommentCourseButton">
                                                             <i class="fa fa-plus-square" aria-hidden="true"></i>Add Comment
                                                         </button>
                                                     </div>
@@ -251,8 +241,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        @* --------------------------------------------------------------- *@
-
                                         <ul class="media-list">
                                             @foreach (var comment in Model.CommentCourseViewModels)
                                             {
@@ -270,12 +258,10 @@
                                                             </h4>
                                                             <p> Subject: @comment.Subject</p>
                                                             <p> Message: @comment.Message</p>
-
                                                             <form asp-action="DeleteComment" asp-route-id="@comment.Id" data-ajax="true">
                                                                 <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
                                                                     <span class="glyphicon glyphicon-erase"></span>Delete
                                                                 </button>
-
                                                                 <a class="btn btn-sm btn-primary d-none d-md-inline-block" onclick="PopupForm('@Url.Action("EditComment","Comment", new {id = comment.Id, UserId = comment.UserId})')">
                                                                     <span class="glyphicon glyphicon-pencil"></span>Modify
                                                                 </a>
@@ -283,12 +269,9 @@
 
                                                         </div>
                                                     </div>
-
                                                 </li>
                                             }
                                         </ul>
-
-                                        @* ----------------------------------------------- *@
                                     </div>
 
                                     <div id="commentCourseTeacher" class="container tab-pane fade">
@@ -305,17 +288,14 @@
                                                             }
                                                         </select>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <p>Chose Teacher</p>
                                                         <select class="form-control" style="width: 150px" id="teacherCommentCourseTeacher"></select>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <p>Chose Course</p>
                                                         <select class="form-control" style="width: 150px" id="courseCommentCourseTeacher"></select>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <p>Add Comment</p>
                                                         <button type="submit" class="btn btn-success" style="margin-bottom: 10px">
@@ -331,7 +311,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="row">
                                                         <div class="col-md-8">
                                                             <div class="form-group">
@@ -343,9 +322,6 @@
                                                 </div>
                                             </form>
                                         </div>
-
-                                        @* --------------------------------------------------------------- *@
-
                                         <ul class="media-list">
                                             @foreach (var comment in Model.CommentCourseTeacherViewModels)
                                             {
@@ -379,14 +355,9 @@
                                                 </li>
                                             }
                                         </ul>
-
-                                        @* ----------------------------------------------- *@
                                     </div>
                                 </div>
                             </div>
-
-
-
 
                         </div>
                     </div>
@@ -423,7 +394,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#addCommentUniversity").on("submit",
+            $("#addCommentUniversityButton").click(
                 function () {
                     $.ajax({
                         url: "/Comment/AddCommentUniversity",
@@ -434,7 +405,7 @@
                             Message: $('#messageCommentUniversity').val()
                         }),
                         success: function (data) {
-                            alert(data);
+                            location.reload();
                         }
                     });
                 });
@@ -497,8 +468,8 @@
                     });
                 });
 
-            $("#addCommentTeacher").on("submit",
-                function () {
+            $("#addCommentTeacherButton").click(
+            function () {
                     $.ajax({
                         url: "/Comment/AddCommentTeacher",
                         type: "POST",
@@ -510,7 +481,7 @@
 
                         }),
                         success: function (data) {
-                            alert(data);
+                            location.reload();
                         }
                     });
                 });
@@ -518,7 +489,6 @@
 
         });
     </script>
-
 
     <script>
         $(document).ready(function () {
@@ -564,7 +534,7 @@
                     });
                 });
 
-            $("#addCommentCourse").on("submit",
+            $("#addCommentCourseButton").click(
                 function () {
                     $.ajax({
                         url: "/Comment/AddCommentCourse",
@@ -577,8 +547,7 @@
 
                         }),
                         success: function (data) {
-
-                            alert(data);
+                            location.reload();
                         }
                     });
                 });

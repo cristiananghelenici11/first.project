@@ -144,15 +144,6 @@
                             <p>User Profile</p>
                         </a>
                     </li>
-                    @if (User.IsInRole("moderator"))
-                    {
-                        <li>
-                            <a asp-controller="Home" asp-action="About">
-                                <i class="pe-7s-news-paper"></i>
-                                <p>About</p>
-                            </a>
-                        </li>
-                    }
 
                     @if (User.IsInRole("admin"))
                     {

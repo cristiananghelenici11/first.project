@@ -36,18 +36,14 @@
 
                                     <div class="container tab-pane active" id="University">
                                         <div class="header">
-                                            <a class="btn btn-success" style="width: 150px; margin-bottom: 5px;" onclick="PopupForm('@Url.Action("AddUniversity","AdminSetting")')">
-                                                Add new University
-                                            </a>
                                             <div class="row">
-                                                <div class="col-md-10">
-                                                    <select name="Universities" class="form-control" id="sortColumn" style="width: 150px" asp-items="Html.GetEnumSelectList<UniversitiesSortColumn>()">
-                                                        <option selected="selected" value="">Please select</option>
-                                                    </select>
+                                                <div class="col-md-10 ">
+                                                    <a class="btn btn-success" style="width: 150px; margin-bottom: 5px;" onclick="PopupForm('@Url.Action("AddUniversity", "AdminSetting")')">
+                                                        Add new University
+                                                    </a>
                                                 </div>
-
                                                 <div class="col-md-2 ">
-                                                    <input class="form-control" style="width: 150px" type="text" placeholder="search" id="searchUniversity"/>
+                                                    <input class="form-control" style="width: 150px" type="text" placeholder="search" id="searchUniversity" />
                                                 </div>
                                             </div>
                                         </div>
@@ -84,7 +80,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md-2">
-                                                        <input class="form-control" style="width: 150px" type="text" placeholder="search" id="searchTeacher"/>
+                                                    <input class="form-control" style="width: 150px" type="text" placeholder="search" id="searchTeacher" />
                                                 </div>
                                             </div>
 
@@ -92,16 +88,16 @@
                                         <div class="content table-responsive table-full-width">
                                             <table class="table table-hover table-striped table-striped table-bordered table-sm" data-toggle="table" data-sort-name="date" data-sort-order="desc">
                                                 <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>TypeTeacher</th>
-                                                    <th>Change</th>
-                                                </tr>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>TypeTeacher</th>
+                                                        <th>Change</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody id="resultsTableTeacher">
-                                                @await Html.PartialAsync("_TeacherTableRecordsAdmin", Model.TeacherShowViewModels)
+                                                    @await Html.PartialAsync("_TeacherTableRecordsAdmin", Model.TeacherShowViewModels)
                                                 </tbody>
                                             </table>
                                             <div class="col-md-2">
@@ -123,7 +119,7 @@
 </div>
 
 @section Scripts
-{
+    {
     <script>
         var pageNumber = 1;
 
@@ -142,7 +138,7 @@
                         $("#resultsTableUniversity").append($(response));
                     });
             });
-                
+
             $("#searchUniversity").bind("change",function() {
                 pageNumber = 1;
                 var url = '@Url.Action("UniversitySort")' +
@@ -163,9 +159,9 @@
                 pageNumber = 1;
                 var url = '@Url.Action("UniversitySort")' +
                     '?universitiesSortColumn=' +
-                    $("#sortColumn").val() +    
+                    $("#sortColumn").val() +
                     '&sortType=Desc' +
-                    '&pageNumber=' + pageNumber + 
+                    '&pageNumber=' + pageNumber +
                     '&search=' + $("#searchUniversity").val() +
                     '&skipRecords=' + false;
 
@@ -217,7 +213,7 @@
                 pageNumber1 ++;
 
                 var url = '@Url.Action("TeachersByUniversityId")' +
-                    '?universityId=0' + 
+                    '?universityId=0' +
                     '&pageNumber=' + pageNumber1 +
                     '&search=' + $('#searchTeacher').val() +
                     '&numberOfRecordsPerPage=10';
